@@ -37,14 +37,12 @@ class NavTree extends Component {
           style={{ backgroundColor: '#333'}}
           treeData={this.props.components}
           onChange={components => this.props.updateComponents(components)}
-          removeNodeAtPath={({ node, path }) => ({
+          generateNodeProps={({ node, path }) => ({
             buttons: [
               <button
-                onClick={() => {
 
-                }}
               >
-              Delete
+                delete
               </button>
             ]
           })}
