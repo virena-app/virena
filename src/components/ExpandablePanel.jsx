@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-
+import Selects from './Selects.jsx'
 const styles = theme => ({
   root: {
     width: '100%',
@@ -61,7 +61,9 @@ function DetailedExpansionPanel(props) {
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
-          <div className={classes.column} />
+          <div className={classes.column}>
+            <Selects />
+          </div>
           <div className={classes.column}>
             <Chip label="Barbados" className={classes.chip} onDelete={() => {}} />
           </div>
