@@ -27,7 +27,7 @@ class NavTree extends Component {
       // style={{height: '100%'}}
       >
         <SortableTree 
-          style={{ backgroundColor: 'rgb(215, 211, 255)'}}
+          style={{ backgroundColor: 'rgb(34, 34, 34)'}}
           treeData={this.props.components}
           onChange={treeData => this.setState({ treeData })}
           
