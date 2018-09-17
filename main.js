@@ -3,7 +3,9 @@ const {app, BrowserWindow} = require('electron');
 let win;
 
 const createWindow = () => {
-  win = new BrowserWindow({width: 800, height: 600});
+  const { width, height } = require('electron').screen.getPrimaryDisplay().size;
+
+  win = new BrowserWindow({ width, height });
 
   if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
   else win.loadFile('index.html')
