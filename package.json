@@ -24,9 +24,35 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",
     "css-loader": "^1.0.0",
+    "electron-builder": "^20.28.4",
     "style-loader": "^0.23.0",
     "webpack": "^4.19.0",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8"
+  },
+  "build": {
+    "appId": "com.viserion.elec",
+    "files": [
+      "dist/",
+      "node_modules/",
+      "index.html",
+      "package.json",
+      "main.js"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "extends": null
   }
 }
