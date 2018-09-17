@@ -4,7 +4,6 @@ import addCompReducer from './addCompReducer';
 
 const reducers = combineReducers({
   compReducer: compReducer,
-  add: addCompReducer
 })
 
 export default reducers

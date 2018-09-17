@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../actions/actions'
+// import * as actions from '../actions/actions'
 import ViewContainer from './ViewContainer.jsx'
 import NavTree from '../components/SortableTree.jsx'
 import '../visuals/styles.css'

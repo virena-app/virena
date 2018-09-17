@@ -10,3 +10,13 @@ export const addUserInput = (userInput) => ({
   type: types.ADD_USERINPUT,
   payload: userInput
 });
+
+export const updateComponents = (components) => ({
+  type: types.UPDATE_COMPONENTS,
+  payload: components
+})
+
+export const deleteComponent = (components) => ({
+  type: types.DELETE_COMPONENT,
+  payload: components
+})
