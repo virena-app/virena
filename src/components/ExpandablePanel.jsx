@@ -77,9 +77,7 @@ class DetailedExpansionPanel extends React.Component {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                {/*selectedComponent[0].title*/
-                  selectedComponent.length > 0? selectedComponent[0].title : 'Select a component'
-                }
+                {selectedComponent.length > 0? selectedComponent[0].title : 'Select a component'}
               </Typography>
             </div>
             <div className={classes.column}>

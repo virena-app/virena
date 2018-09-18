@@ -14,30 +14,18 @@ const mapDispatchToProps = dispatch => ({
   addComponent: userInput => dispatch(actions.addComponent(userInput)),
 });
 class LeftContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
-  }
-
-  handleChange(event) {
-    this.props.addUserInput(event.target.value)
-  }
-
-  handleAdd(event) {
-    event.preventDefault();
-    this.props.addComponent(this.props.userInput);
-  }
-
+  
   render() {
     return (
       <div className='column left-container'>
-        <form onSubmit={this.handleAdd}>
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          this.props.addComponent(this.props.userInput)
+          }}>
           <input 
             type='text' 
             placeholder='Add Component. . .' 
-            onChange={this.handleChange}/>
+            onChange={(event) => this.props.addUserInput(event.target.value)}/>
           <button type='submit'>+</button>
         </form>
         <div>
