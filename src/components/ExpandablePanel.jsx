@@ -77,7 +77,7 @@ function DetailedExpansionPanel(props) {
           
           <div className={classNames(classes.column, classes.helper)}>
             <Typography variant="caption">
-              Select your destination of choice
+              Define the selected component's type and parent
               <br />
               <a href="#sub-labels-and-columns" className={classes.link}>
                 Learn more

@@ -8,21 +8,27 @@ const initialState = {
       title: 'Crap',
       id: 1,
       expanded: true,
-      type: 'hi',
-      subtitle: 'drawer nav',
+      type: 'Drawer Navigator',
+      subtitle: 'Drawer Navigator',
       children: [
         {
           title: 'Tab Navigator',
           id: 2,
           expanded: true,
+          type: 'Tab Navigator',
+          subtitle: 'Tab Navigator',
           children: [
             {
               title: 'Tab A screen',
               id: 3,
+              type: 'Screen',
+              subtitle: 'Screen',
             },
             {
               title: 'Tab B screen',
               id: 4,
+              type: 'Screen',
+              subtitle: 'Screen',
             }
           ]
         }
