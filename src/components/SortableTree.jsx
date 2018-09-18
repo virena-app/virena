@@ -7,12 +7,14 @@ import '../visuals/styles.css'
 
 const mapStateToProps = store => ({
   components: store.compReducer.components,
+  userInput: store.compReducer.userInput,
 })
 
 const mapDispatchToProps = dispatch => ({
   updateComponents: components => dispatch(actions.updateComponents(components)),
   deleteComponent: (key, path) => dispatch(actions.deleteComponent(key, path)),
   addChild: (name, type, key, path) => dispatch(actions.addChild(name, type, key, path)),
+  selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
 })
 
 
@@ -23,7 +25,7 @@ class NavTree extends Component {
 
   render () {
     const getNodeKey = ({ treeIndex }) => treeIndex;
-    
+    const { userInput } = this.props;
     return (
       <div className='nav-tree'>
         <SortableTree 
@@ -33,15 +35,22 @@ class NavTree extends Component {
           generateNodeProps={({ node, path }) => ({
             buttons: [
               <button
-                  onClick={() => this.props.addChild('hi', 'hi', getNodeKey, path)}
+                onClick={() => this.props.addChild(userInput, 'hi', getNodeKey, path)}
                 >
-                  Add Child
+                  +
                 </button>,
               <button
                 onClick={() => {
                   this.props.deleteComponent(getNodeKey, path)
                 }}>
-                Delete
+                -
+              </button>,
+              <button
+                onClick={() => {
+                  console.log('Edit button Clicked!', node.title, getNodeKey);
+                  this.props.selectComponent(node.title, getNodeKey, path)
+                }}>
+                Edit
               </button>
             ]
           })}

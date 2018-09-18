@@ -17,6 +17,9 @@ import { connect } from 'react-redux'
 const styles = theme => ({
   root: {
     width: '100%',
+    background:'linear-gradient(45deg, #37474F 30%, #455A64 90%)',
+    color: 'white',
+    
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -35,6 +38,7 @@ const styles = theme => ({
   },
   column: {
     flexBasis: '33.33%',
+
   },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
@@ -51,50 +55,63 @@ const styles = theme => ({
 
 const mapStateToProps = store => ({
   components: store.compReducer.components,
+  selectedComponent: store.compReducer.selectedComponent,
 })
 
 const mapDispatchToProps = store => ({
 
 })
 //need to grab name of selected tree component and render to options panel
-function DetailedExpansionPanel(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <ExpansionPanel defaultExpanded>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <div className={classes.column}>
-            <Typography className={classes.heading}>Selected Component Name</Typography>
-          </div>
-          <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>Options Panel</Typography>
-          </div>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
-          <div className={classes.column}>
-            <Selects />
-          </div>
-          
-          <div className={classNames(classes.column, classes.helper)}>
-            <Typography variant="caption">
-              Define the selected component's type and parent
-              <br />
-              <a href="#sub-labels-and-columns" className={classes.link}>
-                Learn more
-              </a>
-            </Typography>
-          </div>
-        </ExpansionPanelDetails>
-        <Divider />
-        <ExpansionPanelActions>
-          <Button size="small">Cancel</Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
-    </div>
-  );
+class DetailedExpansionPanel extends React.Component {
+  constructor(props) {
+    super(props);
+    
+  }
+  
+  render () {
+    const { classes, selectedComponent } = this.props;
+    console.log('inside panel', selectedComponent);
+    return (
+      <div className={classes.root}>
+        <ExpansionPanel defaultExpanded>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <div className={classes.column}>
+              <Typography className={classes.heading}>
+                {/*selectedComponent[0].title*/
+                  selectedComponent.length > 0? selectedComponent[0].title : 'Select a component'
+                }
+              </Typography>
+            </div>
+            <div className={classes.column}>
+              <Typography className={classes.secondaryHeading}>Options Panel</Typography>
+            </div>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails className={classes.details}>
+            <div className={classes.column}>
+              <Selects />
+            </div>
+            
+            <div className={classNames(classes.column, classes.helper)}>
+              <Typography variant="caption">
+                Define the selected component's type and parent
+                <br />
+                <a href="#sub-labels-and-columns" className={classes.link}>
+                  Learn more
+                </a>
+              </Typography>
+            </div>
+          </ExpansionPanelDetails>
+          <Divider />
+          <ExpansionPanelActions>
+            <Button size="small">Cancel</Button>
+            <Button size="small" color="primary">
+              Save
+            </Button>
+          </ExpansionPanelActions>
+        </ExpansionPanel>
+      </div>
+    );
+  }
 }
 
 DetailedExpansionPanel.propTypes = {
