@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
+import ExpandablePanel from '../components/ExpandablePanel.jsx';
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
@@ -16,8 +17,7 @@ class LeftContainer extends Component {
   render() {
     return (
       <div className='left'>
-        <p>LeftContainer</p>
-        <form onSubmit={(e) => {
+        <form className='parent-form' onSubmit={(e) => {
               e.preventDefault();
               this.props.addParent();
             }}>
@@ -28,8 +28,9 @@ class LeftContainer extends Component {
             <option value='Drawer'>Drawer</option>
             <option value='BottomTab'>BottomTab</option>
           </select>
-          <input type='submit' value='Add More' />
+          <input type='submit' value='Add Parent Component' />
         </form>
+        <ExpandablePanel />
       </div>
     )
   }

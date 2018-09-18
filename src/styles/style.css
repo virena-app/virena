@@ -10,18 +10,17 @@ body {
 
 .left, .right {
   width: 30%;
-  border: 1px dotted red;
+  padding-top: 2.5%;
+  border: 5px solid lightgrey;
   color: white;
   display: inherit;
-}
-
-.right {
   flex-direction: column;
 }
 
 .view {
   width: 40%;
-  border: 1px dotted blue;
+  padding-top: 2.5%;
+  border: 5px solid lightgrey;
   color: white;
   display: inherit;
   align-items: center;
@@ -31,4 +30,9 @@ body {
 #iphone {
   width: 360px;
   height: 722px;
+}
+
+.parent-form {
+  display: inherit;
+  justify-content: space-evenly;
 }

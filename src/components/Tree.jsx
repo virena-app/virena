@@ -9,13 +9,16 @@ export default class Tree extends Component {
       <SortableTree
             treeData={this.props.treeData}
             onChange={treeData => this.props.setTree(treeData)}
-            generateNodeProps={({ path }) => ({
+            generateNodeProps={({ node, path }) => ({
               buttons: [
-                <button onClick={() => this.props.addChild('hi', 'hi', getNodeKey, path)}>
+                <button onClick={() => this.props.addChild(this.props.input, 'hi', getNodeKey, path)}>
                   +
                 </button>,
                 <button onClick={() => this.props.deleteComponent(getNodeKey, path)}>
                   -
+                </button>,
+                <button onClick={() => this.props.selectComponent(node.title, getNodeKey, path)}>
+                  Edit
                 </button>
               ],
             })}
@@ -23,3 +26,8 @@ export default class Tree extends Component {
     )
   }
 }
+
+// Tree.propTypes = {
+//   //check to make sure props.
+//   treeData: PropTypes.array,
+// }

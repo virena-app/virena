@@ -5,7 +5,8 @@ import { addNodeUnderParent, removeNodeAtPath } from 'react-sortable-tree';
 const initialState = {
   treeData: [{title: 'Hello', subtitle: 'Test'}],
   addAsFirstChild: false,
-  input: ''
+  input: '',
+  selectedComponent: []
 }
 
 const componentReducer = (state = initialState, action) => {
@@ -63,6 +64,18 @@ const componentReducer = (state = initialState, action) => {
           path: path2,
           getNodeKey: key2,
         }),
+      }
+
+    case types.SELECT_COMPONENT:
+      const key3 = action.payload.key;
+      const path3 = action.payload.path;
+      const title = action.payload.title;
+      copy.selectedComponent = [];
+      copy.selectedComponent.push({ title, path: path3, key: key3 });
+
+      return {
+        ...state,
+        selectedComponent: copy.selectedComponent
       }
 
     default: 
