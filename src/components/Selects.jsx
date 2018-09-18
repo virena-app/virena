@@ -33,8 +33,7 @@ class NativeSelects extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      age: '',
-      name: 'hai',
+      parent: 'hai',
       type: 'Component Type'
     };
   }
@@ -74,11 +73,14 @@ class NativeSelects extends React.Component {
           <FormHelperText>{'Current Type:' + this.state.type}</FormHelperText>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-native-helper">Parent</InputLabel>
+          <InputLabel htmlFor="parentSelect">Parent</InputLabel>
           <NativeSelect
-            value={this.state.age}
-            onChange={this.handleChange('age')}
-            input={<Input name="age" id="age-native-helper" />}
+            value={this.state.parent}
+            onChange={(event) => {
+              const selection = event.target.value;
+              this.setState({ parent: selection });
+            }}
+            input={<Input name="parent" id="parentSelect" />}
           >
             <option value="" />
             <option value={10}>Ten</option>
