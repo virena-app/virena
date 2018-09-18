@@ -16,7 +16,7 @@ export const updateComponents = (components) => ({
   payload: components
 })
 
-export const deleteComponent = (components) => ({
+export const deleteComponent = (key, path) => ({
   type: types.DELETE_COMPONENT,
-  payload: components
+  payload: { key, path }
 })

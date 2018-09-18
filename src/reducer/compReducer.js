@@ -1,58 +1,51 @@
 import * as types from '../constants/actionTypes';
+import { removeNodeAtPath } from 'react-sortable-tree';
 
 const initialState = {
   userInput: '',
-  components: []
-  // components: [
-  //   { 
-  //     title: 'Crap',
-  //     expanded: true,
-  //     type: 'hi',
-  //     subtitle: 'drawer nav',
-  //     children: [
-  //       {
-  //         title: 'Tab Navigator',
-  //         expanded: true,
-  //         children: [
-  //           {
-  //             title: 'Tab A screen'
-  //           },
-  //           {
-  //             title: 'Tab B screen'
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // ],
+  id: 0,
+  components: [],
 }
 
 const compReducer = (state=initialState, action) => {
+  const getNodeKey = ({ treeIndex }) => treeIndex;
+
   switch(action.type) {
     case types.ADD_USERINPUT:
-      return {
-        ...state,
-        userInput: action.payload
-      }
-
+    return {
+      ...state,
+      userInput: action.payload
+    }
+    
     case types.ADD_COMPONENT:
-      const newComponent = state.components.concat([{title:  state.userInput}]);
+      // const newComponentState = addNode(state.components, )
+      const newComponent = state.components.concat([{title: state.userInput, id: state.id}]);
       // const newState = Object.assign({}, state);
       return {
         ...state,
+        id: state.id + 1,
         components: newComponent
       }
-
+    
     case types.UPDATE_COMPONENTS:
       const updateState = Object.assign({}, state, {components: action.payload});
       // newState = action.payload;
       
       console.log('new state here', updateState);
       return updateState;
-
+    
     case types.DELETE_COMPONENT:
-      
-
+      const key = action.payload.key;
+      const path = action.payload.path;
+      return {
+        ...state,
+        components: removeNodeAtPath({
+          treeData: state.components,
+          path,
+          getNodeKey: key
+        })
+    }
+    
     default:
       return state;
   }
@@ -60,3 +53,26 @@ const compReducer = (state=initialState, action) => {
 
 export default compReducer
 
+
+// components: [
+//   { 
+//     title: 'Crap',
+//     expanded: true,
+//     type: 'hi',
+//     subtitle: 'drawer nav',
+//     children: [
+//       {
+//         title: 'Tab Navigator',
+//         expanded: true,
+//         children: [
+//           {
+//             title: 'Tab A screen'
+//           },
+//           {
+//             title: 'Tab B screen'
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// ],
