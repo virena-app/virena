@@ -25,10 +25,10 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.ADD_PARENT:
+      copy.treeData = state.treeData.slice()
       copy.treeData.push({
         title: copy.input,
       })
-      console.log(copy.treeData)
 
     return {
       ...state,
@@ -41,6 +41,7 @@ const componentReducer = (state = initialState, action) => {
       const path1 = action.payload.path;
 
       return {
+        ...state,
         treeData: addNodeUnderParent({
           treeData: copy.treeData,
           parentKey: path1[path1.length - 1],
@@ -54,9 +55,9 @@ const componentReducer = (state = initialState, action) => {
     case types.DELETE_COMPONENT:
       const key2 = action.payload.key;
       const path2 = action.payload.path;
-      console.log(key2);
 
       return {
+        ...state,
         treeData: removeNodeAtPath({
           treeData: copy.treeData,
           path: path2,

@@ -21,7 +21,13 @@ class LeftContainer extends Component {
               e.preventDefault();
               this.props.addParent();
             }}>
-          <input type='text' value={this.props.input} placeholder='Input component name...' onChange={(e) => this.props.setParentName(e.target.value)}/>
+          <input type='text' value={this.props.input} placeholder='Input component name...' onChange={(e) => this.props.setParentName(e.target.value)} required/>
+          <select>
+            <option value='Switch'>Switch</option>
+            <option value='Stack'>Stack</option>
+            <option value='Drawer'>Drawer</option>
+            <option value='BottomTab'>BottomTab</option>
+          </select>
           <input type='submit' value='Add More' />
         </form>
       </div>

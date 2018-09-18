@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SortableTree, { addNodeUnderParent, removeNodeAtPath } from 'react-sortable-tree';
+import SortableTree from 'react-sortable-tree';
 import '../styles/tree.css';
 
 export default class Tree extends Component {
@@ -9,17 +9,13 @@ export default class Tree extends Component {
       <SortableTree
             treeData={this.props.treeData}
             onChange={treeData => this.props.setTree(treeData)}
-            generateNodeProps={({ node, path }) => ({
+            generateNodeProps={({ path }) => ({
               buttons: [
-                <button
-                  onClick={() => this.props.addChild('hi', 'hi', getNodeKey, path)}
-                >
-                  Add Child
+                <button onClick={() => this.props.addChild('hi', 'hi', getNodeKey, path)}>
+                  +
                 </button>,
-                <button
-                onClick={() => this.props.deleteComponent(getNodeKey, path)}
-                >
-                  Remove
+                <button onClick={() => this.props.deleteComponent(getNodeKey, path)}>
+                  -
                 </button>
               ],
             })}
