@@ -6,19 +6,23 @@ const initialState = {
   components: [
     { 
       title: 'Crap',
+      id: 1,
       expanded: true,
       type: 'hi',
       subtitle: 'drawer nav',
       children: [
         {
           title: 'Tab Navigator',
+          id: 2,
           expanded: true,
           children: [
             {
-              title: 'Tab A screen'
+              title: 'Tab A screen',
+              id: 3,
             },
             {
-              title: 'Tab B screen'
+              title: 'Tab B screen',
+              id: 4,
             }
           ]
         }

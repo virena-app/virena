@@ -12,6 +12,8 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Selects from './Selects.jsx'
+import { connect } from 'react-redux'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -47,6 +49,14 @@ const styles = theme => ({
   },
 });
 
+const mapStateToProps = store => ({
+  components: store.compReducer.components,
+})
+
+const mapDispatchToProps = store => ({
+
+})
+//need to grab name of selected tree component and render to options panel
 function DetailedExpansionPanel(props) {
   const { classes } = props;
   return (
@@ -91,4 +101,4 @@ DetailedExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DetailedExpansionPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(DetailedExpansionPanel));

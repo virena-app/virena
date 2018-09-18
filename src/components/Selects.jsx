@@ -23,7 +23,9 @@ const styles = theme => ({
   },
 });
 
-const mapStateToProps = store => ({})
+const mapStateToProps = store => ({
+  components: store.compReducer.components,
+})
 
 const mapDispatchToProps = dispatch => ({
 
@@ -34,7 +36,8 @@ class NativeSelects extends React.Component {
     super(props);
     this.state = {
       parent: 'hai',
-      type: 'Component Type'
+      type: 'Component Type',
+      parentsArray: [],
     };
   }
 
@@ -43,9 +46,26 @@ class NativeSelects extends React.Component {
       console.log(event.target.value);
     this.setState({ [type]: event.target.value });
   }}
+  
+  loadParentsDropdown () {
+    let output = [];
+    const getAllParents = (tree) => {
+      tree.forEach( branch => {
+        if (branch.type !== "screen") {
+          output.push({title:branch.title, id: branch.id}) 
+        }
+        if (branch.children && branch.children.length > 0) {
+          getAllParents(branch.children);
+        }
+      })
+    }
+    getAllParents(this.props.components);
+    let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title}</option>)
+    return results;
+  }
 
   render() {
-    const { classes } = this.props;
+    const { classes, components } = this.props;
 
     return (
       <div className={classes.root}>
@@ -83,9 +103,7 @@ class NativeSelects extends React.Component {
             input={<Input name="parent" id="parentSelect" />}
           >
             <option value="" />
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            {this.loadParentsDropdown()}
           </NativeSelect>
         </FormControl>
       </div>
