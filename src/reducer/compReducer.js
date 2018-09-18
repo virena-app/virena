@@ -5,6 +5,7 @@ const initialState = {
   userInput: '',
   id: 0,
   components: [],
+  selectedComponent: [],
 }
 
 const compReducer = (state=initialState, action) => {
@@ -48,6 +49,7 @@ const compReducer = (state=initialState, action) => {
       const key1 = action.payload.key;
       const path1 = action.payload.path;
       return {
+        ...state,
         components: addNodeUnderParent({
           treeData: copy.components,
           parentKey: path1[path1.length - 1],
@@ -57,7 +59,17 @@ const compReducer = (state=initialState, action) => {
           addAsFirstChild: copy.addAsFirstChild,
         }).treeData,
     }
-    
+    case types.SELECT_COMPONENT:
+      const key2 = action.payload.key;
+      const path2 = action.payload.path;
+      const title2 = action.payload.title;
+      state.selectedComponent = [];
+      state.selectedComponent.push({ title: title2, path: path2, key: key2 });
+      const selectedComponent = state.selectedComponent;
+      return {
+        ...state,
+        selectedComponent
+      }
     default:
       return state;
   }
