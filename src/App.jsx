@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
+import AppContainer from './containers/AppContainer.jsx';
 
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <p>Hello</p>
-      </div>
+      <AppContainer />
     )
   }
 }
