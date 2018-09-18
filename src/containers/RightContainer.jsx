@@ -23,7 +23,13 @@ class RightContainer extends Component {
   render() {
     return (
       <div className='right'>
-        <Tree treeData={this.props.treeData} setTree={this.props.setTree} addChild={this.props.addChild} deleteComponent={this.props.deleteComponent} selectComponent={this.props.selectComponent} input={this.props.input}/>
+        <Tree 
+          treeData={this.props.treeData} 
+          setTree={this.props.setTree} 
+          addChild={this.props.addChild} 
+          deleteComponent={this.props.deleteComponent} 
+          selectComponent={this.props.selectComponent} 
+          input={this.props.input}/>
       </div>
     )
   }

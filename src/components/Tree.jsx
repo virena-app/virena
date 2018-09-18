@@ -18,7 +18,7 @@ export default class Tree extends Component {
                   -
                 </button>,
                 <button onClick={() => this.props.selectComponent(node.title, getNodeKey, path)}>
-                  Edit
+                  Details
                 </button>
               ],
             })}
