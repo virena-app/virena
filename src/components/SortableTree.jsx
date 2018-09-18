@@ -10,27 +10,42 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-
+  updateComponents: components => dispatch(actions.updateComponents(components)),
 })
 
 
 class NavTree extends Component {
   constructor(props) {
     super(props);
+
+    // this.handleChange = this.handleChange.bind(this);
   }
+
+  // handleChange(components) {
+  //   this.props.updateComponents(components);
+  // }
 
   render () {
     const getNodeKey = ({ treeIndex }) => treeIndex;
+    console.log(`node key here ${getNodeKey}`);
     console.log('store', this.props.components);
     return (
       <div className='nav-tree' 
       // style={{height: '100%'}}
       >
         <SortableTree 
-          style={{ backgroundColor: 'rgb(34, 34, 34)'}}
+          style={{ backgroundColor: '#333'}}
           treeData={this.props.components}
-          onChange={treeData => this.setState({ treeData })}
-          
+          onChange={components => this.props.updateComponents(components)}
+          generateNodeProps={({ node, path }) => ({
+            buttons: [
+              <button
+
+              >
+                delete
+              </button>
+            ]
+          })}
         />
       </div>
     )

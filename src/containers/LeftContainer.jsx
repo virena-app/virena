@@ -5,11 +5,13 @@ import ExpandablePanel from '../components/ExpandablePanel.jsx'
 import '../visuals/styles.css';
 
 const mapStateToProps = store => ({
-  userInput: store.add.userInput
+  userInput: store.compReducer.userInput,
+  components: store.compReducer.components
 });
 
 const mapDispatchToProps = dispatch => ({
   addUserInput: userInput => dispatch(actions.addUserInput(userInput)),
+  addComponent: userInput => dispatch(actions.addComponent(userInput)),
 });
 class LeftContainer extends Component {
   constructor(props) {
@@ -25,8 +27,7 @@ class LeftContainer extends Component {
 
   handleAdd(event) {
     event.preventDefault();
-
-
+    this.props.addComponent(this.props.userInput);
   }
 
   render() {
