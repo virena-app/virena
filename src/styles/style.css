@@ -1,0 +1,38 @@
+body {
+  background-color: black;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.left, .right {
+  width: 30%;
+  padding-top: 2.5%;
+  border: 5px solid lightgrey;
+  color: white;
+  display: inherit;
+  flex-direction: column;
+}
+
+.view {
+  width: 40%;
+  padding-top: 2.5%;
+  border: 5px solid lightgrey;
+  color: white;
+  display: inherit;
+  align-items: center;
+  flex-direction: column;
+}
+
+#iphone {
+  width: 360px;
+  height: 722px;
+}
+
+.parent-form {
+  display: inherit;
+  justify-content: space-evenly;
+}

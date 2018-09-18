@@ -1,51 +1,39 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
-import ExpandablePanel from '../components/ExpandablePanel.jsx'
-import '../visuals/styles.css';
+import ExpandablePanel from '../components/ExpandablePanel.jsx';
 
 const mapStateToProps = store => ({
-  userInput: store.compReducer.userInput,
-  components: store.compReducer.components
-});
+  treeData: store.data.treeData,
+  input: store.data.input
+})
 
 const mapDispatchToProps = dispatch => ({
-  addUserInput: userInput => dispatch(actions.addUserInput(userInput)),
-  addComponent: userInput => dispatch(actions.addComponent(userInput)),
-});
+  setParentName: name => dispatch(actions.setParentName(name)),
+  addParent: name => dispatch(actions.addParent(name))
+})
+
 class LeftContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
-  }
-
-  handleChange(event) {
-    this.props.addUserInput(event.target.value)
-  }
-
-  handleAdd(event) {
-    event.preventDefault();
-    this.props.addComponent(this.props.userInput);
-  }
-
   render() {
     return (
-      <div className='column left-container'>
-        <form onSubmit={this.handleAdd}>
-          <input 
-            type='text' 
-            placeholder='Add Component. . .' 
-            onChange={this.handleChange}/>
-          <button type='submit'>+</button>
+      <div className='left'>
+        <form className='parent-form' onSubmit={(e) => {
+              e.preventDefault();
+              this.props.addParent();
+            }}>
+          <input type='text' value={this.props.input} placeholder='Input component name...' onChange={(e) => this.props.setParentName(e.target.value)} required/>
+          <select>
+            <option value='Switch'>Switch</option>
+            <option value='Stack'>Stack</option>
+            <option value='Drawer'>Drawer</option>
+            <option value='BottomTab'>BottomTab</option>
+          </select>
+          <input type='submit' value='Add Parent Component' />
         </form>
-        <div>
-          <ExpandablePanel />
-        </div>
+        <ExpandablePanel />
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeftContainer);
+export default connect(mapStateToProps, mapDispatchToProps) (LeftContainer);

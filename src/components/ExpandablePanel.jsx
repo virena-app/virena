@@ -54,8 +54,8 @@ const styles = theme => ({
 });
 
 const mapStateToProps = store => ({
-  components: store.compReducer.components,
-  selectedComponent: store.compReducer.selectedComponent,
+  treeData: store.data.treeData,
+  selectedComponent: store.data.selectedComponent,
 })
 
 const mapDispatchToProps = store => ({
@@ -65,21 +65,17 @@ const mapDispatchToProps = store => ({
 class DetailedExpansionPanel extends React.Component {
   constructor(props) {
     super(props);
-    
   }
   
   render () {
     const { classes, selectedComponent } = this.props;
-    console.log('inside panel', selectedComponent);
     return (
       <div className={classes.root}>
         <ExpansionPanel defaultExpanded>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                {/*selectedComponent[0].title*/
-                  selectedComponent.length > 0? selectedComponent[0].title : 'Select a component'
-                }
+                {selectedComponent.length > 0? selectedComponent[0].title : 'Select a component'}
               </Typography>
             </div>
             <div className={classes.column}>
@@ -94,10 +90,6 @@ class DetailedExpansionPanel extends React.Component {
             <div className={classNames(classes.column, classes.helper)}>
               <Typography variant="caption">
                 Define the selected component's type and parent
-                <br />
-                <a href="#sub-labels-and-columns" className={classes.link}>
-                  Learn more
-                </a>
               </Typography>
             </div>
           </ExpansionPanelDetails>

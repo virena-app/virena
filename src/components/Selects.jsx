@@ -24,7 +24,7 @@ const styles = theme => ({
 });
 
 const mapStateToProps = store => ({
-  components: store.compReducer.components,
+  treeData: store.data.treeData,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -59,13 +59,13 @@ class NativeSelects extends React.Component {
         }
       })
     }
-    getAllParents(this.props.components);
+    getAllParents(this.props.treeData);
     let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title}</option>)
     return results;
   }
 
   render() {
-    const { classes, components } = this.props;
+    const { classes, treeData } = this.props;
 
     return (
       <div className={classes.root}>
@@ -115,4 +115,4 @@ NativeSelects.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(NativeSelects));
+export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(NativeSelects));

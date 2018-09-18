@@ -1,29 +1,32 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-// import * as actions from '../actions/actions'
-import ViewContainer from './ViewContainer.jsx'
-import NavTree from '../components/SortableTree.jsx'
-import '../visuals/styles.css'
+import React, {Component} from 'react';
+import Tree from '../components/Tree.jsx';
+import {connect} from 'react-redux';
+import * as actions from '../actions/actions';
 
-const mapStateToProps = store => ({
-  
+const mapStateToProps = store =>({
+  treeData: store.data.treeData,
+  input: store.data.input
 })
 
 const mapDispatchToProps = dispatch => ({
-
+  setTree: treeData => dispatch(actions.setTree(treeData)),
+  addChild: (name, type, key, path) => dispatch(actions.addChild(name, type, key, path)),
+  deleteComponent: (key, path) => dispatch(actions.deleteComponent(key, path)),
+  selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path))
 })
 
 class RightContainer extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   render() {
     return (
-      <div className='column right-container'>
-        <NavTree
-          //components={pass in components from store}
-        />
+      <div className='right'>
+        <Tree treeData={this.props.treeData} setTree={this.props.setTree} addChild={this.props.addChild} deleteComponent={this.props.deleteComponent} selectComponent={this.props.selectComponent} input={this.props.input}/>
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RightContainer);
+export default connect(mapStateToProps, mapDispatchToProps) (RightContainer);
