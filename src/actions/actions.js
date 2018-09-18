@@ -20,3 +20,13 @@ export const deleteComponent = (key, path) => ({
   type: types.DELETE_COMPONENT,
   payload: { key, path }
 })
+
+export const addChild = (name, type, key, path) => ({
+  type: types.ADD_CHILD,
+  payload: {
+    title: name,
+    subtitle: type,
+    key,
+    path
+  }
+})

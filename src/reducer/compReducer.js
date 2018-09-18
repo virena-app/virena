@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import { removeNodeAtPath } from 'react-sortable-tree';
+import { removeNodeAtPath, addNodeUnderParent } from 'react-sortable-tree';
 
 const initialState = {
   userInput: '',
@@ -29,10 +29,7 @@ const compReducer = (state=initialState, action) => {
     
     case types.UPDATE_COMPONENTS:
       const updateState = Object.assign({}, state, {components: action.payload});
-      // newState = action.payload;
-      
-      console.log('new state here', updateState);
-      return updateState;
+        return updateState;
     
     case types.DELETE_COMPONENT:
       const key = action.payload.key;
@@ -44,6 +41,21 @@ const compReducer = (state=initialState, action) => {
           path,
           getNodeKey: key
         })
+    }
+
+    case types.ADD_CHILD:
+    const copy = Object.assign({}, state)
+      const key1 = action.payload.key;
+      const path1 = action.payload.path;
+      return {
+        components: addNodeUnderParent({
+          treeData: copy.components,
+          parentKey: path1[path1.length - 1],
+          expandParent: true,
+          getNodeKey: key1,
+          newNode: action.payload,
+          addAsFirstChild: copy.addAsFirstChild,
+        }).treeData,
     }
     
     default:
