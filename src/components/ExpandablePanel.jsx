@@ -64,9 +64,7 @@ function DetailedExpansionPanel(props) {
           <div className={classes.column}>
             <Selects />
           </div>
-          <div className={classes.column}>
-            <Chip label="Barbados" className={classes.chip} onDelete={() => {}} />
-          </div>
+          
           <div className={classNames(classes.column, classes.helper)}>
             <Typography variant="caption">
               Select your destination of choice
