@@ -2,29 +2,29 @@ import * as types from '../constants/actionTypes';
 
 const initialState = {
   userInput: '',
-  components: []
-  // components: [
-  //   { 
-  //     title: 'Crap',
-  //     expanded: true,
-  //     type: 'hi',
-  //     subtitle: 'drawer nav',
-  //     children: [
-  //       {
-  //         title: 'Tab Navigator',
-  //         expanded: true,
-  //         children: [
-  //           {
-  //             title: 'Tab A screen'
-  //           },
-  //           {
-  //             title: 'Tab B screen'
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // ],
+  // components: [],
+  components: [
+    { 
+      title: 'Crap',
+      expanded: true,
+      type: 'hi',
+      subtitle: 'drawer nav',
+      children: [
+        {
+          title: 'Tab Navigator',
+          expanded: true,
+          children: [
+            {
+              title: 'Tab A screen'
+            },
+            {
+              title: 'Tab B screen'
+            }
+          ]
+        }
+      ]
+    }
+  ],
 }
 
 const compReducer = (state=initialState, action) => {
