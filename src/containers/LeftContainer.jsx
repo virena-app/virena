@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-
+import ExpandablePanel from '../components/ExpandablePanel.jsx'
 import '../visuals/styles.css';
 
 const mapStateToProps = store => ({
@@ -40,7 +40,9 @@ class LeftContainer extends Component {
             onChange={this.handleChange}/>
           <button type='submit'>+</button>
         </form>
-        
+        <div>
+          <ExpandablePanel />
+        </div>
       </div>
     )
   }
