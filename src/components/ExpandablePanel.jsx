@@ -21,6 +21,10 @@ const styles = theme => ({
     color: 'white',
     
   },
+
+  expansion: {
+    backgroundColor: 'black'
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
   },
@@ -71,7 +75,7 @@ class DetailedExpansionPanel extends React.Component {
     const { classes, selectedComponent } = this.props;
     return (
       <div className={classes.root}>
-        <ExpansionPanel defaultExpanded>
+        <ExpansionPanel className={classes.expansion}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.column}>
               <Typography className={classes.heading}>

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
-import ExpandablePanel from '../components/ExpandablePanel.jsx';
+import Details from '../components/Details.jsx';
+import ExpandablePanel from '../components/ExpandablePanel.jsx'
+
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
@@ -30,7 +32,8 @@ class LeftContainer extends Component {
           </select>
           <input type='submit' value='Add Parent Component' />
         </form>
-        <ExpandablePanel />
+        <Details />
+        {/* <ExpandablePanel /> */}
       </div>
     )
   }

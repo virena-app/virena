@@ -12,6 +12,7 @@ body {
   width: 30%;
   padding-top: 2.5%;
   border: 5px solid lightgrey;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
   display: inherit;
   flex-direction: column;
