@@ -16,7 +16,6 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   setParentName: name => dispatch(actions.setParentName(name)),
   addParent: name => dispatch(actions.addParent(name)),
-  loadParentsDropdown: () => dispatch(actions.loadParentsDropdown()),
   selectType: selection => dispatch(actions.selectType(selection)),
   selectInitialType: selection => dispatch(actions.selectInitialType(selection)),
   selectParent: selection => dispatch(actions.selectParent(selection)),
@@ -27,14 +26,13 @@ const mapDispatchToProps = dispatch => ({
 
 class LeftContainer extends Component {
   render() {
-    const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, loadParentsDropdown, updateParentAndType,
+    const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType } = this.props;
     return (
       <div className='left'>
         <form className='parent-form' onSubmit={(e) => {
               e.preventDefault();
               addParent();
-              loadParentsDropdown();
               console.log('avail', availableParents);
             }}>
           <input type='text' value={input} placeholder='Input component name...' onChange={(e) => setParentName(e.target.value)} required/>

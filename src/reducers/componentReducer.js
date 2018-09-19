@@ -71,26 +71,6 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key2,
         }),
       }
-    case types.LOAD_PARENTS_DROPDOWN:
-      let output = [];
-      const getAllParents = (tree) => {
-        tree.forEach(branch => {
-          if (branch.type !== "screen") {
-            output.push({title: branch.title, id: branch.id})
-          }
-          if (branch.children && branch.children.length > 0) {
-            getAllParents(branch.children);
-          }
-        })
-      }
-      getAllParents(state.treeData);
-      console.log(output);
-      let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title, titleObj.id}</option>);
-      console.log('inside reducer load parents');
-      return {
-        ...state,
-        availableParents: results
-      }
 
     case types.SELECT_COMPONENT:
       const key3 = action.payload.key;
