@@ -1,47 +1,21 @@
 import React, {Component} from 'react';
-import * as actions from '../actions/actions';
+// import * as actions from '../actions/actions';
+import { populateImg } from '../utils/populateImg';
+import { connect } from 'react-redux';
 
 const mapStateToProps = store => ({
-  selectedComponent: store.add.selectedComponent,
+  selectedComponent: store.data.selectedComponent,
 })
 
 const mapDispatchToProps = dispatch => ({})
-export default class ViewContainer extends Component {
+class ViewContainer extends Component {
   render() {
-    const image = '../assets/';
+    let image = '../assets/';
+    console.log('hi');
     const selected = this.props.selectedComponent;
-    
-    if(selected) {
-      switch(selected.type) {
-        case 'BottomTab':
-          if(selected.children.length === 1) image += '1tab.png';
-          if(selected.children.length === 2) image += '2tab.png';
-          if(selected.children.length === 3) image += '3tab.png';
-          if(selected.children.length === 4) image += '4tab.png';
-          if(selected.children.length === 5) image += '5tab.png';
-          break;
-        case 'Drawer':
-        if(selected.children.length === 1) image += '1drawer.png';
-        if(selected.children.length === 2) image += '2drawer.png';
-        if(selected.children.length === 3) image += '3drawer.png';
-        if(selected.children.length === 4) image += '4drawer.png';
-        if(selected.children.length === 5) image += '5drawer.png';
-        break;
-          break;
-        case 'Simple Screen':
-          break;
-        case 'Stack':
-          break;
-        case 'Switch':
-          break;
-        default:
-          image += 'defauilt.png'
-      }
-
-    }else {
-      image += 'default.png';
-    }
-
+    console.log('hi2');
+    image = populateImg(image, selected);
+    console.log(`image here ${image}`);
     return (
       <div className='view'>
         {/* <img id='iphone' src='../assets/iphonex.png'></img> */}
@@ -50,3 +24,5 @@ export default class ViewContainer extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewContainer);

@@ -33,11 +33,12 @@ export const deleteComponent = (key, path) => ({
   }
 })
 
-export const selectComponent = (name, key, path) => ({
+export const selectComponent = (name, type, key, path) => ({
   type: types.SELECT_COMPONENT,
   payload: {
     title: name,
     key,
-    path
+    path,
+    subtitle: type
   }
 })
