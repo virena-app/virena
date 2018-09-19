@@ -4,10 +4,27 @@ import React from 'react';
 import exportFiles from '../utils/exportFiles.util.js';
 
 const initialState = {
-  treeData: [{title: 'Hello', subtitle: 'Test'}],
+  treeData: [ 
+    // {
+    //   title: 'Hello', 
+    //   subtitle: 'Drawer', 
+    //   children: [
+    //     { 
+    //       title: 'World', 
+    //       subtitle: 'BottomTab', 
+    //       children: [ {title: 'TabA', subtitle: 'Simple Screen'} ]
+    //     },
+    //     {
+    //       title: 'DrawerChild',
+    //       subtitle: 'Simple Screen'
+    //     }
+    //   ]
+    // } 
+  ],
   addAsFirstChild: false,
   input: '',
-  selectedComponent: [],
+  selectedComponent: {},
+  initialTypeSelection: '',
   typeSelected: '',
   parentSelected: '',
   availableParents: [],
@@ -34,6 +51,7 @@ const componentReducer = (state = initialState, action) => {
       copy.treeData = state.treeData.slice()
       copy.treeData.push({
         title: copy.input,
+        subtitle: copy.initialTypeSelection,
       })
 
     return {
@@ -70,33 +88,22 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key2,
         }),
       }
-    case types.LOAD_PARENTS_DROPDOWN:
-      let output = [];
-      const getAllParents = (tree) => {
-        tree.forEach(branch => {
-          if (branch.type !== "screen") {
-            output.push({title: branch.title, id: branch.id})
-          }
-          if (branch.children && branch.children.length > 0) {
-            getAllParents(branch.children);
-          }
-        })
-      }
-      getAllParents(state.treeData);
-      console.log(output);
-      let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title, titleObj.id}</option>);
-      console.log('inside reducer load parents');
-      return {
-        ...state,
-        availableParents: results
-      }
 
     case types.SELECT_COMPONENT:
+      const subtitle = action.payload.subtitle;
+      const title = action.payload.title;
       const key3 = action.payload.key;
       const path3 = action.payload.path;
-      const title = action.payload.title;
-      copy.selectedComponent = [];
-      copy.selectedComponent.push({ title, path: path3, key: key3 });
+      
+      copy.selectedComponent = {};
+      
+      if(action.payload.children && action.payload.children.length)
+        copy.selectedComponent.children = Object.assign([], action.payload.children);
+      // copy.selectedComponent.push({ title, path: path3, key: key3 });
+      copy.selectedComponent.title = title;
+      copy.selectedComponent.subtitle = subtitle;
+      copy.selectedComponent.path = path3;
+      copy.selectedComponent.key = key3;
 
       return {
         ...state,
@@ -108,7 +115,11 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         typeSelected: action.payload
       }
-
+    case types.SELECT_INITIAL_TYPE:
+      return {
+        ...state,
+        initialTypeSelection: action.payload
+      }
     case types.SELECT_PARENT:
       return {
         ...state,

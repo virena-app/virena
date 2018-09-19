@@ -33,16 +33,14 @@ export const deleteComponent = (key, path) => ({
   }
 })
 
-export const loadParentsDropdown = () => ({
-  type: types.LOAD_PARENTS_DROPDOWN,
-})
-
-export const selectComponent = (name, key, path) => ({
+export const selectComponent = (name, type, children, key, path) => ({
   type: types.SELECT_COMPONENT,
   payload: {
     title: name,
+    subtitle: type,
+    children,
     key,
-    path
+    path,
   }
 })
 
@@ -53,6 +51,11 @@ export const selectParent = (parent) => ({
 
 export const selectType = (navType) => ({
   type: types.SELECT_TYPE,
+  payload: navType
+})
+
+export const selectInitialType = (navType) => ({
+  type: types.SELECT_INITIAL_TYPE,
   payload: navType
 })
 

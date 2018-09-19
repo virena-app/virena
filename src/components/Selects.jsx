@@ -39,10 +39,10 @@ class NativeSelects extends React.Component {
           <InputLabel htmlFor="typeSelect">Type</InputLabel>
           <Select
             native
-            value={this.props.typeSelected}
+            value={typeSelected}
             onChange={(event) => {
               const selection = event.target.value;
-              this.props.selectType(selection)
+              selectType(selection)
             }}
             inputProps={{
               name: 'type',
@@ -56,22 +56,22 @@ class NativeSelects extends React.Component {
             <option value={'Switch'}>Switch</option>
             <option value={'Simple Screen'}>Simple Screen</option>
           </Select>
-          <FormHelperText>{'Current Type:' + this.props.typeSelected}</FormHelperText>
+          <FormHelperText>{'Current Type:' + typeSelected}</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        {/* <FormControl className={classes.formControl}>
           <InputLabel htmlFor="parentSelect">Parent</InputLabel>
           <NativeSelect
-            value={this.props.parentSelected}
+            value={parentSelected}
             onChange={(event) => {
               const selection = event.target.value;
-              this.props.selectParent(selection);
+              selectParent(selection);
             }}
             input={<Input name="parent" id="parentSelect" />}
           >
             <option value="" />
-            {this.props.availableParents}
+            {availableParents}
           </NativeSelect>
-        </FormControl>
+        </FormControl> */}
       </div>
     )
   }
