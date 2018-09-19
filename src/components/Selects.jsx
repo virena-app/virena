@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import { connect } from 'react-redux'
+import * as actions from '../actions/actions';
 
 const styles = theme => ({
   root: {
@@ -23,49 +24,14 @@ const styles = theme => ({
   },
 });
 
-const mapStateToProps = store => ({
-  treeData: store.data.treeData,
-})
-
-const mapDispatchToProps = dispatch => ({
-
-})
 
 class NativeSelects extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      parent: 'hai',
-      type: 'Component Type',
-      parentsArray: [],
-    };
-  }
-
-  handleChange (type) { 
-    event => {
-      console.log(event.target.value);
-    this.setState({ [type]: event.target.value });
-  }}
-  
-  loadParentsDropdown () {
-    let output = [];
-    const getAllParents = (tree) => {
-      tree.forEach( branch => {
-        if (branch.type !== "screen") {
-          output.push({title:branch.title, id: branch.id}) 
-        }
-        if (branch.children && branch.children.length > 0) {
-          getAllParents(branch.children);
-        }
-      })
-    }
-    getAllParents(this.props.treeData);
-    let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title}</option>)
-    return results;
+    super(props); 
   }
 
   render() {
-    const { classes, treeData } = this.props;
+    const { classes, treeData, typeSelected, parentSelected, availableParents, selectType, selectParent } = this.props;
 
     return (
       <div className={classes.root}>
@@ -73,10 +39,10 @@ class NativeSelects extends React.Component {
           <InputLabel htmlFor="typeSelect">Type</InputLabel>
           <Select
             native
-            value={this.state.type}
+            value={typeSelected}
             onChange={(event) => {
               const selection = event.target.value;
-              this.setState({ type: selection });
+              this.props.selectType(selection)
             }}
             inputProps={{
               name: 'type',
@@ -90,22 +56,22 @@ class NativeSelects extends React.Component {
             <option value={'Switch'}>Switch</option>
             <option value={'Simple Screen'}>Simple Screen</option>
           </Select>
-          <FormHelperText>{'Current Type:' + this.state.type}</FormHelperText>
+          <FormHelperText>{'Current Type:' + typeSelected}</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        {/* <FormControl className={classes.formControl}>
           <InputLabel htmlFor="parentSelect">Parent</InputLabel>
           <NativeSelect
-            value={this.state.parent}
+            value={parentSelected}
             onChange={(event) => {
               const selection = event.target.value;
-              this.setState({ parent: selection });
+              selectParent(selection);
             }}
             input={<Input name="parent" id="parentSelect" />}
           >
             <option value="" />
-            {this.loadParentsDropdown()}
+            {availableParents}
           </NativeSelect>
-        </FormControl>
+        </FormControl> */}
       </div>
     )
   }
@@ -115,4 +81,4 @@ NativeSelects.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(NativeSelects));
+export default withStyles(styles)(NativeSelects);
