@@ -3,7 +3,7 @@ import { addNodeUnderParent, removeNodeAtPath } from 'react-sortable-tree';
 
 
 const initialState = {
-  treeData: [{title: 'Hello', subtitle: 'BottomTab', children: [{title: 'World', subtitle: 'TabA'}]}],
+  treeData: [{title: 'Hello', subtitle: 'Drawer', children: [{title: 'World', subtitle: 'BottomTab', children: [{title: 'TabA'}]}]}],
   addAsFirstChild: false,
   input: '',
   selectedComponent: {}
@@ -73,16 +73,14 @@ const componentReducer = (state = initialState, action) => {
       const path3 = action.payload.path;
       
       copy.selectedComponent = {};
-      
       if(action.payload.children && action.payload.children.length) {
-        console.log('children here', copy.selectedComponent.children);
         copy.selectedComponent.children = Object.assign([], action.payload.children);
       }
       // copy.selectedComponent.push({ title, path: path3, key: key3 });
       copy.selectedComponent.title = title;
+      copy.selectedComponent.subtitle = subtitle;
       copy.selectedComponent.path = path3;
       copy.selectedComponent.key = key3;
-      copy.selectedComponent.subtitle = subtitle;
 
       return {
         ...state,

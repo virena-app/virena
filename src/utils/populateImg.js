@@ -1,14 +1,15 @@
 export const populateImg = function(image, selected) {
   if(selected) {
+    console.log(`the selected title ${selected.subtitle}`)
     switch(selected.subtitle) {
       case 'BottomTab':
         console.log(`children ${selected.children}`);
         if(selected.children && selected.children.length) 
-          return `image${selected.children.length}tab.png`;
+          return `${image}${selected.children.length}tab.png`;
       
       case 'Drawer':
         if(selected.children && selected.children.length) 
-          return `image${selected.children.length}drawer.png`;
+          return `${image}${selected.children.length}drawer.png`;
       
       case 'Simple Screen':
         return image += 'simple.png';
