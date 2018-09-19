@@ -13,7 +13,6 @@ const mapDispatchToProps = dispatch => ({
   addChild: (name, type, key, path) => dispatch(actions.addChild(name, type, key, path)),
   deleteComponent: (key, path) => dispatch(actions.deleteComponent(key, path)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
-  loadParentsDropdown: () => dispatch(actions.loadParentsDropdown()),
 })
 
 class RightContainer extends Component {
@@ -22,10 +21,10 @@ class RightContainer extends Component {
   }
 
   render() {
-    const { treeData, input, setTree, addChild, deleteComponent, selectComponent, loadParentsDropdown } = this.props;
+    const { treeData, input, setTree, addChild, deleteComponent, selectComponent } = this.props;
     return (
       <div className='right'>
-        <Tree treeData={treeData} setTree={setTree} addChild={addChild} deleteComponent={deleteComponent} selectComponent={selectComponent} input={input} loadParentsDropdown={loadParentsDropdown}/>
+        <Tree treeData={treeData} setTree={setTree} addChild={addChild} deleteComponent={deleteComponent} selectComponent={selectComponent} input={input}/>
       </div>
     )
   }
