@@ -58,7 +58,7 @@ class NativeSelects extends React.Component {
           </Select>
           <FormHelperText>{'Current Type:' + typeSelected}</FormHelperText>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        {/* <FormControl className={classes.formControl}>
           <InputLabel htmlFor="parentSelect">Parent</InputLabel>
           <NativeSelect
             value={parentSelected}
@@ -71,7 +71,7 @@ class NativeSelects extends React.Component {
             <option value="" />
             {availableParents}
           </NativeSelect>
-        </FormControl>
+        </FormControl> */}
       </div>
     )
   }
