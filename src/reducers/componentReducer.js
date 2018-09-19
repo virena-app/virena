@@ -1,12 +1,16 @@
 import * as types from '../constants/actionTypes';
-import { addNodeUnderParent, removeNodeAtPath } from 'react-sortable-tree';
-
+import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
+import React from 'react'
 
 const initialState = {
   treeData: [{title: 'Hello', subtitle: 'Test'}],
   addAsFirstChild: false,
   input: '',
-  selectedComponent: []
+  selectedComponent: [],
+  typeSelected: '',
+  parentSelected: '',
+  availableParents: [],
+  changeNameInput: '',
 }
 
 const componentReducer = (state = initialState, action) => {
@@ -65,6 +69,26 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key2,
         }),
       }
+    case types.LOAD_PARENTS_DROPDOWN:
+      let output = [];
+      const getAllParents = (tree) => {
+        tree.forEach(branch => {
+          if (branch.type !== "screen") {
+            output.push({title: branch.title, id: branch.id})
+          }
+          if (branch.children && branch.children.length > 0) {
+            getAllParents(branch.children);
+          }
+        })
+      }
+      getAllParents(state.treeData);
+      console.log(output);
+      let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title, titleObj.id}</option>);
+      console.log('inside reducer load parents');
+      return {
+        ...state,
+        availableParents: results
+      }
 
     case types.SELECT_COMPONENT:
       const key3 = action.payload.key;
@@ -78,6 +102,36 @@ const componentReducer = (state = initialState, action) => {
         selectedComponent: copy.selectedComponent
       }
 
+    case types.SELECT_TYPE:
+      return {
+        ...state,
+        typeSelected: action.payload
+      }
+
+    case types.SELECT_PARENT:
+      return {
+        ...state,
+        parentSelected: action.payload
+      }
+    case types.SET_NAME_TO_CHANGE:
+      return {
+        ...state,
+        changeNameInput: action.payload
+      }
+    case types.UPDATE_NAME_AND_TYPE:
+      //update name and type of the selected component on save click
+      const key4 = action.payload.key;
+      const path4 = action.payload.path;
+
+      return {
+        ...state,
+        treeData: changeNodeAtPath({
+          treeData: copy.treeData,
+          path: path4,
+          newNode: (({ node }) => ({ ...node, title: action.payload.title, subtitle: action.payload.subtitle })),
+          getNodeKey: key4,
+        })
+      }
     default: 
       return state;
   }
