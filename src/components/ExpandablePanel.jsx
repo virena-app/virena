@@ -94,6 +94,7 @@ class DetailedExpansionPanel extends React.Component {
                 className={classes.textField}
                 margin="normal"
                 onChange={(e) => setNameToChange(e.target.value)}
+                value={changeNameInput}
               />  
             </div>
           </ExpansionPanelDetails>
@@ -103,7 +104,10 @@ class DetailedExpansionPanel extends React.Component {
             <Button size="small" color="primary" 
             onClick={() => {
               updateNameAndType(changeNameInput, typeSelected, selectedComponent[0].key, selectedComponent[0].path)
-              
+              //need to change typeSelected and changeNameInput to be empty
+              //actions: selectType and setNameToChange
+              selectType('')
+              setNameToChange('')
             }}
             >
               Save
