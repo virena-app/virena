@@ -8,10 +8,7 @@ export default class Tree extends Component {
     return (
       <SortableTree
             treeData={this.props.treeData}
-            onChange={treeData => {
-              // this.props.loadParentsDropdown()
-              this.props.setTree(treeData)
-            }}
+            onChange={treeData => this.props.setTree(treeData)}
             generateNodeProps={({ node, path }) => ({
               buttons: [
                 <button onClick={() => this.props.addChild(this.props.input, 'hi', getNodeKey, path)}>

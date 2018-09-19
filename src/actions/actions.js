@@ -54,6 +54,11 @@ export const selectType = (navType) => ({
   payload: navType
 })
 
+export const selectInitialType = (navType) => ({
+  type: types.SELECT_INITIAL_TYPE,
+  payload: navType
+})
+
 export const setNameToChange = name => ({
   type: types.SET_NAME_TO_CHANGE,
   payload: name

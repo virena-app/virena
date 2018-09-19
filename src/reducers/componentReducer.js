@@ -23,6 +23,7 @@ const initialState = {
   addAsFirstChild: false,
   input: '',
   selectedComponent: {},
+  initialTypeSelection: '',
   typeSelected: '',
   parentSelected: '',
   availableParents: [],
@@ -49,6 +50,7 @@ const componentReducer = (state = initialState, action) => {
       copy.treeData = state.treeData.slice()
       copy.treeData.push({
         title: copy.input,
+        subtitle: copy.initialTypeSelection,
       })
 
     return {
@@ -118,7 +120,11 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         typeSelected: action.payload
       }
-
+    case types.SELECT_INITIAL_TYPE:
+      return {
+        ...state,
+        initialTypeSelection: action.payload
+      }
     case types.SELECT_PARENT:
       return {
         ...state,

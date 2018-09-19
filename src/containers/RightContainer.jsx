@@ -22,7 +22,7 @@ class RightContainer extends Component {
   }
 
   render() {
-    const { treeData, input, setTree, addChild, deleteComponent, selectComponent, loadParentsDropdown } = this.props;
+    const { treeData, input, setTree, addChild, deleteComponent, selectComponent } = this.props;
     return (
       <div className='right'>
         <Tree 
@@ -31,8 +31,7 @@ class RightContainer extends Component {
           addChild={addChild} 
           deleteComponent={deleteComponent} 
           selectComponent={selectComponent} 
-          input={input} l
-          oadParentsDropdown={loadParentsDropdown}/>
+          input={input}/>
       </div>
     )
   }

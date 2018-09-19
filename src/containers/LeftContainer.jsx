@@ -16,8 +16,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   setParentName: name => dispatch(actions.setParentName(name)),
   addParent: name => dispatch(actions.addParent(name)),
-  // loadParentsDropdown: () => dispatch(actions.loadParentsDropdown()),
   selectType: selection => dispatch(actions.selectType(selection)),
+  selectInitialType: selection => dispatch(actions.selectInitialType(selection)),
   selectParent: selection => dispatch(actions.selectParent(selection)),
   updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
@@ -26,18 +26,20 @@ const mapDispatchToProps = dispatch => ({
 
 class LeftContainer extends Component {
   render() {
-    const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, loadParentsDropdown, updateParentAndType,
-    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent } = this.props;
+    const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
+    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType } = this.props;
     return (
       <div className='left'>
         <form className='parent-form' onSubmit={(e) => {
               e.preventDefault();
               addParent();
-              // loadParentsDropdown();
               console.log('avail', availableParents);
             }}>
           <input type='text' value={input} placeholder='Input component name...' onChange={(e) => setParentName(e.target.value)} required/>
-          <select>
+          <select onChange={(e) => { 
+            const selection = e.target.value;
+            selectInitialType(selection)
+          }}>
             <option value='Switch'>Switch</option>
             <option value='Stack'>Stack</option>
             <option value='Drawer'>Drawer</option>
