@@ -9,7 +9,7 @@ export default class Tree extends Component {
       <SortableTree
             treeData={this.props.treeData}
             onChange={treeData => {
-              this.props.loadParentsDropdown()
+              // this.props.loadParentsDropdown()
               this.props.setTree(treeData)
             }}
             generateNodeProps={({ node, path }) => ({

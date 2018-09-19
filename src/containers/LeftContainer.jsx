@@ -16,7 +16,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   setParentName: name => dispatch(actions.setParentName(name)),
   addParent: name => dispatch(actions.addParent(name)),
-  loadParentsDropdown: () => dispatch(actions.loadParentsDropdown()),
+  // loadParentsDropdown: () => dispatch(actions.loadParentsDropdown()),
   selectType: selection => dispatch(actions.selectType(selection)),
   selectParent: selection => dispatch(actions.selectParent(selection)),
   updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
@@ -33,7 +33,7 @@ class LeftContainer extends Component {
         <form className='parent-form' onSubmit={(e) => {
               e.preventDefault();
               addParent();
-              loadParentsDropdown();
+              // loadParentsDropdown();
               console.log('avail', availableParents);
             }}>
           <input type='text' value={input} placeholder='Input component name...' onChange={(e) => setParentName(e.target.value)} required/>

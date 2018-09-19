@@ -22,7 +22,7 @@ const initialState = {
   ],
   addAsFirstChild: false,
   input: '',
-  selectedComponent: [],
+  selectedComponent: {},
   typeSelected: '',
   parentSelected: '',
   availableParents: [],
@@ -85,26 +85,6 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key2,
         }),
       }
-    case types.LOAD_PARENTS_DROPDOWN:
-      let output = [];
-      const getAllParents = (tree) => {
-        tree.forEach(branch => {
-          if (branch.type !== "screen") {
-            output.push({title: branch.title, id: branch.id})
-          }
-          if (branch.children && branch.children.length > 0) {
-            getAllParents(branch.children);
-          }
-        })
-      }
-      getAllParents(state.treeData);
-      console.log(output);
-      let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title, titleObj.id}</option>);
-      console.log('inside reducer load parents');
-      return {
-        ...state,
-        availableParents: results
-      }
 
     case types.SELECT_COMPONENT:
       const subtitle = action.payload.subtitle;
@@ -122,10 +102,12 @@ const componentReducer = (state = initialState, action) => {
       copy.selectedComponent.path = path3;
       copy.selectedComponent.key = key3;
       // new stuff right here
+      /*
       const title = action.payload.title;
       copy.selectedComponent = [];
       copy.selectedComponent.push({ title, path: path3, key: key3 });
       console.log('Selected Component reducer on save?');
+      */
       return {
         ...state,
         selectedComponent: copy.selectedComponent
