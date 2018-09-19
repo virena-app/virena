@@ -7,8 +7,8 @@ export default class AppContainer extends Component {
   render() {
     return (
       <div className='main'>
-        <LeftContainer />
         <ViewContainer />
+        <LeftContainer />
         <RightContainer />
       </div>
     )

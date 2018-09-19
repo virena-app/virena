@@ -118,7 +118,8 @@ class DetailedExpansionPanel extends React.Component {
                 updateNameAndType(changeNameInput, typeSelected, selectedComponent[0].key, selectedComponent[0].path)
                 selectType('')
                 setNameToChange('')
-                selectComponent(selectedComponent[0].title, selectedComponent[0].key, selectedComponent[0].path)
+                console.log('clicked, current title: ', changeNameInput);
+                selectComponent(changeNameInput, selectedComponent[0].key, selectedComponent[0].path)
               }}
             >
               Save
