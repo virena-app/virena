@@ -21,12 +21,13 @@ const mapDispatchToProps = dispatch => ({
   selectParent: selection => dispatch(actions.selectParent(selection)),
   updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
+  selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
 })
 
 class LeftContainer extends Component {
   render() {
     const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, loadParentsDropdown, updateParentAndType,
-    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange } = this.props;
+    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent } = this.props;
     return (
       <div className='left'>
         <form className='parent-form' onSubmit={(e) => {
@@ -46,7 +47,7 @@ class LeftContainer extends Component {
         </form>
         <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
         availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
-        changeNameInput={changeNameInput} setNameToChange={setNameToChange}/>
+        changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
       </div>
     )
   }

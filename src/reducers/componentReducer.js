@@ -96,7 +96,7 @@ const componentReducer = (state = initialState, action) => {
       const title = action.payload.title;
       copy.selectedComponent = [];
       copy.selectedComponent.push({ title, path: path3, key: key3 });
-
+      console.log('Selected Component reducer on save?');
       return {
         ...state,
         selectedComponent: copy.selectedComponent
