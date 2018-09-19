@@ -42,7 +42,7 @@ class NativeSelects extends React.Component {
             value={typeSelected}
             onChange={(event) => {
               const selection = event.target.value;
-              this.props.selectType(selection)
+              selectType(selection)
             }}
             inputProps={{
               name: 'type',
