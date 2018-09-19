@@ -12,7 +12,6 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Selects from './Selects.jsx'
-import { connect } from 'react-redux'
 
 const styles = theme => ({
   root: {
@@ -53,24 +52,15 @@ const styles = theme => ({
   },
 });
 
-const mapStateToProps = store => ({
-  components: store.compReducer.components,
-  selectedComponent: store.compReducer.selectedComponent,
-})
 
-const mapDispatchToProps = store => ({
-
-})
 //need to grab name of selected tree component and render to options panel
 class DetailedExpansionPanel extends React.Component {
   constructor(props) {
     super(props);
-    
   }
   
   render () {
-    const { classes, selectedComponent } = this.props;
-    console.log('inside panel', selectedComponent);
+    const { classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent } = this.props;
     return (
       <div className={classes.root}>
         <ExpansionPanel defaultExpanded>
@@ -86,23 +76,19 @@ class DetailedExpansionPanel extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.details}>
             <div className={classes.column}>
-              <Selects />
+              <Selects typeSelected={typeSelected} parentSelected={parentSelected} availableParents={availableParents} selectType={selectType} selectParent={selectParent}/>
             </div>
             
             <div className={classNames(classes.column, classes.helper)}>
               <Typography variant="caption">
                 Define the selected component's type and parent
-                <br />
-                <a href="#sub-labels-and-columns" className={classes.link}>
-                  Learn more
-                </a>
               </Typography>
             </div>
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
             <Button size="small">Cancel</Button>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" >
               Save
             </Button>
           </ExpansionPanelActions>
@@ -116,4 +102,4 @@ DetailedExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(DetailedExpansionPanel));
+export default withStyles(styles)(DetailedExpansionPanel);

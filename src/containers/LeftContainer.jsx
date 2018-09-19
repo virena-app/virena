@@ -1,39 +1,50 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
-import ExpandablePanel from '../components/ExpandablePanel.jsx'
-import '../visuals/styles.css';
+import ExpandablePanel from '../components/ExpandablePanel.jsx';
 
 const mapStateToProps = store => ({
-  userInput: store.compReducer.userInput,
-  components: store.compReducer.components
-});
+  treeData: store.data.treeData,
+  input: store.data.input,
+  selectedComponent: store.data.selectedComponent,
+  typeSelected: store.data.typeSelected,
+  parentSelected: store.data.parentSelected,
+  availableParents: store.data.availableParents,
+})
 
 const mapDispatchToProps = dispatch => ({
-  addUserInput: userInput => dispatch(actions.addUserInput(userInput)),
-  addComponent: userInput => dispatch(actions.addComponent(userInput)),
-});
+  setParentName: name => dispatch(actions.setParentName(name)),
+  addParent: name => dispatch(actions.addParent(name)),
+  loadParentsDropdown: () => dispatch(actions.loadParentsDropdown()),
+  selectType: selection => dispatch(actions.selectType(selection)),
+  selectParent: selection => dispatch(actions.selectParent(selection)),
+})
+
 class LeftContainer extends Component {
-  
   render() {
+    const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, loadParentsDropdown, updateParentAndType,
+    availableParents, selectType, selectParent } = this.props;
     return (
-      <div className='column left-container'>
-        <form onSubmit={(event) => {
-          event.preventDefault();
-          this.props.addComponent(this.props.userInput)
-          }}>
-          <input 
-            type='text' 
-            placeholder='Add Component. . .' 
-            onChange={(event) => this.props.addUserInput(event.target.value)}/>
-          <button type='submit'>+</button>
+      <div className='left'>
+        <form className='parent-form' onSubmit={(e) => {
+              e.preventDefault();
+              addParent();
+              loadParentsDropdown();
+            }}>
+          <input type='text' value={input} placeholder='Input component name...' onChange={(e) => setParentName(e.target.value)} required/>
+          <select>
+            <option value='Switch'>Switch</option>
+            <option value='Stack'>Stack</option>
+            <option value='Drawer'>Drawer</option>
+            <option value='BottomTab'>BottomTab</option>
+          </select>
+          <input type='submit' value='Add Parent Component' />
         </form>
-        <div>
-          <ExpandablePanel />
-        </div>
+        <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
+        availableParents={availableParents} selectType={selectType} selectParent={selectParent}/>
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeftContainer);
+export default connect(mapStateToProps, mapDispatchToProps) (LeftContainer);

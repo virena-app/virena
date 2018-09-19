@@ -1,11 +1,13 @@
-const {app, BrowserWindow} = require('electron');
+const electron = require('electron')
+const { app, BrowserWindow } = electron;
 
 let win;
 
 const createWindow = () => {
-  const { width, height } = require('electron').screen.getPrimaryDisplay().size;
 
-  win = new BrowserWindow({ width, height });
+  const {width, height} = electron.screen.getPrimaryDisplay().size;
+
+  win = new BrowserWindow({width, height});
 
   if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
   else win.loadFile('index.html')

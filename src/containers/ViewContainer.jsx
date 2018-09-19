@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import '../visuals/styles.css';
-
-export default class ViewContainer extends Component { 
+export default class ViewContainer extends Component {
   render() {
     return (
-      <div className='view-container'>
-        <p>this is the middle container</p>
+      <div className='view'>
+        <img id='iphone' src='../assets/iphonex.png'></img>
       </div>
     )
   }
