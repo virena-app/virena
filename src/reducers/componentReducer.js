@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import { addNodeUnderParent, removeNodeAtPath } from 'react-sortable-tree';
+import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import React from 'react'
 
 const initialState = {
@@ -10,6 +10,7 @@ const initialState = {
   typeSelected: '',
   parentSelected: '',
   availableParents: [],
+  changeNameInput: '',
 }
 
 const componentReducer = (state = initialState, action) => {
@@ -81,6 +82,7 @@ const componentReducer = (state = initialState, action) => {
         })
       }
       getAllParents(state.treeData);
+      console.log(output);
       let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title, titleObj.id}</option>);
       console.log('inside reducer load parents');
       return {
@@ -111,7 +113,25 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         parentSelected: action.payload
       }
+    case types.SET_NAME_TO_CHANGE:
+      return {
+        ...state,
+        changeNameInput: action.payload
+      }
+    case types.UPDATE_NAME_AND_TYPE:
+      //update name and type of the selected component on save click
+      const key4 = action.payload.key;
+      const path4 = action.payload.path;
 
+      return {
+        ...state,
+        treeData: changeNodeAtPath({
+          treeData: copy.treeData,
+          path: path4,
+          newNode: (({ node }) => ({ ...node, title: action.payload.title, subtitle: action.payload.subtitle })),
+          getNodeKey: key4,
+        })
+      }
     default: 
       return state;
   }

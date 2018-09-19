@@ -12,6 +12,7 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Selects from './Selects.jsx'
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   root: {
@@ -50,6 +51,11 @@ const styles = theme => ({
       textDecoration: 'underline',
     },
   },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
 });
 
 
@@ -60,7 +66,8 @@ class DetailedExpansionPanel extends React.Component {
   }
   
   render () {
-    const { classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent } = this.props;
+    const { classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
+      changeNameInput, setNameToChange } = this.props;
     return (
       <div className={classes.root}>
         <ExpansionPanel defaultExpanded>
@@ -76,19 +83,29 @@ class DetailedExpansionPanel extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.details}>
             <div className={classes.column}>
-              <Selects typeSelected={typeSelected} parentSelected={parentSelected} availableParents={availableParents} selectType={selectType} selectParent={selectParent}/>
+              <Selects typeSelected={typeSelected} parentSelected={parentSelected} availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}/>
             </div>
             
             <div className={classNames(classes.column, classes.helper)}>
-              <Typography variant="caption">
-                Define the selected component's type and parent
-              </Typography>
+              <TextField
+                id="standard-with-placeholder"
+                label="Change Component Name"
+                placeholder="Change Name"
+                className={classes.textField}
+                margin="normal"
+                onChange={(e) => setNameToChange(e.target.value)}
+              />  
             </div>
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
             <Button size="small">Cancel</Button>
-            <Button size="small" color="primary" >
+            <Button size="small" color="primary" 
+            onClick={() => {
+              updateNameAndType(changeNameInput, typeSelected, selectedComponent[0].key, selectedComponent[0].path)
+              
+            }}
+            >
               Save
             </Button>
           </ExpansionPanelActions>

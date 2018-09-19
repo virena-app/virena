@@ -56,3 +56,17 @@ export const selectType = (navType) => ({
   payload: navType
 })
 
+export const setNameToChange = name => ({
+  type: types.SET_NAME_TO_CHANGE,
+  payload: name
+})
+
+export const updateNameAndType = (name, type, key, path) => ({
+  type: types.UPDATE_NAME_AND_TYPE,
+  payload: {
+    title: name,
+    subtitle: type,
+    key,
+    path
+  }
+})

@@ -10,6 +10,7 @@ const mapStateToProps = store => ({
   typeSelected: store.data.typeSelected,
   parentSelected: store.data.parentSelected,
   availableParents: store.data.availableParents,
+  changeNameInput: store.data.changeNameInput,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -18,18 +19,21 @@ const mapDispatchToProps = dispatch => ({
   loadParentsDropdown: () => dispatch(actions.loadParentsDropdown()),
   selectType: selection => dispatch(actions.selectType(selection)),
   selectParent: selection => dispatch(actions.selectParent(selection)),
+  updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
+  setNameToChange: name => dispatch(actions.setNameToChange(name)),
 })
 
 class LeftContainer extends Component {
   render() {
     const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, loadParentsDropdown, updateParentAndType,
-    availableParents, selectType, selectParent } = this.props;
+    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange } = this.props;
     return (
       <div className='left'>
         <form className='parent-form' onSubmit={(e) => {
               e.preventDefault();
               addParent();
               loadParentsDropdown();
+              console.log('avail', availableParents);
             }}>
           <input type='text' value={input} placeholder='Input component name...' onChange={(e) => setParentName(e.target.value)} required/>
           <select>
@@ -41,7 +45,8 @@ class LeftContainer extends Component {
           <input type='submit' value='Add Parent Component' />
         </form>
         <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
-        availableParents={availableParents} selectType={selectType} selectParent={selectParent}/>
+        availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
+        changeNameInput={changeNameInput} setNameToChange={setNameToChange}/>
       </div>
     )
   }
