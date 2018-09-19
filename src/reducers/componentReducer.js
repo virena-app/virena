@@ -3,7 +3,23 @@ import { addNodeUnderParent, removeNodeAtPath } from 'react-sortable-tree';
 
 
 const initialState = {
-  treeData: [{title: 'Hello', subtitle: 'Drawer', children: [{title: 'World', subtitle: 'BottomTab', children: [{title: 'TabA'}]}]}],
+  treeData: [ 
+    {
+      title: 'Hello', 
+      subtitle: 'Drawer', 
+      children: [
+        { 
+          title: 'World', 
+          subtitle: 'BottomTab', 
+          children: [ {title: 'TabA', subtitle: 'Simple Screen'} ]
+        },
+        {
+          title: 'DrawerChild',
+          subtitle: 'Simple Screen'
+        }
+      ]
+    } 
+  ],
   addAsFirstChild: false,
   input: '',
   selectedComponent: {}
