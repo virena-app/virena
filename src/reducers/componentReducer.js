@@ -3,10 +3,26 @@ import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-so
 import React from 'react'
 
 const initialState = {
-  treeData: [{title: 'Hello', subtitle: 'Test'}],
+  treeData: [ 
+    // {
+    //   title: 'Hello', 
+    //   subtitle: 'Drawer', 
+    //   children: [
+    //     { 
+    //       title: 'World', 
+    //       subtitle: 'BottomTab', 
+    //       children: [ {title: 'TabA', subtitle: 'Simple Screen'} ]
+    //     },
+    //     {
+    //       title: 'DrawerChild',
+    //       subtitle: 'Simple Screen'
+    //     }
+    //   ]
+    // } 
+  ],
   addAsFirstChild: false,
   input: '',
-  selectedComponent: [],
+  selectedComponent: {},
   initialTypeSelection: '',
   typeSelected: '',
   parentSelected: '',
@@ -73,12 +89,21 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.SELECT_COMPONENT:
+      const subtitle = action.payload.subtitle;
+      const title = action.payload.title;
       const key3 = action.payload.key;
       const path3 = action.payload.path;
-      const title = action.payload.title;
-      copy.selectedComponent = [];
-      copy.selectedComponent.push({ title, path: path3, key: key3 });
-      console.log('Selected Component reducer on save?');
+      
+      copy.selectedComponent = {};
+      
+      if(action.payload.children && action.payload.children.length)
+        copy.selectedComponent.children = Object.assign([], action.payload.children);
+      // copy.selectedComponent.push({ title, path: path3, key: key3 });
+      copy.selectedComponent.title = title;
+      copy.selectedComponent.subtitle = subtitle;
+      copy.selectedComponent.path = path3;
+      copy.selectedComponent.key = key3;
+
       return {
         ...state,
         selectedComponent: copy.selectedComponent
