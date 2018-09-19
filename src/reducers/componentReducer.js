@@ -4,21 +4,21 @@ import React from 'react'
 
 const initialState = {
   treeData: [ 
-    {
-      title: 'Hello', 
-      subtitle: 'Drawer', 
-      children: [
-        { 
-          title: 'World', 
-          subtitle: 'BottomTab', 
-          children: [ {title: 'TabA', subtitle: 'Simple Screen'} ]
-        },
-        {
-          title: 'DrawerChild',
-          subtitle: 'Simple Screen'
-        }
-      ]
-    } 
+    // {
+    //   title: 'Hello', 
+    //   subtitle: 'Drawer', 
+    //   children: [
+    //     { 
+    //       title: 'World', 
+    //       subtitle: 'BottomTab', 
+    //       children: [ {title: 'TabA', subtitle: 'Simple Screen'} ]
+    //     },
+    //     {
+    //       title: 'DrawerChild',
+    //       subtitle: 'Simple Screen'
+    //     }
+    //   ]
+    // } 
   ],
   addAsFirstChild: false,
   input: '',

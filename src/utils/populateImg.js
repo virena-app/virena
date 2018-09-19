@@ -8,11 +8,17 @@ export const populateImg = function(image, selected) {
           return `${image}${selected.children.length}tab.png`;
       
       case 'Drawer':
-        if(selected.children && selected.children.length) 
-          return `${image}${selected.children.length}drawer.png`;
+        // check children exists, check if the first child is a bottomtabnav or a simple screen
+        if(selected.children && selected.children.length) {
+          if(selected.children[0].subtitle === 'BottomTab')
+            return populateImg(image, selected.children[0])
+          
+          return `${image}/Screen-Drawer/${selected.children.length}DrawerScreen.png`;
+        }
       
       case 'Simple Screen':
-        return image += 'simple.png';
+      // if(selected.children && selected.children.length) 
+        return `${image}/Screen/${selected.children.length}screen.png`;
         
       case 'Stack':
         break;
