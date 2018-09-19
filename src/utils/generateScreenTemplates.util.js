@@ -3,9 +3,10 @@
  * @param {array} sortableTree - The flattened version of the sortable tree state
  */
   
-const getAllScreenTitles = sortableTree => {
+export const getAllScreenTitles = sortableTree => {
   return sortableTree.reduce( (screenTitlesArr, comp ) => {
-    if (comp.type === 'Screen') return screenTitlesArr.concat(comp.title);
+    //console.log(comp.subtitle);
+    if (comp.subtitle === 'Simple Screen') return screenTitlesArr.concat(comp.title);
     else if (comp.children) return screenTitlesArr.concat(getAllScreenTitles(comp.children));
     else return screenTitlesArr;
   }, []).map(title => title.replace(/\s+/g, ''))

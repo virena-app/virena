@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
+import ExportFilesButton from '../components/ExportFilesButton.jsx'
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
@@ -21,12 +22,13 @@ const mapDispatchToProps = dispatch => ({
   selectParent: selection => dispatch(actions.selectParent(selection)),
   updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
+  exportFiles: treeData => dispatch(actions.exportFiles(treeData))
 })
 
 class LeftContainer extends Component {
   render() {
     const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, loadParentsDropdown, updateParentAndType,
-    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange } = this.props;
+    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, exportFiles } = this.props;
     return (
       <div className='left'>
         <form className='parent-form' onSubmit={(e) => {
@@ -47,6 +49,7 @@ class LeftContainer extends Component {
         <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
         availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
         changeNameInput={changeNameInput} setNameToChange={setNameToChange}/>
+        <ExportFilesButton treeData={treeData} exportFiles={exportFiles}></ExportFilesButton>
       </div>
     )
   }
