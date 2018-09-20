@@ -1,11 +1,10 @@
 import fs from 'fs';
-//import { format } from 'prettier';
 import generateScreenTemplate, { getAllScreenTitles } from './generateScreenTemplates.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
+import generateAppTemplate from './generateAppTemplate.util.js';
 
 const exportFiles = (treeData, path) => {
   const screenTitles = getAllScreenTitles(treeData);
-  console.log(Object.keys(fs))
   const promises = [];
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
@@ -41,9 +40,23 @@ const exportFiles = (treeData, path) => {
       });
   });
 
+  const appPromise = new Promise((resolve, reject) => {
+    fs.writeFile(`${path}/App.js`, 
+      generateAppTemplate(treeData), {
+        singleQuote: true,
+        trailingComma: 'es5',
+        bracketSpacing: true,
+        jsxBracketSameLine: true,
+        parser: 'babylon'
+      },
+      (err) => {
+        if (err) return reject(err);
+        return resolve();
+      });
+  });
+
   promises.push(navPromise);
-
-
+  promises.push(appPromise);
 
   return Promise.all(promises);
 };

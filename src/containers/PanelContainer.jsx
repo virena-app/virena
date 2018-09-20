@@ -75,7 +75,7 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles } = this.props;
     return (
-      <div className='left'>
+      <div className='panel'>
         <form className='form' autoComplete='off'>
           <InputLabel htmlFor='typeSelect'>Type</InputLabel>
           <FormControl className={classes.formControl}>

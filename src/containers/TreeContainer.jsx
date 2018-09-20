@@ -24,7 +24,7 @@ class TreeContainer extends Component {
   render() {
     const { treeData, input, setTree, addChild, deleteComponent, selectComponent, id } = this.props;
     return (
-      <div className='right'>
+      <div className='tree'>
         <Tree 
           treeData={treeData} 
           setTree={setTree} 
