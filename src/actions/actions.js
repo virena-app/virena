@@ -15,13 +15,14 @@ export const addParent = name => ({
   payload: name
 })
 
-export const addChild = (name, type, key, path) => ({
+export const addChild = (name, type, key, path, id) => ({
   type: types.ADD_CHILD,
   payload: {
     title: name,
     subtitle: type,
     key,
-    path
+    path,
+    id
   }
 })
 

@@ -4,23 +4,7 @@ import React from 'react';
 import exportFiles from '../utils/exportFiles.util.js';
 
 const initialState = {
-  treeData: [ 
-    // {
-    //   title: 'Hello', 
-    //   subtitle: 'Drawer', 
-    //   children: [
-    //     { 
-    //       title: 'World', 
-    //       subtitle: 'BottomTab', 
-    //       children: [ {title: 'TabA', subtitle: 'Simple Screen'} ]
-    //     },
-    //     {
-    //       title: 'DrawerChild',
-    //       subtitle: 'Simple Screen'
-    //     }
-    //   ]
-    // } 
-  ],
+  treeData: [{title: 'Hello', subtitle: 'Test'}],
   addAsFirstChild: false,
   input: '',
   selectedComponent: {},
@@ -29,6 +13,7 @@ const initialState = {
   parentSelected: '',
   availableParents: [],
   changeNameInput: '',
+  id: 0,
 }
 
 const componentReducer = (state = initialState, action) => {
@@ -52,18 +37,21 @@ const componentReducer = (state = initialState, action) => {
       copy.treeData.push({
         title: copy.input,
         subtitle: copy.initialTypeSelection,
+        id: copy.id,
       })
+      const copyid = copy.id + 1;
 
     return {
       ...state,
       treeData: copy.treeData,
-      input: ''
+      input: '',
+      id: copyid,
     }
 
     case types.ADD_CHILD:
       const key1 = action.payload.key;
       const path1 = action.payload.path;
-
+      
       return {
         ...state,
         treeData: addNodeUnderParent({
@@ -74,6 +62,7 @@ const componentReducer = (state = initialState, action) => {
           newNode: action.payload,
           addAsFirstChild: copy.addAsFirstChild,
         }).treeData,
+        id: copy.id + 1,
       }
 
     case types.DELETE_COMPONENT:
@@ -96,10 +85,9 @@ const componentReducer = (state = initialState, action) => {
       const path3 = action.payload.path;
       
       copy.selectedComponent = {};
-      
       if(action.payload.children && action.payload.children.length)
         copy.selectedComponent.children = Object.assign([], action.payload.children);
-      // copy.selectedComponent.push({ title, path: path3, key: key3 });
+      
       copy.selectedComponent.title = title;
       copy.selectedComponent.subtitle = subtitle;
       copy.selectedComponent.path = path3;
@@ -134,7 +122,7 @@ const componentReducer = (state = initialState, action) => {
       //update name and type of the selected component on save click
       const key4 = action.payload.key;
       const path4 = action.payload.path;
-
+      console.log('check path', path4, 'key', key4);
       return {
         ...state,
         treeData: changeNodeAtPath({
@@ -149,7 +137,7 @@ const componentReducer = (state = initialState, action) => {
         //1. take out hardcoded path
         //2. take it out of the reducer since it does nothing to change state, it's a util function
         //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-        exportFiles(action.payload, '/home/sam/components')
+        exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
         return state;
     default: 
       return state;

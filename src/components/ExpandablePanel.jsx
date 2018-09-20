@@ -115,10 +115,11 @@ class DetailedExpansionPanel extends React.Component {
           <ExpansionPanelActions>
             <Button variant="contained" color="primary" 
               onClick={() => {
+                console.log(selectedComponent.key)
                 updateNameAndType(changeNameInput, typeSelected, selectedComponent.key, selectedComponent.path)
                 selectType('')
                 setNameToChange('')
-                selectComponent(selectedComponent.title, selectedComponent.children, selectedComponent.key, selectedComponent.path)
+                selectComponent(changeNameInput, selectedComponent.children, selectedComponent.key, selectedComponent.path)
               }}
             >
               Save

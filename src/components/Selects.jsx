@@ -22,6 +22,9 @@ const styles = theme => ({
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
   },
+  input: {
+    color: '#fff'
+  }
 });
 
 
@@ -47,6 +50,7 @@ class NativeSelects extends React.Component {
             inputProps={{
               name: 'type',
               id: 'typeSelect',
+              className: classes.input,
             }}
           >
             <option value="" />
