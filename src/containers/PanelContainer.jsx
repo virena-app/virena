@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
 
 const mapStateToProps = store => ({
@@ -40,7 +41,8 @@ const styles = theme => ({
   },
   textField: {
     background: '#2068c9',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    width: '120px'
   },
   input: {
     color: 'white'
@@ -49,13 +51,19 @@ const styles = theme => ({
     background: '#2068c9',
     marginLeft: '10px',
     borderRadius: '5px',
-    width: '100px',
+    width: '120px',
+    fontSize: '13px',
+    paddingLeft: '20px'
   },
   inputLabel: {
     color: 'white',
     zIndex: 999,
     marginLeft: '15px',
-    fontSize: '12px'
+    fontSize: '12px',
+  },
+  addParentButton: {
+    fontSize: '10px',
+    marginLeft: '15px',
   }
 })
 
@@ -79,7 +87,6 @@ class PanelContainer extends Component {
             />
           </FormControl>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="type-select" className={classes.inputLabel}>Type</InputLabel>
             <Select
               className={classes.selectType}
               value={initialTypeSelection}
@@ -93,16 +100,22 @@ class PanelContainer extends Component {
                 className: classes.input,
               }}
             >
-            <MenuItem value="" />
-            <MenuItem value={'Stack'}>Stack</MenuItem>
-            <MenuItem value={'Drawer'}>Drawer</MenuItem>
-            <MenuItem value={'BottomTab'}>BottomTab</MenuItem>
-            <MenuItem value={'Switch'}>Switch</MenuItem>
-            <MenuItem value={'Simple Screen'}>Screen</MenuItem>
+              <MenuItem value="" />
+              <MenuItem value={'Stack'}>Stack</MenuItem>
+              <MenuItem value={'Drawer'}>Drawer</MenuItem>
+              <MenuItem value={'BottomTab'}>BottomTab</MenuItem>
+              <MenuItem value={'Switch'}>Switch</MenuItem>
+              <MenuItem value={'Simple Screen'}>Screen</MenuItem>
             </Select>
+            <Button type='submit' variant='contained' className={classes.addParentButton} onClick={(e) => {
+              e.preventDefault();
+              addParent();
+            }}>
+              Add
+            </Button> 
           </FormControl>
         </form>
-        <form className='parent-form' onSubmit={(e) => {
+        {/* <form className='parent-form' onSubmit={(e) => {
               e.preventDefault();
               addParent();
             }}>
@@ -118,7 +131,7 @@ class PanelContainer extends Component {
             <option value='BottomTab'>BottomTab</option>
           </select>
           <input type='submit' value='Add Parent Component' />
-        </form>
+        </form> */}
         <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
         availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
         changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
