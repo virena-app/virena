@@ -1,5 +1,5 @@
 import { getNodeAtPath, getNodeKey, getParentKey, walk } from 'react-sortable-tree';
-
+import { getNthChildInfo } from './getNthChildInfo.util';
 /**
  * @param {number|string} parentKey - The key of the to-be parentNode of the node
  */

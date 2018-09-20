@@ -17,7 +17,7 @@ export default class Tree extends Component {
                 <button onClick={() => this.props.deleteComponent(getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
                   -
                 </button>,
-                <button onClick={() => this.props.selectComponent(node.title, node.subtitle, node.children, getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
+                <button onClick={() => this.props.selectComponent(node.title, node.subtitle, node.children, getNodeKey, node.path)} style={{ 'fontFamily': 'Arial' }}>
                   Details
                 </button>
               ],
