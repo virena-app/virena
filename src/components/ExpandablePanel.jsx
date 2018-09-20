@@ -98,6 +98,7 @@ class DetailedExpansionPanel extends React.Component {
             
             <div className={classNames(classes.column, classes.helper)}>
               <TextField
+                required
                 id="standard-with-placeholder"
                 label="Change Component Name"
                 placeholder="Change Name"
@@ -115,8 +116,12 @@ class DetailedExpansionPanel extends React.Component {
           <ExpansionPanelActions>
             <Button variant="contained" color="primary" 
               onClick={() => {
-                console.log(selectedComponent.key)
-                updateNameAndType(changeNameInput, typeSelected, selectedComponent.key, selectedComponent.path)
+                if (changeNameInput.length > 0 && typeSelected.length > 0) {
+                  updateNameAndType(changeNameInput, typeSelected, selectedComponent.key, selectedComponent.path)
+                } else {
+                  console.log('Must include both type and name when updating component')
+                  
+                }
                 selectType('')
                 setNameToChange('')
                 selectComponent(changeNameInput, selectedComponent.children, selectedComponent.key, selectedComponent.path)
@@ -133,6 +138,11 @@ class DetailedExpansionPanel extends React.Component {
 
 DetailedExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
+  typeSelected: function(props, propName, componentName) {
+    if(props[propName].length === 0) {
+      return new Error(`${propName} needs to be selected.`)
+    }
+  }
 };
 
 export default withStyles(styles)(DetailedExpansionPanel);

@@ -38,7 +38,7 @@ class NativeSelects extends React.Component {
 
     return (
       <div className={classes.root}>
-        <FormControl className={classes.formControl}>
+        <FormControl required className={classes.formControl}>
           <InputLabel htmlFor="typeSelect">Type</InputLabel>
           <Select
             native
@@ -52,6 +52,7 @@ class NativeSelects extends React.Component {
               id: 'typeSelect',
               className: classes.input,
             }}
+
           >
             <option value="" />
             <option value={'Stack'}>Stack</option>

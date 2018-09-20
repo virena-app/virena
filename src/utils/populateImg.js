@@ -16,10 +16,10 @@ export const populateImg = function(image, selected, treeData) {
       case 'Drawer':
         // check children exists, check if the first child is a bottomtabnav or a simple screen
         if(selected.children && selected.children.length) {
-          if(selected.children[0].subtitle === 'BottomTab')
-            return populateImg(image, selected.children[0])
-          
-          return `${image}/Screen-Drawer/${selected.children.length}DrawerScreen.png`;
+          if(selected.children[0].subtitle === 'BottomTab') 
+            return `${image}/Tab-Drawer/${selected.children.length}TabDrawer.png`;
+            
+          return populateImg(image, selected.children[0])
         }
       
       case 'Simple Screen':
