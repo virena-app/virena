@@ -51,7 +51,7 @@ const generateNavigatorFile = treeData => {
     childrenTitles.map(title => {
       return `${title}: { screen: ${title} }`
     }).join(', ') + '})' : '})')
-  }).join('\n\n') + `\n\nexport default ${unspace(screens[0].title)}`;
+  }).reverse().join('\n\n') + `\n\nexport default ${unspace(screens[0].title)}`;
 }
 
 export default generateNavigatorFile

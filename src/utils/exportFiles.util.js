@@ -9,7 +9,7 @@ const exportFiles = (treeData, path) => {
   const promises = [];
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
-      fs.writeFile(`${path}/${title}.jsx`,
+      fs.writeFile(`${path}/${title}.js`,
         generateScreenTemplate(title), {
           singleQuote: true,
           trailingComma: 'es5',
@@ -27,7 +27,7 @@ const exportFiles = (treeData, path) => {
   });
 
   const navPromise = new Promise((resolve, reject) => {
-    fs.writeFile(`${path}/navigator.jsx`, 
+    fs.writeFile(`${path}/navigator.js`, 
       generateNavigatorTemplate(treeData), {
         singleQuote: true,
         trailingComma: 'es5',
