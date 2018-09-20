@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import { connect } from 'react-redux'
-import * as actions from '../actions/actions';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const styles = theme => ({
   root: {
@@ -27,21 +25,15 @@ const styles = theme => ({
   }
 });
 
-
-class NativeSelects extends React.Component {
-  constructor(props) {
-    super(props); 
-  }
-
+class Selects extends Component {
   render() {
     const { classes, treeData, typeSelected, parentSelected, availableParents, selectType, selectParent } = this.props;
-
     return (
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="typeSelect">Type</InputLabel>
           <Select
-            native
+            required
             value={typeSelected}
             onChange={(event) => {
               const selection = event.target.value;
@@ -53,12 +45,12 @@ class NativeSelects extends React.Component {
               className: classes.input,
             }}
           >
-            <option value="" />
-            <option value={'Stack'}>Stack</option>
-            <option value={'Drawer'}>Drawer</option>
-            <option value={'BottomTab'}>BottomTab</option>
-            <option value={'Switch'}>Switch</option>
-            <option value={'Simple Screen'}>Simple Screen</option>
+            <MenuItem value="" />
+            <MenuItem value={'Stack'}>Stack</MenuItem>
+            <MenuItem value={'Drawer'}>Drawer</MenuItem>
+            <MenuItem value={'BottomTab'}>BottomTab</MenuItem>
+            <MenuItem value={'Switch'}>Switch</MenuItem>
+            <MenuItem value={'Simple Screen'}>Screen</MenuItem>
           </Select>
           <FormHelperText>{'Current Type:' + typeSelected}</FormHelperText>
         </FormControl>
@@ -81,8 +73,8 @@ class NativeSelects extends React.Component {
   }
 }
 
-NativeSelects.propTypes = {
+Selects.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NativeSelects);
+export default withStyles(styles)(Selects);

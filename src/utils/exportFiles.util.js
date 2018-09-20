@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { format } from 'prettier';
 import generateScreenTemplate, { getAllScreenTitles } from './generateScreenTemplates.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
@@ -10,7 +9,7 @@ const exportFiles = (treeData, path) => {
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
       fs.writeFile(`${path}/${title}.js`,
-        format(generateScreenTemplate(title)), {
+        generateScreenTemplate(title), {
           singleQuote: true,
           trailingComma: 'es5',
           bracketSpacing: true,
@@ -28,7 +27,7 @@ const exportFiles = (treeData, path) => {
 
   const navPromise = new Promise((resolve, reject) => {
     fs.writeFile(`${path}/navigator.js`, 
-      format(generateNavigatorTemplate(treeData)), {
+      generateNavigatorTemplate(treeData), {
         singleQuote: true,
         trailingComma: 'es5',
         bracketSpacing: true,
@@ -43,7 +42,7 @@ const exportFiles = (treeData, path) => {
 
   const appPromise = new Promise((resolve, reject) => {
     fs.writeFile(`${path}/App.js`, 
-      format(generateAppTemplate(treeData)), {
+      generateAppTemplate(treeData), {
         singleQuote: true,
         trailingComma: 'es5',
         bracketSpacing: true,
