@@ -41,6 +41,7 @@ class LeftContainer extends Component {
             const selection = e.target.value;
             selectInitialType(selection)
           }}>
+            <option value=''>Choose Type</option>
             <option value='Switch'>Switch</option>
             <option value='Stack'>Stack</option>
             <option value='Drawer'>Drawer</option>

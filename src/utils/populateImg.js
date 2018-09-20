@@ -1,4 +1,10 @@
-export const populateImg = function(image, selected) {
+import { getNodeAtPath, getNodeKey, getParentKey, walk } from 'react-sortable-tree';
+
+/**
+ * @param {number|string} parentKey - The key of the to-be parentNode of the node
+ */
+let ignoreCollapsed = true;
+export const populateImg = function(image, selected, treeData) {
   if(selected) {
     console.log(`the selected title ${selected.subtitle}`)
     switch(selected.subtitle) {
@@ -18,8 +24,20 @@ export const populateImg = function(image, selected) {
       
       case 'Simple Screen':
       // if(selected.children && selected.children.length) 
-        return `${image}/Screen/${selected.children.length}screen.png`;
+        // return `${image}/Screen/${selected.children.length}screen.png`;
+        //trying to get the parent so i can access the children.length on the tree
+        //selected.path === [0, 1];
         
+        console.log('case ss: path', 
+        treeData, 
+        selected,
+        getNodeAtPath({
+          treeData, 
+          path: selected.path.slice(0, selected.path.length), 
+          getNodeKey: selected.key,
+          ignoreCollapsed
+        })
+        );
       case 'Stack':
         break;
       

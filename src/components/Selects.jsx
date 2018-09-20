@@ -18,6 +18,9 @@ const styles = theme => ({
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
   },
+  input: {
+    color: '#fff'
+  }
 });
 
 class Selects extends Component {
@@ -37,6 +40,7 @@ class Selects extends Component {
             inputProps={{
               name: 'type',
               id: 'typeSelect',
+              className: classes.input,
             }}
           >
             <option value="" />

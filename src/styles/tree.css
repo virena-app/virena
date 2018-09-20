@@ -108,7 +108,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: grey;
+  background: linear-gradient(45deg, #37474F 30%, #455A64 90%);
 }
 
 .rst__rtl.rst__rowContents {
@@ -273,17 +273,20 @@
 
 .rst__rowTitle {
   font-weight: bold;
+  font-family: Arial;
 }
 
 .rst__rowTitleWithSubtitle {
   font-size: 85%;
   display: block;
   height: 0.8rem;
+  font-family: Arial;
 }
 
 .rst__rowSubtitle {
   font-size: 70%;
   line-height: 1;
+  font-family: Arial;
 }
 
 .rst__collapseButton,
@@ -423,6 +426,7 @@
   height: 100%;
   position: relative;
   display: inline-block;
+  color: 'linear-gradient(45deg, #37474F 30%, #455A64 90%)';
 }
 
 .rst__absoluteLineBlock {
@@ -436,7 +440,7 @@
 .rst__lineHalfVerticalBottom::after {
   position: absolute;
   content: '';
-  background-color: black;
+  background-color: #455A64;
 }
 
 /**
