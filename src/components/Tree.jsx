@@ -8,11 +8,7 @@ export default class Tree extends Component {
     return (
       <SortableTree
             treeData={this.props.treeData}
-            onChange={treeData => {
-              this.props.loadParentsDropdown()
-              this.props.setTree(treeData)
-            }}
-            getNodeKey={({ node }) => node.id}
+            onChange={treeData => this.props.setTree(treeData)}
             generateNodeProps={({ node, path }) => ({
               buttons: [
                 <button onClick={() => this.props.addChild(this.props.input, 'screen', getNodeKey, path)}>
@@ -21,7 +17,9 @@ export default class Tree extends Component {
                 <button onClick={() => this.props.deleteComponent(getNodeKey, path)}>
                   -
                 </button>,
-                <button onClick={() => this.props.selectComponent(node.title, getNodeKey, path)}>
+              <button onClick={() => {
+                console.log(node.path)
+                this.props.selectComponent(node.title, node.subtitle, node.children, getNodeKey, path)}}>
                   Details
                 </button>
               ],

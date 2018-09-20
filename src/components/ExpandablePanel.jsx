@@ -14,27 +14,26 @@ import Selects from './Selects.jsx'
 import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
-  expansion: {
-    backgroundColor: 'lightgrey',
-  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
+    color: '#fff',
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    color: '#fff',
   },
   icon: {
     verticalAlign: 'bottom',
     height: 20,
     width: 20,
+    color: '#fff',
   },
   details: {
     alignItems: 'center',
+    color: '#fff',
   },
   column: {
     flexBasis: '33.33%',
-
   },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
@@ -51,7 +50,14 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200,
+    color: '#fff',
   },
+  panel: {
+    background: 'linear-gradient(45deg, #37474F 30%, #455A64 90%)',
+  },
+  input: {
+    color: "white",
+  }
 });
 
 
@@ -59,14 +65,17 @@ const styles = theme => ({
 class DetailedExpansionPanel extends Component {
   render () {
     const { classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
-      changeNameInput, setNameToChange } = this.props;
+      changeNameInput, setNameToChange, selectComponent } = this.props;
     return (
       <div className={classes.root}>
-        <ExpansionPanel className={classes.expansion}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <ExpansionPanel 
+          defaultExpanded
+          className={classes.panel}
+        >
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon className={classes.icon}/>}>
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                {selectedComponent.length > 0? selectedComponent[0].title : 'Select a component'}
+                {selectedComponent.title ? selectedComponent.title : 'Select a component'}
               </Typography>
             </div>
             <div className={classes.column}>
@@ -86,15 +95,21 @@ class DetailedExpansionPanel extends Component {
                 className={classes.textField}
                 margin="normal"
                 onChange={(e) => setNameToChange(e.target.value)}
+                value={changeNameInput}
+                InputProps={{
+                  className: classes.input
+                }}
               />  
             </div>
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
-            <Button size="small">Cancel</Button>
-            <Button size="small" color="primary" 
+            <Button variant="contained" color="primary" 
               onClick={() => {
-                updateNameAndType(changeNameInput, typeSelected, selectedComponent[0].key, selectedComponent[0].path)
+                updateNameAndType(changeNameInput, typeSelected, selectedComponent.key, selectedComponent.path)
+                selectType('')
+                setNameToChange('')
+                selectComponent(selectedComponent.title, selectedComponent.children, selectedComponent.key, selectedComponent.path)
               }}
             >
               Save

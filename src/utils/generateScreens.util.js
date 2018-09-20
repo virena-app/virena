@@ -1,4 +1,4 @@
-import fs from 'fs';
+// import fs from 'fs';
 
 export const getAllScreenTitles = (treeData, screenTitles = []) => {
   treeData.forEach(component => {

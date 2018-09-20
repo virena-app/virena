@@ -29,10 +29,10 @@ class Selects extends Component {
           <InputLabel htmlFor="typeSelect">Type</InputLabel>
           <Select
             native
-            value={this.props.typeSelected}
+            value={typeSelected}
             onChange={(event) => {
               const selection = event.target.value;
-              this.props.selectType(selection)
+              selectType(selection)
             }}
             inputProps={{
               name: 'type',
@@ -46,8 +46,22 @@ class Selects extends Component {
             <option value={'Switch'}>Switch</option>
             <option value={'Simple Screen'}>Screen</option>
           </Select>
-          <FormHelperText>{'Current Type: ' + this.props.typeSelected}</FormHelperText>
+          <FormHelperText>{'Current Type:' + typeSelected}</FormHelperText>
         </FormControl>
+        {/* <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="parentSelect">Parent</InputLabel>
+          <NativeSelect
+            value={parentSelected}
+            onChange={(event) => {
+              const selection = event.target.value;
+              selectParent(selection);
+            }}
+            input={<Input name="parent" id="parentSelect" />}
+          >
+            <option value="" />
+            {availableParents}
+          </NativeSelect>
+        </FormControl> */}
       </div>
     )
   }
