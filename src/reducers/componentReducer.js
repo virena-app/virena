@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
-import React from 'react'
+import React from 'react';
+import exportFiles from '../utils/exportFiles.util.js';
 
 const initialState = {
   treeData: [{title: 'Hello', subtitle: 'Test'}],
@@ -131,6 +132,13 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key4,
         })
       }
+      case types.EXPORT_FILES:
+        //todo: 
+        //1. take out hardcoded path
+        //2. take it out of the reducer since it does nothing to change state, it's a util function
+        //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
+        exportFiles(action.payload, '/home/sam/components')
+        return state;
     default: 
       return state;
   }
