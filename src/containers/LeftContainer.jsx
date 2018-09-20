@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
-// import Details from '../components/Details.jsx';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
+import Button from '@material-ui/core/Button';
+import {generateScreenComponents} from '../utils/generateScreens.util';
 
 
 const mapStateToProps = store => ({
@@ -23,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   selectParent: selection => dispatch(actions.selectParent(selection)),
   updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
+  exportFiles: data => dispatch(actions.exportFiles(data))
 })
 
 class LeftContainer extends Component {
@@ -49,6 +51,7 @@ class LeftContainer extends Component {
         <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
         availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
         changeNameInput={changeNameInput} setNameToChange={setNameToChange}/>
+        <Button variant='contained' onClick={() => {generateScreenComponents()}}>Export</Button>
       </div>
     )
   }

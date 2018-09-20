@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
-import React from 'react'
+import createFiles from '../utils/createScreenFiles.util';
+import getAllScreenTitles from '../utils/generateScreenTemplates.util';
 
 const initialState = {
   treeData: [{title: 'Hello', subtitle: 'Test'}],
@@ -69,26 +70,26 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key2,
         }),
       }
-    case types.LOAD_PARENTS_DROPDOWN:
-      let output = [];
-      const getAllParents = (tree) => {
-        tree.forEach(branch => {
-          if (branch.type !== "screen") {
-            output.push({title: branch.title, id: branch.id})
-          }
-          if (branch.children && branch.children.length > 0) {
-            getAllParents(branch.children);
-          }
-        })
-      }
-      getAllParents(state.treeData);
-      console.log(output);
-      let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title, titleObj.id}</option>);
-      console.log('inside reducer load parents');
-      return {
-        ...state,
-        availableParents: results
-      }
+    // case types.LOAD_PARENTS_DROPDOWN:
+    //   let output = [];
+    //   const getAllParents = (tree) => {
+    //     tree.forEach(branch => {
+    //       if (branch.type !== "screen") {
+    //         output.push({title: branch.title, id: branch.id})
+    //       }
+    //       if (branch.children && branch.children.length > 0) {
+    //         getAllParents(branch.children);
+    //       }
+    //     })
+    //   }
+    //   getAllParents(state.treeData);
+    //   console.log(output);
+    //   let results = output.map(titleObj => <option value={titleObj.title} key={titleObj.id}>{titleObj.title, titleObj.id}</option>);
+    //   console.log('inside reducer load parents');
+    //   return {
+    //     ...state,
+    //     availableParents: results
+    //   }
 
     case types.SELECT_COMPONENT:
       const key3 = action.payload.key;
@@ -96,6 +97,7 @@ const componentReducer = (state = initialState, action) => {
       const title = action.payload.title;
       copy.selectedComponent = [];
       copy.selectedComponent.push({ title, path: path3, key: key3 });
+      console.log(copy.treeData);
 
       return {
         ...state,
@@ -132,6 +134,14 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key4,
         })
       }
+
+    case types.EXPORT_FILES:
+      // createFiles(getAllScreenTitles(action.payload))
+      console.log(copy.treeData)
+      return {
+        ...state
+      }
+
     default: 
       return state;
   }

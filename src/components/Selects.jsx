@@ -44,7 +44,7 @@ class Selects extends Component {
             <option value={'Drawer'}>Drawer</option>
             <option value={'BottomTab'}>BottomTab</option>
             <option value={'Switch'}>Switch</option>
-            <option value={'Simple Screen'}>Simple Screen</option>
+            <option value={'Simple Screen'}>Screen</option>
           </Select>
           <FormHelperText>{'Current Type: ' + this.props.typeSelected}</FormHelperText>
         </FormControl>
@@ -53,7 +53,7 @@ class Selects extends Component {
   }
 }
 
-NativeSelects.propTypes = {
+Selects.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 

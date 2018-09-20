@@ -15,7 +15,7 @@ import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   expansion: {
-    backgroundColor: 'white',
+    backgroundColor: 'lightgrey',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),

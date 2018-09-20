@@ -9,3 +9,4 @@ export const SELECT_PARENT = 'SELECT_PARENT';
 export const SELECT_TYPE = 'SELECT_TYPE';
 export const SET_NAME_TO_CHANGE = 'SET_NAME_TO_CHANGE';
 export const UPDATE_NAME_AND_TYPE = 'UPDATE_NAME_AND_TYPE';
+export const EXPORT_FILES = 'EXPORT_FILES';

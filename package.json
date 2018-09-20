@@ -30,13 +30,14 @@
     "electron-builder": "^20.28.4",
     "file-loader": "^2.0.0",
     "prop-types": "^15.6.2",
-    "redux": "^4.0.0",
     "react-redux": "^5.0.7",
     "react-sortable-tree": "^2.2.0",
+    "redux": "^4.0.0",
     "style-loader": "^0.23.0",
     "webpack": "^4.19.0",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8"
+    "webpack-dev-server": "^3.1.8",
+    "webpack-node-externals": "^1.7.2"
   },
   "build": {
     "appId": "com.viserion.elec",

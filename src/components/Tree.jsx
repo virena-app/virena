@@ -12,16 +12,17 @@ export default class Tree extends Component {
               this.props.loadParentsDropdown()
               this.props.setTree(treeData)
             }}
+            getNodeKey={({ node }) => node.id}
             generateNodeProps={({ node, path }) => ({
               buttons: [
-                <button onClick={() => this.props.addChild(this.props.input, 'hi', getNodeKey, path)}>
+                <button onClick={() => this.props.addChild(this.props.input, 'screen', getNodeKey, path)}>
                   +
                 </button>,
                 <button onClick={() => this.props.deleteComponent(getNodeKey, path)}>
                   -
                 </button>,
                 <button onClick={() => this.props.selectComponent(node.title, getNodeKey, path)}>
-                  Edit
+                  Details
                 </button>
               ],
             })}
