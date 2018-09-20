@@ -75,54 +75,57 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles } = this.props;
     return (
-      <div className='panel'>
-        <form className='form' autoComplete='off'>
-          <InputLabel htmlFor='typeSelect'>Type</InputLabel>
-          <FormControl className={classes.formControl}>
-            <TextField
-              InputProps={{
-                className: classes.input
-              }}
-              label={<span style={{ color: 'white', fontSize: '13px', paddingLeft: '5px' }}>Name</span>}
-              className={classes.textField}
-              value={input}
-              onChange={(e) => setParentName(e.target.value)}
-              required={true}
-            />
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <Select
-              className={classes.selectType}
-              value={initialTypeSelection}
-              onChange={(event) => {
-                const selection = event.target.value;
-                selectInitialType(selection)
-              }}
-              inputProps={{
-                name: 'type',
-                id: 'typeSelect',
-                className: classes.input,
-              }}
-            >
-              <MenuItem value="" className={classes.menu}/>
-              <MenuItem value={'Stack'} className={classes.menu}>Stack</MenuItem>
-              <MenuItem value={'Drawer'} className={classes.menu}>Drawer</MenuItem>
-              <MenuItem value={'BottomTab'} className={classes.menu}>BottomTab</MenuItem>
-              <MenuItem value={'Switch'} className={classes.menu}>Switch</MenuItem>
-              <MenuItem value={'Simple Screen'} className={classes.menu}>Screen</MenuItem>
-            </Select>
-            <Button type='submit' variant='contained' className={classes.addParentButton} onClick={(e) => {
-              e.preventDefault();
-              addParent();
-            }}>
-              Add
-            </Button> 
-          </FormControl>
-        </form>
-        <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
-        availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
-        changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
-        <ExportFilesButton treeData={treeData} exportFiles={exportFiles}></ExportFilesButton>
+      <div>
+        <div className='panel'>
+          <form className='form' autoComplete='off'>
+            <InputLabel htmlFor='typeSelect'>Type</InputLabel>
+            <FormControl className={classes.formControl}>
+              <TextField
+                InputProps={{
+                  className: classes.input
+                }}
+                label={<span style={{ color: 'white', fontSize: '13px', paddingLeft: '5px' }}>Name</span>}
+                className={classes.textField}
+                value={input}
+                onChange={(e) => setParentName(e.target.value)}
+                required={true}
+              />
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <Select
+                className={classes.selectType}
+                value={initialTypeSelection}
+                onChange={(event) => {
+                  const selection = event.target.value;
+                  selectInitialType(selection)
+                }}
+                inputProps={{
+                  name: 'type',
+                  id: 'typeSelect',
+                  className: classes.input,
+                }}
+              >
+                <MenuItem value="" className={classes.menu}/>
+                <MenuItem value={'Stack'} className={classes.menu}>Stack</MenuItem>
+                <MenuItem value={'Drawer'} className={classes.menu}>Drawer</MenuItem>
+                <MenuItem value={'BottomTab'} className={classes.menu}>BottomTab</MenuItem>
+                <MenuItem value={'Switch'} className={classes.menu}>Switch</MenuItem>
+                <MenuItem value={'Simple Screen'} className={classes.menu}>Screen</MenuItem>
+              </Select>
+              <Button type='submit' variant='contained' className={classes.addParentButton} onClick={(e) => {
+                e.preventDefault();
+                addParent();
+              }}>
+                Add
+              </Button> 
+            </FormControl>
+          </form>
+          <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
+          availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
+          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
+          <ExportFilesButton treeData={treeData} exportFiles={exportFiles}></ExportFilesButton>
+        </div>
+        <img src='../../assets/virena-icon-white.png' className='logo'></img>
       </div>
     )
   }
