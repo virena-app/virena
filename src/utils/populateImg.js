@@ -4,6 +4,8 @@ import { getNodeAtPath, getNodeKey, getParentKey, walk } from 'react-sortable-tr
  * @param {number|string} parentKey - The key of the to-be parentNode of the node
  */
 let ignoreCollapsed = true;
+
+
 export const populateImg = function(image, selected, treeData) {
   if(selected) {
     console.log(`the selected title ${selected.subtitle}`)
@@ -28,16 +30,11 @@ export const populateImg = function(image, selected, treeData) {
         //trying to get the parent so i can access the children.length on the tree
         //selected.path === [0, 1];
         
-        console.log('case ss: path', 
-        treeData, 
-        selected,
-        getNodeAtPath({
-          treeData, 
-          path: selected.path.slice(0, selected.path.length), 
-          getNodeKey: selected.key,
-          ignoreCollapsed
-        })
-        );
+        // if the selected component is Simple Screen, 
+          // check what the subtitle (type) is 
+            // if bottomtab
+              // check the children
+        
       case 'Stack':
         break;
       

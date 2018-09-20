@@ -1,5 +1,6 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
+import React from 'react';
 import exportFiles from '../utils/exportFiles.util.js';
 
 const initialState = {
@@ -7,14 +8,14 @@ const initialState = {
   addAsFirstChild: false,
   input: '',
   selectedComponent: {},
-  initialTypeSelection: 'Choose Type',
+  initialTypeSelection: '',
   typeSelected: '',
   parentSelected: '',
   availableParents: [],
   changeNameInput: '',
-  id: 0,
-  fileExportModalState: false,
-  
+  id: 1,
+  // parentId: 0,
+  // parents: {},
 }
 
 const componentReducer = (state = initialState, action) => {
@@ -38,7 +39,7 @@ const componentReducer = (state = initialState, action) => {
       copy.treeData.push({
         title: copy.input,
         subtitle: copy.initialTypeSelection,
-        id: copy.id,
+        id: copy.id
       })
       const copyid = copy.id + 1;
 
@@ -52,7 +53,8 @@ const componentReducer = (state = initialState, action) => {
     case types.ADD_CHILD:
       const key1 = action.payload.key;
       const path1 = action.payload.path;
-      
+      // const currParentId = action.payload.parentId;
+      console.log('path being clicked on?', path1);
       return {
         ...state,
         treeData: addNodeUnderParent({
@@ -64,6 +66,7 @@ const componentReducer = (state = initialState, action) => {
           addAsFirstChild: copy.addAsFirstChild,
         }).treeData,
         id: copy.id + 1,
+        // parentId: currParentId
       }
 
     case types.DELETE_COMPONENT:
@@ -80,8 +83,10 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.SELECT_COMPONENT:
-      const subtitle = action.payload.subtitle;
       const title = action.payload.title;
+      const subtitle = action.payload.subtitle;
+      // const parentId = action.payload.parentId;
+      // const id = action.payload.id;
       const key3 = action.payload.key;
       const path3 = action.payload.path;
       
@@ -91,6 +96,8 @@ const componentReducer = (state = initialState, action) => {
       
       copy.selectedComponent.title = title;
       copy.selectedComponent.subtitle = subtitle;
+      // copy.selectedComponent.parentId = parentId;
+      // copy.selectedComponent.id = id;
       copy.selectedComponent.path = path3;
       copy.selectedComponent.key = key3;
 
@@ -123,25 +130,29 @@ const componentReducer = (state = initialState, action) => {
       //update name and type of the selected component on save click
       const key4 = action.payload.key;
       const path4 = action.payload.path;
+      const type = action.payload.subtitle;
+      console.log('check path', path4, 'key', key4);
+
+      // if(type === 'BottomTab') {
+        
+      // }
 
       return {
         ...state,
         treeData: changeNodeAtPath({
           treeData: copy.treeData,
           path: path4,
-          newNode: (({ node }) => ({ ...node, title: action.payload.title, subtitle: action.payload.subtitle })),
+          newNode: (({ node }) => ({ ...node, title: action.payload.title, subtitle: type })),
           getNodeKey: key4,
         })
       }
       case types.EXPORT_FILES:
-        console.log('asfsf', action.payload)
         //todo: 
         //1. take out hardcoded path
         //2. take it out of the reducer since it does nothing to change state, it's a util function
         //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-        exportFiles(action.payload, '/Users/jchan/Documents/virena/src/reducers/')
+        exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
         return state;
-        
     default: 
       return state;
   }
