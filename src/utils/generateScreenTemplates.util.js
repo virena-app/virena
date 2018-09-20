@@ -18,18 +18,31 @@ export const getAllScreenTitles = sortableTree => {
  */
   
 const generateScreenTemplate = screenTitle => {
+  
   return `
-    import React, {Component} from 'react'
+import React, {Component} from 'react'
+import { StyleSheet, Text, View } from 'react-native';
 
-    class ${screenTitle} extends Component {
-      render() {
-        return (
-          <div>This is ${screenTitle}!</div>
-        )
-      }
-    }
+class ${screenTitle} extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>This is ${screenTitle}!</Text>
+      </View>
+    )
+  }
+}
 
-    export default ${screenTitle}
+export default ${screenTitle}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
   `
 }
 

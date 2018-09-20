@@ -1,3 +1,5 @@
+
+
 /**
  * Populates dropdown menu with all available parents to add a new child to
  * @param {array} sortableTree - The current state of the sortable tree
@@ -22,12 +24,12 @@ export const flattenTree = sortableTree => {
 
 /**
  * Required to generate the navigator.js file
- * @param {array} components - The flattened version of the sortable tree state
+ * @param {array} flatTree - The flattened version of the sortable tree state
  * @param {object} parent - A parent node whose immediate children's titles we want
  */
 
-const getImmediateChildrenTitles = (components, parent) => {
-  return components.filter(screen => {
+const getImmediateChildrenTitles = (flatTree, parent) => {
+  return flatTree.filter(screen => {
     for (let i = 0; i < parent.children.length; i++) {
       if (screen.id === parent.children[i]) return true;
     }
@@ -41,17 +43,23 @@ const getImmediateChildrenTitles = (components, parent) => {
  */
   
 const generateNavigatorFile = treeData => {
-  const screens = flattenTree(treeData);
+  const flatTree = flattenTree(treeData);
+  const simpleScreens = flatTree.filter( screen => screen.subtitle === 'Simple Screen');
   const unspace = title => title.replace(/\s+/g, '');
-  const navigators = screens.filter( screen => screen.children );
-  return navigators.map(navigator => {
-    console.log(navigator);
-    const childrenTitles = getImmediateChildrenTitles(screens, navigator);
-    return `const ${unspace(navigator.title)} = create${navigator.subtitle}Navigator({` + (childrenTitles.length ?
+  const navigators = flatTree.filter(components => components.children );
+  return "import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';\n" +
+  simpleScreens.map(screen => `import ${screen.title} from './${screen.title}.js'`).join('\n') + '\n\n' +
+  navigators.map(navigator => {
+    const childrenTitles = getImmediateChildrenTitles(flatTree, navigator);
+    return `export const ${unspace(navigator.title)} = create${navigator.subtitle}Navigator({` + (childrenTitles.length ?
     childrenTitles.map(title => {
       return `${title}: { screen: ${title} }`
     }).join(', ') + '})' : '})')
+<<<<<<< HEAD
+  }).reverse().join('\n\n');
+=======
   }).reverse().join('\n\n') + `\n\nexport default ${unspace(screens[0].title)}`;
+>>>>>>> master
 }
 
 export default generateNavigatorFile
