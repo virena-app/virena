@@ -27,7 +27,7 @@ class ${screenTitle} extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>This is ${screenTitle}!</Text>
+        <Text style={styles.text}>This is ${screenTitle}!</Text>
       </View>
     )
   }
@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text: {
+    fontSize: 40,
+    fontWeight: 'bold',
+  }
 });
   `
 }

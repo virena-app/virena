@@ -8,8 +8,8 @@ export default class AppContainer extends Component {
     return (
       <div className='main'>
         <ViewContainer />
-        <LeftContainer />
         <RightContainer />
+        <LeftContainer />
       </div>
     )
   }

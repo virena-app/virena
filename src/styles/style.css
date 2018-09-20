@@ -11,7 +11,6 @@ body {
 .left, .right {
   width: 30%;
   padding-top: 2.5%;
-  border: 5px solid lightgrey;
   color: white;
   display: inherit;
   flex-direction: column;
@@ -20,7 +19,6 @@ body {
 .view {
   width: 40%;
   padding-top: 2.5%;
-  border: 5px solid lightgrey;
   color: white;
   display: inherit;
   align-items: center;
