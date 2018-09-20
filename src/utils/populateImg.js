@@ -9,7 +9,6 @@ let ignoreCollapsed = true;
 export const populateImg = function(image, selected, treeData) {
   if(selected) {
     console.log(`the selected title ${selected.subtitle}`)
-    // const { parent, n } = getNthChildInfo(selected, treeData[0]);
 
     switch(selected.subtitle) {
       case 'BottomTab':
