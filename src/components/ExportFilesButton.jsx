@@ -1,14 +1,23 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = theme => ({
+  exportButton: {
+    background: '#2068c9',
+    position: 'absolute',
+    bottom: '50px',
+    right: '50px',
+    width: '250px'
+  }
+})
 
 class ExportFilesButton extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
-    const {treeData, exportFiles} = this.props;
+    const {treeData, exportFiles, classes} = this.props;
     return (
-      <Button variant="contained" color="primary" 
+      <Button variant="contained" color="primary"
+      className={classes.exportButton} 
       onClick={()=> {
         this.props.exportFiles(this.props.treeData);
       }}>
@@ -18,4 +27,4 @@ class ExportFilesButton extends Component {
   }
 }
 
-export default ExportFilesButton;
+export default (withStyles(styles)) (ExportFilesButton);
