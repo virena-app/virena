@@ -9,6 +9,8 @@ let ignoreCollapsed = true;
 export const populateImg = function(image, selected, treeData) {
   if(selected) {
     console.log(`the selected title ${selected.subtitle}`)
+    // const { parent, n } = getNthChildInfo(selected, treeData[0]);
+
     switch(selected.subtitle) {
       case 'BottomTab':
         console.log(`children ${selected.children}`);
@@ -16,12 +18,16 @@ export const populateImg = function(image, selected, treeData) {
           return `${image}${selected.children.length}tab.png`;
       
       case 'Drawer':
+
         // check children exists, check if the first child is a bottomtabnav or a simple screen
         if(selected.children && selected.children.length) {
           if(selected.children[0].subtitle === 'BottomTab') 
             return `${image}/Tab-Drawer/${selected.children.length}TabDrawer.png`;
             
-          return populateImg(image, selected.children[0])
+          // return populateImg(image, selected.children[0])
+          if(selected.children[0].subtitle === 'Simple Screen');
+            return `${image}/Screen-Drawer/${selected.children.length}DrawerScreen.png`;
+          // return `${image}/`
         }
       
       case 'Simple Screen':
@@ -33,7 +39,10 @@ export const populateImg = function(image, selected, treeData) {
         // if the selected component is Simple Screen, 
         const { parent, n } = getNthChildInfo(selected, treeData[0]);
         if(parent.subtitle === 'BottomTab') {
-          return `${image}/Tab/${n}tab.png`;
+          return `${image}/Tab-Screen/${parent.children.length}BottomTab${n}.png`;
+        }
+        if(parent.subtitle === 'Drawer') {
+          return `${image}/Screen/${n}screen.png`;
         }
           // check what the subtitle (type) is 
             // if bottomtab
