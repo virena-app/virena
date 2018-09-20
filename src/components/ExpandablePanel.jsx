@@ -95,7 +95,9 @@ class DetailedExpansionPanel extends Component {
                 placeholder="Change Name"
                 className={classes.textField}
                 margin="normal"
-                onChange={(e) => setNameToChange(e.target.value)}
+                onChange={(e) => {
+                  console.log(changeNameInput)
+                  setNameToChange(e.target.value)}}
                 value={changeNameInput}
                 InputProps={{
                   className: classes.input
@@ -107,11 +109,11 @@ class DetailedExpansionPanel extends Component {
           <ExpansionPanelActions>
             <Button variant="contained" color="primary" 
               onClick={() => {
+                console.log('changeNameInput, ', changeNameInput, 'typeSelected', typeSelected);
                 if (changeNameInput.length > 0 && typeSelected.length > 0) {
                   updateNameAndType(changeNameInput, typeSelected, selectedComponent.key, selectedComponent.path)
                 } else {
-                  console.log('Must include both type and name when updating component')
-                  
+                  return alert('Must include both type and name when updating component')
                 }
                 selectType('')
                 setNameToChange('')
@@ -129,11 +131,7 @@ class DetailedExpansionPanel extends Component {
 
 DetailedExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
-  typeSelected: function(props, propName, componentName) {
-    if(props[propName].length === 0) {
-      return new Error(`${propName} needs to be selected.`)
-    }
-  }
+  
 };
 
 export default withStyles(styles)(DetailedExpansionPanel);

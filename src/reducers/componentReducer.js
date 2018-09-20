@@ -13,8 +13,9 @@ const initialState = {
   availableParents: [],
   changeNameInput: '',
   id: 0,
-  fileExportModalState: false,
-  
+  fileExportModalState: {
+    open: true,
+  }
 }
 
 const componentReducer = (state = initialState, action) => {
@@ -141,7 +142,14 @@ const componentReducer = (state = initialState, action) => {
         //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
         exportFiles(action.payload, '/Users/jchan/Documents/virena/src/reducers/')
         return state;
-        
+      case types.CLOSE_EXPORT_MODAL:
+        copy.fileExportModalState = {
+          open: action.payload,
+        }
+        return {
+          ...state,
+          fileExportModalState: copy.fileExportModalState
+        }
     default: 
       return state;
   }

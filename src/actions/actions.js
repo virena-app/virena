@@ -79,3 +79,8 @@ export const exportFiles = treeData => ({
   type: types.EXPORT_FILES,
   payload: treeData
 })
+
+export const closeExportModal = (boolean) => ({
+  type: types.CLOSE_EXPORT_MODAL,
+  payload: boolean
+})

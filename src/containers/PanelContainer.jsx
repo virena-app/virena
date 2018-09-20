@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
+import AlertModal from '../components/AlertModal.jsx'
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
@@ -20,6 +21,7 @@ const mapStateToProps = store => ({
   parentSelected: store.data.parentSelected,
   availableParents: store.data.availableParents,
   changeNameInput: store.data.changeNameInput,
+  fileExportModalState: store.data.fileExportModalState,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -32,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
   exportFiles: treeData => dispatch(actions.exportFiles(treeData)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
+  closeExportModal: (boolean) => dispatch(actions.closeExportModal(boolean)),
 })
 
 const styles = theme => ({
@@ -73,7 +76,8 @@ const styles = theme => ({
 class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
-    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles } = this.props;
+    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles,
+    fileExportModalState, closeExportModal } = this.props;
     return (
       <div className='panel'>
         <form className='form' autoComplete='off'>
