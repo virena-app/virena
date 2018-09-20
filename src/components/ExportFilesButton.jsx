@@ -5,9 +5,6 @@ import {withStyles} from '@material-ui/core/styles';
 const styles = theme => ({
   exportButton: {
     background: '#2068c9',
-    position: 'absolute',
-    bottom: '50px',
-    right: '50px',
     width: '250px'
   }
 })
