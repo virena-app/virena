@@ -39,3 +39,17 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.logo {
+  width: 211.5px;
+  height: 187.5px;
+  margin-bottom: 100px;
+}
