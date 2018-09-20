@@ -74,7 +74,7 @@ export const updateNameAndType = (name, type, key, path) => ({
   }
 })
 
-export const exportFiles = (treeData) => ({
+export const exportFiles = treeData => ({
   type: types.EXPORT_FILES,
   payload: treeData
 })

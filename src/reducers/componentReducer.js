@@ -1,7 +1,6 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
-import createFiles from '../utils/createScreenFiles.util';
-import getAllScreenTitles from '../utils/generateScreenTemplates.util';
+import exportFiles from '../utils/exportFiles.util.js';
 
 const initialState = {
   treeData: [ 
@@ -144,14 +143,14 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key4,
         })
       }
-
-    case types.EXPORT_FILES:
-      // createFiles(getAllScreenTitles(action.payload))
-      console.log(copy.treeData)
-      return {
-        ...state
-      }
-
+      case types.EXPORT_FILES:
+        console.log('asfsf', action.payload)
+        //todo: 
+        //1. take out hardcoded path
+        //2. take it out of the reducer since it does nothing to change state, it's a util function
+        //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
+        exportFiles(action.payload, '/Users/jchan/Documents/virena/src/reducers/')
+        return state;
     default: 
       return state;
   }
