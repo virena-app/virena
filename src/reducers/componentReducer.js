@@ -121,7 +121,7 @@ const componentReducer = (state = initialState, action) => {
       //update name and type of the selected component on save click
       const key4 = action.payload.key;
       const path4 = action.payload.path;
-      console.log('check path', path4, 'key', key4);
+
       return {
         ...state,
         treeData: changeNodeAtPath({

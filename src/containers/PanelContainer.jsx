@@ -2,12 +2,19 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
-import ExportFilesButton from '../components/ExportFilesButton.jsx'
+import ExportFilesButton from '../components/ExportFilesButton.jsx';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import {withStyles} from '@material-ui/core/styles';
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
   input: store.data.input,
   selectedComponent: store.data.selectedComponent,
+  initialTypeSelection: store.data.initialTypeSelection,
   typeSelected: store.data.typeSelected,
   parentSelected: store.data.parentSelected,
   availableParents: store.data.availableParents,
@@ -26,12 +33,75 @@ const mapDispatchToProps = dispatch => ({
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
 })
 
-class LeftContainer extends Component {
+const styles = theme => ({
+  formControl: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  textField: {
+    background: '#2068c9',
+    borderRadius: '5px'
+  },
+  input: {
+    color: 'white'
+  },
+  selectType: {
+    background: '#2068c9',
+    marginLeft: '10px',
+    borderRadius: '5px',
+    width: '100px',
+  },
+  inputLabel: {
+    color: 'white',
+    zIndex: 999,
+    marginLeft: '15px',
+    fontSize: '12px'
+  }
+})
+
+class PanelContainer extends Component {
   render() {
-    const { treeData, input, selectedComponent, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
+    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles } = this.props;
     return (
       <div className='left'>
+        <form className='form' autoComplete='off'>
+          <FormControl className={classes.formControl}>
+            <TextField
+              InputProps={{
+                className: classes.input
+              }}
+              label={<span style={{ color: 'white', fontSize: '13px', paddingLeft: '5px' }}>Name</span>}
+              className={classes.textField}
+              value={input}
+              onChange={(e) => setParentName(e.target.value)}
+              required={true}
+            />
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="type-select" className={classes.inputLabel}>Type</InputLabel>
+            <Select
+              className={classes.selectType}
+              value={initialTypeSelection}
+              onChange={(event) => {
+                const selection = event.target.value;
+                selectInitialType(selection)
+              }}
+              inputProps={{
+                name: 'type',
+                id: 'typeSelect',
+                className: classes.input,
+              }}
+            >
+            <MenuItem value="" />
+            <MenuItem value={'Stack'}>Stack</MenuItem>
+            <MenuItem value={'Drawer'}>Drawer</MenuItem>
+            <MenuItem value={'BottomTab'}>BottomTab</MenuItem>
+            <MenuItem value={'Switch'}>Switch</MenuItem>
+            <MenuItem value={'Simple Screen'}>Screen</MenuItem>
+            </Select>
+          </FormControl>
+        </form>
         <form className='parent-form' onSubmit={(e) => {
               e.preventDefault();
               addParent();
@@ -58,4 +128,4 @@ class LeftContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (LeftContainer);
+export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(PanelContainer));

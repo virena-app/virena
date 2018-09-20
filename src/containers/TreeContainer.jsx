@@ -14,10 +14,9 @@ const mapDispatchToProps = dispatch => ({
   addChild: (name, type, key, path, id) => dispatch(actions.addChild(name, type, key, path, id)),
   deleteComponent: (key, path) => dispatch(actions.deleteComponent(key, path)),
   selectComponent: (name, subtitle, children, key, path) => dispatch(actions.selectComponent(name, subtitle, children, key, path)),
-  // loadParentsDropdown: () => dispatch(actions.loadParentsDropdown()),
 })
 
-class RightContainer extends Component {
+class TreeContainer extends Component {
   constructor(props) {
     super(props)
   }
@@ -39,4 +38,4 @@ class RightContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (RightContainer);
+export default connect(mapStateToProps, mapDispatchToProps) (TreeContainer);

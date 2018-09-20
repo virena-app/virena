@@ -37,3 +37,8 @@ body {
   display: inherit;
   justify-content: space-evenly;
 }
+
+.form {
+  display: flex;
+  flex-direction: row;
+}

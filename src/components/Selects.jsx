@@ -5,6 +5,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const styles = theme => ({
   root: {
@@ -43,12 +45,12 @@ class Selects extends Component {
               className: classes.input,
             }}
           >
-            <option value="" />
-            <option value={'Stack'}>Stack</option>
-            <option value={'Drawer'}>Drawer</option>
-            <option value={'BottomTab'}>BottomTab</option>
-            <option value={'Switch'}>Switch</option>
-            <option value={'Simple Screen'}>Screen</option>
+            <MenuItem value="" />
+            <MenuItem value={'Stack'}>Stack</MenuItem>
+            <MenuItem value={'Drawer'}>Drawer</MenuItem>
+            <MenuItem value={'BottomTab'}>BottomTab</MenuItem>
+            <MenuItem value={'Switch'}>Switch</MenuItem>
+            <MenuItem value={'Simple Screen'}>Screen</MenuItem>
           </Select>
           <FormHelperText>{'Current Type:' + typeSelected}</FormHelperText>
         </FormControl>
