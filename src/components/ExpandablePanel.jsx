@@ -84,7 +84,7 @@ class DetailedExpansionPanel extends React.Component {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon className={classes.icon}/>}>
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                {selectedComponent.length > 0? selectedComponent[0].title : 'Select a component'}
+                {selectedComponent.title ? selectedComponent.title : 'Select a component'}
               </Typography>
             </div>
             <div className={classes.column}>
@@ -115,11 +115,11 @@ class DetailedExpansionPanel extends React.Component {
           <ExpansionPanelActions>
             <Button variant="contained" color="primary" 
               onClick={() => {
-                updateNameAndType(changeNameInput, typeSelected, selectedComponent[0].key, selectedComponent[0].path)
+                console.log(selectedComponent.key)
+                updateNameAndType(changeNameInput, typeSelected, selectedComponent.key, selectedComponent.path)
                 selectType('')
                 setNameToChange('')
-                console.log('clicked, current title: ', changeNameInput);
-                selectComponent(changeNameInput, selectedComponent[0].key, selectedComponent[0].path)
+                selectComponent(changeNameInput, selectedComponent.children, selectedComponent.key, selectedComponent.path)
               }}
             >
               Save

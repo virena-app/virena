@@ -15,13 +15,14 @@ export const addParent = name => ({
   payload: name
 })
 
-export const addChild = (name, type, key, path) => ({
+export const addChild = (name, type, key, path, id) => ({
   type: types.ADD_CHILD,
   payload: {
     title: name,
     subtitle: type,
     key,
-    path
+    path,
+    id
   }
 })
 
@@ -33,12 +34,14 @@ export const deleteComponent = (key, path) => ({
   }
 })
 
-export const selectComponent = (name, key, path) => ({
+export const selectComponent = (name, type, children, key, path) => ({
   type: types.SELECT_COMPONENT,
   payload: {
     title: name,
+    subtitle: type,
+    children,
     key,
-    path
+    path,
   }
 })
 
