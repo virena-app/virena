@@ -140,7 +140,7 @@ const componentReducer = (state = initialState, action) => {
         //1. take out hardcoded path
         //2. take it out of the reducer since it does nothing to change state, it's a util function
         //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-        exportFiles(action.payload, '/Users/jchan/Documents/virena/src/reducers/')
+        exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
         return state;
       case types.CLOSE_EXPORT_MODAL:
         copy.fileExportModalState = {
