@@ -365,13 +365,11 @@
   box-sizing: border-box;
 }
 .rst__placeholder::before {
-  border: 3px dashed #d9d9d9;
-  content: '';
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  bottom: 5px;
-  left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: 'Add New Screen...';
+  font-family: Arial, Helvetica, sans-serif;
   z-index: -1;
 }
 

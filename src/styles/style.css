@@ -8,7 +8,7 @@ body {
   flex: 1;
 }
 
-.left, .right {
+.panel, .tree {
   width: 30%;
   padding-top: 2.5%;
   color: white;
@@ -33,4 +33,9 @@ body {
 .parent-form {
   display: inherit;
   justify-content: space-evenly;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
 }

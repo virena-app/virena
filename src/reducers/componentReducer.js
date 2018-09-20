@@ -1,14 +1,13 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
-import React from 'react';
 import exportFiles from '../utils/exportFiles.util.js';
 
 const initialState = {
-  treeData: [{title: 'Hello', subtitle: 'Test'}],
+  treeData: [],
   addAsFirstChild: false,
   input: '',
   selectedComponent: {},
-  initialTypeSelection: '',
+  initialTypeSelection: 'Choose Type',
   typeSelected: '',
   parentSelected: '',
   availableParents: [],
@@ -122,7 +121,7 @@ const componentReducer = (state = initialState, action) => {
       //update name and type of the selected component on save click
       const key4 = action.payload.key;
       const path4 = action.payload.path;
-      console.log('check path', path4, 'key', key4);
+
       return {
         ...state,
         treeData: changeNodeAtPath({
@@ -133,12 +132,14 @@ const componentReducer = (state = initialState, action) => {
         })
       }
       case types.EXPORT_FILES:
+        console.log('asfsf', action.payload)
         //todo: 
         //1. take out hardcoded path
         //2. take it out of the reducer since it does nothing to change state, it's a util function
         //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-        exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
+        exportFiles(action.payload, '/Users/jchan/Documents/virena/src/reducers/')
         return state;
+        
     default: 
       return state;
   }
