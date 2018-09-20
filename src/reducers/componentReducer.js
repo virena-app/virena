@@ -13,6 +13,8 @@ const initialState = {
   availableParents: [],
   changeNameInput: '',
   id: 0,
+  fileExportModalState: false,
+  
 }
 
 const componentReducer = (state = initialState, action) => {

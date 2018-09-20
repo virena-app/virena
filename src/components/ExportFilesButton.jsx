@@ -19,6 +19,7 @@ class ExportFilesButton extends Component {
       <Button variant="contained" color="primary"
       className={classes.exportButton} 
       onClick={()=> {
+        //open modal function
         this.props.exportFiles(this.props.treeData);
       }}>
         Export

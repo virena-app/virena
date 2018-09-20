@@ -30,7 +30,7 @@ class Selects extends Component {
     const { classes, treeData, typeSelected, parentSelected, availableParents, selectType, selectParent } = this.props;
     return (
       <div className={classes.root}>
-        <FormControl className={classes.formControl}>
+        <FormControl required className={classes.formControl}>
           <InputLabel htmlFor="typeSelect">Type</InputLabel>
           <Select
             required
@@ -44,6 +44,7 @@ class Selects extends Component {
               id: 'typeSelect',
               className: classes.input,
             }}
+
           >
             <MenuItem value="" />
             <MenuItem value={'Stack'}>Stack</MenuItem>
