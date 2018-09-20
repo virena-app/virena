@@ -5,9 +5,7 @@ import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
 
 const exportFiles = (treeData, path) => {
-  path = '/home/sam/components';
   const screenTitles = getAllScreenTitles(treeData);
-  console.log(screenTitles)
   const promises = [];
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
