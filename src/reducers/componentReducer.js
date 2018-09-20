@@ -13,7 +13,7 @@ const initialState = {
   parentSelected: '',
   availableParents: [],
   changeNameInput: '',
-  id: 1,
+  id: 0,
   // parentId: 0,
   // parents: {},
 }
@@ -130,7 +130,7 @@ const componentReducer = (state = initialState, action) => {
       //update name and type of the selected component on save click
       const key4 = action.payload.key;
       const path4 = action.payload.path;
-      const type = action.payload.subtitle;
+      // const type = action.payload.subtitle;
       console.log('check path', path4, 'key', key4);
 
       // if(type === 'BottomTab') {
@@ -142,7 +142,7 @@ const componentReducer = (state = initialState, action) => {
         treeData: changeNodeAtPath({
           treeData: copy.treeData,
           path: path4,
-          newNode: (({ node }) => ({ ...node, title: action.payload.title, subtitle: type })),
+          newNode: (({ node }) => ({ ...node, title: action.payload.title, subtitle: action.payload.subtitle })),
           getNodeKey: key4,
         })
       }
