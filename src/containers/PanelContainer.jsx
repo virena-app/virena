@@ -75,8 +75,8 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles } = this.props;
     return (
-      <div>
-        <div className='panel'>
+      <div className='panel'>
+        <div>
           <form className='form' autoComplete='off'>
             <InputLabel htmlFor='typeSelect'>Type</InputLabel>
             <FormControl className={classes.formControl}>
@@ -123,9 +123,11 @@ class PanelContainer extends Component {
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
           changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
+        </div>
+        <div className='logo-wrapper'>
+          <img src='../../assets/virena-icon-white.png' className='logo'></img>
           <ExportFilesButton treeData={treeData} exportFiles={exportFiles}></ExportFilesButton>
         </div>
-        <img src='../../assets/virena-icon-white.png' className='logo'></img>
       </div>
     )
   }
