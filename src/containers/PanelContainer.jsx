@@ -45,7 +45,7 @@ const styles = theme => ({
     width: '120px'
   },
   input: {
-    color: 'white'
+    color: 'white',
   },
   selectType: {
     background: '#2068c9',
@@ -64,6 +64,9 @@ const styles = theme => ({
   addParentButton: {
     fontSize: '10px',
     marginLeft: '15px',
+  },
+  export: {
+    marginTop: '50px'
   }
 })
 
@@ -74,6 +77,7 @@ class PanelContainer extends Component {
     return (
       <div className='left'>
         <form className='form' autoComplete='off'>
+          <InputLabel htmlFor='typeSelect'>Type</InputLabel>
           <FormControl className={classes.formControl}>
             <TextField
               InputProps={{
@@ -100,12 +104,12 @@ class PanelContainer extends Component {
                 className: classes.input,
               }}
             >
-              <MenuItem value="" />
-              <MenuItem value={'Stack'}>Stack</MenuItem>
-              <MenuItem value={'Drawer'}>Drawer</MenuItem>
-              <MenuItem value={'BottomTab'}>BottomTab</MenuItem>
-              <MenuItem value={'Switch'}>Switch</MenuItem>
-              <MenuItem value={'Simple Screen'}>Screen</MenuItem>
+              <MenuItem value="" className={classes.menu}/>
+              <MenuItem value={'Stack'} className={classes.menu}>Stack</MenuItem>
+              <MenuItem value={'Drawer'} className={classes.menu}>Drawer</MenuItem>
+              <MenuItem value={'BottomTab'} className={classes.menu}>BottomTab</MenuItem>
+              <MenuItem value={'Switch'} className={classes.menu}>Switch</MenuItem>
+              <MenuItem value={'Simple Screen'} className={classes.menu}>Screen</MenuItem>
             </Select>
             <Button type='submit' variant='contained' className={classes.addParentButton} onClick={(e) => {
               e.preventDefault();
@@ -115,27 +119,10 @@ class PanelContainer extends Component {
             </Button> 
           </FormControl>
         </form>
-        {/* <form className='parent-form' onSubmit={(e) => {
-              e.preventDefault();
-              addParent();
-            }}>
-          <input type='text' value={input} placeholder='Input component name...' onChange={(e) => setParentName(e.target.value)} required/>
-          <select onChange={(e) => { 
-            const selection = e.target.value;
-            selectInitialType(selection)
-          }}>
-            <option value=''>Choose Type</option>
-            <option value='Switch'>Switch</option>
-            <option value='Stack'>Stack</option>
-            <option value='Drawer'>Drawer</option>
-            <option value='BottomTab'>BottomTab</option>
-          </select>
-          <input type='submit' value='Add Parent Component' />
-        </form> */}
         <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
         availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
         changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
-        <ExportFilesButton treeData={treeData} exportFiles={exportFiles}></ExportFilesButton>
+        <ExportFilesButton treeData={treeData} exportFiles={exportFiles} className={classes.export}></ExportFilesButton>
       </div>
     )
   }

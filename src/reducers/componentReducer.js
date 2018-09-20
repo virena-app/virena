@@ -7,7 +7,7 @@ const initialState = {
   addAsFirstChild: false,
   input: '',
   selectedComponent: {},
-  initialTypeSelection: '',
+  initialTypeSelection: 'Choose Type',
   typeSelected: '',
   parentSelected: '',
   availableParents: [],

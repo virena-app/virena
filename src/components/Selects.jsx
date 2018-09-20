@@ -33,6 +33,7 @@ class Selects extends Component {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="typeSelect">Type</InputLabel>
           <Select
+            required
             value={typeSelected}
             onChange={(event) => {
               const selection = event.target.value;

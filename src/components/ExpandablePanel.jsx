@@ -89,6 +89,7 @@ class DetailedExpansionPanel extends Component {
             
             <div className={classNames(classes.column, classes.helper)}>
               <TextField
+                required
                 id="standard-with-placeholder"
                 label="Change Component Name"
                 placeholder="Change Name"
