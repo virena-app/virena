@@ -69,7 +69,7 @@ const styles = theme => ({
     marginLeft: '15px',
   },
   export: {
-    marginTop: '50px'
+    background: 'white'
   }
 })
 
@@ -126,7 +126,7 @@ class PanelContainer extends Component {
         <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
         availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
         changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
-        <ExportFilesButton treeData={treeData} exportFiles={exportFiles} className={classes.export}></ExportFilesButton>
+        <ExportFilesButton treeData={treeData} exportFiles={exportFiles}></ExportFilesButton>
       </div>
     )
   }
