@@ -73,3 +73,8 @@ export const updateNameAndType = (name, type, key, path) => ({
     path
   }
 })
+
+export const exportFiles = treeData => ({
+  type: types.EXPORT_FILES,
+  payload: treeData
+})

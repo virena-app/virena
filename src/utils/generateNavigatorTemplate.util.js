@@ -3,7 +3,7 @@
  * @param {array} sortableTree - The current state of the sortable tree
  */
 
-export const getAllParents = sortableTree => {
+const getAllParents = sortableTree => {
   return sortableTree.reduce( (parentsArr, branch) => {
     return branch.type !== "Screen" ? parentsArr.concat(branch.title, getAllParents(branch.children)) : parentsArr
   }, []);
@@ -26,7 +26,7 @@ export const flattenTree = sortableTree => {
  * @param {object} parent - A parent node whose immediate children's titles we want
  */
 
-export const getImmediateChildrenTitles = (components, parent) => {
+const getImmediateChildrenTitles = (components, parent) => {
   return components.filter(screen => {
     for (let i = 0; i < parent.children.length; i++) {
       if (screen.id === parent.children[i]) return true;
@@ -40,14 +40,18 @@ export const getImmediateChildrenTitles = (components, parent) => {
  * @param {array} screens - The flattened version of the sortable tree state
  */
   
-export const generateNavigatorFile = screens => {
+const generateNavigatorFile = treeData => {
+  const screens = flattenTree(treeData);
   const unspace = title => title.replace(/\s+/g, '');
   const navigators = screens.filter( screen => screen.children );
   return navigators.map(navigator => {
+    console.log(navigator);
     const childrenTitles = getImmediateChildrenTitles(screens, navigator);
-    return `const ${unspace(navigator.title)} = create${navigator.type}Navigator({` + (childrenTitles.length ?
+    return `const ${unspace(navigator.title)} = create${navigator.subtitle}Navigator({` + (childrenTitles.length ?
     childrenTitles.map(title => {
       return `${title}: { screen: ${title} }`
     }).join(', ') + '})' : '})')
   }).join('\n\n') + `\n\nexport default ${unspace(screens[0].title)}`;
 }
+
+export default generateNavigatorFile
