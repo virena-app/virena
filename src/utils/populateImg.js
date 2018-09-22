@@ -1,5 +1,5 @@
 import { getNodeAtPath, getNodeKey, getParentKey, walk } from 'react-sortable-tree';
-import getNthChildInfo from './getNthChildInfo.util';
+import { getNthChildInfo } from './helperFunctions.util';
 /**
  * @param {number|string} parentKey - The key of the to-be parentNode of the node
  */
@@ -38,7 +38,6 @@ export const populateImg = function(image, selected, treeData) {
         
         // if the selected component is Simple Screen, 
         // const { parent, n } = getNthChildInfo(selected, treeData[0]);
-        console.log("FUCK THIS", selected)
         const parent2 = getNthChildInfo(selected, treeData[0]).parent;
         const n2 = getNthChildInfo(selected, treeData[0]).n;
         if(parent2.subtitle === 'BottomTab') {
