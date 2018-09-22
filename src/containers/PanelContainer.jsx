@@ -77,7 +77,7 @@ class PanelContainer extends Component {
     return (
       <div className='panel'>
         <div>
-          <form className='form' autoComplete='off'>
+         { !treeData[0] && <form className='form' autoComplete='off'>
             <InputLabel htmlFor='typeSelect'>Type</InputLabel>
             <FormControl className={classes.formControl}>
               <TextField
@@ -119,7 +119,7 @@ class PanelContainer extends Component {
                 Add
               </Button> 
             </FormControl>
-          </form>
+          </form>}
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
           changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
