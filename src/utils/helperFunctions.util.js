@@ -14,8 +14,8 @@ export const getAllScreenTitles = treeData => {
  */
 
 export const getAllParents = treeData => {
-  return sortableTree.reduce((parents, node) => {
-    return node.subtitle !== "Screen" ? parents.concat(node.title, getAllParents(node.children)) : parents
+  return treeData.reduce((parents, node) => {
+    return node.subtitle !== "Simple Screen" ? parents.concat(node, getAllParents(node.children)) : parents
   }, []);
 }
 
@@ -58,4 +58,13 @@ export const getNthChildInfo = (node, parent) => {
     if ((child.title) === title) return { parent, n: i + 1 }
     else if (child.children) return getNthChildInfo(node, child);
   }
+}
+
+const maxDepth = treeData => {
+  let depth = 1;
+  let max = 1;
+  for (let i = 0; i < treeData.length; i++) {
+    if (treeData[i].children) max = Math.max(depth + maxDepth(treeData[i].children), max)
+  }
+  return max;
 }

@@ -1,4 +1,4 @@
-import { getAllScreenTitles, getImmediateChildrenTitles, flattenTree } from './helperFunctions.util'
+import { getAllScreenTitles, getImmediateChildrenTitles, getAllParents } from './helperFunctions.util'
 
 /**
  * Master function which generates navigator.js file
@@ -6,11 +6,10 @@ import { getAllScreenTitles, getImmediateChildrenTitles, flattenTree } from './h
  */
   
 const generateNavigatorTemplate = treeData => {
-  const flatTree = flattenTree(treeData);
-  const simpleScreens = flatTree.filter( screen => screen.subtitle === 'Simple Screen');
-  const navigators = flatTree.filter(components => components.children );
+  const screenTitles = getAllScreenTitles(treeData);
+  const navigators = getAllParents(treeData);
   return "import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';\n" +
-  simpleScreens.map(screen => `import ${screen.title} from './${screen.title}.js'`).join('\n') + '\n\n' +
+  screenTitles.map(title => `import ${title} from './${title}.js'`).join('\n') + '\n\n' +
   navigators.map(navigator => {
     const childrenTitles = getImmediateChildrenTitles(navigator, treeData);
     return `export const ${navigator.title} = create${navigator.subtitle}Navigator({` + (childrenTitles.length ?
@@ -18,7 +17,6 @@ const generateNavigatorTemplate = treeData => {
       return `${title}: { screen: ${title} }`
     }).join(', ') + '})' : '})')
   }).reverse().join('\n\n');
-
 }
 
 export default generateNavigatorTemplate
