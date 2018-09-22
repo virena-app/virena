@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Selects from './Selects.jsx'
 import TextField from '@material-ui/core/TextField';
+import { pascalCase } from '../utils/helperFunctions.util.js'
 
 const styles = theme => ({
   heading: {
@@ -64,11 +65,10 @@ const styles = theme => ({
 //need to grab name of selected tree component and render to options panel
 class DetailedExpansionPanel extends Component {
   render () {
-    const { classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
+    const { treeData, classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
       changeNameInput, setNameToChange, selectComponent } = this.props;
-      const pascalCase = title => title.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join('');
     return (
-      <div className={classes.root}>
+      treeData.length && <div className={classes.root}>
         <ExpansionPanel 
           defaultExpanded
           className={classes.panel}
