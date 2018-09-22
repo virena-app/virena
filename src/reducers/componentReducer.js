@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
+import { pascalCase } from '../utils/helperFunctions.util.js'
 const initialState = {
   treeData: [],
   addAsFirstChild: false,
@@ -31,11 +32,12 @@ const componentReducer = (state = initialState, action) => {
     case types.ADD_PARENT:
       copy.treeData = state.treeData.slice()
       copy.treeData.push({
-        title: copy.input,
+        title: pascalCase(copy.input),
         subtitle: copy.initialTypeSelection,
         id: copy.id,
       })
       const copyid = copy.id + 1;
+      
     return {
       ...state,
       treeData: copy.treeData,
