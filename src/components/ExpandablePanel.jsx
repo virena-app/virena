@@ -68,7 +68,7 @@ class DetailedExpansionPanel extends Component {
     const { treeData, classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
       changeNameInput, setNameToChange, selectComponent } = this.props;
     return (
-      treeData.length && <div className={classes.root}>
+      !!treeData.length && <div className={classes.root}>
         <ExpansionPanel 
           defaultExpanded
           className={classes.panel}
