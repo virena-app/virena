@@ -1,5 +1,3 @@
-
-
 const generateAppTemplate = treeData => {
   const RootComponent = treeData[0].title;
   return `

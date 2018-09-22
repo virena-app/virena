@@ -1,9 +1,11 @@
 import fs from 'fs';
-import generateScreenTemplate, { getAllScreenTitles } from './generateScreenTemplates.util.js';
+import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
+import { getAllScreenTitles } from './helperFunctions.util.js'
 
 const exportFiles = (treeData, path) => {
+  path = '/home/sam/components'
   const screenTitles = getAllScreenTitles(treeData);
   const promises = [];
   screenTitles.forEach((title) => {

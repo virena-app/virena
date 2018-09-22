@@ -66,6 +66,7 @@ class DetailedExpansionPanel extends Component {
   render () {
     const { classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
       changeNameInput, setNameToChange, selectComponent } = this.props;
+      const pascalCase = title => title.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join('');
     return (
       <div className={classes.root}>
         <ExpansionPanel 
@@ -108,7 +109,7 @@ class DetailedExpansionPanel extends Component {
             <Button variant="contained" color="primary" 
               onClick={() => {
                 if (changeNameInput.length > 0 && typeSelected.length > 0) {
-                  updateNameAndType(changeNameInput, typeSelected, selectedComponent.key, selectedComponent.path)
+                  updateNameAndType(pascalCase(changeNameInput), typeSelected, selectedComponent.key, selectedComponent.path)
                 } else {
                   console.log('Must include both type and name when updating component')
                   
