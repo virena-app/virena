@@ -60,10 +60,18 @@ export const getNthChildInfo = (node, parent) => {
   };
 }
 
-const maxDepth = treeData => {
+export const maxDepth = treeData => {
   let depth = 1;
   return treeData.reduce((max, node) => {
     if (node.children) max = Math.max(depth + maxDepth(node.children), max);
     return max;
   }, 1);
+}
+
+export const duplicateTitle = (title, treeData) => {
+  if (!treeData.length) return true
+  return treeData.reduce((bool, node) => {
+    if (node.title === title) bool = true;
+    return node.children ? bool || duplicateTitle(title, node.children) : bool
+  }, false)
 }

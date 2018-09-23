@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
-import { pascalCase } from '../utils/helperFunctions.util.js'
+import { pascalCase, maxDepth } from '../utils/helperFunctions.util.js'
 const initialState = {
   treeData: [],
   addAsFirstChild: false,
