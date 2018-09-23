@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
+import SubmitParentForm from '../components/SubmitParentForm.jsx';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
 import ExportFilesButton from '../components/ExportFilesButton.jsx';
 import FormControl from '@material-ui/core/FormControl';
@@ -77,48 +78,8 @@ class PanelContainer extends Component {
     return (
       <div className='panel'>
         <div>
-         { !treeData[0] && <form className='form' autoComplete='off'>
-            <InputLabel htmlFor='typeSelect'>Type</InputLabel>
-            <FormControl className={classes.formControl}>
-              <TextField
-                InputProps={{
-                  className: classes.input
-                }}
-                label={<span style={{ color: 'white', fontSize: '13px', paddingLeft: '5px' }}>Name</span>}
-                className={classes.textField}
-                value={input}
-                onChange={(e) => setParentName(e.target.value)}
-                required={true}
-              />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <Select
-                className={classes.selectType}
-                value={initialTypeSelection}
-                onChange={(event) => {
-                  const selection = event.target.value;
-                  selectInitialType(selection)
-                }}
-                inputProps={{
-                  name: 'type',
-                  id: 'typeSelect',
-                  className: classes.input,
-                }}
-              >
-                <MenuItem value="" className={classes.menu}/>
-                <MenuItem value={'Stack'} className={classes.menu}>Stack</MenuItem>
-                <MenuItem value={'Drawer'} className={classes.menu}>Drawer</MenuItem>
-                <MenuItem value={'BottomTab'} className={classes.menu}>BottomTab</MenuItem>
-                <MenuItem value={'Switch'} className={classes.menu}>Switch</MenuItem>
-              </Select>
-              <Button type='submit' variant='contained' className={classes.addParentButton} onClick={(e) => {
-                e.preventDefault();
-                addParent();
-              }}>
-                Add
-              </Button> 
-            </FormControl>
-          </form> }
+          <SubmitParentForm treeData={treeData} input={input} classes={classes} initialTypeSelection={initialTypeSelection}
+           setParentName={setParentName} addParent={addParent} selectInitialType={selectInitialType}/>
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
           changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
