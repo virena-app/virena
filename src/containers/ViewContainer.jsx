@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import * as actions from '../actions/actions';
-import { populateImg } from '../utils/populateImg';
+import { generateImage } from '../utils/generateImage';
 import { connect } from 'react-redux';
 
 const mapStateToProps = store => ({
@@ -14,7 +14,7 @@ class ViewContainer extends Component {
   render() {
     let image = '../assets/';
     const selected = this.props.selectedComponent;
-    image = populateImg(image, selected, this.props.treeData);
+    image = generateImage(image, selected, this.props.treeData);
     console.log(`image here ${image}`);
     return (
       <div className='view'>
