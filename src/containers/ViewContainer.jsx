@@ -14,10 +14,10 @@ const mapDispatchToProps = dispatch => ({})
 class ViewContainer extends Component {
 
   render() {
-    let image = '../assets/';
-    const selected = this.props.selectedComponent;
-    image = populateImg(image, selected, this.props.treeData);
-    console.log(`image here ${image}`);
+    // let image = '../assets/';
+    // const selected = this.props.selectedComponent;
+    // image = populateImg(image, selected, this.props.treeData);
+    // console.log(`image here ${image}`);
     return (
       <div className='view'>
         <div className='inner-view'>

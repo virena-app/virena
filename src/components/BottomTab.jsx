@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default class BottomTab extends Component {
   render() {
+    
     return (
       <div className='bottom-tab'>
           <Link to='/one'>One</Link>
