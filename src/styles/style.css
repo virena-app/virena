@@ -19,10 +19,47 @@ body {
 .view {
   width: 40%;
   padding-top: 2.5%;
-  color: white;
   display: inherit;
   align-items: center;
   flex-direction: column;
+}
+
+.inner-view {
+  width: 360px;
+  height: 722px;
+  background-image: url('../../assets/frame.png');
+  background-size: 360px 722px;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen-view {
+  margin-top: 45px;
+  margin-left: 1px;
+  width: 86.5%;
+  height: 80%;
+  background-color: white;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-screen {
+  flex: 9;
+  border: 1px solid yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-tab {
+  display: inherit;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 1;
+  border: 1px solid orange;
 }
 
 #iphone {
