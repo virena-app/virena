@@ -22,7 +22,7 @@ const componentReducer = (state = initialState, action) => {
     case types.SET_TREE:
         return {
           ...state,
-          treeData: action.payload
+          treeData: action.payload.length > 1 ? copy.treeData : action.payload
         }
     case types.SET_PARENT_NAME:
       return {
@@ -47,17 +47,17 @@ const componentReducer = (state = initialState, action) => {
     case types.ADD_CHILD:
       const key1 = action.payload.key;
       const path1 = action.payload.path;
-      
+      const newTreeData = addNodeUnderParent({
+        treeData: copy.treeData,
+        parentKey: path1[path1.length - 1],
+        expandParent: true,
+        getNodeKey: key1,
+        newNode: action.payload,
+        addAsFirstChild: copy.addAsFirstChild,
+      }).treeData;
       return {
         ...state,
-        treeData: addNodeUnderParent({
-          treeData: copy.treeData,
-          parentKey: path1[path1.length - 1],
-          expandParent: true,
-          getNodeKey: key1,
-          newNode: action.payload,
-          addAsFirstChild: copy.addAsFirstChild,
-        }).treeData,
+        treeData: maxDepth(newTreeData) > 5 ? copy.treeData : newTreeData,
         id: copy.id + 1,
       }
     case types.DELETE_COMPONENT:
