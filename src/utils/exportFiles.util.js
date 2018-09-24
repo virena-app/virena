@@ -1,15 +1,18 @@
 import fs from 'fs';
-import generateScreenTemplate, { getAllScreenTitles } from './generateScreenTemplates.util.js';
+import { format } from 'prettier';
+import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
+import { getAllScreenTitles } from './helperFunctions.util.js'
 
 const exportFiles = (treeData, path) => {
+  path = '/home/sam/components'
   const screenTitles = getAllScreenTitles(treeData);
   const promises = [];
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
       fs.writeFile(`${path}/${title}.js`,
-        generateScreenTemplate(title), {
+        format(generateScreenTemplate(title)), {
           singleQuote: true,
           trailingComma: 'es5',
           bracketSpacing: true,
@@ -27,7 +30,7 @@ const exportFiles = (treeData, path) => {
 
   const navPromise = new Promise((resolve, reject) => {
     fs.writeFile(`${path}/navigator.js`, 
-      generateNavigatorTemplate(treeData), {
+      format(generateNavigatorTemplate(treeData)), {
         singleQuote: true,
         trailingComma: 'es5',
         bracketSpacing: true,
@@ -42,7 +45,7 @@ const exportFiles = (treeData, path) => {
 
   const appPromise = new Promise((resolve, reject) => {
     fs.writeFile(`${path}/App.js`, 
-      generateAppTemplate(treeData), {
+      format(generateAppTemplate(treeData)), {
         singleQuote: true,
         trailingComma: 'es5',
         bracketSpacing: true,

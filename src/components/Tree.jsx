@@ -5,24 +5,25 @@ import '../styles/tree.css';
 export default class Tree extends Component {
   render() {
     const getNodeKey = ({ treeIndex }) => treeIndex;
+    const { treeData, addChild, deleteComponent, selectComponent, id, input } = this.props;
     return (
       <SortableTree
-            treeData={this.props.treeData}
-            onChange={treeData => this.props.setTree(treeData)}
-            generateNodeProps={({ node, path }) => ({
-              buttons: [
-                <button onClick={() => this.props.addChild(this.props.input, 'Simple Screen', getNodeKey, path, this.props.id)} style={{ 'fontFamily': 'Arial' }}>
-                  +
-                </button>,
-                <button onClick={() => this.props.deleteComponent(getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
-                  -
-                </button>,
-                <button onClick={() => this.props.selectComponent(node.title, node.subtitle, node.children, getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
-                  Details
-                </button>
-              ],
-            })}
-          />
+        treeData={treeData}
+        onChange={treeData => setTree(treeData)}
+        generateNodeProps={({ node, path }) => ({
+          buttons: [
+            node.subtitle !== "Simple Screen" && <button onClick={() => addChild(input, 'Simple Screen', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial' }}>
+              +
+            </button>,
+            <button onClick={() => deleteComponent(getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
+              -
+            </button>,
+            <button onClick={() => selectComponent(node.title, node.subtitle, node.children, getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
+              Details
+            </button>
+          ],
+        })}
+      />
     )
   }
 }
