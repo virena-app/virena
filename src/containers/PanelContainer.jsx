@@ -81,7 +81,7 @@ class PanelContainer extends Component {
     return (
       <div className='panel'>
         <div>
-          <form className='form' autoComplete='off'>
+         { !treeData[0] && <form className='form' autoComplete='off'>
             <InputLabel htmlFor='typeSelect'>Type</InputLabel>
             <FormControl className={classes.formControl}>
               <TextField
@@ -114,7 +114,6 @@ class PanelContainer extends Component {
                 <MenuItem value={'Drawer'} className={classes.menu}>Drawer</MenuItem>
                 <MenuItem value={'BottomTab'} className={classes.menu}>BottomTab</MenuItem>
                 <MenuItem value={'Switch'} className={classes.menu}>Switch</MenuItem>
-                <MenuItem value={'Simple Screen'} className={classes.menu}>Screen</MenuItem>
               </Select>
               <Button type='submit' variant='contained' className={classes.addParentButton} onClick={(e) => {
                 e.preventDefault();
@@ -123,7 +122,7 @@ class PanelContainer extends Component {
                 Add
               </Button> 
             </FormControl>
-          </form>
+          </form> }
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
           changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>

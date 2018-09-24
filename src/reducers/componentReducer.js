@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
-
+import { pascalCase } from '../utils/helperFunctions.util.js'
 const initialState = {
   treeData: [],
   addAsFirstChild: false,
@@ -17,39 +17,34 @@ const initialState = {
     open: true,
   }
 }
-
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
-
   switch (action.type) {
     case types.SET_TREE:
         return {
           ...state,
           treeData: action.payload
         }
-
     case types.SET_PARENT_NAME:
       return {
         ...state,
         input: action.payload
       }
-
     case types.ADD_PARENT:
       copy.treeData = state.treeData.slice()
       copy.treeData.push({
-        title: copy.input,
+        title: pascalCase(copy.input),
         subtitle: copy.initialTypeSelection,
         id: copy.id,
       })
       const copyid = copy.id + 1;
-
+      
     return {
       ...state,
       treeData: copy.treeData,
       input: '',
       id: copyid,
     }
-
     case types.ADD_CHILD:
       const key1 = action.payload.key;
       const path1 = action.payload.path;
@@ -66,11 +61,9 @@ const componentReducer = (state = initialState, action) => {
         }).treeData,
         id: copy.id + 1,
       }
-
     case types.DELETE_COMPONENT:
       const key2 = action.payload.key;
       const path2 = action.payload.path;
-
       return {
         ...state,
         treeData: removeNodeAtPath({
@@ -79,7 +72,6 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key2,
         }),
       }
-
     case types.SELECT_COMPONENT:
       const subtitle = action.payload.subtitle;
       const title = action.payload.title;
@@ -94,12 +86,10 @@ const componentReducer = (state = initialState, action) => {
       copy.selectedComponent.subtitle = subtitle;
       copy.selectedComponent.path = path3;
       copy.selectedComponent.key = key3;
-
       return {
         ...state,
         selectedComponent: copy.selectedComponent
       }
-
     case types.SELECT_TYPE:
       return {
         ...state,
@@ -124,7 +114,6 @@ const componentReducer = (state = initialState, action) => {
       //update name and type of the selected component on save click
       const key4 = action.payload.key;
       const path4 = action.payload.path;
-
       return {
         ...state,
         treeData: changeNodeAtPath({
@@ -154,5 +143,4 @@ const componentReducer = (state = initialState, action) => {
       return state;
   }
 }
-
 export default componentReducer;
