@@ -6,12 +6,13 @@ import Three from './Three.jsx';
 
 export default class PhoneScreen extends Component {
   render() {
+    // const routes = () => this.props.selectedComponent.children? this.props.selectedComponent.children.map((screen, i) => <Route path={`/${screen.title}`} render={() => <div>{screen.title}</div>} />): <Route exact path='/' render={() => <div>Default</div>} />;
     return (
       <div className='phone-screen'>
         <Switch>
-          <Route exact path='/one' component={One}></Route>
-          <Route exact path='/two' component={Two}></Route>
-          <Route exact path='/three' component={Three}></Route>
+          {/* {routes()} */}
+          <Route exact path='/One' render={() => <div>One</div>} />
+          <Route path='/Two' render={() => <div>Two</div>} />
         </Switch>
       </div>
     )
