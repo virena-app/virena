@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import * as actions from '../actions/actions';
+import * as actions from '../actions/actions';
 import { generateImage } from '../utils/generateImage';
 import { connect } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
@@ -10,7 +10,9 @@ const mapStateToProps = store => ({
   treeData: store.data.treeData,
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+  // selectComponent: (name, subtitle, children, key, path) => dispatch(actions.selectComponent(name, subtitle, key, path)),
+})
 class ViewContainer extends Component {
 
   render() {
@@ -22,7 +24,7 @@ class ViewContainer extends Component {
       <div className='view'>
         <div id='iphone'>
           <HashRouter>
-            <ScreenContainer />
+            <ScreenContainer selected={this.props.selectedComponent} />
           </HashRouter>
         </div>
         {/* <img id='iphone' src={image}></img> */}
