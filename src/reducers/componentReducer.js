@@ -15,6 +15,8 @@ const initialState = {
   id: 0,
   statusPopupOpen: false, 
   statusPopupErrorOpen: false,
+  fileExportModalState: false,
+  drawerState: false
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -47,17 +49,17 @@ const componentReducer = (state = initialState, action) => {
     case types.ADD_CHILD:
       const key1 = action.payload.key;
       const path1 = action.payload.path;
-      
+      const newTreeData = addNodeUnderParent({
+        treeData: copy.treeData,
+        parentKey: path1[path1.length - 1],
+        expandParent: true,
+        getNodeKey: key1,
+        newNode: action.payload,
+        addAsFirstChild: copy.addAsFirstChild,
+      }).treeData;
       return {
         ...state,
-        treeData: addNodeUnderParent({
-          treeData: copy.treeData,
-          parentKey: path1[path1.length - 1],
-          expandParent: true,
-          getNodeKey: key1,
-          newNode: action.payload,
-          addAsFirstChild: copy.addAsFirstChild,
-        }).treeData,
+        treeData: maxDepth(newTreeData) > 5 ? copy.treeData : newTreeData,
         id: copy.id + 1,
       }
     case types.DELETE_COMPONENT:
@@ -128,7 +130,6 @@ const componentReducer = (state = initialState, action) => {
       //1. take out hardcoded path
       //2. take it out of the reducer since it does nothing to change state, it's a util function
       //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-      
       // exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
       //add logic to manipulate statusPopupOpen to be true?
       //also statusPopupErrorOpen
@@ -152,7 +153,17 @@ const componentReducer = (state = initialState, action) => {
         statusPopupOpen: action.payload, 
         statusPopupErrorOpen: action.payload,
       }
-    
+    case types.OPEN_DRAWER:
+      return {
+        ...state,
+        drawerState: !state.drawerState
+      }
+
+    case types.CLOSE_DRAWER:
+      return {
+        ...state,
+        drawerState: false
+      }
     default: 
       return state;
   }

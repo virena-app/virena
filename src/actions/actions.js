@@ -102,4 +102,10 @@ export const closeStatusPopup = () => ({
   payload: false
 })
 
+export const openDrawer = () => ({
+  type: types.OPEN_DRAWER
+})
 
+export const closeDrawer = () => ({
+  type: types.CLOSE_DRAWER
+})

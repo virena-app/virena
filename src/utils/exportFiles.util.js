@@ -67,22 +67,6 @@ const exportFilesAction = (treeData, path) => {
   promises.push(appPromise);
 
   return Promise.all(promises)
-    // dispatch({
-    //   type: EXPORT_FILES_SUCCESS,
-    //   payload: {
-    //     filesArr: data,
-    //     totalFiles,
-    //     childFiles: screenTitles.length,
-    //   }
-    // })
-    // .catch(err => dispatch({
-    //   type: EXPORT_FILES_FAIL,
-    //   payload: {
-    //     status: true,
-    //     err
-    //   }
-    // }))
-   
 };
 
 export default exportFilesAction;

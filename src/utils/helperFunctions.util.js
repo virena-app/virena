@@ -43,10 +43,8 @@ export const flattenTree = treeData => {
 
 
 export const getImmediateChildrenTitles = (parent, treeData) => {
-  console.log('treeData inside getImmediateChildrenTitles', treeData);
   for (let i = 0; i < treeData.length; i++) {
     if (treeData[i].title === parent.title) {
-      console.log('inside first if for gict', )
       return treeData[i].children.map(child => child.title)
     }
     else if (treeData[i].children) return getImmediateChildrenTitles(parent, treeData[i].children)
@@ -68,15 +66,13 @@ export const getNthChildInfo = (node, parent) => {
 }
 
 export const maxDepth = treeData => {
-  let depth = 1;
   return treeData.reduce((max, node) => {
-    if (node.children) max = Math.max(depth + maxDepth(node.children), max);
+    if (node.children) max = Math.max(1 + maxDepth(node.children), max);
     return max;
   }, 1);
 }
 
 export const duplicateTitle = (title, treeData) => {
-  console.log('dupTitle treeData.length', treeData.length);
   if (!treeData.length) return true
   return treeData.reduce((bool, node) => {
     if (node.title === title) bool = true;
