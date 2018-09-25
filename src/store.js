@@ -1,8 +1,11 @@
 import reducers from './reducers/index';
-import {createStore} from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import history from './history';
 
 const store = createStore(
-  reducers
+  connectRouter(history)(reducers),
+  compose(applyMiddleware(routerMiddleware(history)))
 )
 
 export default store;
