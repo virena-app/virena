@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import * as actions from '../actions/actions';
 import { generateImage } from '../utils/generateImage';
 import { connect } from 'react-redux';
-import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import ScreenContainer from './ScreenContainer.jsx';
 
 const mapStateToProps = store => ({
@@ -21,7 +21,9 @@ class ViewContainer extends Component {
     return (
       <div className='view'>
         <div id='iphone'>
-          <ScreenContainer />
+          <HashRouter>
+            <ScreenContainer />
+          </HashRouter>
         </div>
         {/* <img id='iphone' src={image}></img> */}
       </div>
