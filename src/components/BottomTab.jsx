@@ -7,8 +7,6 @@ export default class BottomTab extends Component {
     return (
       <div className='bottom-tab'>
           {links}
-          {/* <Link to='/one' replace>One</Link>
-          <Link to ='/two' replace>Two</Link> */}
       </div>
     )
   }

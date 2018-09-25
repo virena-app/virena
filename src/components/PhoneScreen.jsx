@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import One from './One.jsx';
-import Two from './Two.jsx';
-import Three from './Three.jsx';
 
 export default class PhoneScreen extends Component {
   render() {
@@ -13,8 +10,6 @@ export default class PhoneScreen extends Component {
       <div className='phone-screen'>
         <Switch>
           {routes()}
-          {/* <Route exact path='/One' render={() => <div>One</div>} />
-          <Route path='/Two' render={() => <div>Two</div>} /> */}
         </Switch>
       </div>
     )
