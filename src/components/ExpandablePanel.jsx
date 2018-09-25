@@ -111,8 +111,6 @@ class DetailedExpansionPanel extends Component {
             <Button variant="contained" color="primary" 
               onClick={() => {
                 const title = pascalCase(changeNameInput);
-                console.log('titlelength', title.length)
-                console.log('typeSelected', typeSelected.length)
                 if (title.length > 0 && typeSelected.length > 0 && !duplicateTitle(title, treeData)) {
                   updateNameAndType(title, typeSelected, selectedComponent.key, selectedComponent.path)
                 } else {

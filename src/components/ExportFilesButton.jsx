@@ -15,10 +15,7 @@ class ExportFilesButton extends Component {
     return (
       <Button variant="contained" color="primary"
       className={classes.exportButton} 
-      onClick={()=> {
-        alert('Files Exported!');
-        exportFiles(treeData);
-      }}>
+      onClick={() => exportFiles(treeData)}>
         Export
       </Button>
     );

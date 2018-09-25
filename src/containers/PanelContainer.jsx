@@ -4,7 +4,7 @@ import * as actions from '../actions/actions';
 import SubmitParentForm from '../components/SubmitParentForm.jsx';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
 import ExportFilesButton from '../components/ExportFilesButton.jsx';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import StatusPopup from '../components/StatusPopup.jsx';
 
 const mapStateToProps = store => ({

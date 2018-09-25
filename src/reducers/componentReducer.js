@@ -129,16 +129,30 @@ const componentReducer = (state = initialState, action) => {
       //2. take it out of the reducer since it does nothing to change state, it's a util function
       //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
       
-      exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
+      // exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
       //add logic to manipulate statusPopupOpen to be true?
       //also statusPopupErrorOpen
       return state;
+    case types.EXPORT_FILES_SUCCESS:
+      console.log('successful export!');
+      return {
+        ...state,
+        statusPopupOpen: action.payload.status
+      }
+    case types.EXPORT_FILES_FAIL:
+      console.log(action.payload.err)
+      return {
+        ...state,
+        statusPopupErrorOpen: action.payload.status
+      }
     case types.CLOSE_STATUS_POPUP:
+      
       return {
         ...state,
         statusPopupOpen: action.payload, 
         statusPopupErrorOpen: action.payload,
       }
+    
     default: 
       return state;
   }
