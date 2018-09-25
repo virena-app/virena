@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 // import * as actions from '../actions/actions';
 import { generateImage } from '../utils/generateImage';
 import { connect } from 'react-redux';
+import { HashRouter as Router } from 'react-router-dom';
+import ScreenContainer from './ScreenContainer.jsx';
 
 const mapStateToProps = store => ({
   selectedComponent: store.data.selectedComponent,
@@ -12,13 +14,16 @@ const mapDispatchToProps = dispatch => ({})
 class ViewContainer extends Component {
 
   render() {
-    let image = '../assets/';
-    const selected = this.props.selectedComponent;
-    image = generateImage(image, selected, this.props.treeData);
-    console.log(`image here ${image}`);
+    // let image = '../assets/';
+    // const selected = this.props.selectedComponent;
+    // image = generateImage(image, selected, this.props.treeData);
+    // console.log(`image here ${image}`);
     return (
       <div className='view'>
-        <img id='iphone' src={image}></img>
+        <div id='iphone'>
+          <ScreenContainer />
+        </div>
+        {/* <img id='iphone' src={image}></img> */}
       </div>
     )
   }

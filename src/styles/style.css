@@ -25,7 +25,15 @@ body {
   flex-direction: column;
 }
 
-#iphone {
+/* #iphone {
+  width: 360px;
+  height: 722px;
+} */
+
+div#iphone { 
+  background-image: url('../../assets/frame.png');
+  background-size: 90%;
+  background-repeat: no-repeat;
   width: 360px;
   height: 722px;
 }
