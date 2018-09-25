@@ -1,7 +1,7 @@
 import React from 'react';
 
 const screenStyle = {
-  color: 'blue'
+  color: '#333'
 }
 
 const Screen = props => {
