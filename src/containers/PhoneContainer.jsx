@@ -24,13 +24,6 @@ class PhoneContainer extends Component {
     if (this.props.drawerState) {
       backdrop = <Backdrop closeDrawer={this.props.closeDrawer}/>
     }
-    // const navigator = () => this.props.selectedComponent.subtitle === 'BottomTab'? <BottomTab selectedComponent={this.props.selectedComponent} />: (
-    //   <div>
-    //     <button onClick={this.props.openDrawer}>Open</button>
-    //     <Drawer selectedComponent={this.props.selectedComponent} drawerState={this.props.drawerState}/>
-    //     {backdrop}
-    //   </div>
-    // );
 
     const navigator = () => {
       if (this.props.selectedComponent.subtitle === 'BottomTab') {
