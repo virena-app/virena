@@ -5,7 +5,7 @@ import '../styles/tree.css';
 export default class Tree extends Component {
   render() {
     const getNodeKey = ({ treeIndex }) => treeIndex;
-    const { treeData, addChild, deleteComponent, selectComponent, id, input } = this.props;
+    const { treeData, addChild, deleteComponent, selectComponent, id, input, setTree } = this.props;
     return (
       <SortableTree
         treeData={treeData}

@@ -1,6 +1,7 @@
-export const pascalCase = title => title.replace(/[a-z]+/gi, word => word[0].toUpperCase() + word.slice(1)).replace(/[-_\s0-9\W]+/gi, '');
+export const pascalCase = title => title.replace(/[a-z]+/gi, word => word[0].toUpperCase() + word.slice(1)).replace(/[-_\s\W]+/gi, '');
 
 export const getAllScreenTitles = treeData => {
+  console.log('treeData in getAllScreenTitles', treeData);
   return treeData.reduce((screenTitles, node) => {
     if (node.subtitle === 'Simple Screen') return screenTitles.concat(node.title);
     else if (node.children) return screenTitles.concat(getAllScreenTitles(node.children));
@@ -14,6 +15,10 @@ export const getAllScreenTitles = treeData => {
  */
 
 export const getAllParents = treeData => {
+  if (!treeData) {
+    //logic to invoke ErrorSnackBar
+    console.log('Navigators must have child screens/navigators!');
+  }
   return treeData.reduce((parents, node) => {
     return node.subtitle !== "Simple Screen" ? parents.concat(node, getAllParents(node.children)) : parents
   }, []);
@@ -68,6 +73,7 @@ export const maxDepth = treeData => {
 }
 
 export const duplicateTitle = (title, treeData) => {
+  if (!treeData.length) return true
   return treeData.reduce((bool, node) => {
     if (node.title === title) bool = true;
     return node.children ? bool || duplicateTitle(title, node.children) : bool
