@@ -60,7 +60,7 @@ const exportFiles = (treeData, path) => {
   promises.push(navPromise);
   promises.push(appPromise);
 
-  return Promise.all(promises);
+  return Promise.all(promises).then(data => console.log('promise all', data));
 };
 
 export default exportFiles;

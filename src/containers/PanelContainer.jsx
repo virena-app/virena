@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actions';
+import SubmitParentForm from '../components/SubmitParentForm.jsx';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
 import ExportFilesButton from '../components/ExportFilesButton.jsx';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
-import AlertModal from '../components/AlertModal.jsx'
+import StatusPopup from '../components/StatusPopup.jsx';
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
@@ -21,7 +16,8 @@ const mapStateToProps = store => ({
   parentSelected: store.data.parentSelected,
   availableParents: store.data.availableParents,
   changeNameInput: store.data.changeNameInput,
-  fileExportModalState: store.data.fileExportModalState,
+  statusPopupOpen: store.data.statusPopupOpen,
+  statusPopupErrorOpen: store.data.statusPopupErrorOpen,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -34,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
   exportFiles: treeData => dispatch(actions.exportFiles(treeData)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
-  closeExportModal: (boolean) => dispatch(actions.closeExportModal(boolean)),
+  closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
 })
 
 const styles = theme => ({
@@ -75,62 +71,27 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   render() {
-    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
+    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles,
-    fileExportModalState, closeExportModal } = this.props;
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup } = this.props;
     return (
       <div className='panel'>
         <div>
-         { !treeData[0] && <form className='form' autoComplete='off'>
-            <InputLabel htmlFor='typeSelect'>Type</InputLabel>
-            <FormControl className={classes.formControl}>
-              <TextField
-                InputProps={{
-                  className: classes.input
-                }}
-                label={<span style={{ color: 'white', fontSize: '13px', paddingLeft: '5px' }}>Name</span>}
-                className={classes.textField}
-                value={input}
-                onChange={(e) => setParentName(e.target.value)}
-                required={true}
-              />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <Select
-                className={classes.selectType}
-                value={initialTypeSelection}
-                onChange={(event) => {
-                  const selection = event.target.value;
-                  selectInitialType(selection)
-                }}
-                inputProps={{
-                  name: 'type',
-                  id: 'typeSelect',
-                  className: classes.input,
-                }}
-              >
-                <MenuItem value="" className={classes.menu}/>
-                <MenuItem value={'Stack'} className={classes.menu}>Stack</MenuItem>
-                <MenuItem value={'Drawer'} className={classes.menu}>Drawer</MenuItem>
-                <MenuItem value={'BottomTab'} className={classes.menu}>BottomTab</MenuItem>
-                <MenuItem value={'Switch'} className={classes.menu}>Switch</MenuItem>
-              </Select>
-              <Button type='submit' variant='contained' className={classes.addParentButton} onClick={(e) => {
-                e.preventDefault();
-                addParent();
-              }}>
-                Add
-              </Button> 
-            </FormControl>
-          </form> }
+          <SubmitParentForm treeData={treeData} input={input} classes={classes} initialTypeSelection={initialTypeSelection}
+           setParentName={setParentName} addParent={addParent} selectInitialType={selectInitialType}/>
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
           changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
         </div>
         <div className='logo-wrapper'>
           <img src='../../assets/virena-icon-white.png' className='logo'></img>
-          <ExportFilesButton treeData={treeData} exportFiles={exportFiles}></ExportFilesButton>
+          <ExportFilesButton treeData={treeData} exportFiles={exportFiles} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
+        <StatusPopup 
+          statusPopupOpen={statusPopupOpen}
+          statusPopupErrorOpen={statusPopupErrorOpen}
+          closeStatusPopup={closeStatusPopup}
+        />
       </div>
     )
   }

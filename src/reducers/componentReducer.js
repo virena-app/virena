@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
-import { pascalCase } from '../utils/helperFunctions.util.js'
+import { pascalCase, maxDepth } from '../utils/helperFunctions.util.js'
 const initialState = {
   treeData: [],
   addAsFirstChild: false,
@@ -13,9 +13,8 @@ const initialState = {
   availableParents: [],
   changeNameInput: '',
   id: 0,
-  fileExportModalState: {
-    open: true,
-  }
+  statusPopupOpen: false, 
+  statusPopupErrorOpen: false,
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -23,7 +22,7 @@ const componentReducer = (state = initialState, action) => {
     case types.SET_TREE:
         return {
           ...state,
-          treeData: action.payload
+          treeData: action.payload.length > 1 ? copy.treeData : action.payload
         }
     case types.SET_PARENT_NAME:
       return {
@@ -123,22 +122,23 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key4,
         })
       }
-      case types.EXPORT_FILES:
-        console.log('asfsf', action.payload)
-        //todo: 
-        //1. take out hardcoded path
-        //2. take it out of the reducer since it does nothing to change state, it's a util function
-        //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-        exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
-        return state;
-      case types.CLOSE_EXPORT_MODAL:
-        copy.fileExportModalState = {
-          open: action.payload,
-        }
-        return {
-          ...state,
-          fileExportModalState: copy.fileExportModalState
-        }
+    case types.EXPORT_FILES:
+      console.log('asfsf', action.payload)
+      //todo: 
+      //1. take out hardcoded path
+      //2. take it out of the reducer since it does nothing to change state, it's a util function
+      //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
+      
+      exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
+      //add logic to manipulate statusPopupOpen to be true?
+      //also statusPopupErrorOpen
+      return state;
+    case types.CLOSE_STATUS_POPUP:
+      return {
+        ...state,
+        statusPopupOpen: action.payload, 
+        statusPopupErrorOpen: action.payload,
+      }
     default: 
       return state;
   }

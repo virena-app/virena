@@ -11,13 +11,13 @@ const styles = theme => ({
 
 class ExportFilesButton extends Component {
   render() {
-    const {treeData, exportFiles, classes} = this.props;
+    const {treeData, exportFiles, classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup} = this.props;
     return (
       <Button variant="contained" color="primary"
       className={classes.exportButton} 
       onClick={()=> {
         alert('Files Exported!');
-        this.props.exportFiles(this.props.treeData);
+        exportFiles(treeData);
       }}>
         Export
       </Button>

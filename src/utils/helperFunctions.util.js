@@ -1,11 +1,11 @@
-export const pascalCase = title => title.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join('')
+export const pascalCase = title => title.replace(/[a-z]+/gi, word => word[0].toUpperCase() + word.slice(1)).replace(/[-_\s\W]+/gi, '');
 
 export const getAllScreenTitles = treeData => {
   return treeData.reduce((screenTitles, node) => {
     if (node.subtitle === 'Simple Screen') return screenTitles.concat(node.title);
     else if (node.children) return screenTitles.concat(getAllScreenTitles(node.children));
     else return screenTitles;
-  }, [])
+  }, []);
 }
 
 /**
@@ -27,7 +27,7 @@ export const getAllParents = treeData => {
 export const flattenTree = treeData => {
   return treeData.reduce((flattenedTree, node) => {
     return node.children ? flattenedTree.concat({...node, children: node.children.map(child => child.id)}, flattenTree(node.children)) : flattenedTree.concat(node)
-  }, [])
+  }, []);
 }
 
 /**
@@ -44,11 +44,8 @@ export const getImmediateChildrenTitles = (parent, treeData) => {
       console.log('inside first if for gict', )
       return treeData[i].children.map(child => child.title)
     }
-    else if (treeData[i].children) {
-      console.log('inside second if for gict', treeData[i].children)
-      return getImmediateChildrenTitles(parent, treeData[i].children)
-    }
-  }
+    else if (treeData[i].children) return getImmediateChildrenTitles(parent, treeData[i].children)
+  };
 }
 
 /**
@@ -62,14 +59,22 @@ export const getNthChildInfo = (node, parent) => {
     const child = parent.children[i]
     if ((child.title) === title) return { parent, n: i + 1 }
     else if (child.children) return getNthChildInfo(node, child);
-  }
+  };
 }
 
-const maxDepth = treeData => {
+export const maxDepth = treeData => {
   let depth = 1;
-  let max = 1;
-  for (let i = 0; i < treeData.length; i++) {
-    if (treeData[i].children) max = Math.max(depth + maxDepth(treeData[i].children), max)
-  }
-  return max;
+  return treeData.reduce((max, node) => {
+    if (node.children) max = Math.max(depth + maxDepth(node.children), max);
+    return max;
+  }, 1);
+}
+
+export const duplicateTitle = (title, treeData) => {
+  console.log('dupTitle treeData.length', treeData.length);
+  if (!treeData.length) return true
+  return treeData.reduce((bool, node) => {
+    if (node.title === title) bool = true;
+    return node.children ? bool || duplicateTitle(title, node.children) : bool
+  }, false)
 }

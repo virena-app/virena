@@ -8,22 +8,22 @@ export default class Tree extends Component {
     const { treeData, addChild, deleteComponent, selectComponent, id, input } = this.props;
     return (
       <SortableTree
-            treeData={treeData}
-            onChange={treeData => setTree(treeData)}
-            generateNodeProps={({ node, path }) => ({
-              buttons: [
-                node.subtitle !== "Simple Screen" && <button onClick={() => addChild(input, 'Simple Screen', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial' }}>
-                  +
-                </button>,
-                <button onClick={() => deleteComponent(getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
-                  -
-                </button>,
-                <button onClick={() => selectComponent(node.title, node.subtitle, node.children, getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
-                  Details
-                </button>
-              ],
-            })}
-          />
+        treeData={treeData}
+        onChange={treeData => setTree(treeData)}
+        generateNodeProps={({ node, path }) => ({
+          buttons: [
+            node.subtitle !== "Simple Screen" && <button onClick={() => addChild(input, 'Simple Screen', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial' }}>
+              +
+            </button>,
+            <button onClick={() => deleteComponent(getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
+              -
+            </button>,
+            <button onClick={() => selectComponent(node.title, node.subtitle, node.children, getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
+              Details
+            </button>
+          ],
+        })}
+      />
     )
   }
 }

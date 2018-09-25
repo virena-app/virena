@@ -80,7 +80,7 @@ export const exportFiles = treeData => ({
   payload: treeData
 })
 
-export const closeExportModal = (boolean) => ({
-  type: types.CLOSE_EXPORT_MODAL,
-  payload: boolean
+export const closeStatusPopup = () => ({
+  type: types.CLOSE_STATUS_POPUP,
+  payload: false
 })

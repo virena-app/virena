@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Selects from './Selects.jsx'
 import TextField from '@material-ui/core/TextField';
-import { pascalCase } from '../utils/helperFunctions.util.js'
+import { pascalCase, duplicateTitle } from '../utils/helperFunctions.util.js'
 
 const styles = theme => ({
   heading: {
@@ -68,7 +68,7 @@ class DetailedExpansionPanel extends Component {
     const { treeData, classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
       changeNameInput, setNameToChange, selectComponent } = this.props;
     return (
-      treeData.length && <div className={classes.root}>
+      !!treeData.length && <div className={classes.root}>
         <ExpansionPanel 
           defaultExpanded
           className={classes.panel}
@@ -110,9 +110,11 @@ class DetailedExpansionPanel extends Component {
           <ExpansionPanelActions>
             <Button variant="contained" color="primary" 
               onClick={() => {
-                console.log('changeNameInput, ', changeNameInput, 'typeSelected', typeSelected);
-                if (changeNameInput.length > 0 && typeSelected.length > 0) {
-                  updateNameAndType(pascalCase(changeNameInput), typeSelected, selectedComponent.key, selectedComponent.path)
+                const title = pascalCase(changeNameInput);
+                console.log('titlelength', title.length)
+                console.log('typeSelected', typeSelected.length)
+                if (title.length > 0 && typeSelected.length > 0 && !duplicateTitle(title, treeData)) {
+                  updateNameAndType(title, typeSelected, selectedComponent.key, selectedComponent.path)
                 } else {
                   return alert('Must include both type and name when updating component')
                 }
@@ -132,7 +134,6 @@ class DetailedExpansionPanel extends Component {
 
 DetailedExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
-  
 };
 
 export default withStyles(styles)(DetailedExpansionPanel);
