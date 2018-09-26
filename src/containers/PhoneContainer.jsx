@@ -29,6 +29,7 @@ class PhoneContainer extends Component {
 
     const navigator = () => {
       if (this.props.selectedComponent.subtitle === 'BottomTab') {
+        console.log('i am here');
         return (
           <div className='screen-view'>
             <PhoneScreen treeData={this.props.treeData} selectedComponent={this.props.selectedComponent}/>
@@ -46,15 +47,20 @@ class PhoneContainer extends Component {
             <PhoneScreen treeData={this.props.treeData} selectedComponent={this.props.selectedComponent}/>
           </div>
         )
-      } else if(this.props.selectedComponent.subtitle === 'Simple Screen') {
+      } 
+      else if(this.props.selectedComponent.subtitle === 'Simple Screen') {
+        console.log(getParent(this.props.treeData, this.props.selectedComponent));
           return (
             <div className='screen-view'>
-              <PhoneScreen selectedComponent={this.props.selectedComponent} />
-              {/* <BottomTab selectedComponent={getParent(this.props.treeData, this.props.selectedComponent)} /> */}
+              <PhoneScreen 
+                treeData={this.props.treeData} 
+                selectedComponent={this.props.selectedComponent} 
+                parent={getParent(this.props.treeData, this.props.selectedComponent)}/>
+              <BottomTab selectedComponent={getParent(this.props.treeData, this.props.selectedComponent)} />
             </div>
           )
        }
-    }
+      }
 
     return (
       <div className='screen-wrapper'>
