@@ -6,7 +6,7 @@ import generateAppTemplate from './generateAppTemplate.util.js';
 import { getAllScreenTitles } from './helperFunctions.util.js'
 import * as types from '../constants/actionTypes.js'
 
-const exportFiles = (treeData, path) => {
+const exportFilesUtil = (treeData, path) => {
   console.log('treeData in exportFilesAction', treeData);
   path = '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena';
   path = '/home/sam/components';
@@ -70,4 +70,4 @@ const exportFiles = (treeData, path) => {
   return Promise.all(promises)
 };
 
-export default exportFiles;
+export default exportFilesUtil;

@@ -114,20 +114,7 @@ const componentReducer = (state = initialState, action) => {
         treeData: updated
       }
     case types.EXPORT_FILES:
-      exportFiles(action.payload.treeData, action.payload.path)
-      .then(data => dispatch({
-        type: types.EXPORT_FILES_SUCCESS,
-        payload: {
-          status: true,
-        }
-      }))
-      .catch(err => dispatch({
-        type: types.EXPORT_FILES_FAIL,
-        payload: {
-          status: true,
-          err
-        }
-      }));
+      console.log('asfsf', action.payload)
       //todo: 
       //1. take out hardcoded path
       //2. take it out of the reducer since it does nothing to change state, it's a util function
