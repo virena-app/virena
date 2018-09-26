@@ -6,9 +6,10 @@ import generateAppTemplate from './generateAppTemplate.util.js';
 import { getAllScreenTitles } from './helperFunctions.util.js'
 import * as types from '../constants/actionTypes.js'
 
-const exportFilesAction = (treeData, path) => {
+const exportFiles = (treeData, path) => {
   console.log('treeData in exportFilesAction', treeData);
   path = '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena';
+  path = '/home/sam/components';
   const screenTitles = getAllScreenTitles(treeData);
   const promises = [];
   let totalFiles = screenTitles.length;
@@ -69,4 +70,4 @@ const exportFilesAction = (treeData, path) => {
   return Promise.all(promises)
 };
 
-export default exportFilesAction;
+export default exportFiles;

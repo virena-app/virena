@@ -4,6 +4,7 @@ import * as actions from '../actions/actions';
 import SubmitParentForm from '../components/SubmitParentForm.jsx';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
 import ExportFilesButton from '../components/ExportFilesButton.jsx';
+import SaveProjectButton from '../components/SaveProjectButton.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import StatusPopup from '../components/StatusPopup.jsx';
 
@@ -31,6 +32,7 @@ const mapDispatchToProps = dispatch => ({
   exportFiles: treeData => dispatch(actions.exportFiles(treeData)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
   closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
+  saveProject: treeData => dispatch(actions.saveProject(treeData))
 })
 
 const styles = theme => ({
@@ -73,7 +75,7 @@ class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles,
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup } = this.props;
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject } = this.props;
     return (
       <div className='panel'>
         <div>
@@ -85,6 +87,7 @@ class PanelContainer extends Component {
         </div>
         <div className='logo-wrapper'>
           <img src='../../assets/virena-icon-white.png' className='logo'></img>
+          <SaveProjectButton treeData={treeData} saveProject={saveProject}/>
           <ExportFilesButton treeData={treeData} exportFiles={exportFiles} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
         <StatusPopup 

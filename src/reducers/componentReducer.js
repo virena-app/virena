@@ -2,6 +2,8 @@ import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
 import { pascalCase, maxDepth, findNewNode, updateNode } from '../utils/helperFunctions.util.js'
+import saveProject from '../utils/saveProject.util.js';
+
 const initialState = {
   treeData: [],
   addAsFirstChild: false,
@@ -112,7 +114,20 @@ const componentReducer = (state = initialState, action) => {
         treeData: updated
       }
     case types.EXPORT_FILES:
-      console.log('asfsf', action.payload)
+      exportFiles(action.payload.treeData, action.payload.path)
+      .then(data => dispatch({
+        type: types.EXPORT_FILES_SUCCESS,
+        payload: {
+          status: true,
+        }
+      }))
+      .catch(err => dispatch({
+        type: types.EXPORT_FILES_FAIL,
+        payload: {
+          status: true,
+          err
+        }
+      }));
       //todo: 
       //1. take out hardcoded path
       //2. take it out of the reducer since it does nothing to change state, it's a util function
@@ -140,6 +155,9 @@ const componentReducer = (state = initialState, action) => {
         statusPopupOpen: action.payload, 
         statusPopupErrorOpen: action.payload,
       }
+    case types.SAVE_PROJECT:
+      saveProject(copy.treeData);
+      return state;
     case types.OPEN_DRAWER:
       return {
         ...state,
