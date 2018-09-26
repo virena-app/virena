@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+<<<<<<< HEAD
 import * as actions from '../actions/actions';
 import { generateImage } from '../utils/generateImage';
 import { connect } from 'react-redux';
@@ -7,6 +8,12 @@ import PhoneContainer from './PhoneContainer.jsx';
 
 
 export default class ViewContainer extends Component {
+=======
+import { HashRouter } from 'react-router-dom';
+import PhoneContainer from './PhoneContainer.jsx';
+
+class ViewContainer extends Component {
+>>>>>>> master
 
   render() {
     return (
@@ -19,4 +26,10 @@ export default class ViewContainer extends Component {
       </div>
     )
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+export default ViewContainer;
+>>>>>>> master

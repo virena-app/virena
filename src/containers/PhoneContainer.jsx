@@ -19,20 +19,32 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   openDrawer: () => dispatch(actions.openDrawer()),
   closeDrawer: () => dispatch(actions.closeDrawer()),
+<<<<<<< HEAD
   selectComponent: (node) => dispatch(actions.selectComponent(node)),
+=======
+  selectComponent: (name, subtitle, children, key, path) => dispatch(actions.selectComponent(name, subtitle, children, key, path)),
+>>>>>>> master
 })
 
 class PhoneContainer extends Component {
   render() {
+    const { treeData, selectedComponent, drawerState, openDrawer, closeDrawer, selectComponent } = this.props;
     let backdrop;
+<<<<<<< HEAD
     const { selectedComponent, selectComponent, treeData, drawerState, openDrawer, closeDrawer } = this.props;
+=======
+>>>>>>> master
     if (drawerState) {
       backdrop = <Backdrop closeDrawer={closeDrawer}/>
     }
 
     const navigator = () => {
+<<<<<<< HEAD
       if (this.props.selectedComponent.subtitle === 'BottomTab') {
         console.log('i am here');
+=======
+      if (selectedComponent.subtitle === 'BottomTab') {
+>>>>>>> master
         return (
           <div className='screen-view'>
             <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
@@ -41,6 +53,7 @@ class PhoneContainer extends Component {
         )
       } else if (selectedComponent.subtitle === 'Drawer') {
         return (
+<<<<<<< HEAD
           <div className='screen-view'>
             <div className='drawer-wrapper'>
               <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
@@ -49,6 +62,16 @@ class PhoneContainer extends Component {
             </div>
             <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
           </div>
+=======
+      <div className='screen-view'>
+        <div className='drawer-wrapper'>
+          <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
+          <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent}/>
+          {backdrop}
+        </div>
+        <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
+      </div>
+>>>>>>> master
         )
       } else if (selectedComponent.subtitle === 'Simple Screen') {
         console.log(getParent(treeData, selectedComponent));
