@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PhoneScreen from '../components/PhoneScreen.jsx';
 import Screen from '../components/Screen.jsx';
+import Switch from '../components/Switch.jsx';
 import BottomTab from '../components/BottomTab.jsx';
 import Drawer from '../components/Drawer.jsx';
 import { connect } from 'react-redux';
@@ -17,14 +18,16 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   openDrawer: () => dispatch(actions.openDrawer()),
-  closeDrawer: () => dispatch(actions.closeDrawer())
+  closeDrawer: () => dispatch(actions.closeDrawer()),
+  selectComponent: (node) => dispatch(actions.selectComponent(node)),
 })
 
 class PhoneContainer extends Component {
   render() {
     let backdrop;
-    if (this.props.drawerState) {
-      backdrop = <Backdrop closeDrawer={this.props.closeDrawer}/>
+    const { selectedComponent, selectComponent, treeData, drawerState, openDrawer, closeDrawer } = this.props;
+    if (drawerState) {
+      backdrop = <Backdrop closeDrawer={closeDrawer}/>
     }
 
     const navigator = () => {
@@ -32,35 +35,45 @@ class PhoneContainer extends Component {
         console.log('i am here');
         return (
           <div className='screen-view'>
-            <PhoneScreen treeData={this.props.treeData} selectedComponent={this.props.selectedComponent}/>
-            <BottomTab selectedComponent={this.props.selectedComponent} />
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
+            <BottomTab selectedComponent={selectedComponent} />
           </div>
         )
-      } else if (this.props.selectedComponent.subtitle === 'Drawer') {
+      } else if (selectedComponent.subtitle === 'Drawer') {
         return (
           <div className='screen-view'>
             <div className='drawer-wrapper'>
-              <button onClick={this.props.openDrawer} className='toggle-btn'>Toggle Drawer</button>
-              <Drawer selectedComponent={this.props.selectedComponent} drawerState={this.props.drawerState}/>
+              <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
+              <Drawer selectedComponent={selectedComponent} drawerState={drawerState}/>
               {backdrop}
             </div>
-            <PhoneScreen treeData={this.props.treeData} selectedComponent={this.props.selectedComponent}/>
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
           </div>
         )
-      } 
-      else if(this.props.selectedComponent.subtitle === 'Simple Screen') {
-        console.log(getParent(this.props.treeData, this.props.selectedComponent));
+      } else if (selectedComponent.subtitle === 'Simple Screen') {
+        console.log(getParent(treeData, selectedComponent));
           return (
             <div className='screen-view'>
               <PhoneScreen 
-                treeData={this.props.treeData} 
-                selectedComponent={this.props.selectedComponent} 
-                parent={getParent(this.props.treeData, this.props.selectedComponent)}/>
-              <BottomTab selectedComponent={getParent(this.props.treeData, this.props.selectedComponent)} />
+                treeData={treeData} 
+                selectedComponent={selectedComponent} 
+                parent={getParent(treeData, selectedComponent)}/>
+              <BottomTab selectedComponent={getParent(treeData, selectedComponent)} />
+            </div>
+          )
+       } else if (selectedComponent.subtitle === 'Switch') {
+          // from the switch, go to immediate child
+          // should show 'login' screen
+          // have a link to go to the immediate child
+          return (
+            <div className='screen-view'>
+              <PhoneScreen selectedComponent={selectedComponent} child={selectedComponent.children[0]} />
+              <Switch selectedComponent={selectedComponent} selectComponent={selectComponent} child={selectedComponent.children[0]} />
             </div>
           )
        }
-      }
+
+    }
 
     return (
       <div className='screen-wrapper'>

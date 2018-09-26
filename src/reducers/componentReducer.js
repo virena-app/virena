@@ -78,7 +78,9 @@ const componentReducer = (state = initialState, action) => {
     case types.SELECT_COMPONENT:
       return {
         ...state,
-        selectedComponent: {...action.payload}
+        selectedComponent: {...action.payload},
+        changeNameInput: action.payload.title,
+        typeSelected: action.payload.subtitle
       }
     case types.SELECT_TYPE:
       return {
