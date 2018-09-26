@@ -4,13 +4,8 @@ import * as actions from '../actions/actions';
 import SubmitParentForm from '../components/SubmitParentForm.jsx';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
 import ExportFilesButton from '../components/ExportFilesButton.jsx';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import StatusPopup from '../components/StatusPopup.jsx';
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
@@ -21,6 +16,8 @@ const mapStateToProps = store => ({
   parentSelected: store.data.parentSelected,
   availableParents: store.data.availableParents,
   changeNameInput: store.data.changeNameInput,
+  statusPopupOpen: store.data.statusPopupOpen,
+  statusPopupErrorOpen: store.data.statusPopupErrorOpen,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -33,6 +30,7 @@ const mapDispatchToProps = dispatch => ({
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
   exportFiles: treeData => dispatch(actions.exportFiles(treeData)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
+  closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
 })
 
 const styles = theme => ({
@@ -73,8 +71,9 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   render() {
-    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, updateParentAndType,
-    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles } = this.props;
+    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
+    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles,
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup } = this.props;
     return (
       <div className='panel'>
         <div>
@@ -86,8 +85,13 @@ class PanelContainer extends Component {
         </div>
         <div className='logo-wrapper'>
           <img src='../../assets/virena-icon-white.png' className='logo'></img>
-          <ExportFilesButton treeData={treeData} exportFiles={exportFiles}></ExportFilesButton>
+          <ExportFilesButton treeData={treeData} exportFiles={exportFiles} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
+        <StatusPopup 
+          statusPopupOpen={statusPopupOpen}
+          statusPopupErrorOpen={statusPopupErrorOpen}
+          closeStatusPopup={closeStatusPopup}
+        />
       </div>
     )
   }

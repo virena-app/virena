@@ -47,17 +47,13 @@ class PhoneContainer extends Component {
           </div>
         )
       } else if(this.props.selectedComponent.subtitle === 'Simple Screen') {
-          // console.log(this.props.selectedComponent);
-          // console.log(JSON.stringify(this.props.treeData));
-          // console.log(JSON.stringify(this.props.selectedComponent));
-          // console.log(getParent(this.props.treeData, this.props.selectedComponent))
           return (
             <div className='screen-view'>
-              <PhoneScreen treeData={this.props.treeData} selectedComponent={this.selectedComponent} />
-              <BottomTab selectedComponent={getParent(this.props.treeData, this.props.selectedComponent)} />
+              <PhoneScreen selectedComponent={this.props.selectedComponent} />
+              {/* <BottomTab selectedComponent={getParent(this.props.treeData, this.props.selectedComponent)} /> */}
             </div>
           )
-        }
+       }
     }
 
     return (
