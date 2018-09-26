@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default class Drawer extends Component {
   render() {
     let drawerClass = 'drawer';
-    const getNodeKey = ({ treeIndex }) => treeIndex;
     if (this.props.drawerState) {
       drawerClass= 'drawer open'
     }
