@@ -4,11 +4,14 @@ import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
 import { getAllScreenTitles } from './helperFunctions.util.js'
+import * as types from '../constants/actionTypes.js'
 
-const exportFiles = (treeData, path) => {
-  path = '/home/sam/components'
+const exportFilesAction = (treeData, path) => {
+  console.log('treeData in exportFilesAction', treeData);
+  path = '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena';
   const screenTitles = getAllScreenTitles(treeData);
   const promises = [];
+  let totalFiles = screenTitles.length;
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
       fs.writeFile(`${path}/${title}.js`,
@@ -21,7 +24,7 @@ const exportFiles = (treeData, path) => {
         },
         (err) => {
           if (err) return reject(err)
-          return resolve();
+          return resolve(title);
         });
     });
 
@@ -39,7 +42,8 @@ const exportFiles = (treeData, path) => {
       },
       (err) => {
         if (err) return reject(err);
-        return resolve();
+        totalFiles++;
+        return resolve('nav');
       });
   });
 
@@ -54,14 +58,15 @@ const exportFiles = (treeData, path) => {
       },
       (err) => {
         if (err) return reject(err);
-        return resolve();
+        totalFiles++
+        return resolve('app');
       });
   });
 
   promises.push(navPromise);
   promises.push(appPromise);
 
-  return Promise.all(promises);
+  return Promise.all(promises)
 };
 
-export default exportFiles;
+export default exportFilesAction;
