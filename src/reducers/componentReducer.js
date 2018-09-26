@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
-import { pascalCase, maxDepth } from '../utils/helperFunctions.util.js'
+import { pascalCase, maxDepth, findNewNode, updateNode } from '../utils/helperFunctions.util.js'
 const initialState = {
   treeData: [],
   addAsFirstChild: false,
@@ -13,6 +13,8 @@ const initialState = {
   availableParents: [],
   changeNameInput: '',
   id: 0,
+  statusPopupOpen: false, 
+  statusPopupErrorOpen: false,
   fileExportModalState: false,
   drawerState: false
 }
@@ -55,10 +57,12 @@ const componentReducer = (state = initialState, action) => {
         newNode: action.payload,
         addAsFirstChild: copy.addAsFirstChild,
       }).treeData;
+      const newNode = findNewNode(copy.treeData, newTreeData);
       return {
         ...state,
         treeData: maxDepth(newTreeData) > 5 ? copy.treeData : newTreeData,
         id: copy.id + 1,
+        selectedComponent: newNode
       }
     case types.DELETE_COMPONENT:
       const key2 = action.payload.key;
@@ -72,23 +76,11 @@ const componentReducer = (state = initialState, action) => {
         }),
       }
     case types.SELECT_COMPONENT:
-      const subtitle = action.payload.subtitle;
-      const title = action.payload.title;
-      const key3 = action.payload.key;
-      const path3 = action.payload.path;
-      
-      copy.selectedComponent = {};
-      if(action.payload.children && action.payload.children.length)
-        copy.selectedComponent.children = Object.assign([], action.payload.children);
-      
-      copy.selectedComponent.title = title;
-      copy.selectedComponent.subtitle = subtitle;
-      copy.selectedComponent.path = path3;
-      copy.selectedComponent.key = key3;
       return {
         ...state,
-        selectedComponent: copy.selectedComponent
+        selectedComponent: {...action.payload}
       }
+      
     case types.SELECT_TYPE:
       return {
         ...state,
@@ -110,17 +102,10 @@ const componentReducer = (state = initialState, action) => {
         changeNameInput: action.payload
       }
     case types.UPDATE_NAME_AND_TYPE:
-      //update name and type of the selected component on save click
-      const key4 = action.payload.key;
-      const path4 = action.payload.path;
+      const updated = updateNode(copy.treeData, action.payload.title, action.payload.subtitle, action.payload.selectedComponent)
       return {
         ...state,
-        treeData: changeNodeAtPath({
-          treeData: copy.treeData,
-          path: path4,
-          newNode: (({ node }) => ({ ...node, title: action.payload.title, subtitle: action.payload.subtitle })),
-          getNodeKey: key4,
-        })
+        treeData: updated
       }
     case types.EXPORT_FILES:
       console.log('asfsf', action.payload)
@@ -128,9 +113,29 @@ const componentReducer = (state = initialState, action) => {
       //1. take out hardcoded path
       //2. take it out of the reducer since it does nothing to change state, it's a util function
       //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-      exportFiles(action.payload, '/Users/jchan/Documents/virena/src/reducers/')
+      // exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
+      //add logic to manipulate statusPopupOpen to be true?
+      //also statusPopupErrorOpen
       return state;
-
+    case types.EXPORT_FILES_SUCCESS:
+      console.log('successful export!');
+      return {
+        ...state,
+        statusPopupOpen: action.payload.status
+      }
+    case types.EXPORT_FILES_FAIL:
+      console.log(action.payload.err)
+      return {
+        ...state,
+        statusPopupErrorOpen: action.payload.status
+      }
+    case types.CLOSE_STATUS_POPUP:
+      
+      return {
+        ...state,
+        statusPopupOpen: action.payload, 
+        statusPopupErrorOpen: action.payload,
+      }
     case types.OPEN_DRAWER:
       return {
         ...state,
@@ -142,7 +147,6 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         drawerState: false
       }
-        
     default: 
       return state;
   }

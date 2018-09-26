@@ -5,7 +5,7 @@ import '../styles/tree.css';
 export default class Tree extends Component {
   render() {
     const getNodeKey = ({ treeIndex }) => treeIndex;
-    const { treeData, addChild, deleteComponent, selectComponent, id, input } = this.props;
+    const { treeData, addChild, deleteComponent, selectComponent, id, input, setTree } = this.props;
     return (
       <SortableTree
         treeData={treeData}
@@ -18,7 +18,7 @@ export default class Tree extends Component {
             <button onClick={() => deleteComponent(getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
               -
             </button>,
-            <button onClick={() => selectComponent(node.title, node.subtitle, node.children, getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
+            <button onClick={() => selectComponent(node)} style={{ 'fontFamily': 'Arial' }}>
               Details
             </button>
           ],

@@ -67,6 +67,7 @@ class DetailedExpansionPanel extends Component {
   render () {
     const { treeData, classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
       changeNameInput, setNameToChange, selectComponent } = this.props;
+      if (Object.keys(selectedComponent).length) console.log("SELECTED COMPONENT AFTER GRABBING PROPS", selectedComponent)
     return (
       !!treeData.length && <div className={classes.root}>
         <ExpansionPanel 
@@ -96,7 +97,9 @@ class DetailedExpansionPanel extends Component {
                 placeholder="Change Name"
                 className={classes.textField}
                 margin="normal"
-                onChange={(e) => setNameToChange(e.target.value)}
+                onChange={(e) => {
+                  console.log(changeNameInput)
+                  setNameToChange(e.target.value)}}
                 value={changeNameInput}
                 InputProps={{
                   className: classes.input
@@ -110,14 +113,14 @@ class DetailedExpansionPanel extends Component {
               onClick={() => {
                 const title = pascalCase(changeNameInput);
                 if (title.length > 0 && typeSelected.length > 0 && !duplicateTitle(title, treeData)) {
-                  updateNameAndType(title, typeSelected, selectedComponent.key, selectedComponent.path)
+                  updateNameAndType(title, typeSelected, selectedComponent)
                 } else {
-                  console.log('Must include both type and name when updating component')
-                  
+                  return alert('Must include both type and name when updating component')
                 }
                 selectType('')
                 setNameToChange('')
-                selectComponent(changeNameInput, selectedComponent.children, selectedComponent.key, selectedComponent.path)
+                //selectComponent(changeNameInput, selectedComponent.children, selectedComponent.key, selectedComponent.path)
+                console.log("SELECTED COMPONENT AFTER DETAIL EDIT", selectedComponent)
               }}
             >
               Save
@@ -131,11 +134,6 @@ class DetailedExpansionPanel extends Component {
 
 DetailedExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
-  typeSelected: function(props, propName, componentName) {
-    if(props[propName].length === 0) {
-      return new Error(`${propName} needs to be selected.`)
-    }
-  }
 };
 
 export default withStyles(styles)(DetailedExpansionPanel);

@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes';
+import exportFilesAction from '../utils/exportFiles.util.js'
 
 export const setTree = treeData => ({
   type: types.SET_TREE,
@@ -34,14 +35,10 @@ export const deleteComponent = (key, path) => ({
   }
 })
 
-export const selectComponent = (name, type, children, key, path) => ({
+export const selectComponent = (node) => ({
   type: types.SELECT_COMPONENT,
   payload: {
-    title: name,
-    subtitle: type,
-    children,
-    key,
-    path,
+    ...node
   }
 })
 
@@ -65,19 +62,39 @@ export const setNameToChange = name => ({
   payload: name
 })
 
-export const updateNameAndType = (name, type, key, path) => ({
+export const updateNameAndType = (name, type, selected) => ({
   type: types.UPDATE_NAME_AND_TYPE,
   payload: {
     title: name,
     subtitle: type,
-    key,
-    path
+    selectedComponent: selected
   }
 })
 
-export const exportFiles = treeData => ({
-  type: types.EXPORT_FILES,
-  payload: treeData
+export const exportFiles = ( treeData, path ) => (dispatch) => {
+  dispatch({
+    type: types.EXPORT_FILES,
+  });
+  console.log('treeData in exportFiles actions', treeData);
+  exportFilesAction(treeData, path)
+    .then(data => dispatch({
+      type: types.EXPORT_FILES_SUCCESS,
+      payload: {
+        status: true,
+      }
+    }))
+    .catch(err => dispatch({
+      type: types.EXPORT_FILES_FAIL,
+      payload: {
+        status: true,
+        err
+      }
+    }));
+}
+
+export const closeStatusPopup = () => ({
+  type: types.CLOSE_STATUS_POPUP,
+  payload: false
 })
 
 export const openDrawer = () => ({
