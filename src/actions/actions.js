@@ -35,14 +35,10 @@ export const deleteComponent = (key, path) => ({
   }
 })
 
-export const selectComponent = (name, type, children, key, path) => ({
+export const selectComponent = (node) => ({
   type: types.SELECT_COMPONENT,
   payload: {
-    title: name,
-    subtitle: type,
-    children,
-    key,
-    path,
+    ...node
   }
 })
 
@@ -66,13 +62,12 @@ export const setNameToChange = name => ({
   payload: name
 })
 
-export const updateNameAndType = (name, type, key, path) => ({
+export const updateNameAndType = (name, type, selected) => ({
   type: types.UPDATE_NAME_AND_TYPE,
   payload: {
     title: name,
     subtitle: type,
-    key,
-    path
+    selectedComponent: selected
   }
 })
 
