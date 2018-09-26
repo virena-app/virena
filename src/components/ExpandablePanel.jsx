@@ -67,7 +67,6 @@ class DetailedExpansionPanel extends Component {
   render () {
     const { treeData, classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
       changeNameInput, setNameToChange, selectComponent } = this.props;
-      if (Object.keys(selectedComponent).length) console.log("SELECTED COMPONENT AFTER GRABBING PROPS", selectedComponent)
     return (
       !!treeData.length && <div className={classes.root}>
         <ExpansionPanel 
@@ -86,7 +85,7 @@ class DetailedExpansionPanel extends Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.details}>
             <div className={classes.column}>
-              <Selects typeSelected={typeSelected} parentSelected={parentSelected} availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}/>
+              <Selects typeSelected={typeSelected} selectedComponent={selectedComponent} parentSelected={parentSelected} availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}/>
             </div>
             
             <div className={classNames(classes.column, classes.helper)}>
@@ -98,7 +97,6 @@ class DetailedExpansionPanel extends Component {
                 className={classes.textField}
                 margin="normal"
                 onChange={(e) => {
-                  console.log(changeNameInput)
                   setNameToChange(e.target.value)}}
                 value={changeNameInput}
                 InputProps={{
@@ -112,15 +110,8 @@ class DetailedExpansionPanel extends Component {
             <Button variant="contained" color="primary" 
               onClick={() => {
                 const title = pascalCase(changeNameInput);
-                if (title.length > 0 && typeSelected.length > 0 && !duplicateTitle(title, treeData)) {
-                  updateNameAndType(title, typeSelected, selectedComponent)
-                } else {
-                  return alert('Must include both type and name when updating component')
-                }
-                selectType('')
-                setNameToChange('')
-                //selectComponent(changeNameInput, selectedComponent.children, selectedComponent.key, selectedComponent.path)
-                console.log("SELECTED COMPONENT AFTER DETAIL EDIT", selectedComponent)
+                updateNameAndType(title || "Untitled" + selectedComponent.id, typeSelected || "Simple Screen", selectedComponent)
+
               }}
             >
               Save

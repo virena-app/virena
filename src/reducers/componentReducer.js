@@ -62,7 +62,9 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         treeData: maxDepth(newTreeData) > 5 ? copy.treeData : newTreeData,
         id: copy.id + 1,
-        selectedComponent: newNode
+        selectedComponent: newNode,
+        changeNameInput: newNode.title,
+        typeSelected: newNode.subtitle
       }
     case types.DELETE_COMPONENT:
       const key2 = action.payload.key;
@@ -78,7 +80,9 @@ const componentReducer = (state = initialState, action) => {
     case types.SELECT_COMPONENT:
       return {
         ...state,
-        selectedComponent: {...action.payload}
+        selectedComponent: {...action.payload},
+        changeNameInput: action.payload.title,
+        typeSelected: action.payload.subtitle
       }
       
     case types.SELECT_TYPE:

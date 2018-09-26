@@ -12,7 +12,7 @@ export default class Tree extends Component {
         onChange={treeData => setTree(treeData)}
         generateNodeProps={({ node, path }) => ({
           buttons: [
-            node.subtitle !== "Simple Screen" && <button onClick={() => addChild(input, 'Simple Screen', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial' }}>
+            node.subtitle !== "Simple Screen" && node.subtitle !== "" && <button onClick={() => addChild(input, '', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial' }}>
               +
             </button>,
             <button onClick={() => deleteComponent(getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>

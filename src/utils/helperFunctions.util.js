@@ -73,9 +73,8 @@ export const maxDepth = treeData => {
 }
 
 export const duplicateTitle = (title, treeData) => {
-  if (!treeData.length) return true
   return treeData.reduce((bool, node) => {
-    if (node.title === title) bool = true;
+    if (node.title === title) bool = node.id;
     return node.children ? bool || duplicateTitle(title, node.children) : bool
   }, false)
 }
