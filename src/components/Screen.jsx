@@ -7,7 +7,7 @@ const screenStyle = {
 const Screen = props => {
   return(
     <div style={screenStyle}>
-      <h1>Screen {props.screenNum}</h1>
+      <h1>{props.subtitle}</h1>
     </div>
   )
 }

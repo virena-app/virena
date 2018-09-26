@@ -73,3 +73,11 @@ export const duplicateTitle = (title, treeData) => {
     return node.children ? bool || duplicateTitle(title, node.children) : bool
   }, false)
 }
+
+export const getParent = (tree, node) => {
+  const {id} = node;
+  for (let i = 0; i < tree.length; i++) {
+    if (tree[i].children && tree[i].children.find(child => child.id === id)) return tree[i];
+    else if (tree[i].children) return getParent(tree[i].children, node)
+  }
+}

@@ -14,7 +14,7 @@ const initialState = {
   changeNameInput: '',
   id: 0,
   fileExportModalState: false,
-  
+  drawerState: false
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -122,14 +122,26 @@ const componentReducer = (state = initialState, action) => {
           getNodeKey: key4,
         })
       }
-      case types.EXPORT_FILES:
-        console.log('asfsf', action.payload)
-        //todo: 
-        //1. take out hardcoded path
-        //2. take it out of the reducer since it does nothing to change state, it's a util function
-        //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-        exportFiles(action.payload, '/Users/jchan/Documents/virena/src/reducers/')
-        return state;
+    case types.EXPORT_FILES:
+      console.log('asfsf', action.payload)
+      //todo: 
+      //1. take out hardcoded path
+      //2. take it out of the reducer since it does nothing to change state, it's a util function
+      //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
+      exportFiles(action.payload, '/Users/jchan/Documents/virena/src/reducers/')
+      return state;
+
+    case types.OPEN_DRAWER:
+      return {
+        ...state,
+        drawerState: !state.drawerState
+      }
+
+    case types.CLOSE_DRAWER:
+      return {
+        ...state,
+        drawerState: false
+      }
         
     default: 
       return state;

@@ -79,3 +79,11 @@ export const exportFiles = treeData => ({
   type: types.EXPORT_FILES,
   payload: treeData
 })
+
+export const openDrawer = () => ({
+  type: types.OPEN_DRAWER
+})
+
+export const closeDrawer = () => ({
+  type: types.CLOSE_DRAWER
+})
