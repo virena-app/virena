@@ -12,7 +12,7 @@ const styles = theme => ({
 });
 
 const StatusPopup = (props) => {
-  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup } = props;
+  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, exportErrMsg } = props;
 
   return (
     <div>
@@ -29,6 +29,7 @@ const StatusPopup = (props) => {
           variant='success'
           className={classes.margin}
           message='Files successfully exported!'
+          onClose={closeStatusPopup}
         />
       </Snackbar>
       <Snackbar
@@ -43,7 +44,8 @@ const StatusPopup = (props) => {
         <StatusPopupContent 
           variant='error'
           className={classes.margin}
-          message='Error exporting files!'
+          message='File Export Error. Files need to be named/Navigators must have children. May have generated App.js and Screen components without navigators'
+          onClose={closeStatusPopup}
         />
       </Snackbar>
     </div>

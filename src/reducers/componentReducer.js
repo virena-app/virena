@@ -16,7 +16,7 @@ const initialState = {
   statusPopupOpen: false, 
   statusPopupErrorOpen: false,
   fileExportModalState: false,
-  drawerState: false
+  drawerState: false,
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -142,9 +142,10 @@ const componentReducer = (state = initialState, action) => {
       }
     case types.EXPORT_FILES_FAIL:
       console.log(action.payload.err)
+
       return {
         ...state,
-        statusPopupErrorOpen: action.payload.status
+        statusPopupErrorOpen: action.payload.status,
       }
     case types.CLOSE_STATUS_POPUP:
       

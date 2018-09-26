@@ -18,6 +18,7 @@ const mapStateToProps = store => ({
   changeNameInput: store.data.changeNameInput,
   statusPopupOpen: store.data.statusPopupOpen,
   statusPopupErrorOpen: store.data.statusPopupErrorOpen,
+  exportErrMsg: store.data.exportErrMsg,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -73,7 +74,7 @@ class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles,
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup } = this.props;
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, exportErrMsg } = this.props;
     return (
       <div className='panel'>
         <div>
@@ -91,6 +92,7 @@ class PanelContainer extends Component {
           statusPopupOpen={statusPopupOpen}
           statusPopupErrorOpen={statusPopupErrorOpen}
           closeStatusPopup={closeStatusPopup}
+          exportErrMsg={exportErrMsg}
         />
       </div>
     )
