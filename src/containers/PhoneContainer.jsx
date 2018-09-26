@@ -15,33 +15,35 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   openDrawer: () => dispatch(actions.openDrawer()),
-  closeDrawer: () => dispatch(actions.closeDrawer())
+  closeDrawer: () => dispatch(actions.closeDrawer()),
+  selectComponent: (name, subtitle, children, key, path) => dispatch(actions.selectComponent(name, subtitle, children, key, path)),
 })
 
 class PhoneContainer extends Component {
   render() {
+    const { treeData, selectedComponent, drawerState, openDrawer, closeDrawer, selectComponent } = this.props;
     let backdrop;
-    if (this.props.drawerState) {
-      backdrop = <Backdrop closeDrawer={this.props.closeDrawer}/>
+    if (drawerState) {
+      backdrop = <Backdrop closeDrawer={closeDrawer}/>
     }
 
     const navigator = () => {
-      if (this.props.selectedComponent.subtitle === 'BottomTab') {
+      if (selectedComponent.subtitle === 'BottomTab') {
         return (
           <div className='screen-view'>
-            <PhoneScreen treeData={this.props.treeData} selectedComponent={this.props.selectedComponent}/>
-            <BottomTab selectedComponent={this.props.selectedComponent} />
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
+            <BottomTab selectedComponent={selectedComponent} />
           </div>
         )
-      } else if (this.props.selectedComponent.subtitle === 'Drawer') {
+      } else if (selectedComponent.subtitle === 'Drawer') {
         return (
       <div className='screen-view'>
         <div className='drawer-wrapper'>
-          <button onClick={this.props.openDrawer} className='toggle-btn'>Toggle Drawer</button>
-          <Drawer selectedComponent={this.props.selectedComponent} drawerState={this.props.drawerState}/>
+          <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
+          <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent}/>
           {backdrop}
         </div>
-        <PhoneScreen treeData={this.props.treeData} selectedComponent={this.props.selectedComponent}/>
+        <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
       </div>
         )
       }

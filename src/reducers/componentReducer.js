@@ -80,6 +80,7 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         selectedComponent: {...action.payload}
       }
+      
     case types.SELECT_TYPE:
       return {
         ...state,
