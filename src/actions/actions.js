@@ -111,6 +111,6 @@ export const closeDrawer = () => ({
   type: types.CLOSE_DRAWER
 })
 
-export const openDirectory = () => ({
+// export const openDirectory = () => ({
   
-})
+// })
