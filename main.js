@@ -1,5 +1,7 @@
 const electron = require('electron')
 const { app, BrowserWindow } = electron;
+const url = require('url');
+const path = require('path');
 
 let win;
 
@@ -10,7 +12,12 @@ const createWindow = () => {
   win = new BrowserWindow({width, height});
 
   if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
-  else win.loadFile('./index.html')
+  else win.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    hash: '/',
+    slashes: true
+  }));
 
   win.webContents.openDevTools() 
 
