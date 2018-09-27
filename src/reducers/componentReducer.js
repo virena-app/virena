@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
-import { pascalCase, maxDepth, findNewNode, updateNode } from '../utils/helperFunctions.util.js'
+import { pascalCase, maxDepth, findNewNode, updateNode, nodeExists, deleteNode } from '../utils/helperFunctions.util.js'
 import saveProject from '../utils/saveProject.util.js';
 
 const initialState = {
@@ -69,15 +69,13 @@ const componentReducer = (state = initialState, action) => {
         typeSelected: newNode.subtitle
       }
     case types.DELETE_COMPONENT:
-      const key2 = action.payload.key;
-      const path2 = action.payload.path;
+      const node = action.payload
+      const newTreeData2 = deleteNode(copy.treeData, node.id)
+      if (!nodeExists(newTreeData2, copy.selectedComponent.id)) copy.selectedComponent = newTreeData2[0]
       return {
         ...state,
-        treeData: removeNodeAtPath({
-          treeData: copy.treeData,
-          path: path2,
-          getNodeKey: key2,
-        }),
+        treeData: newTreeData2,
+        selectedComponent: copy.selectedComponent
       }
     case types.SELECT_COMPONENT:
       return {

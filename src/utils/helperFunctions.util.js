@@ -94,15 +94,15 @@ export const findNewNode = (oldTreeData, newTreeData, three) => {
   }
 }
  
-export const deleteNode = (tree, title) => {
+export const deleteNode = (tree, id) => {
   return tree.reduce((newTree, node) => {
-    if (node.title === title) {
+    if (node.id === id) {
       return newTree;
     }
-    else if (node.title !== title && node.children && node.children.length) {
+    else if (node.id !== id && node.children && node.children.length) {
       return newTree.concat({
         ...node,
-        children: deleteNode(node.children, title)
+        children: deleteNode(node.children, id)
       })
     }
     else return newTree.concat(node)
@@ -145,4 +145,12 @@ export const getParent = (tree, node) => {
     if (tree[i].children && tree[i].children.find(child => child.id === id)) return tree[i];
     else if (tree[i].children) return getParent(tree[i].children, node)
   }
+}
+
+export const nodeExists = (tree, id) => {
+  return tree.reduce((bool, currentNode) => {
+    if (currentNode.id === id) return true;
+    else if (currentNode.children) return bool || nodeExists(currentNode.children, id);
+    else return bool;
+  }, false)
 }
