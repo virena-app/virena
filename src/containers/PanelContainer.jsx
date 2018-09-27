@@ -86,12 +86,8 @@ class PanelContainer extends Component {
           changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
         </div>
         <div className='logo-wrapper'>
-<<<<<<< HEAD
-          {/* <img src='../../assets/virena-icon-white.png' className='logo'></img> */}
-=======
           <img src='../../assets/logo.png' className='logo'></img>
           <SaveProjectButton treeData={treeData} saveProject={saveProject}/>
->>>>>>> master
           <ExportFilesButton treeData={treeData} exportFiles={exportFiles} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
         <StatusPopup 
