@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { format } from 'prettier';
+// import { format } from 'prettier';
 import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';

@@ -38,7 +38,6 @@
     "electron-packager": "^12.1.2",
     "file-loader": "^2.0.0",
     "pg-promise": "^8.4.6",
-    "prettier": "^1.14.3",
     "prop-types": "^15.6.2",
     "redux": "^4.0.0",
     "style-loader": "^0.23.0",
