@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { HashRouter } from 'react-router-dom';
 import PhoneContainer from './PhoneContainer.jsx';
 
 class ViewContainer extends Component {
@@ -7,9 +6,7 @@ class ViewContainer extends Component {
     return (
       <div className='view'>
         <div className='inner-view'>
-            <HashRouter>
-              <PhoneContainer />
-            </HashRouter>
+            <PhoneContainer />
         </div>
       </div>
     )

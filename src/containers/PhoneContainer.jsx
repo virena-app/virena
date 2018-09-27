@@ -19,7 +19,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   openDrawer: () => dispatch(actions.openDrawer()),
   closeDrawer: () => dispatch(actions.closeDrawer()),
-  selectComponent: (node) => dispatch(actions.selectComponent(node)),
+  selectComponent: node => dispatch(actions.selectComponent(node)),
 })
 
 class PhoneContainer extends Component {

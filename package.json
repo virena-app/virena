@@ -10,8 +10,7 @@
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "postinstall": "electron-builder install-app-deps"
+    "dist": "electron-builder"
   },
   "author": "",
   "license": "ISC",
@@ -26,7 +25,9 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-sortable-tree": "^2.2.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "prettier": "^1.14.3",
+    "connected-react-router": "^4.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -39,7 +40,12 @@
     "electron-builder": "^20.28.4",
     "electron-packager": "^12.1.2",
     "file-loader": "^2.0.0",
+<<<<<<< HEAD
     "fs": "0.0.1-security",
+=======
+    "pg-promise": "^8.4.6",
+    "prettier": "^1.14.2",
+>>>>>>> master
     "prop-types": "^15.6.2",
     "redux": "^4.0.0",
     "style-loader": "^0.23.0",
@@ -49,6 +55,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "build": {
+    "asar": true,
+    "asarUnpack": "assets",
     "appId": "com.viserion.elec",
     "files": [
       "dist/",

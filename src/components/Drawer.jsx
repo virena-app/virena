@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default class Drawer extends Component {
   render() {
-    const { selectedComponent, drawerState } = this.props;
+    const { selectedComponent, drawerState, selectComponent } = this.props;
     let drawerClass = 'drawer';
-    const getNodeKey = ({ treeIndex }) => treeIndex;
     if (drawerState) drawerClass = 'drawer open';
 
     const links = selectedComponent.children ? 

@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import exportFilesAction from '../utils/exportFiles.util.js'
+import exportFilesUtil from '../utils/exportFiles.util.js';
 
 export const setTree = treeData => ({
   type: types.SET_TREE,
@@ -72,11 +72,8 @@ export const updateNameAndType = (name, type, selected) => ({
 })
 
 export const exportFiles = ( treeData, path ) => (dispatch) => {
-  dispatch({
-    type: types.EXPORT_FILES,
-  });
   console.log('treeData in exportFiles actions', treeData);
-  exportFilesAction(treeData, path)
+  exportFilesUtil(treeData, path)
     .then(data => dispatch({
       type: types.EXPORT_FILES_SUCCESS,
       payload: {
@@ -91,6 +88,11 @@ export const exportFiles = ( treeData, path ) => (dispatch) => {
       }
     }));
 }
+
+export const saveProject = (treeData) => ({
+  type: types.SAVE_PROJECT,
+  payload: treeData
+})
 
 export const closeStatusPopup = () => ({
   type: types.CLOSE_STATUS_POPUP,
