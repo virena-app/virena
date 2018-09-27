@@ -1,15 +1,10 @@
-import React from 'react';
-
-const screenStyle = {
-  color: '#333'
+import React, { Component } from 'react';
+export default class Screen extends Component {
+  render() {
+    return(
+      <div>
+        <h1>{this.props.title}</h1>
+      </div>
+    )
+  }
 }
-
-const Screen = props => {
-  return(
-    <div style={screenStyle}>
-      <h1>{props.subtitle}</h1>
-    </div>
-  )
-}
-
-export default Screen;

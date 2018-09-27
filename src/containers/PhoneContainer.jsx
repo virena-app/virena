@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PhoneScreen from '../components/PhoneScreen.jsx';
-import Screen from '../components/Screen.jsx';
 import Switch from '../components/Switch.jsx';
+import Screen from '../components/Screen.jsx';
 import BottomTab from '../components/BottomTab.jsx';
 import Drawer from '../components/Drawer.jsx';
 import { connect } from 'react-redux';
@@ -19,32 +19,19 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   openDrawer: () => dispatch(actions.openDrawer()),
   closeDrawer: () => dispatch(actions.closeDrawer()),
-<<<<<<< HEAD
   selectComponent: (node) => dispatch(actions.selectComponent(node)),
-=======
-  selectComponent: (name, subtitle, children, key, path) => dispatch(actions.selectComponent(name, subtitle, children, key, path)),
->>>>>>> master
 })
 
 class PhoneContainer extends Component {
   render() {
-    const { treeData, selectedComponent, drawerState, openDrawer, closeDrawer, selectComponent } = this.props;
     let backdrop;
-<<<<<<< HEAD
     const { selectedComponent, selectComponent, treeData, drawerState, openDrawer, closeDrawer } = this.props;
-=======
->>>>>>> master
     if (drawerState) {
       backdrop = <Backdrop closeDrawer={closeDrawer}/>
     }
 
     const navigator = () => {
-<<<<<<< HEAD
-      if (this.props.selectedComponent.subtitle === 'BottomTab') {
-        console.log('i am here');
-=======
       if (selectedComponent.subtitle === 'BottomTab') {
->>>>>>> master
         return (
           <div className='screen-view'>
             <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
@@ -53,16 +40,6 @@ class PhoneContainer extends Component {
         )
       } else if (selectedComponent.subtitle === 'Drawer') {
         return (
-<<<<<<< HEAD
-          <div className='screen-view'>
-            <div className='drawer-wrapper'>
-              <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
-              <Drawer selectedComponent={selectedComponent} drawerState={drawerState}/>
-              {backdrop}
-            </div>
-            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
-          </div>
-=======
       <div className='screen-view'>
         <div className='drawer-wrapper'>
           <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
@@ -71,23 +48,29 @@ class PhoneContainer extends Component {
         </div>
         <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
       </div>
->>>>>>> master
         )
       } else if (selectedComponent.subtitle === 'Simple Screen') {
-        console.log(getParent(treeData, selectedComponent));
+          const parent = getParent(treeData, selectedComponent);
           return (
             <div className='screen-view'>
               <PhoneScreen 
                 treeData={treeData} 
                 selectedComponent={selectedComponent} 
-                parent={getParent(treeData, selectedComponent)}/>
-              <BottomTab selectedComponent={getParent(treeData, selectedComponent)} />
+                parent={
+                  parent.subtitle === 'BottomTab' || parent.subtitle === 'Drawer'
+                  ? parent
+                  : null
+                }
+                selectComponent={selectComponent}
+              />
+              {
+                parent.subtitle === 'BottomTab'
+                ? <BottomTab selectedComponent={parent} />
+                : null
+              }
             </div>
           )
        } else if (selectedComponent.subtitle === 'Switch') {
-          // from the switch, go to immediate child
-          // should show 'login' screen
-          // have a link to go to the immediate child
           return (
             <div className='screen-view'>
               <PhoneScreen selectedComponent={selectedComponent} child={selectedComponent.children[0]} />
@@ -95,7 +78,6 @@ class PhoneContainer extends Component {
             </div>
           )
        }
-
     }
 
     return (

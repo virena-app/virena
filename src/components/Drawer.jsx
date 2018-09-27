@@ -14,11 +14,10 @@ export default class Drawer extends Component {
           return <Link to={`/${screen.title}`}>{screen.title}</Link>
         }
         else if (screen.subtitle === 'BottomTab') {
-          return <button onClick={() => selectComponent(screen)}>{screen.title}</button>
+          return <button onClick={() => this.props.selectComponent(screen)}>{screen.title}</button>
         }
       }) : null
   
-
     return (
       <div className={drawerClass}>
         {links}
