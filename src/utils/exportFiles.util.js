@@ -16,7 +16,7 @@ const exportFilesUtil = (treeData, path) => {
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
       fs.writeFile(`${path}/${title}.js`,
-        format(generateScreenTemplate(title)), {
+        generateScreenTemplate(title), {
           singleQuote: true,
           trailingComma: 'es5',
           bracketSpacing: true,
@@ -34,7 +34,7 @@ const exportFilesUtil = (treeData, path) => {
 
   const navPromise = new Promise((resolve, reject) => {
     fs.writeFile(`${path}/navigator.js`, 
-      format(generateNavigatorTemplate(treeData)), {
+      generateNavigatorTemplate(treeData), {
         singleQuote: true,
         trailingComma: 'es5',
         bracketSpacing: true,
@@ -50,7 +50,7 @@ const exportFilesUtil = (treeData, path) => {
 
   const appPromise = new Promise((resolve, reject) => {
     fs.writeFile(`${path}/App.js`, 
-      format(generateAppTemplate(treeData)), {
+      generateAppTemplate(treeData), {
         singleQuote: true,
         trailingComma: 'es5',
         bracketSpacing: true,

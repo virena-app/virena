@@ -15,7 +15,7 @@ export default class Tree extends Component {
             node.subtitle !== "Simple Screen" && node.subtitle !== "" && <button onClick={() => addChild(input, '', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial' }}>
               +
             </button>,
-            <button onClick={() => deleteComponent(getNodeKey, path)} style={{ 'fontFamily': 'Arial' }}>
+            <button onClick={() => deleteComponent(node)} style={{ 'fontFamily': 'Arial' }}>
               -
             </button>,
             <button onClick={() => selectComponent(node)} style={{ 'fontFamily': 'Arial' }}>

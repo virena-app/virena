@@ -27,11 +27,10 @@ export const addChild = (name, type, key, path, id) => ({
   }
 })
 
-export const deleteComponent = (key, path) => ({
+export const deleteComponent = (node) => ({
   type: types.DELETE_COMPONENT,
   payload: {
-    key,
-    path
+    ...node
   }
 })
 
