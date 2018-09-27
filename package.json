@@ -10,9 +10,12 @@
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "dist-all": "electron-builder -mwl",
+    "dist-l": "electron-builder -l",
+    "dist-w": "electron-builder -w"
   },
-  "author": "",
+  "author": "Virena <gerretkubota@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^3.1.0",
@@ -73,6 +76,15 @@
         }
       ]
     },
-    "extends": null
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    }
   }
 }
