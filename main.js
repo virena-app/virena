@@ -1,5 +1,7 @@
 const electron = require('electron')
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, ipcMain, dialog } = electron;
+const path = require('path');
+const url = require('url');
 
 let win;
 
@@ -10,7 +12,11 @@ const createWindow = () => {
   win = new BrowserWindow({width, height});
 
   if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
-  else win.loadFile('./index.html')
+  else win.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }));
 
   win.webContents.openDevTools() 
 
@@ -18,6 +24,13 @@ const createWindow = () => {
     win = null
   })
 }
+
+ipcMain.on('selectFileDirectory' , (event) => {
+  const dir = dialog.showOpenDialog(win, {
+    properties: ['openDirectory'],
+  })
+  event.sender.send('selectedDir', dir[0]);
+})
 
 app.on('ready', createWindow);
 

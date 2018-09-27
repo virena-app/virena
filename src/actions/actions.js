@@ -1,5 +1,6 @@
 import * as types from '../constants/actionTypes';
 import exportFilesAction from '../utils/exportFiles.util.js'
+const { ipcRenderer } = require('electron')
 
 export const setTree = treeData => ({
   type: types.SET_TREE,
@@ -108,4 +109,8 @@ export const openDrawer = () => ({
 
 export const closeDrawer = () => ({
   type: types.CLOSE_DRAWER
+})
+
+export const openDirectory = () => ({
+  
 })
