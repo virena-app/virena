@@ -37,6 +37,8 @@
     "electron": "^2.0.9",
     "electron-builder": "^20.28.4",
     "file-loader": "^2.0.0",
+    "pg-promise": "^8.4.6",
+    "prettier": "^1.14.2",
     "prop-types": "^15.6.2",
     "redux": "^4.0.0",
     "style-loader": "^0.23.0",
@@ -47,6 +49,7 @@
   },
   "build": {
     "asar": true,
+    "asarUnpack": "assets",
     "appId": "com.viserion.elec",
     "files": [
       "dist/",

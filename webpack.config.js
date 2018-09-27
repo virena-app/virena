@@ -10,7 +10,7 @@ module.exports = {
   devServer: {
     publicPath: '/dist'
   },
-  target: 'electron-renderer',
+  target: 'node',
   externals: [nodeExternals()],
   module: {
     rules: [
