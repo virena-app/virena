@@ -10,7 +10,7 @@ const createWindow = () => {
   win = new BrowserWindow({width, height});
 
   if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
-  else win.loadFile('./index.html')
+  else win.loadFile('index.html')
 
   win.webContents.openDevTools() 
 

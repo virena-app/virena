@@ -28,7 +28,7 @@ body {
 .inner-view {
   width: 360px;
   height: 722px;
-  background-image: url('../../assets/frame.png');
+  /* background-image: url('../../assets/frame.png'); */
   background-size: 360px 722px;
   background-repeat: no-repeat;
   display: flex;

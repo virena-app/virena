@@ -5,12 +5,12 @@ module.exports = {
   entry: path.resolve(__dirname, './src/index.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'webpack-bundle.js'
+    filename: 'webpack-bundle.js',
   },
   devServer: {
     publicPath: '/dist'
   },
-  target: 'node',
+  target: 'electron-renderer',
   externals: [nodeExternals()],
   module: {
     rules: [
