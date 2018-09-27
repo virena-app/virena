@@ -68,6 +68,39 @@ body {
 #iphone {
   width: 360px;
   height: 722px;
+} */
+
+div#iphone { 
+  background-image: url('../../assets/frame.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 360px;
+  height: 722px;
+}
+
+div.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+div.screen-container {
+  border: 2px solid yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 360px;
+  height: 722px;
+  color: #333;
+  font-weight: bold
+}
+
+ul.bottom-tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  list-style: none;
 }
 
 .parent-form {

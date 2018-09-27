@@ -11,6 +11,8 @@ const createWindow = () => {
 
   win = new BrowserWindow({width, height});
 
+  win.webContents.openDevTools() 
+
   if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
   else win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
@@ -18,8 +20,6 @@ const createWindow = () => {
     hash: '/',
     slashes: true
   }));
-
-  win.webContents.openDevTools() 
 
   win.on('closed', () => {
     win = null
