@@ -8,10 +8,6 @@ import * as types from '../constants/actionTypes.js'
 
 
 const exportFilesUtil = (treeData, path) => {
-  console.log('treeData in exportFilesAction', treeData);
-  console.log('path', path)
-  // path = '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena';
-  // path = '/home/sam/components';
   const screenTitles = getAllScreenTitles(treeData);
   const promises = [];
   screenTitles.forEach((title) => {
