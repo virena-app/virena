@@ -12,7 +12,7 @@ const styles = theme => ({
 });
 
 const StatusPopup = (props) => {
-  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, exportErrMsg } = props;
+  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, } = props;
 
   return (
     <div>

@@ -73,9 +73,84 @@ export const maxDepth = treeData => {
 }
 
 export const duplicateTitle = (title, treeData) => {
-  if (!treeData.length) return true
   return treeData.reduce((bool, node) => {
-    if (node.title === title) bool = true;
+    if (node.title === title) bool = node.id;
     return node.children ? bool || duplicateTitle(title, node.children) : bool
+  }, false)
+}
+
+export const findNewNode = (oldTreeData, newTreeData, three) => {
+  let res;
+  //console.log("OLDTREEDATA", JSON.stringify(oldTreeData), "NEWTREEDATA", JSON.stringify(newTreeData))
+  //console.log(newTreeData)
+  for (let i = 0; i < oldTreeData.length; i++) {
+    const oldNode = oldTreeData[i];
+    const newNode = newTreeData[i];
+    if (oldNode.children && newNode.children && oldNode.children.length === newNode.children.length) res = findNewNode(oldNode.children, newNode.children)
+    else if (!oldNode.children && newNode.children) res = newNode.children[0];
+    else if (oldNode.children && newNode.children && oldNode.children.length !== newNode.children.length) res = newNode.children[newNode.children.length - 1]
+    //console.log(res)
+    if (res) return res
+  }
+}
+ 
+export const deleteNode = (tree, id) => {
+  return tree.reduce((newTree, node) => {
+    if (node.id === id) {
+      return newTree;
+    }
+    else if (node.id !== id && node.children && node.children.length) {
+      return newTree.concat({
+        ...node,
+        children: deleteNode(node.children, id)
+      })
+    }
+    else return newTree.concat(node)
+  }, [])
+}
+ 
+export const addNode = (tree, parentTitle, newNode) => {
+  return tree.reduce((newTree, node) => {
+    if (node.title === parentTitle) {
+      const copy = {...node};
+      if (copy.children) copy.children.push(newNode)
+      else copy.children = [newNode]
+      return newTree.concat(copy)
+    }
+    else if (node.children) {
+      return newTree.concat({
+        ...node,
+        children: addNode(node.children, parentTitle, newNode)
+      })
+    } else return newTree.concat(node)
+  }, [])
+}
+
+export const updateNode = (treeData, title, subtitle, selected) => {
+  return treeData.reduce( (newTree, node) => {
+    if (selected.id === node.id) {
+      return newTree.concat({...node, title, subtitle});
+    }
+    else if (node.children) {
+      return newTree.concat({...node, children: updateNode(node.children, title, subtitle, selected)})
+    }
+    //newTree.concat(updateNode(node.children, title, selected))
+    else return newTree.concat(node)
+  }, [])
+}
+ 
+export const getParent = (tree, node) => {
+  const {id} = node;
+  for (let i = 0; i < tree.length; i++) {
+    if (tree[i].children && tree[i].children.find(child => child.id === id)) return tree[i];
+    else if (tree[i].children) return getParent(tree[i].children, node)
+  }
+}
+
+export const nodeExists = (tree, id) => {
+  return tree.reduce((bool, currentNode) => {
+    if (currentNode.id === id) return true;
+    else if (currentNode.children) return bool || nodeExists(currentNode.children, id);
+    else return bool;
   }, false)
 }

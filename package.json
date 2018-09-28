@@ -36,8 +36,9 @@
     "css-loader": "^1.0.0",
     "electron": "^2.0.9",
     "electron-builder": "^20.28.4",
+    "electron-packager": "^12.1.2",
     "file-loader": "^2.0.0",
-    "fs": "0.0.1-security",
+    "pg-promise": "^8.4.6",
     "prop-types": "^15.6.2",
     "redux": "^4.0.0",
     "style-loader": "^0.23.0",
@@ -47,6 +48,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "build": {
+    "asar": true,
+    "asarUnpack": "assets",
     "appId": "com.viserion.elec",
     "files": [
       "dist/",
@@ -57,7 +60,6 @@
       "main.js",
       "src/styles/style.css"
     ],
-    "asar": false,
     "dmg": {
       "contents": [
         {

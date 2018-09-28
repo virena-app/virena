@@ -1,6 +1,6 @@
 import * as types from '../constants/actionTypes';
-import exportFilesAction from '../utils/exportFiles.util.js'
 const { ipcRenderer } = require('electron')
+import exportFilesUtil from '../utils/exportFiles.util.js';
 
 export const setTree = treeData => ({
   type: types.SET_TREE,
@@ -28,22 +28,17 @@ export const addChild = (name, type, key, path, id) => ({
   }
 })
 
-export const deleteComponent = (key, path) => ({
+export const deleteComponent = (node) => ({
   type: types.DELETE_COMPONENT,
   payload: {
-    key,
-    path
+    ...node
   }
 })
 
-export const selectComponent = (name, type, children, key, path) => ({
+export const selectComponent = (node) => ({
   type: types.SELECT_COMPONENT,
   payload: {
-    title: name,
-    subtitle: type,
-    children,
-    key,
-    path,
+    ...node
   }
 })
 
@@ -67,22 +62,19 @@ export const setNameToChange = name => ({
   payload: name
 })
 
-export const updateNameAndType = (name, type, key, path) => ({
+export const updateNameAndType = (name, type, selected) => ({
   type: types.UPDATE_NAME_AND_TYPE,
   payload: {
     title: name,
     subtitle: type,
-    key,
-    path
+    selectedComponent: selected
   }
 })
 
 export const exportFiles = ( treeData, path ) => (dispatch) => {
-  dispatch({
-    type: types.EXPORT_FILES,
-  });
   console.log('treeData in exportFiles actions', treeData);
-  exportFilesAction(treeData, path)
+  
+  exportFilesUtil(treeData, path)
     .then(data => dispatch({
       type: types.EXPORT_FILES_SUCCESS,
       payload: {
@@ -98,6 +90,11 @@ export const exportFiles = ( treeData, path ) => (dispatch) => {
     }));
 }
 
+export const saveProject = (treeData) => ({
+  type: types.SAVE_PROJECT,
+  payload: treeData
+})
+
 export const closeStatusPopup = () => ({
   type: types.CLOSE_STATUS_POPUP,
   payload: false
@@ -111,6 +108,14 @@ export const closeDrawer = () => ({
   type: types.CLOSE_DRAWER
 })
 
-// export const openDirectory = () => ({
-  
-// })
+export const openDirectory = () => (dispatch) => {
+  ipcRenderer.send('selectFileDirectory')
+    // .then(directory => dispatch({
+    //   type: types.SET_PATH_TO_DOWNLOAD,
+    //   payload: directory
+    // }))
+    // .catch(err => dispatch({
+    //   type: types.SET_DIRECTORY_ERR,
+    //   payload: err
+    // }))
+}

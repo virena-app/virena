@@ -9,17 +9,17 @@ const styles = theme => ({
   }
 })
 
-class ExportFilesButton extends Component {
+class SaveProjectButton extends Component {
   render() {
-    const {treeData, openDirectory, classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup} = this.props;
+    const {treeData, saveProject, classes } = this.props;
     return (
       <Button variant="contained" color="primary"
-      className={classes.exportButton} 
-      onClick={openDirectory}>
-        Export
+      className={classes.saveButton} 
+      onClick={() => saveProject(treeData)}>
+        Save My Project
       </Button>
     );
   }
 }
 
-export default (withStyles(styles)) (ExportFilesButton);
+export default (withStyles(styles)) (SaveProjectButton);
