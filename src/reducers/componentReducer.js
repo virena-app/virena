@@ -18,7 +18,8 @@ const initialState = {
   statusPopupOpen: false, 
   statusPopupErrorOpen: false,
   fileExportModalState: false,
-  drawerState: false
+  drawerState: false,
+  fileDownloadPath: '',
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -112,14 +113,6 @@ const componentReducer = (state = initialState, action) => {
         treeData: updated
       }
     case types.EXPORT_FILES:
-      console.log('asfsf', action.payload)
-      //todo: 
-      //1. take out hardcoded path
-      //2. take it out of the reducer since it does nothing to change state, it's a util function
-      //3. implement actions to notify the user when the export file is in the process of finishing and actually finishes
-      // exportFiles(action.payload, '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena')
-      //add logic to manipulate statusPopupOpen to be true?
-      //also statusPopupErrorOpen
       return state;
     case types.EXPORT_FILES_SUCCESS:
       console.log('successful export!');
@@ -129,9 +122,10 @@ const componentReducer = (state = initialState, action) => {
       }
     case types.EXPORT_FILES_FAIL:
       console.log(action.payload.err)
+
       return {
         ...state,
-        statusPopupErrorOpen: action.payload.status
+        statusPopupErrorOpen: action.payload.status,
       }
     case types.CLOSE_STATUS_POPUP:
       
