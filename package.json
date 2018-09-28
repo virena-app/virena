@@ -23,6 +23,7 @@
     "connected-react-router": "^4.5.0",
     "history": "^4.7.2",
     "mysql2": "^1.6.1",
+    "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
