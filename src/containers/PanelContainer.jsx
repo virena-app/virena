@@ -7,6 +7,7 @@ import ExportFilesButton from '../components/ExportFilesButton.jsx';
 import SaveProjectButton from '../components/SaveProjectButton.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import StatusPopup from '../components/StatusPopup.jsx';
+const { ipcRenderer } = require('electron');
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
@@ -29,10 +30,11 @@ const mapDispatchToProps = dispatch => ({
   selectParent: selection => dispatch(actions.selectParent(selection)),
   updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
-  exportFiles: treeData => dispatch(actions.exportFiles(treeData)),
+  exportFiles: (treeData, dirPath) => dispatch(actions.exportFiles(treeData, dirPath)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
   closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
-  saveProject: treeData => dispatch(actions.saveProject(treeData))
+  saveProject: treeData => dispatch(actions.saveProject(treeData)),
+  openDirectory: () => dispatch(actions.openDirectory()),
 })
 
 const styles = theme => ({
@@ -72,10 +74,16 @@ const styles = theme => ({
 })
 
 class PanelContainer extends Component {
+  componentDidMount() {
+    ipcRenderer.on('selectedDir', (event, dirPath) => {
+      const { exportFiles, treeData } = this.props;
+      exportFiles(treeData, dirPath);
+    })
+  }
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
-    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, exportFiles,
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject } = this.props;
+    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory } = this.props;
     return (
       <div className='panel'>
         <div>
@@ -88,7 +96,7 @@ class PanelContainer extends Component {
         <div className='logo-wrapper'>
           <img src='../../assets/logo.png' className='logo'></img>
           <SaveProjectButton treeData={treeData} saveProject={saveProject}/>
-          <ExportFilesButton treeData={treeData} exportFiles={exportFiles} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
+          <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
         <StatusPopup 
           statusPopupOpen={statusPopupOpen}

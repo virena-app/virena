@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
-  exportButton: {
+  saveButton: {
     background: '#2068c9',
     width: '250px'
   }
