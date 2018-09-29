@@ -50,12 +50,19 @@ body {
   position: relative;
 }
 
-.phone-screen {
-  flex: 13;
+.phone-screen, .switch-button {
   background-color: rgb(223, 223, 230);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.phone-screen {
+  flex: 13;
+}
+
+.switch-button {
+  flex: 50;
 }
 
 .bottom-tab {

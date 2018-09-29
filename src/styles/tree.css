@@ -111,6 +111,10 @@
   background: linear-gradient(45deg, #37474F 30%, #455A64 90%);
 }
 
+.active {
+  background: linear-gradient(45deg, #cdcdcd 30%, #eeee 90%);
+}
+
 .rst__rtl.rst__rowContents {
   border-right: none;
   border-left: solid #bbb 1px;
