@@ -27,7 +27,7 @@ class PhoneContainer extends Component {
     let backdrop;
     const { selectedComponent, selectComponent, treeData, drawerState, openDrawer, closeDrawer } = this.props;
     if (drawerState) {
-      backdrop = <Backdrop closeDrawer={closeDrawer}/>
+      backdrop = <Backdrop closeDrawer={closeDrawer} />
     }
 
     const navigator = () => {
@@ -39,8 +39,8 @@ class PhoneContainer extends Component {
       else if (selectedComponent.subtitle && selectedComponent.subtitle === 'BottomTab') {
         return (
           <div className='screen-view'>
-            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
-            <BottomTab selectedComponent={selectedComponent} />
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} />
+            <BottomTab selectedComponent={selectedComponent} selectComponent={selectComponent} />
           </div>
         )
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Drawer') {
@@ -48,10 +48,10 @@ class PhoneContainer extends Component {
           <div className='screen-view'>
             <div className='drawer-wrapper'>
               <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
-              <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent}/>
+              <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent} />
               {backdrop}
             </div>
-            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} />
           </div>
         )
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Simple Screen') {
@@ -91,14 +91,14 @@ class PhoneContainer extends Component {
             let selectedChild = selectedComponent.children[0]
             if (selectedChild.subtitle === 'BottomTab') {              
               screens.push(<PhoneScreen selectedComponent={selectedChild} />);
-              screens.push(<BottomTab selectedComponent={selectedChild}/>);
+              screens.push(<BottomTab selectedComponent={selectedChild} />);
             } else if (selectedChild.subtitle === 'Drawer') {
                 screens.push(<div className='drawer-wrapper'>
                               <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
-                              <Drawer selectedComponent={selectedChild} drawerState={drawerState} selectComponent={selectComponent}/>
+                              <Drawer selectedComponent={selectedChild} drawerState={drawerState} selectComponent={selectComponent} />
                               {backdrop}
                             </div>)
-                screens.push(<PhoneScreen treeData={treeData} selectedComponent={selectedChild}/>)
+                screens.push(<PhoneScreen treeData={treeData} selectedComponent={selectedChild} />)
             }
 
             return screens;

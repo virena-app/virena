@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default class BottomTab extends Component {
   render() {
     const { children } = this.props.selectedComponent;
     const links = children ? 
-    children.map((screen, i) => <Link to={`/${screen.title}`} key={i}>{screen.title}</Link>) :
-    null
+    children.map((screen, i) => { 
+      return <NavLink to={`/${screen.title}`} style={{color: '#d3d3d3'}} activeStyle={{color: 'rgb(0, 122, 255)'}} activeClassName='is-active' key={i}>{screen.title}</NavLink>
+     }) : null
     return (
       <div className='bottom-tab'>
           {links}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default class Drawer extends Component {
   render() {
@@ -10,7 +10,7 @@ export default class Drawer extends Component {
     const links = selectedComponent.children ? 
       selectedComponent.children.map((screen, i) => {
         if (screen.subtitle === "Simple Screen") {
-          return <Link to={`/${screen.title}`}>{screen.title}</Link>
+          return <NavLink to={`/${screen.title}`}>{screen.title}</NavLink>
         }
         else if (screen.subtitle === 'BottomTab') {
           return <button onClick={() => this.props.selectComponent(screen)}>{screen.title}</button>

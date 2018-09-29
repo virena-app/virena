@@ -137,7 +137,7 @@ ul.bottom-tab {
 a {
   text-decoration: none;
   margin-top: 20px;
-  color: rgb(0, 122, 255);
+  /* color: rgb(0, 122, 255); */
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10px;
 }
