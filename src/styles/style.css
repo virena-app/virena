@@ -1,16 +1,33 @@
 body {
-  background-color: black;
+  background-color: #191919;
   z-index: 100;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .main {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   flex: 1;
 }
 
+div.vertical-line, div.horizontal-line {
+  background-color: #4c4c4c;
+  /* box-shadow: inset 0px 5px 10px 0px rgba(0, 0, 0, 0.75); */
+}
+
+div.vertical-line {
+  height: 100vh;
+  width: .3vw;
+}
+
+div.horizontal-line {
+  height: .4vh;
+  width: 40vw;
+}
+
 .panel, .tree {
-  width: 30%;
+  width: 40vw;
   padding-top: 2.5%;
   color: white;
   display: inherit;
@@ -18,7 +35,7 @@ body {
 }
 
 .view {
-  width: 40%;
+  width: 30vw;
   padding-top: 2.5%;
   display: inherit;
   align-items: center;
@@ -26,10 +43,13 @@ body {
 }
 
 .inner-view {
-  width: 360px;
-  height: 722px;
+  /* width: 360px;
+  height: 722px; */
+  width: 330px;
+  height: 662px;
   background-image: url('../../assets/frame.png');
-  background-size: 360px 722px;
+  /* background-size: 360px 722px; */
+  background-size: 330px 662px;
   background-repeat: no-repeat;
   display: flex;
   justify-content: center;
@@ -50,19 +70,22 @@ body {
   position: relative;
 }
 
-.phone-screen, .switch-button {
+.phone-screen, .switch-div {
   background-color: rgb(223, 223, 230);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.phone-screen {
   flex: 13;
 }
 
-.switch-button {
-  flex: 50;
+.switch-button{
+  color: rgb(0, 122, 255);
+  background-color: rgb(223, 223, 230);
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .bottom-tab {
@@ -72,18 +95,13 @@ body {
   flex: 1;
 }
 
-#iphone {
-  width: 360px;
-  height: 722px;
-} */
-
-div#iphone { 
+/* div#iphone { 
   background-image: url('../../assets/frame.png');
   background-size: 100%;
   background-repeat: no-repeat;
   width: 360px;
   height: 722px;
-}
+} */
 
 div.screen {
   display: flex;
@@ -113,6 +131,7 @@ ul.bottom-tab {
 .parent-form {
   display: inherit;
   justify-content: space-evenly;
+  font-size: 12px;
 }
 
 .form {
@@ -136,16 +155,18 @@ ul.bottom-tab {
 
 a {
   text-decoration: none;
-  margin-top: 20px;
+  margin-top: 10px;
   /* color: rgb(0, 122, 255); */
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 10px;
+}
+
+NavLink div {
+  padding: 2em;
 }
 
 .drawer-wrapper {
   display: inherit;
   flex-direction: column;
-
 }
 
 .drawer {
@@ -157,6 +178,29 @@ a {
   left: 0;
   visibility: hidden;
   transition: width 0.2s ease-out;
+}
+
+.drawer a, .drawer button {
+  font-weight: bold;
+  width: 95%;
+  padding: 15px 0px 15px 5px;
+  font-size: 10px;
+}
+
+.drawer a {
+  font-size: 10.5px;
+}
+
+.drawer a:nth-child(1) {
+  margin-top: 10px;
+}
+
+.drawer button {
+  border: none;
+  text-align: left;
+  padding-left: 2px;
+  background-color: #fff;
+  outline: none;
 }
 
 .open {
@@ -181,4 +225,5 @@ a {
   border: none;
   height: 8%;
   outline: none;
+  font-size: 12px;
 }

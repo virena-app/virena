@@ -81,8 +81,10 @@ class PhoneContainer extends Component {
        } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Switch') {
           return (
             <div className='screen-view'>
-              <PhoneScreen selectedComponent={selectedComponent} child={selectedComponent.children[0]} />
-              <Switch selectedComponent={selectedComponent} selectComponent={selectComponent} child={selectedComponent.children[0]} />
+              <Switch 
+                selectedComponent={selectedComponent} 
+                selectComponent={selectComponent} 
+                child={selectedComponent.children ? selectedComponent.children[0] : null} />
             </div>
           )
        } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Stack') {
