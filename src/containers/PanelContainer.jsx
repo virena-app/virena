@@ -94,6 +94,8 @@ class PanelContainer extends Component {
           changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
         </div>
         <div className='logo-wrapper'>
+          <div className='horizontal-line'></div>
+          <br/>
           <img src='../../assets/logo.png' className='logo'></img>
           <SaveProjectButton treeData={treeData} saveProject={saveProject}/>
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
