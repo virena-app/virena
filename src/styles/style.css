@@ -1,16 +1,45 @@
 body {
-  background-color: black;
+  background-color: #191919;
   z-index: 100;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .main {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   flex: 1;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div.vertical-line, div.horizontal-line {
+  background-color: #4c4c4c;
+  /* box-shadow: inset 0px 5px 10px 0px rgba(0, 0, 0, 0.75); */
+}
+
+div.vertical-line {
+  height: 100vh;
+  width: .3vw;
+}
+
+div.horizontal-line {
+  height: .4vh;
+  width: 40vw;
+}
+
 .panel, .tree {
-  width: 30%;
+  width: 40vw;
   padding-top: 2.5%;
   color: white;
   display: inherit;
@@ -18,61 +47,133 @@ body {
 }
 
 .view {
-  width: 40%;
+  width: 30vw;
   padding-top: 2.5%;
   display: inherit;
   align-items: center;
   flex-direction: column;
+  margin: 10px 0;
 }
 
-.inner-view {
-  width: 360px;
-  height: 722px;
-  background-image: url('../../assets/frame.png');
-  background-size: 360px 722px;
+.ios-android {
+  margin-top: 20px;
+}
+
+div.ios-android button{
+  margin: 0 10px 0 10px;
+  outline: none;
+  color: #333;
+}
+
+.toggle-on {
+  background-color: dodgerblue;
+}
+
+.iphone-view, .android-view {
+  /* width: 360px;
+  height: 722px; */
+  width: 330px;
+  height: 662px;
+  /* background-size: 360px 722px; */
+  background-size: 330px 662px;
   background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.iphone-view {
+  background-image: url('../../assets/iphone-frame.png');
+}
+
+.android-view {
+  background-image: url('../../assets/android-frame.png');
+}
+
 .screen-wrapper {
   width: 86.5%;
 }
 
-.screen-view {
+.iphone-screen {
   margin-top: 45px;
   margin-left: 1px;
   height: 80%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
+  background-color: #fff;
   position: relative;
 }
 
-.phone-screen {
-  flex: 13;
-  background-color: rgb(223, 223, 230);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.android-screen {
+  margin-bottom: 13.5px;
+  height: 479px;
+  width: 299.5px;
+  background-color: #fff;
+  position: relative;
 }
 
-.bottom-tab {
+.phone-screen, .switch-div, .a-phone-screen, .a-switch-div {
+  justify-content: center;
+  align-items: center;
+  flex: 13;
+}
+
+.phone-screen, .switch-div {
+  background-color: rgb(223, 223, 230);
+}
+
+.a-phone-screen, .a-switch-div {
+  background-color: #fff;
+}
+
+.switch-button{
+  color: rgb(0, 122, 255);
+  background-color: rgb(223, 223, 230);
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.bottom-tab, .bottom-tab-top-border {
   display: inherit;
   justify-content: space-evenly;
   align-items: center;
   flex: 1;
 }
 
-#iphone {
+.bottom-tab-top-border {
+  border-top: 1px solid #d5d5d5;
+}
+
+
+div.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+div.screen-container {
+  border: 2px solid yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 360px;
   height: 722px;
+  color: #333;
+  font-weight: bold
+}
+
+ul.bottom-tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  list-style: none;
 }
 
 .parent-form {
   display: inherit;
   justify-content: space-evenly;
+  font-size: 12px;
 }
 
 .form {
@@ -96,16 +197,18 @@ body {
 
 a {
   text-decoration: none;
-  margin-top: 20px;
-  color: rgb(0, 122, 255);
-  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+  /* color: rgb(0, 122, 255); */
   font-size: 10px;
+}
+
+NavLink div {
+  padding: 2em;
 }
 
 .drawer-wrapper {
   display: inherit;
   flex-direction: column;
-
 }
 
 .drawer {
@@ -117,6 +220,29 @@ a {
   left: 0;
   visibility: hidden;
   transition: width 0.2s ease-out;
+}
+
+.drawer a, .drawer button {
+  font-weight: bold;
+  width: 95%;
+  padding: 15px 0px 15px 5px;
+  font-size: 10px;
+}
+
+.drawer a {
+  font-size: 10.5px;
+}
+
+.drawer a:nth-child(1) {
+  margin-top: 10px;
+}
+
+.drawer button {
+  border: none;
+  text-align: left;
+  padding-left: 2px;
+  background-color: #fff;
+  outline: none;
 }
 
 .open {
@@ -141,4 +267,5 @@ a {
   border: none;
   height: 8%;
   outline: none;
+  font-size: 12px;
 }

@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes';
+const { ipcRenderer } = require('electron')
 import exportFilesUtil from '../utils/exportFiles.util.js';
 
 export const setTree = treeData => ({
@@ -27,11 +28,10 @@ export const addChild = (name, type, key, path, id) => ({
   }
 })
 
-export const deleteComponent = (key, path) => ({
+export const deleteComponent = (node) => ({
   type: types.DELETE_COMPONENT,
   payload: {
-    key,
-    path
+    ...node
   }
 })
 
@@ -73,6 +73,7 @@ export const updateNameAndType = (name, type, selected) => ({
 
 export const exportFiles = ( treeData, path ) => (dispatch) => {
   console.log('treeData in exportFiles actions', treeData);
+  
   exportFilesUtil(treeData, path)
     .then(data => dispatch({
       type: types.EXPORT_FILES_SUCCESS,
@@ -106,3 +107,28 @@ export const openDrawer = () => ({
 export const closeDrawer = () => ({
   type: types.CLOSE_DRAWER
 })
+
+export const openDirectory = () => (dispatch) => {
+  ipcRenderer.send('selectFileDirectory')
+    // .then(directory => dispatch({
+    //   type: types.SET_PATH_TO_DOWNLOAD,
+    //   payload: directory
+    // }))
+    // .catch(err => dispatch({
+    //   type: types.SET_DIRECTORY_ERR,
+    //   payload: err
+    // }))
+}
+
+export const changePhone = (phone, screen) => ({
+  type: types.CHANGE_PHONE,
+  payload: {
+    phone: phone,
+    screen: screen
+  }
+})
+
+// export const changeScreen = (screen) => ({
+//   type: types.CHANGE_SCREEN,
+//   payload: screen
+// })

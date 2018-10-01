@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import PhoneScreen from '../components/PhoneScreen.jsx';
+import Switch from '../components/Switch.jsx';
 import BottomTab from '../components/BottomTab.jsx';
 import Drawer from '../components/Drawer.jsx';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../actions/actions';
 import Backdrop from '../components/Backdrop.jsx';
+import { getParent } from '../utils/helperFunctions.util';
 
 const mapStateToProps = store => ({
   treeData: store.data.treeData,
   selectedComponent: store.data.selectedComponent,
-  drawerState: store.data.drawerState
+  drawerState: store.data.drawerState,
+  screen: store.data.screen,
+  phone: store.data.phone
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -21,36 +25,84 @@ const mapDispatchToProps = dispatch => ({
 
 class PhoneContainer extends Component {
   render() {
-    const { treeData, selectedComponent, drawerState, openDrawer, closeDrawer, selectComponent } = this.props;
     let backdrop;
+    
+    const { selectedComponent, selectComponent, treeData, drawerState, openDrawer, closeDrawer, screen, phone } = this.props;
     if (drawerState) {
-      backdrop = <Backdrop closeDrawer={closeDrawer}/>
+      backdrop = <Backdrop closeDrawer={closeDrawer} />
     }
 
     const navigator = () => {
-      if (selectedComponent.subtitle === 'BottomTab') {
+      if (!selectedComponent) {
         return (
-          <div className='screen-view'>
-            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
-            <BottomTab selectedComponent={selectedComponent} />
-          </div>
-        )
-      } else if (selectedComponent.subtitle === 'Drawer') {
-        return (
-      <div className='screen-view'>
-        <div className='drawer-wrapper'>
-          <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
-          <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent}/>
-          {backdrop}
-        </div>
-        <PhoneScreen treeData={treeData} selectedComponent={selectedComponent}/>
-      </div>
+          <div className={screen}></div>
         )
       }
+      else if (selectedComponent.subtitle && selectedComponent.subtitle === 'BottomTab') {
+        return (
+          <div className={screen}>
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen}/>
+            <BottomTab selectedComponent={selectedComponent} selectComponent={selectComponent} phone={phone} />
+          </div>
+        )
+      } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Drawer') {
+        return (
+          <div className={screen}>
+            <div className='drawer-wrapper'>
+              <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
+              <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent} />
+              {backdrop}
+            </div>
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen}/>
+          </div>
+        )
+      } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Simple Screen') {
+          // const parent = getParent(treeData, selectedComponent);
+          return (
+            <div className={screen}>
+              <div className='phone-screen column'>
+                <div>{selectedComponent.title}</div>
+              </div>
+            </div>
+          )
+       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Switch') {
+          return (
+            <div className={screen}>
+              <Switch 
+                selectedComponent={selectedComponent} 
+                selectComponent={selectComponent} 
+                child={selectedComponent.children ? selectedComponent.children[0] : null}
+                screen={screen} />
+            </div>
+          )
+       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Stack') {
+          const screen = () => { 
+            let screens = [];
+            let selectedChild = selectedComponent.children[0]
+            if (selectedChild.subtitle === 'BottomTab') {              
+              screens.push(<PhoneScreen selectedComponent={selectedChild} screen={screen}/>);
+              screens.push(<BottomTab selectedComponent={selectedChild} phone={phone} />);
+            } else if (selectedChild.subtitle === 'Drawer') {
+                screens.push(<div className='drawer-wrapper'>
+                              <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
+                              <Drawer selectedComponent={selectedChild} drawerState={drawerState} selectComponent={selectComponent} />
+                              {backdrop}
+                            </div>)
+                screens.push(<PhoneScreen treeData={treeData} selectedComponent={selectedChild} screen={screen}/>)
+            }
+
+            return screens;
+          }
+          return (
+            <div className={screen}>
+              {screen()}
+            </div>
+          )
+       }
     }
 
     return (
-      <div className='screen-wrapper'>
+      <div className={phone === 'iphone-view' ? 'screen-wrapper' : null}>
         {navigator()}
       </div>
     )

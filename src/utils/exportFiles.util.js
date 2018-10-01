@@ -1,22 +1,19 @@
 import fs from 'fs';
-import { format } from 'prettier';
+// import { format } from 'prettier';
 import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
 import { getAllScreenTitles } from './helperFunctions.util.js'
 import * as types from '../constants/actionTypes.js'
 
+
 const exportFilesUtil = (treeData, path) => {
-  console.log('treeData in exportFilesAction', treeData);
-  path = '/Users/danielmatuszak/Desktop/Codesmith/TestRNVirena';
-  path = '/home/sam/components';
   const screenTitles = getAllScreenTitles(treeData);
   const promises = [];
-  let totalFiles = screenTitles.length;
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
       fs.writeFile(`${path}/${title}.js`,
-        format(generateScreenTemplate(title)), {
+        generateScreenTemplate(title), {
           singleQuote: true,
           trailingComma: 'es5',
           bracketSpacing: true,
@@ -34,7 +31,7 @@ const exportFilesUtil = (treeData, path) => {
 
   const navPromise = new Promise((resolve, reject) => {
     fs.writeFile(`${path}/navigator.js`, 
-      format(generateNavigatorTemplate(treeData)), {
+      generateNavigatorTemplate(treeData), {
         singleQuote: true,
         trailingComma: 'es5',
         bracketSpacing: true,
@@ -43,14 +40,13 @@ const exportFilesUtil = (treeData, path) => {
       },
       (err) => {
         if (err) return reject(err);
-        totalFiles++;
         return resolve('nav');
       });
   });
 
   const appPromise = new Promise((resolve, reject) => {
     fs.writeFile(`${path}/App.js`, 
-      format(generateAppTemplate(treeData)), {
+      generateAppTemplate(treeData), {
         singleQuote: true,
         trailingComma: 'es5',
         bracketSpacing: true,
@@ -59,7 +55,6 @@ const exportFilesUtil = (treeData, path) => {
       },
       (err) => {
         if (err) return reject(err);
-        totalFiles++
         return resolve('app');
       });
   });

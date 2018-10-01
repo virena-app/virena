@@ -8,11 +8,14 @@ import { getAllScreenTitles, getImmediateChildrenTitles, getAllParents } from '.
 const generateNavigatorTemplate = treeData => {
   const screenTitles = getAllScreenTitles(treeData);
   const navigators = getAllParents(treeData);
+  navigators.forEach(nav => {
+    if(!nav.children) return new Error;
+  })
   return "import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';\n" +
   screenTitles.map(title => `import ${title} from './${title}.js'`).join('\n') + '\n\n' +
   navigators.map(navigator => {
-    const childrenTitles = getImmediateChildrenTitles(navigator, treeData);
-    console.log('childrenTitles inside gennavTemplate', childrenTitles)
+    const childrenTitles = navigator.children.map(child => child.title)
+    console.log('childrenTitles of'+ navigator.title +'inside gennavTemplate', navigator.children)
     return `export const ${navigator.title} = create${navigator.subtitle}Navigator({` + (childrenTitles.length ?
     childrenTitles.map(title => {
       return `${title}: { screen: ${title} }`

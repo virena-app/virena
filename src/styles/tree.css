@@ -93,12 +93,12 @@
 .rst__toolbarButton {
   display: inline-block;
   vertical-align: middle;
+  border: black;
 }
 
 .rst__rowContents {
   position: relative;
   height: 100%;
-  border: solid #bbb 1px;
   border-left: none;
   box-shadow: 0 2px 2px -2px;
   padding: 0 5px 0 10px;
@@ -109,6 +109,10 @@
   align-items: center;
   justify-content: space-between;
   background: linear-gradient(45deg, #37474F 30%, #455A64 90%);
+}
+
+.active {
+  background: linear-gradient(45deg, #cdcdcd 30%, #eeee 90%);
 }
 
 .rst__rtl.rst__rowContents {
@@ -338,11 +342,13 @@
   height: 100%;
   display: inline-block;
   position: absolute;
+  border: black;
 }
 .rst__lineChildren::after {
   content: '';
   position: absolute;
   background-color: black;
+  border: black;
   width: 1px;
   left: 50%;
   bottom: 0;

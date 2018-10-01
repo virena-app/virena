@@ -1,11 +1,10 @@
 const electron = require('electron')
-const { app, BrowserWindow, ipcMain } = electron;
-const url = require('url');
-const path = require('path');
 // const express = require('express');
 // const expressApp = express();
-
 // expressApp.listen(3000, () => console.log('Listening on 3000'))
+const { app, BrowserWindow, ipcMain, dialog } = electron;
+const path = require('path');
+const url = require('url');
 
 let win;
 
@@ -46,6 +45,13 @@ const createWindow = () => {
     win = null
   })
 }
+
+ipcMain.on('selectFileDirectory' , (event) => {
+  const dir = dialog.showOpenDialog(win, {
+    properties: ['openDirectory'],
+  })
+  event.sender.send('selectedDir', dir[0]);
+})
 
 app.on('ready', createWindow);
 
