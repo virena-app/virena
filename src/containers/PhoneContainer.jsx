@@ -40,7 +40,7 @@ class PhoneContainer extends Component {
       else if (selectedComponent.subtitle && selectedComponent.subtitle === 'BottomTab') {
         return (
           <div className={screen}>
-            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} />
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen}/>
             <BottomTab selectedComponent={selectedComponent} selectComponent={selectComponent} />
           </div>
         )
@@ -52,7 +52,7 @@ class PhoneContainer extends Component {
               <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent} />
               {backdrop}
             </div>
-            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} />
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen}/>
           </div>
         )
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Simple Screen') {
@@ -70,7 +70,8 @@ class PhoneContainer extends Component {
               <Switch 
                 selectedComponent={selectedComponent} 
                 selectComponent={selectComponent} 
-                child={selectedComponent.children ? selectedComponent.children[0] : null} />
+                child={selectedComponent.children ? selectedComponent.children[0] : null}
+                screen={screen} />
             </div>
           )
        } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Stack') {
@@ -78,7 +79,7 @@ class PhoneContainer extends Component {
             let screens = [];
             let selectedChild = selectedComponent.children[0]
             if (selectedChild.subtitle === 'BottomTab') {              
-              screens.push(<PhoneScreen selectedComponent={selectedChild} />);
+              screens.push(<PhoneScreen selectedComponent={selectedChild} screen={screen}/>);
               screens.push(<BottomTab selectedComponent={selectedChild} />);
             } else if (selectedChild.subtitle === 'Drawer') {
                 screens.push(<div className='drawer-wrapper'>
@@ -86,7 +87,7 @@ class PhoneContainer extends Component {
                               <Drawer selectedComponent={selectedChild} drawerState={drawerState} selectComponent={selectComponent} />
                               {backdrop}
                             </div>)
-                screens.push(<PhoneScreen treeData={treeData} selectedComponent={selectedChild} />)
+                screens.push(<PhoneScreen treeData={treeData} selectedComponent={selectedChild} screen={screen}/>)
             }
 
             return screens;

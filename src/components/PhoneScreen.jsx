@@ -4,7 +4,7 @@ import { getParent } from '../utils/helperFunctions.util';
 
 export default class PhoneScreen extends Component {
   render() {
-    const { selectedComponent, parent, child} = this.props;
+    const { selectedComponent, parent, child } = this.props;
     /**
      * routes - Checks to see if the selectedComponent has any children, if there are, return an array of Routes with the
      * appropriate screen titles to render
@@ -35,7 +35,7 @@ export default class PhoneScreen extends Component {
       }
     }
     return (
-      <div className='phone-screen column'>
+      <div className={this.props.screen === 'iphone-screen column' ? 'phone-screen column' : 'a-phone-screen column'}>
         <Switch>
           {routes()}
         </Switch>

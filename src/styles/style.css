@@ -98,7 +98,7 @@ div.ios-android button{
   margin-top: 45px;
   margin-left: 1px;
   height: 80%;
-  background-color: #eee;
+  background-color: #fff;
   position: relative;
 }
 
@@ -107,15 +107,22 @@ div.ios-android button{
   /* margin-bottom: 15px; */
   height: 479px;
   width: 290px;
-  background-color: #eee;
+  background-color: #fff;
   position: relative;
+}
+
+.phone-screen, .switch-div, .a-phone-screen, .a-switch-div {
+  justify-content: center;
+  align-items: center;
+  flex: 13;
 }
 
 .phone-screen, .switch-div {
   background-color: rgb(223, 223, 230);
-  justify-content: center;
-  align-items: center;
-  flex: 13;
+}
+
+.a-phone-screen, .a-switch-div {
+  background-color: #fff;
 }
 
 .switch-button{
