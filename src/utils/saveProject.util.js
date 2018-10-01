@@ -13,7 +13,7 @@ const saveProject = (treeData) => {
       json: treeData
     })
   }).catch(err => {
-    console.log("ERROR THO")
+    console.log("Error saving to the database ", err)
   })
 }
 
