@@ -8,7 +8,9 @@ export default class AppContainer extends Component {
     return (
       <div className='main'>
         <ViewContainer />
+        <div className='vertical-line'></div>
         <TreeContainer />
+        <div className='vertical-line'></div>
         <PanelContainer />
       </div>
     )
