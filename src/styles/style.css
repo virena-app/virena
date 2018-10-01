@@ -94,11 +94,20 @@ div.ios-android button{
   width: 86.5%;
 }
 
-.screen-view {
+.iphone-screen {
   margin-top: 45px;
   margin-left: 1px;
   height: 80%;
-  background-color: white;
+  background-color: #eee;
+  position: relative;
+}
+
+.android-screen {
+  margin: 0 10px 15px 0;
+  /* margin-bottom: 15px; */
+  height: 479px;
+  width: 290px;
+  background-color: #eee;
   position: relative;
 }
 
@@ -125,13 +134,6 @@ div.ios-android button{
   flex: 1;
 }
 
-/* div#iphone { 
-  background-image: url('../../assets/frame.png');
-  background-size: 100%;
-  background-repeat: no-repeat;
-  width: 360px;
-  height: 722px;
-} */
 
 div.screen {
   display: flex;

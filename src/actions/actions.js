@@ -120,7 +120,15 @@ export const openDirectory = () => (dispatch) => {
     // }))
 }
 
-export const changeScreen = (screen) => ({
-  type: types.CHANGE_SCREEN,
-  payload: screen
+export const changePhone = (phone, screen) => ({
+  type: types.CHANGE_PHONE,
+  payload: {
+    phone: phone,
+    screen: screen
+  }
 })
+
+// export const changeScreen = (screen) => ({
+//   type: types.CHANGE_SCREEN,
+//   payload: screen
+// })

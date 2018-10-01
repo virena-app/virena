@@ -20,7 +20,8 @@ const initialState = {
   fileExportModalState: false,
   drawerState: false,
   fileDownloadPath: '',
-  screen: 'iphone-view',
+  phone: 'iphone-view',
+  screen: 'iphone-screen column',
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -150,11 +151,19 @@ const componentReducer = (state = initialState, action) => {
         drawerState: false
       }
 
-      case types.CHANGE_SCREEN:
+    case types.CHANGE_PHONE:
+      return {
+        ...state,
+        phone: action.payload.phone,
+        screen: action.payload.screen
+      }
+    
+    case types.CHANGE_SCREEN:
       return {
         ...state,
         screen: action.payload
       }
+    
     default: 
       return state;
   }
