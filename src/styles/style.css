@@ -103,10 +103,9 @@ div.ios-android button{
 }
 
 .android-screen {
-  margin: 0 10px 15px 0;
-  /* margin-bottom: 15px; */
+  margin-bottom: 13.5px;
   height: 479px;
-  width: 290px;
+  width: 299.5px;
   background-color: #fff;
   position: relative;
 }
@@ -134,11 +133,15 @@ div.ios-android button{
   font-size: 16px;
 }
 
-.bottom-tab {
+.bottom-tab, .bottom-tab-top-border {
   display: inherit;
   justify-content: space-evenly;
   align-items: center;
   flex: 1;
+}
+
+.bottom-tab-top-border {
+  border-top: 1px solid #d5d5d5;
 }
 
 

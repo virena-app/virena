@@ -5,6 +5,7 @@ import * as actions from '../actions/actions';
 
 const mapStateToProps = store =>({
   treeData: store.data.treeData,
+  selectedComponent: store.data.selectedComponent,
   input: store.data.input,
   id: store.data.id,
 })
@@ -22,7 +23,7 @@ class TreeContainer extends Component {
   }
 
   render() {
-    const { treeData, input, setTree, addChild, deleteComponent, selectComponent, id } = this.props;
+    const { treeData, input, setTree, addChild, deleteComponent, selectComponent, selectedComponent, id } = this.props;
     return (
       <div className='tree'>
         <Tree 
@@ -31,6 +32,7 @@ class TreeContainer extends Component {
           addChild={addChild} 
           deleteComponent={deleteComponent} 
           selectComponent={selectComponent} 
+          selectedComponent={selectedComponent}
           input={input}
           id={id}/>
       </div>

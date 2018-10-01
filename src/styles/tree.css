@@ -108,7 +108,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(45deg, #37474F 30%, #455A64 90%);
+  /*background: linear-gradient(45deg, #37474F 30%, #455A64 90%);*/
 }
 
 .active {

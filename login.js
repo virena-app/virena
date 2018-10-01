@@ -34,7 +34,7 @@ function signInWithPopup () {
     const urlParams = {
       response_type: 'code',
       redirect_uri: 'http://127.0.0.1:8000',
-      client_id: '511828570984-7nmej36h9j2tebiqmpqh835naet4vci4.apps.googleusercontent.com',
+      client_id: '484818166811-l38imlkp6f9s2t4p0c8mt9vui0vf7f0q.apps.googleusercontent.com',
       scope: 'profile email',
     }
     const authUrl = `${GOOGLE_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
@@ -46,11 +46,9 @@ function signInWithPopup () {
         if (query.error) {
           reject(new Error(`There was an error: ${query.error}`))
         } else if (query.code) {
-          // Login is complete
           authWindow.removeAllListeners('closed')
           setImmediate(() => authWindow.close())
 
-          // This is the authorization code we need to request tokens
           resolve(query.code)
         }
       }
@@ -77,7 +75,7 @@ async function fetchAccessTokens (code) {
   console.log('code')
   const response = await axios.post(GOOGLE_TOKEN_URL, qs.stringify({
     code,
-    client_id: '511828570984-7nmej36h9j2tebiqmpqh835naet4vci4.apps.googleusercontent.com',
+    client_id: '484818166811-l38imlkp6f9s2t4p0c8mt9vui0vf7f0q.apps.googleusercontent.com',
     redirect_uri: 'http://127.0.0.1:8000',
     grant_type: 'authorization_code',
   }), {

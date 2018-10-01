@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 export default class BottomTab extends Component {
   render() {
     const { children } = this.props.selectedComponent;
+    const { phone  } = this.props.phone;
     const links = children ? 
     children.map((screen, i) => { 
       return <NavLink  
@@ -16,7 +17,7 @@ export default class BottomTab extends Component {
               </NavLink>
      }) : null
     return (
-      <div className='bottom-tab'>
+      <div className={phone === 'iphone-view' ? 'bottom-tab' : 'bottom-tab-top-border'}>
           {links}
       </div>
     )
