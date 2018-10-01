@@ -13,7 +13,7 @@ const createWindow = () => {
 
   if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
   else win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'login.html'),
     protocol: 'file:',
     hash: '/',
     slashes: true
@@ -23,7 +23,22 @@ const createWindow = () => {
 
   win.on('closed', () => {
     win = null
+  });
+
+  ipcMain.on('authorized', (event, args) => {
+    if (args) {
+      win.loadURL(url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        hash: '/',
+        slashes: true
+      }));
+      console.log('login details', args);
+    } else {
+      console.log('cheese')
+    }
   })
+  return win;
 }
 
 ipcMain.on('selectFileDirectory' , (event) => {

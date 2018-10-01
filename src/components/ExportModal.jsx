@@ -28,15 +28,21 @@ const styles = theme => ({
   },
 });
 
-class AlertModal extends React.Component {
-  
-
+class ExportModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
   handleOpen(){
-    // this.setState({ open: true });
+    this.setState({ open: true });
   };
 
   handleClose(){
-    // this.setState({ open: false });
+    this.setState({ open: false });
   };
 
   render() {
@@ -44,20 +50,20 @@ class AlertModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={() => this.props.closeExportModal(false)}>Close</Button>
+        <Button onClick={this.handleClose}>Close</Button>
         <Modal
           aria-labelledby="alert-modal-title"
           aria-describedby="alert-modal-description"
-          open={this.props.fileExportModalState.open}
-          onClose={() => this.props.closeExportModal(false)}
+          open={this.handleOpen}
+          onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="title" id="modal-title">
-              Files Exported!
+              Enter file name
             </Typography>
             <Typography variant="subheading" id="alert-modal-description">
             </Typography>
-            <AlertModalWrapped />
+            <ExportModalWrapped />
           </div>
         </Modal>
       </div>
@@ -65,11 +71,11 @@ class AlertModal extends React.Component {
   }
 }
 
-AlertModal.propTypes = {
+ExportModal.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 // We need an intermediary variable for handling the recursive nesting.
-const AlertModalWrapped = withStyles(styles)(AlertModal);
+const ExportModalWrapped = withStyles(styles)(ExportModal);
 
-export default AlertModalWrapped
+export default ExportModalWrapped
