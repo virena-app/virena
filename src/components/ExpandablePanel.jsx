@@ -12,6 +12,8 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Selects from './Selects.jsx'
 import TextField from '@material-ui/core/TextField';
+import { Input, InputLabel, FormControl } from '@material-ui/core/';
+import purple from '@material-ui/core/colors/purple';
 import { pascalCase, duplicateTitle } from '../utils/helperFunctions.util.js'
 // import white from '@material-ui/core/colors/white';
 import grey from '@material-ui/core/colors/grey';
@@ -67,17 +69,27 @@ const styles = theme => ({
   panel: {
     background: 'linear-gradient(45deg, #37474F 30%, #455A64 90%)',
   },
+  margin: {
+    fullwidth: true
+  },
   input: {
-    color: "#eee",
+    color: "#eee !important",
+    width: 160
     // borderBottom: '1px solid #eee'
   },
   inputLabel: {
-    color: '#eee',
-    borderBottom: '1px solid #eee'
+    // '&$labelFocused': {
+    //   color: purple
+    // }
+    color: '#eee !important'
   },
+  labelFocused: {},
   underline: {
     '&:before': {
-      borderBottom: '1px solid #eee'
+      borderBottomColor: '#eee'
+    },
+    '&:after': {
+      borderBottomColor: '#eee'
     }
   }
 });
@@ -94,7 +106,7 @@ const theme = createMuiTheme({
         //   backgroundColor: 'red'
         // }
         '&:before': {
-          borderColor: 'blue'
+          borderColor: grey
         }
       }
     }
@@ -127,7 +139,7 @@ class DetailedExpansionPanel extends Component {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon className={classes.icon}/>}>
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                {selectedComponent.title ? selectedComponent.title : 'Select a component'}
+                {selectedComponent && selectedComponent.title ? selectedComponent.title : 'Select a component'}
               </Typography>
             </div>
             <div className={classes.column}>
@@ -140,7 +152,7 @@ class DetailedExpansionPanel extends Component {
             </div>
             
             <div className={classNames(classes.column, classes.helper)}>
-              <MuiThemeProvider theme={theme}>
+              {/* <MuiThemeProvider theme={theme}>
               <TextField
                 required
                 id="standard-with-placeholder"
@@ -159,7 +171,25 @@ class DetailedExpansionPanel extends Component {
                   className: classes.input
                 }}
               />  
-              </MuiThemeProvider>
+              </MuiThemeProvider> */}
+              <FormControl className={classes.margin}>
+                <InputLabel 
+                  htmlFor='custom-css-input'
+                  FormLabelClasses={{
+                    root: classes.inputLabel,
+                    focused: classes.labelFocused
+                  }}>
+                  Select a Component  
+                </InputLabel>
+                <Input 
+                  id='custom-css-input'
+                  classes={{
+                    input: classes.input,
+                    underline: classes.underline,
+                  }}
+                />
+              </FormControl>
+              
             </div>
           </ExpansionPanelDetails>
           <Divider />
