@@ -14,6 +14,7 @@ const mapStateToProps = store => ({
   selectedComponent: store.data.selectedComponent,
   drawerState: store.data.drawerState,
   screen: store.data.screen,
+  phone: store.data.phone
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -26,7 +27,7 @@ class PhoneContainer extends Component {
   render() {
     let backdrop;
     
-    const { selectedComponent, selectComponent, treeData, drawerState, openDrawer, closeDrawer, screen } = this.props;
+    const { selectedComponent, selectComponent, treeData, drawerState, openDrawer, closeDrawer, screen, phone } = this.props;
     if (drawerState) {
       backdrop = <Backdrop closeDrawer={closeDrawer} />
     }
@@ -41,7 +42,7 @@ class PhoneContainer extends Component {
         return (
           <div className={screen}>
             <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen}/>
-            <BottomTab selectedComponent={selectedComponent} selectComponent={selectComponent} />
+            <BottomTab selectedComponent={selectedComponent} selectComponent={selectComponent} phone={phone} />
           </div>
         )
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Drawer') {
@@ -80,7 +81,7 @@ class PhoneContainer extends Component {
             let selectedChild = selectedComponent.children[0]
             if (selectedChild.subtitle === 'BottomTab') {              
               screens.push(<PhoneScreen selectedComponent={selectedChild} screen={screen}/>);
-              screens.push(<BottomTab selectedComponent={selectedChild} />);
+              screens.push(<BottomTab selectedComponent={selectedChild} phone={phone} />);
             } else if (selectedChild.subtitle === 'Drawer') {
                 screens.push(<div className='drawer-wrapper'>
                               <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
@@ -101,7 +102,7 @@ class PhoneContainer extends Component {
     }
 
     return (
-      <div className='screen-wrapper'>
+      <div className={phone === 'iphone-view' ? 'screen-wrapper' : null}>
         {navigator()}
       </div>
     )
