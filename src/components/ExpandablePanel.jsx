@@ -17,21 +17,21 @@ import { pascalCase, duplicateTitle } from '../utils/helperFunctions.util.js'
 const styles = theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    color: '#fff',
+    color: '#eee',
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: '#fff',
+    color: '#eee',
   },
   icon: {
     verticalAlign: 'bottom',
     height: 20,
     width: 20,
-    color: '#fff',
+    color: '#eee',
   },
   details: {
     alignItems: 'center',
-    color: '#fff',
+    color: '#eee',
   },
   column: {
     flexBasis: '33.33%',
@@ -51,13 +51,13 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200,
-    color: '#fff',
+    color: '#eee',
   },
   panel: {
     background: 'linear-gradient(45deg, #37474F 30%, #455A64 90%)',
   },
   input: {
-    color: "white",
+    color: "#eee",
   }
 });
 
