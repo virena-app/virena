@@ -11,6 +11,18 @@ body {
   flex: 1;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 div.vertical-line, div.horizontal-line {
   background-color: #4c4c4c;
   /* box-shadow: inset 0px 5px 10px 0px rgba(0, 0, 0, 0.75); */
@@ -40,14 +52,28 @@ div.horizontal-line {
   display: inherit;
   align-items: center;
   flex-direction: column;
+  margin: 10px 0;
 }
 
-.inner-view {
+.ios-android {
+  margin-top: 20px;
+}
+
+div.ios-android button{
+  margin: 0 10px 0 10px;
+  outline: none;
+  color: #333;
+}
+
+.toggle-on {
+  background-color: dodgerblue;
+}
+
+.iphone-view, .android-view {
   /* width: 360px;
   height: 722px; */
   width: 330px;
   height: 662px;
-  background-image: url('../../assets/frame.png');
   /* background-size: 360px 722px; */
   background-size: 330px 662px;
   background-repeat: no-repeat;
@@ -56,27 +82,47 @@ div.horizontal-line {
   align-items: center;
 }
 
+.iphone-view {
+  background-image: url('../../assets/iphone-frame.png');
+}
+
+.android-view {
+  background-image: url('../../assets/android-frame.png');
+}
+
 .screen-wrapper {
   width: 86.5%;
 }
 
-.screen-view {
+.iphone-screen {
   margin-top: 45px;
   margin-left: 1px;
   height: 80%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
+  background-color: #fff;
   position: relative;
+}
+
+.android-screen {
+  margin: 0 10px 15px 0;
+  /* margin-bottom: 15px; */
+  height: 479px;
+  width: 290px;
+  background-color: #fff;
+  position: relative;
+}
+
+.phone-screen, .switch-div, .a-phone-screen, .a-switch-div {
+  justify-content: center;
+  align-items: center;
+  flex: 13;
 }
 
 .phone-screen, .switch-div {
   background-color: rgb(223, 223, 230);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 13;
+}
+
+.a-phone-screen, .a-switch-div {
+  background-color: #fff;
 }
 
 .switch-button{
@@ -95,13 +141,6 @@ div.horizontal-line {
   flex: 1;
 }
 
-/* div#iphone { 
-  background-image: url('../../assets/frame.png');
-  background-size: 100%;
-  background-repeat: no-repeat;
-  width: 360px;
-  height: 722px;
-} */
 
 div.screen {
   display: flex;
