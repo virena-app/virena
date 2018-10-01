@@ -74,7 +74,7 @@ const componentReducer = (state = initialState, action) => {
     case types.DELETE_COMPONENT:
       const node = action.payload
       const newTreeData2 = deleteNode(copy.treeData, node.id)
-      if (!nodeExists(newTreeData2, copy.selectedComponent.id)) copy.selectedComponent = newTreeData2[0]
+      if (!nodeExists(newTreeData2, copy.selectedComponent.id)) copy.selectedComponent = newTreeData2[0] || {title: null, subtitle: null, id: null}
       return {
         ...state,
         treeData: newTreeData2,
