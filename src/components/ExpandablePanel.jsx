@@ -76,7 +76,7 @@ class DetailedExpansionPanel extends Component {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon className={classes.icon}/>}>
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                {selectedComponent.title ? selectedComponent.title : 'Select a component'}
+                {selectedComponent && selectedComponent.title ? selectedComponent.title : 'Select a component'}
               </Typography>
             </div>
             <div className={classes.column}>
