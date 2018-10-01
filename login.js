@@ -97,7 +97,12 @@ async function fetchGoogleProfile (accessToken) {
   return response.data
 }
 
-const button = document.querySelector('button')
-button.addEventListener('click', () => {
+const google = document.getElementById('google-login')
+google.addEventListener('click', () => {
   googleSignIn()
+})
+
+const guest = document.getElementById('guest-login')
+guest.addEventListener('click', () => {
+  ipcRenderer.send('guest', 'guest')
 })
