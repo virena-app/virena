@@ -38,18 +38,22 @@ const componentReducer = (state = initialState, action) => {
       }
     case types.ADD_PARENT:
       copy.treeData = state.treeData.slice()
-      copy.treeData.push({
+      const parent = {
         title: pascalCase(copy.input),
         subtitle: copy.initialTypeSelection,
         id: copy.id,
-      })
+      }
+      copy.treeData.push(parent)
       const copyid = copy.id + 1;
+      
+      
       
     return {
       ...state,
       treeData: copy.treeData,
       input: '',
       id: copyid,
+      selectedComponent: parent
     }
     case types.ADD_CHILD:
       const key1 = action.payload.key;
@@ -74,7 +78,7 @@ const componentReducer = (state = initialState, action) => {
     case types.DELETE_COMPONENT:
       const node = action.payload
       const newTreeData2 = deleteNode(copy.treeData, node.id)
-      if (!nodeExists(newTreeData2, copy.selectedComponent.id)) copy.selectedComponent = newTreeData2[0]
+      if (!nodeExists(newTreeData2, copy.selectedComponent.id)) copy.selectedComponent = newTreeData2[0] || {title: null, subtitle: null, id: null}
       return {
         ...state,
         treeData: newTreeData2,
