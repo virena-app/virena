@@ -1,15 +1,5 @@
-//initializes a connection with our PostgresQL database
-// const connection = 'postgres://ysnirifw:HZzuHfAp7HvXM8qNRpm4G1LJJFHoK9JS@pellefant.db.elephantsql.com:5432/ysnirifw';
-// const pgp = require('pg-promise')(/*options*/);
-// const db = pgp(connection);
-
-// export default db;
-
 const Sequelize = require("sequelize");
-export const db = new Sequelize('postgres://ysnirifw:HZzuHfAp7HvXM8qNRpm4G1LJJFHoK9JS@pellefant.db.elephantsql.com:5432/ysnirifw', {dialect: 'postgres'});
-
-
-
+export const db = new Sequelize('postgres://master:password@visualize-react-native.cdl88obocnjd.us-east-2.rds.amazonaws.com:5432/visualize_react_native', {dialect: 'postgres'});
 
 export const Project = db.define('projects', {
   json: Sequelize.JSONB
