@@ -293,9 +293,15 @@ NavLink div {
 }
 
 #or {
-  margin-top: 10vh;
+  margin-top: 5vh;
 }
 
 #guest-login {
-  margin-top: 10vh;
+  margin-top: 5vh;
+  width: 370px;
+  height: 80px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 22px;
+
 }

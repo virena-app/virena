@@ -41,6 +41,15 @@ const createWindow = () => {
     }
   })
 
+  ipcMain.on('guest', () => {
+    win.loadURL(url.format({
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: 'file:',
+      hash: '/',
+      slashes: true
+    }));
+  })
+
   win.on('closed', () => {
     win = null
   })
