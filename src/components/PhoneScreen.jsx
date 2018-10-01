@@ -35,7 +35,7 @@ export default class PhoneScreen extends Component {
       }
     }
     return (
-      <div className='phone-screen'>
+      <div className='phone-screen column'>
         <Switch>
           {routes()}
         </Switch>

@@ -16,3 +16,4 @@ export const EXPORT_FILES_FAIL = 'EXPORT_FILES_FAIL';
 export const OPEN_DRAWER = 'OPEN_DRAWER';
 export const CLOSE_DRAWER = 'CLOSE_DRAWER';
 export const SAVE_PROJECT = 'SAVE_PROJECT';
+export const CHANGE_SCREEN = 'CHANGE_SCREEN';

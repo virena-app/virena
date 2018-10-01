@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class Switch extends Component {
   render() {
-    const switchClass = 'switch-div'
+    const switchClass = 'switch-div column'
     const switchBtn = 'switch-button'
     return (
       <div className={switchClass}>

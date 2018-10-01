@@ -20,6 +20,7 @@ const initialState = {
   fileExportModalState: false,
   drawerState: false,
   fileDownloadPath: '',
+  screen: 'iphone-view',
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -147,6 +148,12 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         drawerState: false
+      }
+
+      case types.CHANGE_SCREEN:
+      return {
+        ...state,
+        screen: action.payload
       }
     default: 
       return state;

@@ -38,14 +38,14 @@ class PhoneContainer extends Component {
       }
       else if (selectedComponent.subtitle && selectedComponent.subtitle === 'BottomTab') {
         return (
-          <div className='screen-view'>
+          <div className='screen-view column'>
             <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} />
             <BottomTab selectedComponent={selectedComponent} selectComponent={selectComponent} />
           </div>
         )
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Drawer') {
         return (
-          <div className='screen-view'>
+          <div className='screen-view column'>
             <div className='drawer-wrapper'>
               <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
               <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent} />
@@ -57,30 +57,15 @@ class PhoneContainer extends Component {
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Simple Screen') {
           // const parent = getParent(treeData, selectedComponent);
           return (
-            <div className='screen-view'>
-              <div className='phone-screen'>
+            <div className='screen-view column'>
+              <div className='phone-screen column'>
                 <div>{selectedComponent.title}</div>
               </div>
-              {/* <PhoneScreen 
-                treeData={treeData} 
-                selectedComponent={selectedComponent} 
-                parent={
-                  parent.subtitle === 'BottomTab' || parent.subtitle === 'Drawer'
-                  ? parent
-                  : null
-                }
-                selectComponent={selectComponent}
-              />
-              {
-                parent.subtitle === 'BottomTab'
-                ? <BottomTab selectedComponent={parent} />
-                : null
-              } */}
             </div>
           )
        } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Switch') {
           return (
-            <div className='screen-view'>
+            <div className='screen-view column'>
               <Switch 
                 selectedComponent={selectedComponent} 
                 selectComponent={selectComponent} 
@@ -106,7 +91,7 @@ class PhoneContainer extends Component {
             return screens;
           }
           return (
-            <div className='screen-view'>
+            <div className='screen-view column'>
               {screen()}
             </div>
           )

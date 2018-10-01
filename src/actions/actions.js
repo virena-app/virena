@@ -119,3 +119,8 @@ export const openDirectory = () => (dispatch) => {
     //   payload: err
     // }))
 }
+
+export const changeScreen = (screen) => ({
+  type: types.CHANGE_SCREEN,
+  payload: screen
+})
