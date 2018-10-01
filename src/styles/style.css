@@ -35,11 +35,19 @@ div.vertical-line {
 
 div.horizontal-line {
   height: .4vh;
-  width: 40vw;
+  width: 30vw;
 }
 
-.panel, .tree {
-  width: 40vw;
+.panel {
+  width: 30vw;
+  padding-top: 2.5%;
+  color: white;
+  display: inherit;
+  flex-direction: column;
+}
+
+.tree {
+  width: 30vw;
   padding-top: 2.5%;
   color: white;
   display: inherit;

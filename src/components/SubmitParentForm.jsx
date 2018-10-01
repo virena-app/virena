@@ -41,7 +41,7 @@ class SubmitParentForm extends Component {
               className: classes.input,
             }}
           >
-            <MenuItem value="" className={classes.menu}/>
+            
             <MenuItem value={'Stack'} className={classes.menu}>Stack</MenuItem>
             <MenuItem value={'Drawer'} className={classes.menu}>Drawer</MenuItem>
             <MenuItem value={'BottomTab'} className={classes.menu}>BottomTab</MenuItem>
