@@ -38,18 +38,22 @@ const componentReducer = (state = initialState, action) => {
       }
     case types.ADD_PARENT:
       copy.treeData = state.treeData.slice()
-      copy.treeData.push({
+      const parent = {
         title: pascalCase(copy.input),
         subtitle: copy.initialTypeSelection,
         id: copy.id,
-      })
+      }
+      copy.treeData.push(parent)
       const copyid = copy.id + 1;
+      
+      
       
     return {
       ...state,
       treeData: copy.treeData,
       input: '',
       id: copyid,
+      selectedComponent: parent
     }
     case types.ADD_CHILD:
       const key1 = action.payload.key;

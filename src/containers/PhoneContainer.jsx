@@ -78,11 +78,11 @@ class PhoneContainer extends Component {
        } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Stack') {
           const screen = () => { 
             let screens = [];
-            let selectedChild = selectedComponent.children[0]
-            if (selectedChild.subtitle === 'BottomTab') {              
+            let selectedChild = selectedComponent.children ? selectedComponent.children[0] : null
+            if (selectedChild && selectedChild.subtitle === 'BottomTab') {              
               screens.push(<PhoneScreen selectedComponent={selectedChild} screen={screen}/>);
               screens.push(<BottomTab selectedComponent={selectedChild} phone={phone} />);
-            } else if (selectedChild.subtitle === 'Drawer') {
+            } else if (selectedChild && selectedChild.subtitle === 'Drawer') {
                 screens.push(<div className='drawer-wrapper'>
                               <button onClick={openDrawer} className='toggle-btn'>Toggle Drawer</button>
                               <Drawer selectedComponent={selectedChild} drawerState={drawerState} selectComponent={selectComponent} />
