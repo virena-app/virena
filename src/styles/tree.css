@@ -93,12 +93,12 @@
 .rst__toolbarButton {
   display: inline-block;
   vertical-align: middle;
+  border: black;
 }
 
 .rst__rowContents {
   position: relative;
   height: 100%;
-  border: solid #bbb 1px;
   border-left: none;
   box-shadow: 0 2px 2px -2px;
   padding: 0 5px 0 10px;
@@ -338,11 +338,13 @@
   height: 100%;
   display: inline-block;
   position: absolute;
+  border: black;
 }
 .rst__lineChildren::after {
   content: '';
   position: absolute;
   background-color: black;
+  border: black;
   width: 1px;
   left: 50%;
   bottom: 0;
