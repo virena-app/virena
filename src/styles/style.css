@@ -269,3 +269,33 @@ NavLink div {
   outline: none;
   font-size: 12px;
 }
+
+.login {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+}
+
+#google-login {
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  margin-top: 10vh;
+}
+
+#logo {
+  width: 211.5px;
+  height: 187.5px;
+}
+
+#or {
+  margin-top: 10vh;
+}
+
+#guest-login {
+  margin-top: 10vh;
+}

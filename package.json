@@ -27,6 +27,7 @@
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
     "prettier": "^1.14.3",
+    "qs": "^6.5.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-redux": "^5.0.7",
@@ -66,6 +67,8 @@
       "index.html",
       "package.json",
       "main.js",
+      "login.html",
+      "login.js",
       "src/styles/style.css"
     ],
     "dmg": {
