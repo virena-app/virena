@@ -2,7 +2,7 @@ import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
 import { pascalCase, maxDepth, findNewNode, updateNode, nodeExists, deleteNode } from '../utils/helperFunctions.util.js'
-import saveProject from '../utils/saveProject.util.js';
+import saveProjectUtil from '../utils/saveProject.util.js';
 
 const initialState = {
   treeData: [],
@@ -146,7 +146,8 @@ const componentReducer = (state = initialState, action) => {
         statusPopupErrorOpen: action.payload,
       }
     case types.SAVE_PROJECT:
-      saveProject(copy.treeData, copy.displayName, copy.uid);
+      const { treeData, projectName, uid, displayName } = action.payload;
+      saveProjectUtil(treeData, projectName || 'projectName', uid, displayName);
       return state;
     case types.OPEN_DRAWER:
       return {
