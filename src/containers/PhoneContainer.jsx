@@ -59,11 +59,11 @@ class PhoneContainer extends Component {
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Simple Screen') {
           // const parent = getParent(treeData, selectedComponent);
           return (
-            <div className={screen}>
-              <div className='phone-screen column'>
+            // <div className={screen}>
+              <div className={screen === 'iphone-screen' ? 'phone-screen column' : 'a-phone-screen column'}>
                 <div>{selectedComponent.title}</div>
               </div>
-            </div>
+            // </div>
           )
        } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Switch') {
           return (
