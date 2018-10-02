@@ -7,21 +7,22 @@ const saveProjectUtil = (treeData, projectName, uid, displayName) => {
     
     Project.findAll({
       where: {
-        projectName
+        projectName,
+        uid
       }
     }).then( projects => {
       if (projects.length) {
         return Project.update(
           {treeData},
-          {returning: true, where: {projectName}}
-        ).then(updatedRecord => console.log("UPDATED!", updatedDoc))
+          {returning: true, where: {projectName, uid}}
+        ).then(updatedRecord => console.log(updatedRecord[1][0].dataValues))
       } else {
         return Project.create({
           treeData,
           projectName,
           uid,
           displayName
-        }).then(newRecord => console.log("CREATED!", newRecord))
+        }).then(newRecord => console.log("CREATED!", newRecord.dataValues))
       }
     })
 
