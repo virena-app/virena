@@ -73,14 +73,10 @@ const styles = theme => ({
     fullwidth: true
   },
   input: {
-    color: "#eee !important",
+    color: '#eee !important',
     width: 160
-    // borderBottom: '1px solid #eee'
   },
   inputLabel: {
-    // '&$labelFocused': {
-    //   color: purple
-    // }
     color: '#eee !important'
   },
   labelFocused: {},
@@ -91,38 +87,38 @@ const styles = theme => ({
     '&:after': {
       borderBottomColor: '#eee'
     }
+  },
+  saveButton: {
+    background: '#2068c9',
   }
 });
 
-const theme = createMuiTheme({
-  overrides: {
-    MuiInput: {
-      underline: {
-        // color: 'red',
-        // '&:hover:not($disabled):after':{
-        //   backgroundColor: 'red',
-        // },
-        // '&:hover:not($disabled):before':{
-        //   backgroundColor: 'red'
-        // }
-        '&:before': {
-          borderColor: grey
-        }
-      }
-    }
-  },
-  palette: {
-    primary: {
-      light: '#eee',
-      main: '#eee',
-      contrastText: '#eee'
-    },
-    secondary: {
-      main: '#eee',
-      contrastText: '#eee'
-    }
-  },
-})
+// const theme = createMuiTheme({
+//   overrides: {
+//     MuiInput: {
+//       underline: {
+//         // color: 'red',
+//         // '&:hover:not($disabled):after':{
+//         //   backgroundColor: 'red',
+//         // },
+//         // '&:hover:not($disabled):before':{
+//         //   backgroundColor: 'red'
+//         // }
+//       }
+//     }
+//   },
+//   palette: {
+//     primary: {
+//       light: '#eee',
+//       main: '#eee',
+//       contrastText: '#eee'
+//     },
+//     secondary: {
+//       main: '#eee',
+//       contrastText: '#eee'
+//     }
+//   },
+// })
 
 
 //need to grab name of selected tree component and render to options panel
@@ -152,26 +148,6 @@ class DetailedExpansionPanel extends Component {
             </div>
             
             <div className={classNames(classes.column, classes.helper)}>
-              {/* <MuiThemeProvider theme={theme}>
-              <TextField
-                required
-                id="standard-with-placeholder"
-                label="Change Component Name"
-                labelClassName={classes.underline}
-                placeholder="Change Name"
-                className={classes.textField}
-                margin="normal"
-                onChange={(e) => {
-                  setNameToChange(e.target.value)}}
-                value={changeNameInput}
-                InputLabelProps={{
-                  className: classes.input
-                }}
-                InputProps={{
-                  className: classes.input
-                }}
-              />  
-              </MuiThemeProvider> */}
               <FormControl className={classes.margin}>
                 <InputLabel 
                   htmlFor='custom-css-input'
@@ -183,24 +159,28 @@ class DetailedExpansionPanel extends Component {
                 </InputLabel>
                 <Input 
                   id='custom-css-input'
+                  onChange={(e) => {
+                    setNameToChange(e.target.value)}}
+                  value={changeNameInput}
                   classes={{
                     input: classes.input,
                     underline: classes.underline,
                   }}
                 />
               </FormControl>
-              
             </div>
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
-            <Button variant="contained" color="primary" 
+            <Button 
+              variant="contained" 
+              color="primary" 
+              className={classes.saveButton}
               onClick={() => {
                 const title = pascalCase(changeNameInput);
                 updateNameAndType(title || "Untitled" + selectedComponent.id, typeSelected || "Simple Screen", selectedComponent)
 
-              }}
-            >
+              }}>
               Save
             </Button>
           </ExpansionPanelActions>
