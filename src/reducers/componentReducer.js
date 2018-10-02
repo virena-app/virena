@@ -22,6 +22,7 @@ const initialState = {
   fileDownloadPath: '',
   phone: 'iphone-view',
   screen: 'iphone-screen column',
+  logoSpin: true,
   userLoggedIn: false,
   displayName: '',
   uid: '',
@@ -171,6 +172,13 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         screen: action.payload
       }
+
+    case types.TOGGLE_LOGO:
+    return {
+      ...state,
+      logoSpin: copy.logoSpin? false: true
+    }
+    
     case types.SET_USER_DATA:
       return {
         ...state,
