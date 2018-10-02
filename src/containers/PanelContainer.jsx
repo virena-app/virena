@@ -81,12 +81,6 @@ class PanelContainer extends Component {
       const { exportFiles, treeData } = this.props;
       exportFiles(treeData, dirPath);
     })
-    ipcRenderer.on('userLoggedIn', (event,loginData) => {
-      console.log('Received login data in panelContainer', loginData);
-    })
-    ipcRenderer.on('guestLoggedIn', (event, loginData) => {
-      console.log('Received guest data', loginData);
-    })
   }
 
   render() {
@@ -94,6 +88,12 @@ class PanelContainer extends Component {
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, userLoggedIn } = this.props;
     console.log('PanelContainer Rendered!!!!')
+    ipcRenderer.on('userLoggedIn', (event,loginData) => {
+      console.log('Received login data in panelContainer', loginData);
+    })
+    ipcRenderer.on('guestLoggedIn', (event, loginData) => {
+      console.log('Received guest data', loginData);
+    })
     return (
       <div className='panel'>
         <div>

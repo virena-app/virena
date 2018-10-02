@@ -10,7 +10,6 @@ const GOOGLE_PROFILE_URL = 'https://www.googleapis.com/userinfo/v2/me'
 async function googleSignIn () {
   const code = await signInWithPopup()
   const tokens = await fetchAccessTokens(code)
-  console.log(tokens)
   const {id, email, name} = await fetchGoogleProfile(tokens.access_token)
   console.log('after async fetch google profile')
   const providerUser = {
@@ -42,7 +41,6 @@ function signInWithPopup () {
 
     function handleNavigation (url) {
       const query = parse(url, true).query
-      console.log(query)
       if (query) {
         if (query.error) {
           reject(new Error(`There was an error: ${query.error}`))

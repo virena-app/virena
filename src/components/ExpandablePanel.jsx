@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, withTheme, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -12,9 +12,18 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Selects from './Selects.jsx'
 import TextField from '@material-ui/core/TextField';
+import { Input, InputLabel, FormControl } from '@material-ui/core/';
+import purple from '@material-ui/core/colors/purple';
 import { pascalCase, duplicateTitle } from '../utils/helperFunctions.util.js'
+// import white from '@material-ui/core/colors/white';
+import grey from '@material-ui/core/colors/grey';
+
 
 const styles = theme => ({
+  root: {
+    width: '95%',
+    marginLeft: 13
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     color: '#eee',
@@ -31,6 +40,7 @@ const styles = theme => ({
   },
   details: {
     alignItems: 'center',
+    // justifyContent: 'center',
     color: '#eee',
   },
   column: {
@@ -53,13 +63,66 @@ const styles = theme => ({
     width: 200,
     color: '#eee',
   },
+  floatingLabel: {
+    color: '#eee'
+  },
   panel: {
     background: 'linear-gradient(45deg, #37474F 30%, #455A64 90%)',
   },
+  margin: {
+    fullwidth: true
+  },
   input: {
-    color: "#eee",
+    color: "#eee !important",
+    width: 160
+    // borderBottom: '1px solid #eee'
+  },
+  inputLabel: {
+    // '&$labelFocused': {
+    //   color: purple
+    // }
+    color: '#eee !important'
+  },
+  labelFocused: {},
+  underline: {
+    '&:before': {
+      borderBottomColor: '#eee'
+    },
+    '&:after': {
+      borderBottomColor: '#eee'
+    }
   }
 });
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiInput: {
+      underline: {
+        // color: 'red',
+        // '&:hover:not($disabled):after':{
+        //   backgroundColor: 'red',
+        // },
+        // '&:hover:not($disabled):before':{
+        //   backgroundColor: 'red'
+        // }
+        '&:before': {
+          borderColor: grey
+        }
+      }
+    }
+  },
+  palette: {
+    primary: {
+      light: '#eee',
+      main: '#eee',
+      contrastText: '#eee'
+    },
+    secondary: {
+      main: '#eee',
+      contrastText: '#eee'
+    }
+  },
+})
 
 
 //need to grab name of selected tree component and render to options panel
@@ -89,20 +152,44 @@ class DetailedExpansionPanel extends Component {
             </div>
             
             <div className={classNames(classes.column, classes.helper)}>
+              {/* <MuiThemeProvider theme={theme}>
               <TextField
                 required
                 id="standard-with-placeholder"
                 label="Change Component Name"
+                labelClassName={classes.underline}
                 placeholder="Change Name"
                 className={classes.textField}
                 margin="normal"
                 onChange={(e) => {
                   setNameToChange(e.target.value)}}
                 value={changeNameInput}
+                InputLabelProps={{
+                  className: classes.input
+                }}
                 InputProps={{
                   className: classes.input
                 }}
               />  
+              </MuiThemeProvider> */}
+              <FormControl className={classes.margin}>
+                <InputLabel 
+                  htmlFor='custom-css-input'
+                  FormLabelClasses={{
+                    root: classes.inputLabel,
+                    focused: classes.labelFocused
+                  }}>
+                  Select a Component  
+                </InputLabel>
+                <Input 
+                  id='custom-css-input'
+                  classes={{
+                    input: classes.input,
+                    underline: classes.underline,
+                  }}
+                />
+              </FormControl>
+              
             </div>
           </ExpansionPanelDetails>
           <Divider />
@@ -127,4 +214,4 @@ DetailedExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DetailedExpansionPanel);
+export default /*withTheme(theme)*/(withStyles(styles))(DetailedExpansionPanel);

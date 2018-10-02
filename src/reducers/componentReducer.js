@@ -9,7 +9,7 @@ const initialState = {
   addAsFirstChild: false,
   input: '',
   selectedComponent: {},
-  initialTypeSelection: 'Choose Type',
+  initialTypeSelection: '',
   typeSelected: '',
   parentSelected: '',
   availableParents: [],
@@ -43,8 +43,8 @@ const componentReducer = (state = initialState, action) => {
     case types.ADD_PARENT:
       copy.treeData = state.treeData.slice()
       const parent = {
-        title: pascalCase(copy.input),
-        subtitle: copy.initialTypeSelection,
+        title: pascalCase(copy.input) || "Untitled" + copy.id,
+        subtitle: copy.initialTypeSelection || 'Switch',
         id: copy.id,
       }
       copy.treeData.push(parent)
