@@ -17,6 +17,8 @@ const initialState = {
   id: 0,
   statusPopupOpen: false, 
   statusPopupErrorOpen: false,
+  saveProjectOpen: false,
+  saveProjectErrorOpen: false,
   fileExportModalState: false,
   drawerState: false,
   fileDownloadPath: '',
@@ -50,9 +52,6 @@ const componentReducer = (state = initialState, action) => {
       }
       copy.treeData.push(parent)
       const copyid = copy.id + 1;
-      
-      
-      
     return {
       ...state,
       treeData: copy.treeData,
@@ -144,11 +143,21 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         statusPopupOpen: action.payload, 
         statusPopupErrorOpen: action.payload,
+        saveProjectOpen: action.payload,
+        saveProjectErrorOpen: action.payload
       }
-    case types.SAVE_PROJECT:
-      const { treeData, projectName, uid, displayName } = action.payload;
-      saveProjectUtil(treeData, projectName || 'projectName', uid, displayName);
-      return state;
+    case types.SAVE_PROJECT_SUCCESS:
+      console.log('saveRecord', action.payload.record)
+      return {
+        ...state,
+        saveProjectOpen: action.payload.status,
+      }
+    case types.SAVE_PROJECT_FAIL:
+      console.log('saveRecordFail', action.payload.err)
+      return {
+        ...state,
+        saveProjectErrorOpen: action.payload.status,
+      }
     case types.OPEN_DRAWER:
       return {
         ...state,
