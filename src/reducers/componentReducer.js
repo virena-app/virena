@@ -22,6 +22,10 @@ const initialState = {
   fileDownloadPath: '',
   phone: 'iphone-view',
   screen: 'iphone-screen column',
+  userLoggedIn: false,
+  displayName: '',
+  uid: '',
+  projectName: '',
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);

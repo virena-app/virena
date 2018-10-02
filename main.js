@@ -31,20 +31,42 @@ const createWindow = () => {
   win.webContents.openDevTools() 
 
   ipcMain.on('authorized', (event, args) => {
+    console.log('before if state');
     if (args) {
+      console.log('user loggedin b4 loadURL', args);
+      win.once('dom-ready', () => {
+        // Send Message
+        console.log('inside did finishload');
+        setTimeout(() => event.sender.send('userLoggedIn', args), 6000);
+      })
       win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         hash: '/',
         slashes: true
       }));
+      console.log('User Logged In', args);
+     
     }
   })
 
+  ipcMain.on('guest', (event, args) => {
+    win.loadURL(url.format({
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: 'file:',
+      hash: '/',
+      slashes: true
+    }));
+    console.log('Guest Logged In', args)
+    event.sender.send('guestLoggedIn', args)
+  })
+  
   win.on('closed', () => {
     win = null
   });
 }
+
+
 
 ipcMain.on('selectFileDirectory' , (event) => {
   const dir = dialog.showOpenDialog(win, {

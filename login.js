@@ -12,6 +12,7 @@ async function googleSignIn () {
   const tokens = await fetchAccessTokens(code)
   console.log(tokens)
   const {id, email, name} = await fetchGoogleProfile(tokens.access_token)
+  console.log('after async fetch google profile')
   const providerUser = {
     uid: id,
     email,
@@ -97,12 +98,12 @@ async function fetchGoogleProfile (accessToken) {
   return response.data
 }
 
-const googleButton = document.getElementById('google-login')
-googleButton.addEventListener('click', () => {
+const google = document.getElementById('google-login')
+google.addEventListener('click', () => {
   googleSignIn()
 })
 
-const guestButton = document.getElementById('guest-login')
-guestButton.addEventListener('click', () => {
-  googleSignIn()
+const guest = document.getElementById('guest-login')
+guest.addEventListener('click', () => {
+  ipcRenderer.send('guest', 'guest')
 })
