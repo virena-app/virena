@@ -16,7 +16,7 @@ class SaveProjectButton extends Component {
       <Button variant="contained" color="primary"
       className={classes.saveButton} 
       onClick={() => saveProject(treeData, projectName || 'projectName', uid, displayName)}>
-        Save My Project
+        Update Project
       </Button>
     );
   }
