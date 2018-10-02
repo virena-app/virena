@@ -12,14 +12,14 @@ export default class Tree extends Component {
         onChange={treeData => setTree(treeData)}
         generateNodeProps={({ node, path }) => ({
           buttons: [
-            node.subtitle !== "Simple Screen" && node.subtitle !== "" && <button onClick={() => addChild('Untitled' + id, 'Simple Screen', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial' }}>
-              +
+            node.subtitle !== "Simple Screen" && node.subtitle !== "" && <button onClick={() => addChild(input, '', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial', 'backgroundColor': '#37474f', 'outline': 'none', 'border': 'none' }}>
+              <div className='add'></div>
             </button>,
-            <button onClick={() => deleteComponent(node)} style={{ 'fontFamily': 'Arial' }}>
-              -
+            <button onClick={() => deleteComponent(node)} style={{ 'backgroundColor': '#37474f', 'outline': 'none', 'border': 'none' }}>
+              <div className='delete'></div>
             </button>,
-            <button onClick={() => selectComponent(node)} style={{ 'fontFamily': 'Arial' }}>
-              Details
+            <button onClick={() => selectComponent(node)} style={{ 'backgroundColor': '#37474f', 'outline': 'none', 'border': 'none' }}>
+              <div className='details'></div>
             </button>
           ],
           style: selectedComponent.id === node.id 

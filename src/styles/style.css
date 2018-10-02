@@ -61,6 +61,27 @@ div.horizontal-line {
   /* width: 1vw; */
 }
 
+.delete {
+  background-image: url('../../assets/trash.png');
+  background-position: center;
+  height: 25px;
+  width: 25px
+}
+
+.add {
+  background-image: url('../../assets/add.png');
+  background-position: center;
+  height: 25px;
+  width: 25px;
+}
+
+.details {
+  background-image: url('../../assets/edit.png');
+  background-position: center;
+  height: 25px;
+  width: 25px;
+}
+
 .tree {
   width: 40vw;
   padding-top: 2.5%;
