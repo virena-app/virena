@@ -145,7 +145,7 @@ const componentReducer = (state = initialState, action) => {
         statusPopupErrorOpen: action.payload,
       }
     case types.SAVE_PROJECT:
-      saveProject(copy.treeData);
+      saveProject(copy.treeData, copy.displayName, copy.uid);
       return state;
     case types.OPEN_DRAWER:
       return {
@@ -171,7 +171,13 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         screen: action.payload
       }
-    
+    case types.SET_USER_DATA:
+      return {
+        ...state,
+        displayName: action.payload.displayName,
+        uid: action.payload.uid,
+        userLoggedIn: true
+      }
     default: 
       return state;
   }

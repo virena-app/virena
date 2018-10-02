@@ -21,6 +21,8 @@ const mapStateToProps = store => ({
   statusPopupOpen: store.data.statusPopupOpen,
   statusPopupErrorOpen: store.data.statusPopupErrorOpen,
   userLoggedIn: store.data.userLoggedIn,
+  displayName: store.data.displayName,
+  uid: store.data.uid,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -36,6 +38,7 @@ const mapDispatchToProps = dispatch => ({
   closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
   saveProject: treeData => dispatch(actions.saveProject(treeData)),
   openDirectory: () => dispatch(actions.openDirectory()),
+  setUserData: (loginData) => dispatch(actions.setUserData(loginData)),
 })
 
 const styles = theme => ({
@@ -86,10 +89,11 @@ class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, userLoggedIn } = this.props;
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, userLoggedIn, setUserData } = this.props;
     console.log('PanelContainer Rendered!!!!')
     ipcRenderer.on('userLoggedIn', (event,loginData) => {
       console.log('Received login data in panelContainer', loginData);
+      setUserData(loginData);
     })
     ipcRenderer.on('guestLoggedIn', (event, loginData) => {
       console.log('Received guest data', loginData);
