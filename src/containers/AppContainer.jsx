@@ -1,19 +1,30 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import * as actions from '../actions/actions';
 import TopNav from '../components/TopNav.jsx';
 import ViewContainer from './ViewContainer.jsx';
 import TreeContainer from './TreeContainer.jsx';
 import PanelContainer from './PanelContainer.jsx';
 
+const mapStateToProps = store => ({
+  userLoggedIn: store.data.userLoggedIn
+})
 
-export default class AppContainer extends Component {
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(actions.logout())
+})
+
+class AppContainer extends Component {
   componentDidMount() {
     console.log('AppContainer Mounted!')
   }
   render() {
+    const { userLoggedIn, logout } = this.props
     console.log('AppContainer Rendered')
     return (
       <div>
-        <TopNav />
+        <TopNav userLoggedIn={userLoggedIn} logout={logout}/>
         <div className='main'>
         <ViewContainer />
         <div className='vertical-line'></div>
@@ -25,3 +36,5 @@ export default class AppContainer extends Component {
     )
   }
 }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (AppContainer));

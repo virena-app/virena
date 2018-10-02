@@ -196,6 +196,13 @@ const componentReducer = (state = initialState, action) => {
         uid: action.payload.uid,
         userLoggedIn: true
       }
+
+    case types.LOGOUT:
+    return {
+      ...state,
+      userLoggedIn: copy.userLoggedIn? false: true
+    }
+
     default: 
       return state;
   }

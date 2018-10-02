@@ -149,3 +149,8 @@ export const setUserData = (loginData) => ({
     ...loginData,
   }
 })
+
+export const logout = () => ({
+  type: types.LOGOUT
+})
+

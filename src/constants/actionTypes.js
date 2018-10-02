@@ -22,3 +22,4 @@ export const TOGGLE_LOGO = 'TOGGLE_LOGO';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const SAVE_PROJECT_SUCCESS = 'SAVE_PROJECT_SUCCESS';
 export const SAVE_PROJECT_FAIL = 'SAVE_PROJECT_FAIL';
+export const LOGOUT = 'LOGOUT';
