@@ -12,8 +12,8 @@ const saveProject = (treeData, displayName, uid) => {
   }).then(() => {
     return Project.create({
       json: treeData,
-      displayName: displayName,
-      uid: uid,
+      // displayName: displayName,
+      // uid: uid,
     })
   }).catch(err => {
     console.log("Error saving to the database ", err)

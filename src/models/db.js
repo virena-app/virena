@@ -3,6 +3,6 @@ export const db = new Sequelize('postgres://master:password@visualize-react-nati
 
 export const Project = db.define('projects', {
   json: Sequelize.JSONB,
-  displayName: Sequelize.STRING,
-  uid: Sequelize.INTEGER,
+  // displayName: Sequelize.STRING,
+  // uid: Sequelize.INTEGER,
 })
