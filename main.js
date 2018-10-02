@@ -38,7 +38,7 @@ const createWindow = () => {
 
 ipcMain.on('login', () => {
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'login.html'),
     protocol: 'file:',
     hash: '/',
     slashes: true
