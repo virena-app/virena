@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+}
+
 body {
   background-color: #191919;
   z-index: 100;
@@ -324,4 +328,58 @@ NavLink div {
   cursor: pointer;
   font-size: 22px;
 
+}
+
+.top-nav {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  border-bottom: 3px solid #4c4c4c;
+  height: 8vh;
+}
+
+ul {
+  list-style: none;
+  display: inherit;
+  flex-direction: row;
+  padding: 0;
+  flex: 1;
+}
+
+li {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  border-right: 3px solid black;;
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  background-color: #4c4c4c; 
+}
+
+.logout-wrapper {
+  display: inherit;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#logout-btn {
+  color: white;
+  height: 100%;
+  background-color: #4c4c4c; 
+  font-size: 18px;
+  width: 20vh;
+  cursor: pointer;
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+}
+
+button:focus {
+  outline: none;
+}
+
+.nav-icon {
+  margin-right: 2vh;
 }
