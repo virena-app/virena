@@ -98,7 +98,7 @@ class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory } = this.props;
+    statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
@@ -115,8 +115,8 @@ class PanelContainer extends Component {
         <div className='logo-wrapper'>
           <div className='horizontal-line'></div>
           <br/>
-          <img src='./assets/virena-icon-white.png' className={logoClass} onClick={toggleLogo}></img>
-          <SaveProjectButton treeData={treeData} saveProject={saveProject}/>
+          <img src='./assets/virena-icon-white.png' className='logo'></img>
+          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
         <StatusPopup 
