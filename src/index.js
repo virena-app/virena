@@ -6,11 +6,6 @@ import store from './store';
 import { HashRouter } from 'react-router-dom';
 // import { ConnectedRouter } from 'connected-react-router';
 // import history from './history';
-const { ipcRenderer } = require('electron')
-
-ipcRenderer.on('userLoggedIn', (event,loginData) => {
-  console.log('Received login data in App Render', loginData);
-})
 
 render(
   <Provider store={store}>

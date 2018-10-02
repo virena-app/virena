@@ -79,18 +79,11 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
+    const { exportFiles, treeData, setUserData } = this.props;
     console.log('PanelContainer componentDidMount');
     ipcRenderer.on('selectedDir', (event, dirPath) => {
-      const { exportFiles, treeData } = this.props;
       exportFiles(treeData, dirPath);
     })
-  }
-
-  render() {
-    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
-    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, userLoggedIn, setUserData } = this.props;
-    console.log('PanelContainer Rendered!!!!')
     ipcRenderer.on('userLoggedIn', (event,loginData) => {
       console.log('Received login data in panelContainer', loginData);
       setUserData(loginData);
@@ -98,6 +91,13 @@ class PanelContainer extends Component {
     ipcRenderer.on('guestLoggedIn', (event, loginData) => {
       console.log('Received guest data', loginData);
     })
+  }
+
+  render() {
+    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
+    availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, userLoggedIn } = this.props;
+    console.log('PanelContainer Rendered!!!!')
     return (
       <div className='panel'>
         <div>
