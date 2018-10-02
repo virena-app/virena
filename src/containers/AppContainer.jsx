@@ -4,8 +4,13 @@ import ViewContainer from './ViewContainer.jsx';
 import TreeContainer from './TreeContainer.jsx';
 import PanelContainer from './PanelContainer.jsx';
 
+
 export default class AppContainer extends Component {
+  componentDidMount() {
+    console.log('AppContainer Mounted!')
+  }
   render() {
+    console.log('AppContainer Rendered')
     return (
       <div>
         <TopNav />

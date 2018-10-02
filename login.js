@@ -11,6 +11,7 @@ async function googleSignIn () {
   const code = await signInWithPopup()
   const tokens = await fetchAccessTokens(code)
   const {id, email, name} = await fetchGoogleProfile(tokens.access_token)
+  console.log('after async fetch google profile')
   const providerUser = {
     uid: id,
     email,
