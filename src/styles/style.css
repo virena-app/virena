@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Charmonman');
+
 * {
   margin: 0;
 }
@@ -237,7 +239,22 @@ ul.bottom-tab {
 .logo {
   width: 211.5px;
   height: 187.5px;
-  margin-bottom: 100px;
+  margin: 50px 0;
+  animation: spin 6s linear infinite;
+  cursor: pointer;
+}
+
+@keyframes spin {
+  10% {transform: rotate(0deg)}
+  30% {transform: rotate(90deg)}
+  50% {transform: rotate(180deg)}
+  70% {transform: rotate(270deg)}
+  90% {transform: rotate(360deg)}
+  100% {transform: rotate(540deg)}
+}
+
+.paused {
+  animation-play-state: paused;
 }
 
 a {
@@ -332,9 +349,14 @@ NavLink div {
   margin-top: 10vh;
 }
 
+#google-btn {
+  width: 280px;
+  height: 70px;
+}
+
 #logo {
-  width: 211.5px;
-  height: 187.5px;
+  width: 167px;
+  height: 150px;
 }
 
 #or {
@@ -343,12 +365,13 @@ NavLink div {
 
 #guest-login {
   margin-top: 5vh;
-  width: 370px;
-  height: 80px;
+  width: 270px;
+  height: 60px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 22px;
-
+  color: white;
+  background-color: #4c4c4c;
 }
 
 .top-nav {
@@ -403,4 +426,8 @@ button:focus {
 
 .nav-icon {
   margin-right: 2vh;
+}
+
+#app-name {
+  font-family: 'Charmonman', cursive;
 }

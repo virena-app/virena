@@ -18,4 +18,5 @@ export const CLOSE_DRAWER = 'CLOSE_DRAWER';
 export const SAVE_PROJECT = 'SAVE_PROJECT';
 export const CHANGE_PHONE = 'CHANGE_PHONE';
 export const CHANGE_SCREEN = 'CHANGE_SCREEN';
+export const TOGGLE_LOGO = 'TOGGLE_LOGO';
 export const SET_USER_DATA = 'SET_USER_DATA';
