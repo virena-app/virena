@@ -21,6 +21,7 @@ const mapStateToProps = store => ({
   statusPopupOpen: store.data.statusPopupOpen,
   statusPopupErrorOpen: store.data.statusPopupErrorOpen,
   userLoggedIn: store.data.userLoggedIn,
+  projectName: store.data.projectName,
   displayName: store.data.displayName,
   uid: store.data.uid,
 })
@@ -36,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
   exportFiles: (treeData, dirPath) => dispatch(actions.exportFiles(treeData, dirPath)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
   closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
-  saveProject: treeData => dispatch(actions.saveProject(treeData)),
+  saveProject: (treeData, projectName, uid, displayName) => dispatch(actions.saveProject(treeData, projectName, uid, displayName)),
   openDirectory: () => dispatch(actions.openDirectory()),
   setUserData: (loginData) => dispatch(actions.setUserData(loginData)),
 })
@@ -96,7 +97,7 @@ class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, userLoggedIn } = this.props;
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, projectName, uid, displayName, openDirectory, userLoggedIn } = this.props;
     console.log('PanelContainer Rendered!!!!')
     return (
       <div className='panel'>
@@ -111,7 +112,7 @@ class PanelContainer extends Component {
           <div className='horizontal-line'></div>
           <br/>
           <img src='../../assets/virena-icon-white.png' className='logo'></img>
-          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject}/>}
+          {userLoggedIn && <SaveProjectButton treeData={treeData} projectName={projectName} uid={uid} displayName={displayName}  saveProject={saveProject}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
         <StatusPopup 

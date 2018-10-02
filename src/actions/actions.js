@@ -90,9 +90,14 @@ export const exportFiles = ( treeData, path ) => (dispatch) => {
     }));
 }
 
-export const saveProject = (treeData) => ({
+export const saveProject = (treeData, projectName, uid, displayName) => ({
   type: types.SAVE_PROJECT,
-  payload: treeData
+  payload: {
+    treeData,
+    projectName,
+    uid,
+    displayName
+  }
 })
 
 export const closeStatusPopup = () => ({
