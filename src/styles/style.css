@@ -237,6 +237,10 @@ ul.bottom-tab {
   100% {transform: rotate(540deg)}
 }
 
+.paused {
+  animation-play-state: paused;
+}
+
 a {
   text-decoration: none;
   margin-top: 10px;
