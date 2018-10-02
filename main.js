@@ -35,11 +35,11 @@ const createWindow = () => {
     console.log('before if state');
     if (args) {
       // console.log('user loggedin b4 loadURL', args);
-      // win.webContents.on('dom-ready', () => {
-      //   // Send Message
-      //   console.log('inside did finishload');
-      //   setTimeout(() => event.sender.send('userLoggedIn', args), 6000);
-      // })
+      win.webContents.on('dom-ready', () => {
+        // Send Message
+        console.log('inside did finishload');
+        event.sender.send('userLoggedIn', args);
+      })
       win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',

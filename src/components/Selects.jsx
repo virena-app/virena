@@ -21,8 +21,9 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2,
   },
   input: {
-    color: '#fff'
-  }
+    color: '#eee'
+  },
+  inputFocused: {}
 });
 
 class Selects extends Component {
@@ -31,7 +32,14 @@ class Selects extends Component {
     return (
       <div className={classes.root}>
         <FormControl required className={classes.formControl}>
-          <InputLabel htmlFor="typeSelect">Type</InputLabel>
+          <InputLabel 
+            htmlFor="typeSelect"
+            FormLabelClasses={{
+              root: classes.input,
+              focused: classes.inputFocused
+            }}>
+            Type
+            </InputLabel>
           <Select
             required
             value={typeSelected}
@@ -43,10 +51,8 @@ class Selects extends Component {
               name: 'type',
               id: 'typeSelect',
               className: classes.input,
-            }}
-
-          >
-            <MenuItem value="" />
+            }}>
+            <MenuItem value=''/>
             <MenuItem value={'Stack'}>Stack</MenuItem>
             <MenuItem value={'Drawer'}>Drawer</MenuItem>
             <MenuItem value={'BottomTab'}>BottomTab</MenuItem>

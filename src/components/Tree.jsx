@@ -12,17 +12,19 @@ export default class Tree extends Component {
         onChange={treeData => setTree(treeData)}
         generateNodeProps={({ node, path }) => ({
           buttons: [
-            node.subtitle !== "Simple Screen" && node.subtitle !== "" && <button onClick={() => addChild(input, '', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial' }}>
-              +
+            node.subtitle !== "Simple Screen" && node.subtitle !== "" && <button onClick={() => addChild(input, '', getNodeKey, path, id)} style={{ 'fontFamily': 'Arial', 'backgroundColor': '#37474f', 'outline': 'none', 'border': 'none' }}>
+              <div className='add'></div>
             </button>,
-            <button onClick={() => deleteComponent(node)} style={{ 'fontFamily': 'Arial' }}>
-              -
+            <button onClick={() => deleteComponent(node)} style={{ 'backgroundColor': '#37474f', 'outline': 'none', 'border': 'none' }}>
+              <div className='delete'></div>
             </button>,
-            <button onClick={() => selectComponent(node)} style={{ 'fontFamily': 'Arial' }}>
-              Details
+            <button onClick={() => selectComponent(node)} style={{ 'backgroundColor': '#37474f', 'outline': 'none', 'border': 'none' }}>
+              <div className='details'></div>
             </button>
           ],
-          style: selectedComponent.id === node.id ? { color: 'yellow', fontSize: '17px', fontWeight: '700', height: '52px', backgroundColor: 'red', border: '1px solid yellow' } : { backgroundColor: '#282828', borderRadius: '2px', border: '1px solid red', height: '44px'}
+          style: selectedComponent.id === node.id 
+          ? { color: '#eee', fontSize: '17px', fontWeight: '700', height: '52px', backgroundColor: '#37474f', border: '2px solid #eee', filter: 'drop-shadow(0px 0px 3px #fff)' } 
+          : { backgroundColor: '#37474f', borderRadius: '2px', border: 'none', height: '44px'}
         })}
       />
     )
