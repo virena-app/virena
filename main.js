@@ -32,7 +32,14 @@ const createWindow = () => {
   win.webContents.openDevTools() 
 
   ipcMain.on('authorized', (event, args) => {
+    console.log('before if state');
     if (args) {
+      // console.log('user loggedin b4 loadURL', args);
+      win.webContents.on('dom-ready', () => {
+        // Send Message
+        console.log('inside did finishload');
+        event.sender.send('userLoggedIn', args);
+      })
       win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
@@ -40,21 +47,24 @@ const createWindow = () => {
         slashes: true
       }));
       winSession.cookies.set({url: 'https://myapp.com', name: 'cookie', value: 'cookie_value', domain: 'myapp.com', expirationDate: 999999999999}, (error) => console.log(error))
+      win.webContents.send('userLoggedIn', args);
     }
   })
 
-  ipcMain.on('guest', () => {
+  ipcMain.on('guest', (event, args) => {
     win.loadURL(url.format({
       pathname: path.join(__dirname, 'index.html'),
       protocol: 'file:',
       hash: '/',
       slashes: true
     }));
+    console.log('Guest Logged In', args)
+    event.sender.send('guestLoggedIn', args)
   })
-
+  
   win.on('closed', () => {
     win = null
-  })
+  });
 }
 
 ipcMain.on('logout', () => {

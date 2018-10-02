@@ -22,7 +22,11 @@ const initialState = {
   fileDownloadPath: '',
   phone: 'iphone-view',
   screen: 'iphone-screen column',
-  logoSpin: true
+  logoSpin: true,
+  userLoggedIn: false,
+  displayName: '',
+  uid: '',
+  projectName: '',
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -142,7 +146,7 @@ const componentReducer = (state = initialState, action) => {
         statusPopupErrorOpen: action.payload,
       }
     case types.SAVE_PROJECT:
-      saveProject(copy.treeData);
+      saveProject(copy.treeData, copy.displayName, copy.uid);
       return state;
     case types.OPEN_DRAWER:
       return {
@@ -175,6 +179,13 @@ const componentReducer = (state = initialState, action) => {
       logoSpin: copy.logoSpin? false: true
     }
     
+    case types.SET_USER_DATA:
+      return {
+        ...state,
+        displayName: action.payload.displayName,
+        uid: action.payload.uid,
+        userLoggedIn: true
+      }
     default: 
       return state;
   }

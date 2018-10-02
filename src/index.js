@@ -18,4 +18,5 @@ render(
   document.getElementById('content')
 )
 
+
 window.store = store;

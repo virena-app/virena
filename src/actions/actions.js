@@ -110,14 +110,6 @@ export const closeDrawer = () => ({
 
 export const openDirectory = () => (dispatch) => {
   ipcRenderer.send('selectFileDirectory')
-    // .then(directory => dispatch({
-    //   type: types.SET_PATH_TO_DOWNLOAD,
-    //   payload: directory
-    // }))
-    // .catch(err => dispatch({
-    //   type: types.SET_DIRECTORY_ERR,
-    //   payload: err
-    // }))
 }
 
 export const changePhone = (phone, screen) => ({
@@ -136,3 +128,9 @@ export const toggleLogo = () => ({
 //   type: types.CHANGE_SCREEN,
 //   payload: screen
 // })
+export const setUserData = (loginData) => ({
+  type: types.SET_USER_DATA,
+  payload: {
+    ...loginData,
+  }
+})

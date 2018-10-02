@@ -20,7 +20,10 @@ const mapStateToProps = store => ({
   changeNameInput: store.data.changeNameInput,
   statusPopupOpen: store.data.statusPopupOpen,
   statusPopupErrorOpen: store.data.statusPopupErrorOpen,
-  logoSpin: store.data.logoSpin
+  logoSpin: store.data.logoSpin,
+  userLoggedIn: store.data.userLoggedIn,
+  displayName: store.data.displayName,
+  uid: store.data.uid,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -36,7 +39,8 @@ const mapDispatchToProps = dispatch => ({
   closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
   saveProject: treeData => dispatch(actions.saveProject(treeData)),
   openDirectory: () => dispatch(actions.openDirectory()),
-  toggleLogo: () => dispatch(actions.toggleLogo())
+  toggleLogo: () => dispatch(actions.toggleLogo()),
+  setUserData: (loginData) => dispatch(actions.setUserData(loginData))
 })
 
 const styles = theme => ({
@@ -77,11 +81,20 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
+    const { exportFiles, treeData, setUserData } = this.props;
+    console.log('PanelContainer componentDidMount');
     ipcRenderer.on('selectedDir', (event, dirPath) => {
-      const { exportFiles, treeData } = this.props;
       exportFiles(treeData, dirPath);
     })
+    ipcRenderer.on('userLoggedIn', (event,loginData) => {
+      console.log('Received login data in panelContainer', loginData);
+      setUserData(loginData);
+    })
+    ipcRenderer.on('guestLoggedIn', (event, loginData) => {
+      console.log('Received guest data', loginData);
+    })
   }
+
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
