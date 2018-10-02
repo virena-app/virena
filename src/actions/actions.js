@@ -125,6 +125,10 @@ export const changePhone = (phone, screen) => ({
   }
 })
 
+export const toggleLogo = () => ({
+  type: types.TOGGLE_LOGO
+})
+
 // export const changeScreen = (screen) => ({
 //   type: types.CHANGE_SCREEN,
 //   payload: screen

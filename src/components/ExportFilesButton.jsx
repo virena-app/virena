@@ -6,7 +6,7 @@ const styles = theme => ({
   exportButton: {
     background: '#2068c9',
     width: '250px',
-    marginTop: '10px'
+    marginTop: '60px'
   }
 })
 

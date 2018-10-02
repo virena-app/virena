@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Charmonman');
+
 * {
   margin: 0;
 }
@@ -13,19 +15,6 @@ body {
   flex-direction: row;
   justify-content: space-between;
   flex: 1;
-}
-
-.logoImg {
-  /* <img src='../../assets/virena-icon-white.png' className='logo'></img> */
-  background-image: url('../../assets/virena-icon-white.png');
-  /* background: linear-gradient(rgba(200,200,200,.5), rgba(200,200,200,.5), url('../../assets/virena-icon-white.png')); */
-  background-position: center;
-  background-repeat: no-repeat;
-  /* background-color: rgba(0, 0, 0, 0.7); */
-  opacity: 0.5;
-  /* width: 211.5px;
-  height: 187.5px; */
-  z-index: -101;
 }
 
 .column {
@@ -61,25 +50,22 @@ div.horizontal-line {
   /* width: 1vw; */
 }
 
-.delete {
-  background-image: url('../../assets/trash.png');
+.delete, .add, .details {
   background-position: center;
   height: 25px;
   width: 25px
 }
 
+.delete {
+  background-image: url('../../assets/trash.png');
+}
+
 .add {
   background-image: url('../../assets/add.png');
-  background-position: center;
-  height: 25px;
-  width: 25px;
 }
 
 .details {
   background-image: url('../../assets/edit.png');
-  background-position: center;
-  height: 25px;
-  width: 25px;
 }
 
 .tree {
@@ -115,12 +101,12 @@ div.ios-android button{
 }
 
 .iphone-view, .android-view {
-  /* width: 360px;
-  height: 722px; */
-  width: 330px;
-  height: 662px;
+  width: 300px;
+  height: 562px;
+  /* width: 330px; */
+  /* height: 662px; */
   /* background-size: 360px 722px; */
-  background-size: 330px 662px;
+  background-size: 300px 562px;
   background-repeat: no-repeat;
   display: flex;
   justify-content: center;
@@ -140,7 +126,7 @@ div.ios-android button{
 }
 
 .iphone-screen {
-  margin-top: 45px;
+  margin-top: 25px;
   margin-left: 1px;
   height: 80%;
   background-color: #fff;
@@ -149,8 +135,8 @@ div.ios-android button{
 
 .android-screen {
   margin-bottom: 13.5px;
-  height: 479px;
-  width: 299.5px;
+  height: 405px;
+  width: 270px;
   background-color: #fff;
   position: relative;
 }
@@ -231,14 +217,26 @@ ul.bottom-tab {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 55px;
 }
 
 .logo {
   width: 211.5px;
   height: 187.5px;
-  margin-bottom: 100px;
+  margin-bottom: 50px 0;
+  animation: spin 6s linear infinite;
+  cursor: pointer;
 }
+
+@keyframes spin {
+  10% {transform: rotate(0deg)}
+  30% {transform: rotate(90deg)}
+  50% {transform: rotate(180deg)}
+  70% {transform: rotate(270deg)}
+  90% {transform: rotate(360deg)}
+  100% {transform: rotate(540deg)}
+}
+
 
 a {
   text-decoration: none;
@@ -332,9 +330,14 @@ NavLink div {
   margin-top: 10vh;
 }
 
+#google-btn {
+  width: 280px;
+  height: 70px;
+}
+
 #logo {
-  width: 211.5px;
-  height: 187.5px;
+  width: 167px;
+  height: 150px;
 }
 
 #or {
@@ -343,12 +346,13 @@ NavLink div {
 
 #guest-login {
   margin-top: 5vh;
-  width: 370px;
-  height: 80px;
+  width: 270px;
+  height: 60px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 22px;
-
+  color: white;
+  background-color: #4c4c4c;
 }
 
 .top-nav {
@@ -403,4 +407,8 @@ button:focus {
 
 .nav-icon {
   margin-right: 2vh;
+}
+
+#app-name {
+  font-family: 'Charmonman', cursive;
 }

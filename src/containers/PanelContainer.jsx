@@ -20,6 +20,7 @@ const mapStateToProps = store => ({
   changeNameInput: store.data.changeNameInput,
   statusPopupOpen: store.data.statusPopupOpen,
   statusPopupErrorOpen: store.data.statusPopupErrorOpen,
+  logoSpin: store.data.logoSpin,
   userLoggedIn: store.data.userLoggedIn,
   projectName: store.data.projectName,
   displayName: store.data.displayName,
@@ -39,7 +40,8 @@ const mapDispatchToProps = dispatch => ({
   closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
   saveProject: (treeData, projectName, uid, displayName) => dispatch(actions.saveProject(treeData, projectName, uid, displayName)),
   openDirectory: () => dispatch(actions.openDirectory()),
-  setUserData: (loginData) => dispatch(actions.setUserData(loginData)),
+  toggleLogo: () => dispatch(actions.toggleLogo()),
+  setUserData: (loginData) => dispatch(actions.setUserData(loginData))
 })
 
 const styles = theme => ({
@@ -95,10 +97,13 @@ class PanelContainer extends Component {
   }
 
   render() {
-    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
+    const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, projectName, uid, displayName, openDirectory, userLoggedIn } = this.props;
-    console.log('PanelContainer Rendered!!!!')
+    statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName, } = this.props;
+    let logoClass;
+    if (logoSpin) logoClass = 'logo'
+    else logoClass = 'logo paused'
+
     return (
       <div className='panel'>
         <div>
@@ -111,7 +116,7 @@ class PanelContainer extends Component {
         <div className='logo-wrapper'>
           <div className='horizontal-line'></div>
           <br/>
-          <img src='../../assets/virena-icon-white.png' className='logo'></img>
+          <img src='./assets/virena-icon-white.png' className='logo'></img>
           {userLoggedIn && <SaveProjectButton treeData={treeData} projectName={projectName} uid={uid} displayName={displayName}  saveProject={saveProject}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
