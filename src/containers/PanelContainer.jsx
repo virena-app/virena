@@ -20,6 +20,9 @@ const mapStateToProps = store => ({
   changeNameInput: store.data.changeNameInput,
   statusPopupOpen: store.data.statusPopupOpen,
   statusPopupErrorOpen: store.data.statusPopupErrorOpen,
+  userLoggedIn: store.data.userLoggedIn,
+  displayName: store.data.displayName,
+  uid: store.data.uid,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -35,6 +38,7 @@ const mapDispatchToProps = dispatch => ({
   closeStatusPopup: () => dispatch(actions.closeStatusPopup()),
   saveProject: treeData => dispatch(actions.saveProject(treeData)),
   openDirectory: () => dispatch(actions.openDirectory()),
+  setUserData: (loginData) => dispatch(actions.setUserData(loginData)),
 })
 
 const styles = theme => ({
@@ -75,15 +79,25 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
+    const { exportFiles, treeData, setUserData } = this.props;
+    console.log('PanelContainer componentDidMount');
     ipcRenderer.on('selectedDir', (event, dirPath) => {
-      const { exportFiles, treeData } = this.props;
       exportFiles(treeData, dirPath);
     })
+    ipcRenderer.on('userLoggedIn', (event,loginData) => {
+      console.log('Received login data in panelContainer', loginData);
+      setUserData(loginData);
+    })
+    ipcRenderer.on('guestLoggedIn', (event, loginData) => {
+      console.log('Received guest data', loginData);
+    })
   }
+
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent,
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory } = this.props;
+    statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, userLoggedIn } = this.props;
+    console.log('PanelContainer Rendered!!!!')
     return (
       <div className='panel'>
         <div>
@@ -96,8 +110,8 @@ class PanelContainer extends Component {
         <div className='logo-wrapper'>
           <div className='horizontal-line'></div>
           <br/>
-          <img src='./assets/virena-icon-white.png' className='logo'></img>
-          <SaveProjectButton treeData={treeData} saveProject={saveProject}/>
+          <img src='../../assets/virena-icon-white.png' className='logo'></img>
+          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
         <StatusPopup 

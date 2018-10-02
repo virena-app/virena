@@ -11,7 +11,7 @@ const styles = theme => ({
 
 class SaveProjectButton extends Component {
   render() {
-    const {treeData, saveProject, classes } = this.props;
+    const {treeData, saveProject, classes, } = this.props;
     return (
       <Button variant="contained" color="primary"
       className={classes.saveButton} 
