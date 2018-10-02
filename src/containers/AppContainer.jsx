@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../actions/actions';
 import TopNav from '../components/TopNav.jsx';
 import ViewContainer from './ViewContainer.jsx';
@@ -36,4 +37,4 @@ class AppContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (AppContainer)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (AppContainer));
