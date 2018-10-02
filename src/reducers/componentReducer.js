@@ -22,6 +22,7 @@ const initialState = {
   fileDownloadPath: '',
   phone: 'iphone-view',
   screen: 'iphone-screen column',
+  logoSpin: true
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -167,6 +168,12 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         screen: action.payload
       }
+
+    case types.TOGGLE_LOGO:
+    return {
+      ...state,
+      logoSpin: copy.logoSpin? false: true
+    }
     
     default: 
       return state;

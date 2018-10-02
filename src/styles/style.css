@@ -197,7 +197,8 @@ ul.bottom-tab {
   width: 211.5px;
   height: 187.5px;
   margin: 100px 0;
-  animation: spin 4s linear infinite
+  animation: spin 6s linear infinite;
+  cursor: pointer;
 }
 
 @keyframes spin {
@@ -207,6 +208,10 @@ ul.bottom-tab {
   70% {transform: rotate(270deg)}
   90% {transform: rotate(360deg)}
   100% {transform: rotate(540deg)}
+}
+
+.paused {
+  animation-play-state: paused;
 }
 
 a {
