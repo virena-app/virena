@@ -22,7 +22,8 @@ import grey from '@material-ui/core/colors/grey';
 const styles = theme => ({
   root: {
     width: '95%',
-    marginLeft: 13
+    marginLeft: 13,
+    borderRadius: 10
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -40,7 +41,6 @@ const styles = theme => ({
   },
   details: {
     alignItems: 'center',
-    // justifyContent: 'center',
     color: '#eee',
   },
   column: {
@@ -68,6 +68,7 @@ const styles = theme => ({
   },
   panel: {
     background: 'linear-gradient(45deg, #37474F 30%, #455A64 90%)',
+    borderRadius: 10
   },
   margin: {
     fullwidth: true
