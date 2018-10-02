@@ -15,6 +15,19 @@ body {
   flex: 1;
 }
 
+.logoImg {
+  /* <img src='../../assets/virena-icon-white.png' className='logo'></img> */
+  background-image: url('../../assets/virena-icon-white.png');
+  /* background: linear-gradient(rgba(200,200,200,.5), rgba(200,200,200,.5), url('../../assets/virena-icon-white.png')); */
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  opacity: 0.5;
+  /* width: 211.5px;
+  height: 187.5px; */
+  z-index: -101;
+}
+
 .column {
   display: flex;
   flex-direction: column;
@@ -25,6 +38,12 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.save-export-button {
+  /* flex-basis: 12%; */
+  /* justify-content: space-between; */
+  margin: 20px 0;
 }
 
 div.vertical-line, div.horizontal-line {
@@ -48,6 +67,7 @@ div.horizontal-line {
   color: white;
   display: inherit;
   flex-direction: column;
+  z-index: 101;
 }
 
 .view, .panel {
