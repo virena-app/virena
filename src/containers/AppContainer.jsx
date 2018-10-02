@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../actions/actions';
 import TopNav from '../components/TopNav.jsx';
 import ViewContainer from './ViewContainer.jsx';
 import TreeContainer from './TreeContainer.jsx';
@@ -10,7 +11,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-
+  logout: () => dispatch(actions.logout())
 })
 
 class AppContainer extends Component {
@@ -18,11 +19,11 @@ class AppContainer extends Component {
     console.log('AppContainer Mounted!')
   }
   render() {
-    const { userLoggedIn } = this.props
+    const { userLoggedIn, logout } = this.props
     console.log('AppContainer Rendered')
     return (
       <div>
-        <TopNav userLoggedIn={userLoggedIn}/>
+        <TopNav userLoggedIn={userLoggedIn} logout={logout}/>
         <div className='main'>
         <ViewContainer />
         <div className='vertical-line'></div>

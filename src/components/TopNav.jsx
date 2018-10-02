@@ -3,7 +3,7 @@ import { ipcRenderer } from 'electron';
 
 export default class TopNav extends Component {
   render() {
-    const { userLoggedIn } = this.props
+    const { userLoggedIn, logout } = this.props
     return (
       <nav className='top-nav'>
         <ul>
@@ -14,11 +14,11 @@ export default class TopNav extends Component {
         <div className='logout-wrapper'>
           <div id='logout-btn' onClick={() => {
             console.log('clicked')
+            logout()
             ipcRenderer.send('logout', 'logout')
           }}>
             <img src='./assets/logout.png' className='nav-icon'/>
             {userLoggedIn && <span>Log Out</span>}
-            {!userLoggedIn && <span>Log In</span>}
           </div>
         </div>
       </nav>
