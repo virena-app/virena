@@ -196,7 +196,17 @@ ul.bottom-tab {
 .logo {
   width: 211.5px;
   height: 187.5px;
-  margin-bottom: 100px;
+  margin: 100px 0;
+  animation: spin 4s linear infinite
+}
+
+@keyframes spin {
+  10% {transform: rotate(0deg)}
+  30% {transform: rotate(90deg)}
+  50% {transform: rotate(180deg)}
+  70% {transform: rotate(270deg)}
+  90% {transform: rotate(360deg)}
+  100% {transform: rotate(540deg)}
 }
 
 a {
@@ -363,3 +373,4 @@ button:focus {
 .nav-icon {
   margin-right: 2vh;
 }
+

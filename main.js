@@ -40,6 +40,8 @@ const createWindow = () => {
         slashes: true
       }));
       winSession.cookies.set({url: 'https://myapp.com', name: 'cookie', value: 'cookie_value', domain: 'myapp.com', expirationDate: 999999999999}, (error) => console.log(error))
+
+      getWindow('virena').webContents.send('info', {msg: 'hello from main process'})
     }
   })
 
@@ -59,6 +61,7 @@ const createWindow = () => {
 
 ipcMain.on('logout', () => {
   winSession.cookies.remove('https://myapp.com', 'cookie', (error) => console.log(error))
+  dialog.showMessageBox({title: 'logout', message: 'You are now logged out!'})
 })
 
 ipcMain.on('selectFileDirectory' , (event) => {
