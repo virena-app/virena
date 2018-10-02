@@ -228,6 +228,16 @@ ul.bottom-tab {
   cursor: pointer;
 }
 
+@keyframes spin {
+  10% {transform: rotate(0deg)}
+  30% {transform: rotate(90deg)}
+  50% {transform: rotate(180deg)}
+  70% {transform: rotate(270deg)}
+  90% {transform: rotate(360deg)}
+  100% {transform: rotate(540deg)}
+}
+
+
 a {
   text-decoration: none;
   margin-top: 10px;
