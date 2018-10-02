@@ -115,7 +115,7 @@ class PanelContainer extends Component {
         <div className='logo-wrapper'>
           <div className='horizontal-line'></div>
           <br/>
-          <img src='./assets/virena-icon-white.png' className='logo'></img>
+          <img src='./assets/virena-icon-white.png' className={logoClass} onClick={toggleLogo}></img>
           {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
         </div>
