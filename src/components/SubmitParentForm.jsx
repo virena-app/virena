@@ -8,9 +8,15 @@ import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
 
 
+const styles = theme => ({
+  firstcolor: {
+    color: '#eee'
+  }
+})
 class SubmitParentForm extends Component {
   render() {
     const { treeData, input, classes, initialTypeSelection, setParentName, addParent, selectInitialType } = this.props;
+    
     return (
 
         !treeData[0] && <form className='form' autoComplete='off'>
@@ -31,6 +37,7 @@ class SubmitParentForm extends Component {
           <Select
             className={classes.selectType}
             value={initialTypeSelection}
+            displayEmpty
             onChange={(event) => {
               const selection = event.target.value;
               selectInitialType(selection)
@@ -41,7 +48,7 @@ class SubmitParentForm extends Component {
               className: classes.input,
             }}
           >
-            <MenuItem value="" className={classes.menu}/>
+            <MenuItem value='' className={classes.firstcolor}>{initialTypeSelection}</MenuItem>
             <MenuItem value={'Stack'} className={classes.menu}>Stack</MenuItem>
             <MenuItem value={'Drawer'} className={classes.menu}>Drawer</MenuItem>
             <MenuItem value={'BottomTab'} className={classes.menu}>BottomTab</MenuItem>
