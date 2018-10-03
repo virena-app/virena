@@ -5,7 +5,8 @@ import {withStyles} from '@material-ui/core/styles';
 const styles = theme => ({
   saveButton: {
     background: '#2068c9',
-    width: '250px'
+    width: '250px',
+    marginTop: '50px'
   }
 })
 
