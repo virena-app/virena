@@ -8,7 +8,7 @@ let win, winSession;
 const createWindow = () => {
 
   const {width, height} = electron.screen.getPrimaryDisplay().size;
-  win = new BrowserWindow({width, height});
+  win = new BrowserWindow({width, height, resizable: false});
   winSession = win.webContents.session
 
   winSession.cookies.get({name: 'cookie'}, (error, cookies) => {
@@ -78,7 +78,6 @@ ipcMain.on('authorized', (event, args) => {
 
 ipcMain.on('logout', () => {
   winSession.cookies.remove('https://myapp.com', 'cookie', (error) => console.log(error))
-  dialog.showMessageBox({title: 'logout', message: 'You are now logged out!'})
 })
 
 ipcMain.on('selectFileDirectory' , (event) => {

@@ -21,4 +21,11 @@ export const CHANGE_SCREEN = 'CHANGE_SCREEN';
 export const TOGGLE_LOGO = 'TOGGLE_LOGO';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const LOGOUT = 'LOGOUT';
+<<<<<<< HEAD
 export const SET_USER_PROJECTS = 'SET_USER_PROJECTS';
+=======
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const RESET = 'TOGGLE_RESET';
+export const SAVE_PROJECT_SUCCESS = 'SAVE_PROJECT_SUCCESS';
+export const SAVE_PROJECT_FAIL = 'SAVE_PROJECT_FAIL';
+>>>>>>> 1862b7ad59b31744c9c8348ac17ed4ae247bfdde

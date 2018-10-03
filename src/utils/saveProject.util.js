@@ -1,33 +1,42 @@
 import { db, Project } from '../models/db.js';
 
 const saveProjectUtil = (treeData, projectName, uid, displayName) => {
-  projectName = "haha";
-  db
+  
+  return db
   .sync()
   .then(() => {
-    Project.findAll({
+    
+    return Project.findAll({
       where: {
         projectName,
         uid
       }
-    }).then( projects => {
+    }).then(projects => {
       if (projects.length) {
         return Project.update(
           {treeData},
           {returning: true, where: {projectName, uid}}
-        ).then(updatedRecord => console.log(updatedRecord[1][0].dataValues))
+        ).catch(err => {
+          console.log('err in updating db', err);
+          return err
+        })
       } else {
         return Project.create({
           treeData,
           projectName,
           uid,
           displayName
-        }).then(newRecord => console.log("CREATED!", newRecord.dataValues))
+        }).catch(err => {
+          console.log('err in creating entry', err)
+          return err
+        })
       }
+    }).catch(err => {
+      console.log("Error saving to the database ", err)
+      return err;
     })
-  }).catch(err => {
-    console.log("Error saving to the database ", err)
   })
+
 }
 
 export default saveProjectUtil;

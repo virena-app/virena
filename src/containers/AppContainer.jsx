@@ -6,19 +6,24 @@ import TopNav from '../components/TopNav.jsx';
 import ViewContainer from './ViewContainer.jsx';
 import TreeContainer from './TreeContainer.jsx';
 import PanelContainer from './PanelContainer.jsx';
+import InfoModal from '../components/InfoModal.jsx';
 import { db, Project } from '../models/db.js';
 const { ipcRenderer } = require('electron');
 
 const mapStateToProps = store => ({
   userLoggedIn: store.data.userLoggedIn,
+  modalStatus: store.data.modalStatus,
+  modalAction: store.data.modalAction,
   uid: store.data.uid,
-  userProjects: store.data.userProjects
+  userProjects: store.data.userProjects,
 })
 
 const mapDispatchToProps = dispatch => ({
-  setUserProjects: (userProjects) => dispatch(actions.setUserProjects(userProjects)),
   logout: () => dispatch(actions.logout()),
-  setUserData: (loginData) => dispatch(actions.setUserData(loginData))
+  reset: () => dispatch(actions.reset()),
+  toggleModal: (use) => dispatch(actions.toggleModal(use)),
+  setUserData: (loginData) => dispatch(actions.setUserData(loginData)),
+  setUserProjects: (userProjects) => dispatch(actions.setUserProjects(userProjects)),
 })
 
 class AppContainer extends Component {
@@ -44,10 +49,11 @@ class AppContainer extends Component {
     })
   }
   render() {
-    const { userLoggedIn, logout, uid, userProjects } = this.props
+    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects } = this.props
     return (
       <div>
-        <TopNav userLoggedIn={userLoggedIn} logout={logout} uid={uid} userProjects={userProjects}/>
+        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects}/>
+        {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset}/>}
         <div className='main'>
         <ViewContainer />
         <div className='vertical-line'></div>

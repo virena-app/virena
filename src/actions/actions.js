@@ -1,6 +1,8 @@
 import * as types from '../constants/actionTypes';
 const { ipcRenderer } = require('electron')
 import exportFilesUtil from '../utils/exportFiles.util.js';
+import saveProjectUtil from '../utils/saveProject.util.js';
+
 
 export const setTree = treeData => ({
   type: types.SET_TREE,
@@ -90,15 +92,23 @@ export const exportFiles = ( treeData, path ) => (dispatch) => {
     }));
 }
 
-export const saveProject = (treeData, projectName, uid, displayName) => ({
-  type: types.SAVE_PROJECT,
-  payload: {
-    treeData,
-    projectName,
-    uid,
-    displayName
-  }
-})
+export const saveProject = (treeData, projectName, uid, displayName) => (dispatch) => {
+  saveProjectUtil(treeData, projectName || 'projectName', uid, displayName)
+    .then(record => dispatch({
+      type: types.SAVE_PROJECT_SUCCESS,
+      payload: {
+        record,
+        status: true,
+      }
+    }))
+    .catch(err => dispatch({
+      type: types.SAVE_PROJECT_FAIL,
+      payload: {
+        status: true,
+        err
+      }
+    }))
+}
 
 export const closeStatusPopup = () => ({
   type: types.CLOSE_STATUS_POPUP,
@@ -144,8 +154,16 @@ export const logout = () => ({
   type: types.LOGOUT
 })
 
+export const toggleModal = (use) => ({
+  type: types.TOGGLE_MODAL,
+  payload: use
+})
+
+export const reset = () => ({
+  type: types.RESET
+})
+
 export const setUserProjects = (userProjects) => ({
   type: types.SET_USER_PROJECTS,
   payload: userProjects
 })
-

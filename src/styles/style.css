@@ -58,14 +58,17 @@ div.horizontal-line {
 
 .delete {
   background-image: url('../../assets/trash.png');
+  cursor: pointer;
 }
 
 .add {
   background-image: url('../../assets/add.png');
+  cursor: pointer;
 }
 
 .details {
   background-image: url('../../assets/edit.png');
+  cursor: pointer
 }
 
 .tree {
@@ -223,7 +226,7 @@ ul.bottom-tab {
 .logo {
   width: 211.5px;
   height: 187.5px;
-  margin-bottom: 50px 0;
+  margin: 60px 0;
   animation: spin 7s linear infinite;
   cursor: pointer;
 }
@@ -240,7 +243,6 @@ ul.bottom-tab {
 .paused {
   animation-play-state: paused;
 }
-
 
 a {
   text-decoration: none;
@@ -354,7 +356,7 @@ NavLink div {
   height: 60px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 18px;
   color: white;
   background-color: #4c4c4c;
 }
@@ -415,4 +417,5 @@ button:focus {
 
 #app-name {
   font-family: 'Charmonman', cursive;
+  margin-top: 10px;
 }

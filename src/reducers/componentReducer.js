@@ -17,6 +17,8 @@ const initialState = {
   id: 0,
   statusPopupOpen: false, 
   statusPopupErrorOpen: false,
+  saveProjectOpen: false,
+  saveProjectErrorOpen: false,
   fileExportModalState: false,
   drawerState: false,
   fileDownloadPath: '',
@@ -27,6 +29,8 @@ const initialState = {
   displayName: '',
   uid: '',
   projectName: '',
+  modalStatus: false,
+  modalAction: '',
   userProjects: [],
 }
 const componentReducer = (state = initialState, action) => {
@@ -51,9 +55,6 @@ const componentReducer = (state = initialState, action) => {
       }
       copy.treeData.push(parent)
       const copyid = copy.id + 1;
-      
-      
-      
     return {
       ...state,
       treeData: copy.treeData,
@@ -126,6 +127,7 @@ const componentReducer = (state = initialState, action) => {
       }
     case types.EXPORT_FILES:
       return state;
+      
     case types.EXPORT_FILES_SUCCESS:
       console.log('successful export!');
       return {
@@ -145,11 +147,21 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         statusPopupOpen: action.payload, 
         statusPopupErrorOpen: action.payload,
+        saveProjectOpen: action.payload,
+        saveProjectErrorOpen: action.payload
       }
-    case types.SAVE_PROJECT:
-      const { treeData, projectName, uid, displayName } = action.payload;
-      saveProjectUtil(treeData, projectName || 'projectName', uid, displayName);
-      return state;
+    case types.SAVE_PROJECT_SUCCESS:
+      console.log('saveRecord', action.payload.record)
+      return {
+        ...state,
+        saveProjectOpen: action.payload.status,
+      }
+    case types.SAVE_PROJECT_FAIL:
+      console.log('saveRecordFail', action.payload.err)
+      return {
+        ...state,
+        saveProjectErrorOpen: action.payload.status,
+      }
     case types.OPEN_DRAWER:
       return {
         ...state,
@@ -190,10 +202,24 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.LOGOUT:
-    return {
-      ...state,
-      userLoggedIn: copy.userLoggedIn? false: true
-    }
+      return {
+        ...state,
+        userLoggedIn: copy.userLoggedIn? false: true
+      }
+
+    case types.TOGGLE_MODAL:
+      return {
+        ...state,
+        modalStatus: copy.modalStatus? false : true,
+        modalAction: action.payload
+      }
+
+    case types.RESET:
+      return {
+        ...initialState,
+        userLoggedIn: copy.userLoggedIn? true: false,
+        modalStatus: copy.modalStatus
+      }
 
     case types.SET_USER_PROJECTS:
       return {

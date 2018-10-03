@@ -58,7 +58,7 @@ class SubmitParentForm extends Component {
             e.preventDefault();
             addParent();
           }}>
-            Add
+            <img src='./assets/add_parent.png'/>
           </Button> 
         </FormControl>
       </form>
