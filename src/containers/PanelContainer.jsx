@@ -84,11 +84,9 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
-    const { exportFiles, treeData, setUserData } = this.props;
+    const { setUserData } = this.props;
     console.log('PanelContainer componentDidMount');
-    ipcRenderer.on('selectedDir', (event, dirPath) => {
-      exportFiles(treeData, dirPath);
-    })
+    
     ipcRenderer.on('userLoggedIn', (event,loginData) => {
       console.log('Received login data in panelContainer', loginData);
       setUserData(loginData);
@@ -102,11 +100,14 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen } = this.props;
+    saveProjectOpen, saveProjectErrorOpen, exportFiles } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
-
+    ipcRenderer.on('selectedDir', (event, dirPath) => {
+      console.log('dirPath in renderer', dirPath);
+      exportFiles(treeData, dirPath);
+    })
     return (
       <div className='panel'>
         <div>
