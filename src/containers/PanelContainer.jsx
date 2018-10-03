@@ -20,6 +20,8 @@ const mapStateToProps = store => ({
   changeNameInput: store.data.changeNameInput,
   statusPopupOpen: store.data.statusPopupOpen,
   statusPopupErrorOpen: store.data.statusPopupErrorOpen,
+  saveProjectOpen: store.data.saveProjectOpen,
+  saveProjectErrorOpen: store.data.saveProjectErrorOpen,
   logoSpin: store.data.logoSpin,
   userLoggedIn: store.data.userLoggedIn,
   projectName: store.data.projectName,
@@ -99,7 +101,8 @@ class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName, } = this.props;
+    statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName,
+    saveProjectOpen, saveProjectErrorOpen } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
@@ -117,12 +120,14 @@ class PanelContainer extends Component {
           <div className='horizontal-line'></div>
           <br/>
           <img src='./assets/virena-icon-white.png' className={logoClass} onClick={toggleLogo}></img>
-          {userLoggedIn && <SaveProjectButton treeData={treeData} projectName={projectName} uid={uid} displayName={displayName} saveProject={saveProject}/>}
-          <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}></ExportFilesButton>
+          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject} projectName={projectName} uid={uid} displayName={displayName}/>}
+          <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}/>
         </div>
         <StatusPopup 
           statusPopupOpen={statusPopupOpen}
           statusPopupErrorOpen={statusPopupErrorOpen}
+          saveProjectOpen={saveProjectOpen} 
+          saveProjectErrorOpen={saveProjectErrorOpen}
           closeStatusPopup={closeStatusPopup}
         />
       </div>

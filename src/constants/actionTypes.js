@@ -23,3 +23,5 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 export const LOGOUT = 'LOGOUT';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const RESET = 'TOGGLE_RESET';
+export const SAVE_PROJECT_SUCCESS = 'SAVE_PROJECT_SUCCESS';
+export const SAVE_PROJECT_FAIL = 'SAVE_PROJECT_FAIL';

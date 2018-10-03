@@ -353,7 +353,7 @@ NavLink div {
   height: 60px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 18px;
   color: white;
   background-color: #4c4c4c;
 }
@@ -414,4 +414,5 @@ button:focus {
 
 #app-name {
   font-family: 'Charmonman', cursive;
+  margin-top: 10px;
 }
