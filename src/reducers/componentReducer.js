@@ -126,6 +126,7 @@ const componentReducer = (state = initialState, action) => {
       }
     case types.EXPORT_FILES:
       return state;
+      
     case types.EXPORT_FILES_SUCCESS:
       console.log('successful export!');
       return {

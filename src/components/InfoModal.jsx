@@ -12,9 +12,6 @@ const styles = theme => ({
     alignItems: 'center'
   },
   modal: {
-    // position: 'absolute',
-    // top: '50%',
-    // left: '50%',
     backgroundColor: 'white',
     outline: 'none',
     padding: '50px',
