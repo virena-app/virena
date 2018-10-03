@@ -9,22 +9,18 @@ export default class TopNav extends Component {
         <ul>
           {userLoggedIn? <li onClick={() => {
             toggleModal('reset')
-          }}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li> : <li style={{width: '250px'}}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li>}
+          }}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li> : <li onClick={() => {
+            toggleModal('reset')
+          }} style={{width: '250px'}}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li>}
           {userLoggedIn && <li><img src='./assets/load_file.png' className='nav-icon'/>Load Project</li>}
           {userLoggedIn && <li><img src='./assets/save_file.png' className='nav-icon'/>Save Project</li>}
         </ul>
         <div className='logout-wrapper'>
-          {userLoggedIn && (<div id='logout-btn' onClick={() => {
-            toggleModal('logout')
-            // logout()
-            // ipcRenderer.send('logout', 'logout')
-          }}>
+          {userLoggedIn && (<div id='logout-btn' onClick={() => toggleModal('logout')}>
             <img src='./assets/logout.png' className='nav-icon'/>
             <span>Log Out</span>
           </div>)}
-          {!userLoggedIn && (<div id='logout-btn' onClick={() => {
-              ipcRenderer.send('login', 'login')
-            }}>
+          {!userLoggedIn && (<div id='logout-btn' onClick={() => ipcRenderer.send('login', 'login')}>
             <img src='./assets/login.png' className='nav-icon'/>
             <span>Log In</span>
           </div>)}

@@ -204,10 +204,10 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.RESET:
-      console.log('cheese')
       return {
         ...initialState,
-        userLoggedIn: copy.userLoggedIn? true: false
+        userLoggedIn: copy.userLoggedIn? true: false,
+        modalStatus: copy.modalStatus
       }
 
     default: 
