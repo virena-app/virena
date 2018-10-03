@@ -27,6 +27,8 @@ const initialState = {
   displayName: '',
   uid: '',
   projectName: '',
+  openModalStatus: false,
+  navTitle: ''
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -186,6 +188,16 @@ const componentReducer = (state = initialState, action) => {
         uid: action.payload.uid,
         userLoggedIn: true
       }
+
+    case types.OPEN_MODAL:
+      return {
+        ...state,
+        openModalStatus: !action.payload.openModalStatus,
+      }
+    
+    case types.RESET_STATE:
+      return initialState;
+
     default: 
       return state;
   }

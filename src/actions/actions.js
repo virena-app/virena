@@ -134,3 +134,14 @@ export const setUserData = (loginData) => ({
     ...loginData,
   }
 })
+
+export const openModal = (openModalStatus) => ({
+  type: types.OPEN_MODAL,
+  payload: {
+    openModalStatus: openModalStatus,
+  }
+})
+
+export const resetState = () => ({
+  types: types.RESET_STATE,
+})
