@@ -29,6 +29,8 @@ const initialState = {
   displayName: '',
   uid: '',
   projectName: '',
+  modalStatus: false,
+  modalAction: ''
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -198,10 +200,24 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.LOGOUT:
-    return {
-      ...state,
-      userLoggedIn: copy.userLoggedIn? false: true
-    }
+      return {
+        ...state,
+        userLoggedIn: copy.userLoggedIn? false: true
+      }
+
+    case types.TOGGLE_MODAL:
+      return {
+        ...state,
+        modalStatus: copy.modalStatus? false : true,
+        modalAction: action.payload
+      }
+
+    case types.RESET:
+      return {
+        ...initialState,
+        userLoggedIn: copy.userLoggedIn? true: false,
+        modalStatus: copy.modalStatus
+      }
 
     default: 
       return state;

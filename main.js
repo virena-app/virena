@@ -8,7 +8,7 @@ let win, winSession;
 const createWindow = () => {
 
   const {width, height} = electron.screen.getPrimaryDisplay().size;
-  win = new BrowserWindow({width, height});
+  win = new BrowserWindow({width, height, resizable: false});
   winSession = win.webContents.session
 
   winSession.cookies.get({name: 'cookie'}, (error, cookies) => {

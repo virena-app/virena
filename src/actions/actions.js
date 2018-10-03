@@ -154,3 +154,11 @@ export const logout = () => ({
   type: types.LOGOUT
 })
 
+export const toggleModal = (use) => ({
+  type: types.TOGGLE_MODAL,
+  payload: use
+})
+
+export const reset = () => ({
+  type: types.RESET
+})
