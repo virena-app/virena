@@ -27,6 +27,7 @@ const initialState = {
   displayName: '',
   uid: '',
   projectName: '',
+  userProjects: [],
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -187,6 +188,19 @@ const componentReducer = (state = initialState, action) => {
         uid: action.payload.uid,
         userLoggedIn: true
       }
+
+    case types.LOGOUT:
+    return {
+      ...state,
+      userLoggedIn: copy.userLoggedIn? false: true
+    }
+
+    case types.SET_USER_PROJECTS:
+      return {
+        ...state,
+        userProjects: [...copy.userProjects, ...action.payload]
+      }
+
     default: 
       return state;
   }

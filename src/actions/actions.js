@@ -139,3 +139,13 @@ export const setUserData = (loginData) => ({
     ...loginData,
   }
 })
+
+export const logout = () => ({
+  type: types.LOGOUT
+})
+
+export const setUserProjects = (userProjects) => ({
+  type: types.SET_USER_PROJECTS,
+  payload: userProjects
+})
+

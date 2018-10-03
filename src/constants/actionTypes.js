@@ -20,3 +20,5 @@ export const CHANGE_PHONE = 'CHANGE_PHONE';
 export const CHANGE_SCREEN = 'CHANGE_SCREEN';
 export const TOGGLE_LOGO = 'TOGGLE_LOGO';
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const LOGOUT = 'LOGOUT';
+export const SET_USER_PROJECTS = 'SET_USER_PROJECTS';

@@ -1,10 +1,10 @@
 import { db, Project } from '../models/db.js';
 
 const saveProjectUtil = (treeData, projectName, uid, displayName) => {
+  projectName = "haha";
   db
   .sync()
   .then(() => {
-    
     Project.findAll({
       where: {
         projectName,
@@ -25,7 +25,6 @@ const saveProjectUtil = (treeData, projectName, uid, displayName) => {
         }).then(newRecord => console.log("CREATED!", newRecord.dataValues))
       }
     })
-
   }).catch(err => {
     console.log("Error saving to the database ", err)
   })
