@@ -58,14 +58,17 @@ div.horizontal-line {
 
 .delete {
   background-image: url('../../assets/trash.png');
+  cursor: pointer;
 }
 
 .add {
   background-image: url('../../assets/add.png');
+  cursor: pointer;
 }
 
 .details {
   background-image: url('../../assets/edit.png');
+  cursor: pointer
 }
 
 .tree {
