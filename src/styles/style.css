@@ -223,7 +223,7 @@ ul.bottom-tab {
 .logo {
   width: 211.5px;
   height: 187.5px;
-  margin-bottom: 50px 0;
+  margin: 60px 0;
   animation: spin 7s linear infinite;
   cursor: pointer;
 }

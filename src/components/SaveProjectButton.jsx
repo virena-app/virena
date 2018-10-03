@@ -12,12 +12,12 @@ const styles = theme => ({
 
 class SaveProjectButton extends Component {
   render() {
-    const {treeData, saveProject, classes, } = this.props;
+    const {treeData, saveProject, classes, projectName, uid, displayName} = this.props;
     return (
       <Button variant="contained" color="primary"
       className={classes.saveButton} 
-      onClick={() => saveProject(treeData)}>
-        Save My Project
+      onClick={() => saveProject(treeData, projectName || 'projectName', uid, displayName)}>
+        Update Project
       </Button>
     );
   }

@@ -2,7 +2,7 @@ import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
 import { pascalCase, maxDepth, findNewNode, updateNode, nodeExists, deleteNode } from '../utils/helperFunctions.util.js'
-import saveProject from '../utils/saveProject.util.js';
+import saveProjectUtil from '../utils/saveProject.util.js';
 
 const initialState = {
   treeData: [],
@@ -17,6 +17,8 @@ const initialState = {
   id: 0,
   statusPopupOpen: false, 
   statusPopupErrorOpen: false,
+  saveProjectOpen: false,
+  saveProjectErrorOpen: false,
   fileExportModalState: false,
   drawerState: false,
   fileDownloadPath: '',
@@ -27,8 +29,8 @@ const initialState = {
   displayName: '',
   uid: '',
   projectName: '',
-  openModalStatus: false,
-  navTitle: ''
+  modalStatus: false,
+  modalAction: ''
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -52,9 +54,6 @@ const componentReducer = (state = initialState, action) => {
       }
       copy.treeData.push(parent)
       const copyid = copy.id + 1;
-      
-      
-      
     return {
       ...state,
       treeData: copy.treeData,
@@ -146,10 +145,21 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         statusPopupOpen: action.payload, 
         statusPopupErrorOpen: action.payload,
+        saveProjectOpen: action.payload,
+        saveProjectErrorOpen: action.payload
       }
-    case types.SAVE_PROJECT:
-      saveProject(copy.treeData, copy.displayName, copy.uid);
-      return state;
+    case types.SAVE_PROJECT_SUCCESS:
+      console.log('saveRecord', action.payload.record)
+      return {
+        ...state,
+        saveProjectOpen: action.payload.status,
+      }
+    case types.SAVE_PROJECT_FAIL:
+      console.log('saveRecordFail', action.payload.err)
+      return {
+        ...state,
+        saveProjectErrorOpen: action.payload.status,
+      }
     case types.OPEN_DRAWER:
       return {
         ...state,
@@ -189,14 +199,25 @@ const componentReducer = (state = initialState, action) => {
         userLoggedIn: true
       }
 
-    case types.OPEN_MODAL:
+    case types.LOGOUT:
       return {
         ...state,
-        openModalStatus: !action.payload.openModalStatus,
+        userLoggedIn: copy.userLoggedIn? false: true
       }
-    
-    case types.RESET_STATE:
-      return initialState;
+
+    case types.TOGGLE_MODAL:
+      return {
+        ...state,
+        modalStatus: copy.modalStatus? false : true,
+        modalAction: action.payload
+      }
+
+    case types.RESET:
+      return {
+        ...initialState,
+        userLoggedIn: copy.userLoggedIn? true: false,
+        modalStatus: copy.modalStatus
+      }
 
     default: 
       return state;

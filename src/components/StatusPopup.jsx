@@ -12,7 +12,7 @@ const styles = theme => ({
 });
 
 const StatusPopup = (props) => {
-  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, } = props;
+  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProjectOpen, saveProjectErrorOpen } = props;
 
   return (
     <div>
@@ -45,6 +45,38 @@ const StatusPopup = (props) => {
           variant='error'
           className={classes.margin}
           message='File Export Error. Files need to be named/Navigators must have children. May have generated App.js and Screen components without navigators'
+          onClose={closeStatusPopup}
+        />
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={saveProjectOpen}
+        autoHideDuration={6000}
+        onClose={closeStatusPopup}
+      >
+        <StatusPopupContent 
+          variant='success'
+          className={classes.margin}
+          message='Successfully saved to db!'
+          onClose={closeStatusPopup}
+        />
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={saveProjectErrorOpen}
+        autoHideDuration={6000}
+        onClose={closeStatusPopup}
+      >
+        <StatusPopupContent 
+          variant='error'
+          className={classes.margin}
+          message='Error writing data to db!'
           onClose={closeStatusPopup}
         />
       </Snackbar>
