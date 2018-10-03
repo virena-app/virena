@@ -43,7 +43,6 @@ const mapDispatchToProps = dispatch => ({
   saveProject: (treeData, projectName, uid, displayName) => dispatch(actions.saveProject(treeData, projectName, uid, displayName)),
   openDirectory: () => dispatch(actions.openDirectory()),
   toggleLogo: () => dispatch(actions.toggleLogo()),
-  setUserData: (loginData) => dispatch(actions.setUserData(loginData))
 })
 
 const styles = theme => ({
@@ -84,14 +83,10 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
-    const { exportFiles, treeData, setUserData } = this.props;
+    const { exportFiles, treeData } = this.props;
     console.log('PanelContainer componentDidMount');
     ipcRenderer.on('selectedDir', (event, dirPath) => {
       exportFiles(treeData, dirPath);
-    })
-    ipcRenderer.on('userLoggedIn', (event,loginData) => {
-      console.log('Received login data in panelContainer', loginData);
-      setUserData(loginData);
     })
     ipcRenderer.on('guestLoggedIn', (event, loginData) => {
       console.log('Received guest data', loginData);

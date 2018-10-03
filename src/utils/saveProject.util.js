@@ -15,7 +15,7 @@ const saveProjectUtil = (treeData, projectName, uid, displayName) => {
       if (projects.length) {
         return Project.update(
           {treeData},
-          {returning: true, where: {projectName}}
+          {returning: true, where: {projectName, uid}}
         ).catch(err => {
           console.log('err in updating db', err);
           return err

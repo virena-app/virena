@@ -16,8 +16,10 @@ const styles = theme => ({
 })
 
 export default class TopNav extends Component {
+
   render() {
-    const { userLoggedIn, logout, toggleModal } = this.props
+    const { userLoggedIn, logout, userProjects, toggleModal } = this.props
+    console.log("USER PROJECTS FOR LOAD BUTTON DROPDOWN IN TOP NAV BAR", userProjects)
     return (
       
       <nav className='top-nav'>

@@ -162,3 +162,8 @@ export const toggleModal = (use) => ({
 export const reset = () => ({
   type: types.RESET
 })
+
+export const setUserProjects = (userProjects) => ({
+  type: types.SET_USER_PROJECTS,
+  payload: userProjects
+})
