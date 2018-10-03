@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import * as actions from '../actions/actions';
 import { ipcRenderer } from 'electron';
-import { withStyles, Modal, Typography, Button  } from '@material-ui/core';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+
 
 
 const styles = theme => ({
@@ -46,5 +44,3 @@ export default class TopNav extends Component {
     )
   }
 }
-
-// export default (withStyles(styles))(withRouter(connect(mapStateToProps, mapDispatchToProps)(TopNav)));
