@@ -19,7 +19,7 @@ export default class TopNav extends Component {
   render() {
     const { userLoggedIn, logout, toggleModal } = this.props
     return (
-
+      
       <nav className='top-nav'>
         <ul>
           {userLoggedIn? <li onClick={() => {
