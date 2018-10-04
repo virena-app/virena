@@ -43,6 +43,8 @@ const mapDispatchToProps = dispatch => ({
   saveProject: (treeData, projectName, uid, displayName) => dispatch(actions.saveProject(treeData, projectName, uid, displayName)),
   openDirectory: () => dispatch(actions.openDirectory()),
   toggleLogo: () => dispatch(actions.toggleLogo()),
+  updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject)),
+  setUserData: loginData => dispatch(actions.setUserData(loginData)),
 })
 
 const styles = theme => ({
@@ -103,7 +105,7 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen, exportFiles } = this.props;
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
@@ -120,7 +122,7 @@ class PanelContainer extends Component {
           <div className='horizontal-line'></div>
           <br/>
           <img src='./assets/virena-icon-white.png' className={logoClass} onClick={toggleLogo}></img>
-          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject} projectName={projectName} uid={uid} displayName={displayName}/>}
+          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject} projectName={projectName} uid={uid} displayName={displayName} updateUserProjects={updateUserProjects}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}/>
         </div>
         <StatusPopup 

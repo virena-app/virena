@@ -204,7 +204,8 @@ const componentReducer = (state = initialState, action) => {
     case types.LOGOUT:
       return {
         ...state,
-        userLoggedIn: copy.userLoggedIn? false: true
+        userLoggedIn: copy.userLoggedIn? false: true,
+        userProjects: []
       }
 
     case types.TOGGLE_MODAL:
@@ -224,7 +225,17 @@ const componentReducer = (state = initialState, action) => {
     case types.SET_USER_PROJECTS:
       return {
         ...state,
-        userProjects: [...copy.userProjects, ...action.payload]
+        userProjects: [...action.payload]
+      }
+    
+    case types.UPDATE_USER_PROJECTS:
+      alert(JSON.stringify(action.payload));
+      const updatedProjects = copy.userProjects
+        .filter(project => project.projectName !== action.payload.projectName)
+        .concat(action.payload);
+      return {
+        ...state,
+        userProjects: updatedProjects
       }
 
     default: 
