@@ -30,7 +30,9 @@ const initialState = {
   uid: '',
   projectName: '',
   modalStatus: false,
-  modalAction: ''
+  modalAction: '',
+  iphoneHeight: 80,
+  androidHeight: 405
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
