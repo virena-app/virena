@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 
@@ -22,13 +22,14 @@ class SaveAsForm extends Component {
           toggleModal('')
         }}
         >
-        <Input 
+        <TextField 
           id='save-as-input'
           onChange={(e) => {
             changeProjectNameInput(e.target.value)
           }}
           className={classes.saveAsInput}
           value={projectNameInput}
+          label="Required"
           required
         />
         <Button variant="contained" type='submit' color="primary" className={classes.saveAsButton}>Save</Button>
