@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   toggleModal: (use) => dispatch(actions.toggleModal(use)),
   setUserData: (loginData) => dispatch(actions.setUserData(loginData)),
   setUserProjects: (userProjects) => dispatch(actions.setUserProjects(userProjects)),
+  setTree: (treeData) => dispatch(actions.setTree(treeData)),
 })
 
 class AppContainer extends Component {
@@ -41,18 +42,21 @@ class AppContainer extends Component {
           }
         }).then(data => {
           if (data) {
-            const projects = data.map(model => model.dataValues.projectName)
-            setUserProjects(projects);
+            const projects = data.map(model => ({
+              projectName: model.dataValues.projectName,
+              treeData: model.dataValues.treeData
+            }))
+            setUserProjects(projects)
           }
         })
       })
     })
   }
   render() {
-    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects } = this.props
+    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree } = this.props
     return (
       <div>
-        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects}/>
+        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree}/>
         {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset}/>}
         <div className='main'>
         <ViewContainer />
