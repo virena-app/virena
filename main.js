@@ -29,7 +29,7 @@ const createWindow = () => {
 
   // if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
 
-  win.webContents.openDevTools() 
+  // win.webContents.openDevTools() 
   
   win.on('closed', () => {
     win = null
@@ -78,7 +78,6 @@ ipcMain.on('authorized', (event, args) => {
 
 ipcMain.on('logout', () => {
   winSession.cookies.remove('https://myapp.com', 'cookie', (error) => console.log(error))
-  dialog.showMessageBox({title: 'logout', message: 'You are now logged out!'})
 })
 
 ipcMain.on('selectFileDirectory' , (event) => {

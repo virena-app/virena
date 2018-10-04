@@ -44,7 +44,7 @@ const StatusPopup = (props) => {
         <StatusPopupContent 
           variant='error'
           className={classes.margin}
-          message='File Export Error. Files need to be named/Navigators must have children. May have generated App.js and Screen components without navigators'
+          message='Error generating files, may have exported files without a navigator file. Please check navigation tree logic.'
           onClose={closeStatusPopup}
         />
       </Snackbar>

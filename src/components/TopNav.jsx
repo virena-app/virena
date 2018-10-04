@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
+import * as actions from '../actions/actions';
 import { ipcRenderer } from 'electron';
+
+
+
+const styles = theme => ({
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    // outline: 'none'
+  }
+})
 
 export default class TopNav extends Component {
   render() {
-    const { userLoggedIn, logout, modalStatus, toggleModal } = this.props
+    const { userLoggedIn, logout, toggleModal } = this.props
     return (
+      
       <nav className='top-nav'>
         <ul>
           {userLoggedIn? <li onClick={() => {
