@@ -1,6 +1,6 @@
 import { db, Project } from '../models/db.js';
 
-export default const deleteProjectUtil = (projectName, uid) => {
+const deleteProjectUtil = (projectName, uid) => {
   return db
   .sync()
   .then(() => {
@@ -12,3 +12,5 @@ export default const deleteProjectUtil = (projectName, uid) => {
     })
   })
 }
+
+export default deleteProjectUtil;
