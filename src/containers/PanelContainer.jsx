@@ -43,7 +43,8 @@ const mapDispatchToProps = dispatch => ({
   saveProject: (treeData, projectName, uid, displayName) => dispatch(actions.saveProject(treeData, projectName, uid, displayName)),
   openDirectory: () => dispatch(actions.openDirectory()),
   toggleLogo: () => dispatch(actions.toggleLogo()),
-  updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject))
+  updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject)),
+  setUserData: loginData => dispatch(actions.setUserData(loginData)),
 })
 
 const styles = theme => ({
@@ -84,9 +85,15 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
-    const { exportFiles, treeData } = this.props;
+    const { setUserData, exportFiles, treeData } = this.props;
     console.log('PanelContainer componentDidMount');
+    
+    ipcRenderer.on('userLoggedIn', (event,loginData) => {
+      console.log('Received login data in panelContainer', loginData);
+      setUserData(loginData);
+    })
     ipcRenderer.on('selectedDir', (event, dirPath) => {
+      console.log('dirPath in renderer', dirPath);
       exportFiles(treeData, dirPath);
     })
     ipcRenderer.on('guestLoggedIn', (event, loginData) => {
@@ -98,11 +105,10 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen, updateUserProjects } = this.props;
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
-
     return (
       <div className='panel'>
         <div>
