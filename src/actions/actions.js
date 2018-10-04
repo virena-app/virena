@@ -167,3 +167,8 @@ export const setUserProjects = (userProjects) => ({
   type: types.SET_USER_PROJECTS,
   payload: userProjects
 })
+
+export const updateUserProjects = (userProject) => ({
+  type: types.UPDATE_USER_PROJECTS,
+  payload: userProject
+})
