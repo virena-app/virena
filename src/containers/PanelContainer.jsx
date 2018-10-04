@@ -85,7 +85,7 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
-    const { setUserData, exportFiles, treeData } = this.props;
+    const { setUserData, exportFiles } = this.props;
     console.log('PanelContainer componentDidMount');
     
     ipcRenderer.on('userLoggedIn', (event,loginData) => {
@@ -93,6 +93,7 @@ class PanelContainer extends Component {
       setUserData(loginData);
     })
     ipcRenderer.on('selectedDir', (event, dirPath) => {
+      const { treeData } = this.props;
       console.log('dirPath in renderer', dirPath);
       exportFiles(treeData, dirPath);
     })

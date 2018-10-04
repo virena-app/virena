@@ -173,6 +173,11 @@ export const updateUserProjects = (userProject) => ({
   payload: userProject
 })
 
+export const changeProjectNameInput = (name) => ({
+  type: types.CHANGE_PROJECT_NAME_INPUT,
+  payload: name
+})
+
 export const addUserProject = (treeData, projectNameInput, uid, displayName) => (dispatch) => {
   saveProjectUtil(treeData, projectNameInput, uid, displayName)
     .then(record => dispatch({
@@ -190,8 +195,3 @@ export const addUserProject = (treeData, projectNameInput, uid, displayName) => 
       }
     }))
 }
-
-export const changeProjectNameInput = (projectNameInput) => ({
-  type: types.CHANGE_PROJECT_NAME_INPUT,
-  payload: projectNameInput
-})

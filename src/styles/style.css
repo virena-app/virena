@@ -271,6 +271,15 @@ NavLink div {
   transition: width 0.2s ease-out;
 }
 
+.open {
+  width: 40%;
+  z-index: 100;
+  display: inherit;
+  flex-direction: column;
+  visibility: visible;
+  align-items: center;
+}
+
 .drawer a, .drawer button {
   font-weight: bold;
   width: 95%;
@@ -292,15 +301,6 @@ NavLink div {
   padding-left: 2px;
   background-color: #fff;
   outline: none;
-}
-
-.open {
-  width: 40%;
-  z-index: 100;
-  display: inherit;
-  flex-direction: column;
-  visibility: visible;
-  align-items: center;
 }
 
 .backdrop {
@@ -418,4 +418,8 @@ button:focus {
 #app-name {
   font-family: 'Charmonman', cursive;
   margin-top: 10px;
+}
+
+.save-form {
+  margin-top: 15px;
 }

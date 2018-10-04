@@ -237,6 +237,13 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         userProjects: updatedProjects
       }
+
+    case types.CHANGE_PROJECT_NAME_INPUT:
+    console.log(action.payload)
+      return {
+        ...state,
+        projectNameInput: action.payload
+      }
     
     case types.ADD_USER_PROJECT:
       alert(JSON.stringify(action.payload))
@@ -245,13 +252,7 @@ const componentReducer = (state = initialState, action) => {
         userProjects: [...copy.userProjects, action.payload],
         projectNameInput: ''
       }
-    
-    case types.CHANGE_PROJECT_NAME_INPUT:
-      return {
-        ...state,
-        projectNameInput: action.payload
-      }
-  
+
     default: 
       return state;
   }
