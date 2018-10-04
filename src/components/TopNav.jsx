@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as actions from '../actions/actions';
 import { ipcRenderer } from 'electron';
-import LoadFilesDropdown from './LoadFilesDropdown.jsx'
+import LoadFilesDropdown from './LoadFilesDropdown.jsx';
+import SaveAsForm from './SaveAsForm.jsx'
 
 
 
@@ -19,7 +20,7 @@ const styles = theme => ({
 export default class TopNav extends Component {
 
   render() {
-    const { userLoggedIn, logout, userProjects, toggleModal, setTree } = this.props
+    const { treeData, uid, displayName, userLoggedIn, logout, userProjects, toggleModal, setTree, addUserProject, projectNameInput, changeProjectNameInput } = this.props
     console.log("USER PROJECTS FOR LOAD BUTTON DROPDOWN IN TOP NAV BAR", userProjects)
     return (
       
@@ -33,6 +34,7 @@ export default class TopNav extends Component {
           {userLoggedIn && <li><img src='./assets/load_file.png' className='nav-icon'/>Load Project</li>}
           <LoadFilesDropdown userProjects={userProjects} setTree={setTree}/>
           {userLoggedIn && <li><img src='./assets/save_file.png' className='nav-icon'/>Save Project</li>}
+          <SaveAsForm addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName}/>
         </ul>
         <div className='logout-wrapper'>
           {userLoggedIn && (<div id='logout-btn' onClick={() => toggleModal('logout')}>

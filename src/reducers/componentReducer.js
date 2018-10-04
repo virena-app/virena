@@ -32,6 +32,7 @@ const initialState = {
   modalStatus: false,
   modalAction: '',
   userProjects: [],
+  projectNameInput: '',
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -229,7 +230,6 @@ const componentReducer = (state = initialState, action) => {
       }
     
     case types.UPDATE_USER_PROJECTS:
-      alert(JSON.stringify(action.payload));
       const updatedProjects = copy.userProjects
         .filter(project => project.projectName !== action.payload.projectName)
         .concat(action.payload);
@@ -237,7 +237,21 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         userProjects: updatedProjects
       }
-
+    
+    case types.ADD_USER_PROJECT:
+      alert(JSON.stringify(action.payload))
+      return {
+        ...state,
+        userProjects: [...copy.userProjects, action.payload],
+        projectNameInput: ''
+      }
+    
+    case types.CHANGE_PROJECT_NAME_INPUT:
+      return {
+        ...state,
+        projectNameInput: action.payload
+      }
+  
     default: 
       return state;
   }
