@@ -1,27 +1,54 @@
 import React, {Component} from 'react';
-// import * as actions from '../actions/actions';
-import { populateImg } from '../utils/populateImg';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import * as actions from '../actions/actions';
+import PhoneContainer from './PhoneContainer.jsx';
+import { Button, withStyles } from '@material-ui/core/';
 
 const mapStateToProps = store => ({
-  selectedComponent: store.data.selectedComponent,
-  treeData: store.data.treeData,
+  phone: store.data.phone,
 })
 
-const mapDispatchToProps = dispatch => ({})
-class ViewContainer extends Component {
+const mapDispatchToProps = dispatch => ({
+  changePhone: (phone, screen) => dispatch(actions.changePhone(phone, screen)),
+})
 
+const styles = theme => ({
+  onButton: {
+    background: '#2068c9',
+    color: '#eee !important'
+  },
+  offButton: {
+    background: '#d5d5d5'
+  }
+})
+class ViewContainer extends Component {
   render() {
-    let image = '../assets/';
-    const selected = this.props.selectedComponent;
-    image = populateImg(image, selected, this.props.treeData);
-    console.log(`image here ${image}`);
+    const { classes } = this.props;
     return (
       <div className='view'>
-        <img id='iphone' src={image}></img>
+        <div className={this.props.phone}>
+            <PhoneContainer />
+        </div>
+        <div className='row ios-android'>
+          <Button 
+            onClick={() => this.props.changePhone('iphone-view', 'iphone-screen column')}
+            variant='contained'
+            color='primary'
+            className={this.props.phone === 'iphone-view' ? classes.onButton : classes.offButton}>
+            iOS
+            </Button>
+          <Button 
+            onClick={() => this.props.changePhone('android-view', 'android-screen column')}
+            variant='contained'
+            color='primary'
+            className={this.props.phone === 'android-view' ? classes.onButton : classes.offButton}>
+            Android
+          </Button>
+        </div>
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewContainer);
+export default (withStyles(styles))(withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewContainer)));

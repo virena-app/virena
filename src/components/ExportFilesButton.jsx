@@ -1,22 +1,26 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = theme => ({
+  exportButton: {
+    background: '#2068c9',
+    width: '250px',
+    marginTop: '20px'
+  }
+})
 
 class ExportFilesButton extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
-    const {treeData, exportFiles} = this.props;
+    const {treeData, openDirectory, classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup} = this.props;
     return (
-      <Button variant="contained" color="primary" 
-      onClick={()=> {
-        //open modal function
-        this.props.exportFiles(this.props.treeData);
-      }}>
+      <Button variant="contained" color="primary"
+      className={classes.exportButton} 
+      onClick={openDirectory}>
         Export
       </Button>
     );
   }
 }
 
-export default ExportFilesButton;
+export default (withStyles(styles)) (ExportFilesButton);

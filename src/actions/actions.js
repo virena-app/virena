@@ -1,4 +1,8 @@
 import * as types from '../constants/actionTypes';
+const { ipcRenderer } = require('electron')
+import exportFilesUtil from '../utils/exportFiles.util.js';
+import saveProjectUtil from '../utils/saveProject.util.js';
+
 
 export const setTree = treeData => ({
   type: types.SET_TREE,
@@ -26,22 +30,17 @@ export const addChild = (name, type, key, path, id) => ({
   }
 })
 
-export const deleteComponent = (key, path) => ({
+export const deleteComponent = (node) => ({
   type: types.DELETE_COMPONENT,
   payload: {
-    key,
-    path
+    ...node
   }
 })
 
-export const selectComponent = (name, type, children, key, path) => ({
+export const selectComponent = (node) => ({
   type: types.SELECT_COMPONENT,
   payload: {
-    title: name,
-    subtitle: type,
-    children,
-    key,
-    path,
+    ...node
   }
 })
 
@@ -65,17 +64,111 @@ export const setNameToChange = name => ({
   payload: name
 })
 
-export const updateNameAndType = (name, type, key, path) => ({
+export const updateNameAndType = (name, type, selected) => ({
   type: types.UPDATE_NAME_AND_TYPE,
   payload: {
     title: name,
     subtitle: type,
-    key,
-    path
+    selectedComponent: selected
   }
 })
 
-export const exportFiles = treeData => ({
-  type: types.EXPORT_FILES,
-  payload: treeData
+export const exportFiles = ( treeData, path ) => (dispatch) => {
+  console.log('treeData in exportFiles actions', treeData);
+  
+  exportFilesUtil(treeData, path)
+    .then(data => dispatch({
+      type: types.EXPORT_FILES_SUCCESS,
+      payload: {
+        status: true,
+      }
+    }))
+    .catch(err => dispatch({
+      type: types.EXPORT_FILES_FAIL,
+      payload: {
+        status: true,
+        err
+      }
+    }));
+}
+
+export const saveProject = (treeData, projectName, uid, displayName) => (dispatch) => {
+  saveProjectUtil(treeData, projectName || 'projectName', uid, displayName)
+    .then(record => dispatch({
+      type: types.SAVE_PROJECT_SUCCESS,
+      payload: {
+        record,
+        status: true,
+      }
+    }))
+    .catch(err => dispatch({
+      type: types.SAVE_PROJECT_FAIL,
+      payload: {
+        status: true,
+        err
+      }
+    }))
+}
+
+export const closeStatusPopup = () => ({
+  type: types.CLOSE_STATUS_POPUP,
+  payload: false
+})
+
+export const openDrawer = () => ({
+  type: types.OPEN_DRAWER
+})
+
+export const closeDrawer = () => ({
+  type: types.CLOSE_DRAWER
+})
+
+export const openDirectory = () => (dispatch) => {
+  ipcRenderer.send('selectFileDirectory')
+}
+
+export const changePhone = (phone, screen) => ({
+  type: types.CHANGE_PHONE,
+  payload: {
+    phone: phone,
+    screen: screen
+  }
+})
+
+export const toggleLogo = () => ({
+  type: types.TOGGLE_LOGO
+})
+
+// export const changeScreen = (screen) => ({
+//   type: types.CHANGE_SCREEN,
+//   payload: screen
+// })
+export const setUserData = (loginData) => ({
+  type: types.SET_USER_DATA,
+  payload: {
+    ...loginData,
+  }
+})
+
+export const logout = () => ({
+  type: types.LOGOUT
+})
+
+export const toggleModal = (use) => ({
+  type: types.TOGGLE_MODAL,
+  payload: use
+})
+
+export const reset = () => ({
+  type: types.RESET
+})
+
+export const setUserProjects = (userProjects) => ({
+  type: types.SET_USER_PROJECTS,
+  payload: userProjects
+})
+
+export const updateUserProjects = (userProject) => ({
+  type: types.UPDATE_USER_PROJECTS,
+  payload: userProject
 })

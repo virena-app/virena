@@ -1,9 +1,13 @@
 import fs from 'fs';
-import generateScreenTemplate, { getAllScreenTitles } from './generateScreenTemplates.util.js';
+// import { format } from 'prettier';
+import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
+import { getAllScreenTitles } from './helperFunctions.util.js'
+import * as types from '../constants/actionTypes.js'
 
-const exportFiles = (treeData, path) => {
+
+const exportFilesUtil = (treeData, path) => {
   const screenTitles = getAllScreenTitles(treeData);
   const promises = [];
   screenTitles.forEach((title) => {
@@ -18,7 +22,7 @@ const exportFiles = (treeData, path) => {
         },
         (err) => {
           if (err) return reject(err)
-          return resolve();
+          return resolve(title);
         });
     });
 
@@ -36,7 +40,7 @@ const exportFiles = (treeData, path) => {
       },
       (err) => {
         if (err) return reject(err);
-        return resolve();
+        return resolve('nav');
       });
   });
 
@@ -51,14 +55,14 @@ const exportFiles = (treeData, path) => {
       },
       (err) => {
         if (err) return reject(err);
-        return resolve();
+        return resolve('app');
       });
   });
 
   promises.push(navPromise);
   promises.push(appPromise);
 
-  return Promise.all(promises);
+  return Promise.all(promises)
 };
 
-export default exportFiles;
+export default exportFilesUtil;
