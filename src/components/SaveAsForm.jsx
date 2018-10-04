@@ -10,7 +10,7 @@ export default class SaveAsForm extends Component {
         addUserProject(treeData, projectNameInput, uid, displayName)
       }}>
 
-        <input type='text' onChange={(e) => {
+        <input type='text' value={projectNameInput} onChange={(e) => {
           changeProjectNameInput(e.target.value)
         }}/>
         <button>Save As</button>

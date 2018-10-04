@@ -195,3 +195,8 @@ export const changeProjectNameInput = (projectNameInput) => ({
   type: types.CHANGE_PROJECT_NAME_INPUT,
   payload: projectNameInput
 })
+
+export const setProjectName = (projectName) => ({
+  type: types.SET_PROJECT_NAME,
+  payload: projectName
+})
