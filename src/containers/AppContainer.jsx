@@ -29,7 +29,8 @@ const mapDispatchToProps = dispatch => ({
   setUserProjects: (userProjects) => dispatch(actions.setUserProjects(userProjects)),
   setTree: (treeData) => dispatch(actions.setTree(treeData)),
   addUserProject: (treeData, projectNameInput, uid, displayName) => dispatch(actions.addUserProject(treeData, projectNameInput, uid, displayName)),
-  changeProjectNameInput: (projectNameInput) => dispatch(actions.changeProjectNameInput(projectNameInput))
+  changeProjectNameInput: (projectNameInput) => dispatch(actions.changeProjectNameInput(projectNameInput)),
+  setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
 })
 
 class AppContainer extends Component {
@@ -58,7 +59,7 @@ class AppContainer extends Component {
     })
   }
   render() {
-    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput } = this.props
+    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, setProjectName } = this.props
     return (
       <div>
         <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} displayName={displayName} uid={uid}/>

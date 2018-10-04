@@ -220,7 +220,8 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...initialState,
         userLoggedIn: copy.userLoggedIn? true: false,
-        modalStatus: copy.modalStatus
+        modalStatus: copy.modalStatus,
+        userProjects: copy.userProjects
       }
 
     case types.SET_USER_PROJECTS:
@@ -253,6 +254,12 @@ const componentReducer = (state = initialState, action) => {
         projectNameInput: ''
       }
 
+    case types.SET_PROJECT_NAME:
+      return {
+        ...state,
+        projectName: action.payload
+      }
+  
     default: 
       return state;
   }

@@ -35,7 +35,6 @@ export default class TopNav extends Component {
               <img src='./assets/save_file.png' className='nav-icon'/>
                 Save Project
             </li>
-            {/* <SaveAsForm addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName} /> */}
           </div>}
         </ul>
         <div className='logout-wrapper'>

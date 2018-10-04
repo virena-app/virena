@@ -195,3 +195,8 @@ export const addUserProject = (treeData, projectNameInput, uid, displayName) => 
       }
     }))
 }
+
+export const setProjectName = (projectName) => ({
+  type: types.SET_PROJECT_NAME,
+  payload: projectName
+})
