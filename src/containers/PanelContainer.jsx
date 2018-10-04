@@ -93,8 +93,8 @@ class PanelContainer extends Component {
       setUserData(loginData);
     })
     ipcRenderer.on('selectedDir', (event, dirPath) => {
-      console.log('dirPath in renderer', dirPath);
       const { treeData } = this.props;
+      console.log('dirPath in renderer', dirPath);
       exportFiles(treeData, dirPath);
     })
     ipcRenderer.on('guestLoggedIn', (event, loginData) => {

@@ -6,10 +6,16 @@ export default class LoadFilesDropdown extends Component {
     const { userProjects, setTree, setProjectName } = this.props
     return (
       <div className="menu">
-        {userProjects.map(project => <button onClick={()=> {
-          setTree(project.treeData)
-          setProjectName(project.projectName);
-        }}>{project.projectName}</button>)}
+        {userProjects.map((project, i) => (
+        <div>
+          <div onClick={()=> {
+            setTree(project.treeData)
+            setProjectName(project.projectName);
+          }}>{project.projectName}
+            <button>Delete{i}</button>
+          </div>
+        </div>
+        ))}
       </div>
     )
   }

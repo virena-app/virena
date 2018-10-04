@@ -62,8 +62,8 @@ class AppContainer extends Component {
     const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, setProjectName } = this.props
     return (
       <div>
-        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} setProjectName={setProjectName} treeData={treeData} displayName={displayName} uid={uid}/>
-        {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset}/>}
+        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} displayName={displayName} uid={uid}/>
+        {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName}/>}
         <div className='main'>
         <ViewContainer />
         <div className='vertical-line'></div>

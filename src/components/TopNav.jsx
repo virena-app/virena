@@ -20,21 +20,22 @@ const styles = theme => ({
 export default class TopNav extends Component {
 
   render() {
-    const { treeData, uid, displayName, userLoggedIn, logout, userProjects, toggleModal, setTree, addUserProject, projectNameInput, changeProjectNameInput, setProjectName } = this.props
+    const { treeData, uid, displayName, userLoggedIn, userProjects, modalStatus, toggleModal, setTree, addUserProject, projectNameInput, changeProjectNameInput } = this.props
     console.log("USER PROJECTS FOR LOAD BUTTON DROPDOWN IN TOP NAV BAR", userProjects)
     return (
       
       <nav className='top-nav'>
         <ul>
-          {userLoggedIn? <li onClick={() => {
-            toggleModal('reset')
-          }}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li> : <li onClick={() => {
-            toggleModal('reset')
-          }} style={{width: '250px'}}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li>}
+          {userLoggedIn? <li onClick={() => toggleModal('reset')}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li> : <li onClick={() => toggleModal('reset')} style={{width: '250px'}}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li>}
           {userLoggedIn && <li><img src='./assets/load_file.png' className='nav-icon'/>Load Project</li>}
-          <LoadFilesDropdown userProjects={userProjects} setTree={setTree} setProjectName={setProjectName}/>
-          {userLoggedIn && <li><img src='./assets/save_file.png' className='nav-icon'/>Save Project</li>}
-          <SaveAsForm addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName}/>
+          <LoadFilesDropdown userProjects={userProjects} setTree={setTree}/>
+          {userLoggedIn && 
+          <div>
+            <li onClick={() => toggleModal('save')}>
+              <img src='./assets/save_file.png' className='nav-icon'/>
+                Save Project
+            </li>
+          </div>}
         </ul>
         <div className='logout-wrapper'>
           {userLoggedIn && (<div id='logout-btn' onClick={() => toggleModal('logout')}>
