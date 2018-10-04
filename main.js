@@ -29,7 +29,7 @@ const createWindow = () => {
 
   // if (process.env.NODE_ENV === 'development') win.loadURL('http://localhost:8080')
 
-  // win.webContents.openDevTools() 
+  win.webContents.openDevTools() 
   
   win.on('closed', () => {
     win = null

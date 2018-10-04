@@ -30,7 +30,8 @@ const initialState = {
   uid: '',
   projectName: '',
   modalStatus: false,
-  modalAction: ''
+  modalAction: '',
+  userProjects: [],
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -218,6 +219,12 @@ const componentReducer = (state = initialState, action) => {
         ...initialState,
         userLoggedIn: copy.userLoggedIn? true: false,
         modalStatus: copy.modalStatus
+      }
+
+    case types.SET_USER_PROJECTS:
+      return {
+        ...state,
+        userProjects: [...copy.userProjects, ...action.payload]
       }
 
     default: 

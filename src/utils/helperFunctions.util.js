@@ -1,12 +1,26 @@
+//TODO: Rewrite some of these using map instead of unnecessary reduce (...What was I thinking 2 weeks ago?)
+
 /**
  * Sanitizes user input to have valid jsx syntax
- * @param {string} title - The variable name label of the component
+ * @param {string} title - The variable name label of the component/navigator
  */
 
 export const pascalCase = title => title
   .replace(/[a-z]+/gi, word => word[0]
   .toUpperCase() + word.slice(1))
   .replace(/[-_\s\W]+/gi, '');
+
+/**
+ * Get info for any child's parent and its order in the parent's children array
+ * @param {object} - The current state of the sortable tree
+ */
+
+export const maxDepth = treeData => {
+  return treeData.reduce((max, node) => {
+    if (node.children) max = Math.max(1 + maxDepth(node.children), max);
+    return max;
+  }, 1);
+}
 
 /**
  * Get all titles of simple screen components to generate simple screen templates
@@ -75,18 +89,6 @@ export const getNthChildInfo = (node, parent) => {
     if ((child.title) === title) return { parent, n: i + 1 }
     else if (child.children) return getNthChildInfo(node, child);
   };
-}
-
-/**
- * Get info for any child's parent and its order in the parent's children array
- * @param {object} - The current state of the sortable tree
- */
-
-export const maxDepth = treeData => {
-  return treeData.reduce((max, node) => {
-    if (node.children) max = Math.max(1 + maxDepth(node.children), max);
-    return max;
-  }, 1);
 }
 
 /**
