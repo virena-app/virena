@@ -16,6 +16,9 @@ const mapStateToProps = store => ({
   modalAction: store.data.modalAction,
   uid: store.data.uid,
   userProjects: store.data.userProjects,
+  projectNameInput: store.data.projectNameInput,
+  treeData: store.data.treeData,
+  displayName: store.data.displayName
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -25,6 +28,8 @@ const mapDispatchToProps = dispatch => ({
   setUserData: (loginData) => dispatch(actions.setUserData(loginData)),
   setUserProjects: (userProjects) => dispatch(actions.setUserProjects(userProjects)),
   setTree: (treeData) => dispatch(actions.setTree(treeData)),
+  addUserProject: (treeData, projectNameInput, uid, displayName) => dispatch(actions.addUserProject(treeData, projectNameInput, uid, displayName)),
+  changeProjectNameInput: (projectNameInput) => dispatch(actions.changeProjectNameInput(projectNameInput))
 })
 
 class AppContainer extends Component {
@@ -53,10 +58,10 @@ class AppContainer extends Component {
     })
   }
   render() {
-    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree } = this.props
+    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput } = this.props
     return (
       <div>
-        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree}/>
+        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} displayName={displayName} uid={uid}/>
         {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset}/>}
         <div className='main'>
         <ViewContainer />

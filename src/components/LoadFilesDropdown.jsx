@@ -9,5 +9,5 @@ export default class LoadFilesDropdown extends Component {
         {userProjects.map(project => <button onClick={()=>setTree(project.treeData)}>{project.projectName}</button>)}
       </div>
     )
-  }    
+  }
 }
