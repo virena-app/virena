@@ -254,7 +254,8 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         userProjects: [...copy.userProjects, action.payload],
-        projectNameInput: ''
+        projectNameInput: '',
+        currentProject: action.payload
       }
 
     case types.SET_CURRENT_PROJECT:
