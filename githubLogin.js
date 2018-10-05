@@ -102,5 +102,6 @@ async function fetchGithubProfile (accessToken) {
 
 const github = document.getElementById('github-login')
 github.addEventListener('click', () => {
+  console.log('clicked GitHub Login!')
   githubSignIn()
 })
