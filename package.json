@@ -71,7 +71,9 @@
       "main.js",
       "login.html",
       "login.js",
-      "src/styles/style.css"
+      "githubLogin.js",
+      "src/styles/style.css",
+      "src/styles/bootstrap-social.css"
     ],
     "dmg": {
       "contents": [
