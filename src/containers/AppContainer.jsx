@@ -30,8 +30,8 @@ const mapDispatchToProps = dispatch => ({
   setTree: (treeData) => dispatch(actions.setTree(treeData)),
   addUserProject: (treeData, projectNameInput, uid, displayName) => dispatch(actions.addUserProject(treeData, projectNameInput, uid, displayName)),
   changeProjectNameInput: (projectNameInput) => dispatch(actions.changeProjectNameInput(projectNameInput)),
-  setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
-  deleteProject: (projectName) => dispatch(actions.deleteProject(projectName)),
+  setCurrentProject: (project) => dispatch(actions.setCurrentProject(project)),
+  deleteProject: (projectName, uid) => dispatch(actions.deleteProject(projectName, uid)),
 })
 
 class AppContainer extends Component {
@@ -60,10 +60,10 @@ class AppContainer extends Component {
     })
   }
   render() {
-    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, setProjectName, deleteProject } = this.props
+    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject } = this.props
     return (
       <div>
-        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} setProjectName={setProjectName} treeData={treeData} displayName={displayName} uid={uid} deleteProject={deleteProject}/>
+        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} setCurrentProject={setCurrentProject} treeData={treeData} displayName={displayName} uid={uid} deleteProject={deleteProject}/>
         {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName}/>}
         <div className='main'>
         <ViewContainer />

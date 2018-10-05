@@ -28,7 +28,7 @@ const initialState = {
   userLoggedIn: false,
   displayName: '',
   uid: '',
-  projectName: '',
+  currentProject: {},
   modalStatus: false,
   modalAction: '',
   userProjects: [],
@@ -206,7 +206,8 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         userLoggedIn: copy.userLoggedIn? false: true,
-        userProjects: []
+        userProjects: [],
+        treeData: []
       }
 
     case types.TOGGLE_MODAL:
@@ -221,7 +222,9 @@ const componentReducer = (state = initialState, action) => {
         ...initialState,
         userLoggedIn: copy.userLoggedIn? true: false,
         modalStatus: copy.modalStatus,
-        userProjects: copy.userProjects
+        userProjects: copy.userProjects,
+        uid: copy.uid,
+        displayName: copy.displayName
       }
 
     case types.SET_USER_PROJECTS:
@@ -254,19 +257,21 @@ const componentReducer = (state = initialState, action) => {
         projectNameInput: ''
       }
 
-    case types.SET_PROJECT_NAME:
+    case types.SET_CURRENT_PROJECT:
+      //alert(JSON.stringify(action.payload))
       return {
         ...state,
-        projectName: action.payload
+        currentProject: action.payload
       }
 
     case types.DELETE_PROJECT:
-      const projectsAfterDeletion = copy.userProjects.filter(project => project.projectName !== action.payload)
+      const projectsAfterDeletion = copy.userProjects
+      .filter(project => project.projectName !== action.payload)
       return {
         ...state,
         userProjects: projectsAfterDeletion,
-        projectName: copy.projectName === action.payload ? '' : copy.projectName,
-        treeData: copy.projectName === action.payload ? [] : copy.treeData
+        currentProject: copy.currentProject.projectName === action.payload ? '' : copy.currentProject,
+        treeData: copy.currentProject.projectName === action.payload ? [] : copy.treeData
       }
   
     default: 
