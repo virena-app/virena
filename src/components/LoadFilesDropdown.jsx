@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class LoadFilesDropdown extends Component {
 
   render() {
-    const { userProjects, setTree, setProjectName } = this.props
+    const { userProjects, setTree, setProjectName, deleteProject, uid } = this.props
     return (
       <div className="menu">
         {userProjects.map((project, i) => (
@@ -12,7 +12,9 @@ export default class LoadFilesDropdown extends Component {
             setTree(project.treeData)
             setProjectName(project.projectName);
           }}>{project.projectName}
-            <button>Delete{i}</button>
+            <button onClick={() => {
+              deleteProject(project.projectName, uid)
+            }}>Delete{i}</button>
           </div>
         </div>
         ))}
