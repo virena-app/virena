@@ -259,6 +259,15 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         projectName: action.payload
       }
+
+    case types.DELETE_PROJECT:
+      const projectsAfterDeletion = copy.userProjects.filter(project => project.projectName !== action.payload)
+      return {
+        ...state,
+        userProjects: projectsAfterDeletion,
+        projectName: copy.projectName === action.payload ? '' : copy.projectName,
+        treeData: copy.projectName === action.payload ? [] : copy.treeData
+      }
   
     default: 
       return state;

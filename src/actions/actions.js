@@ -2,6 +2,7 @@ import * as types from '../constants/actionTypes';
 const { ipcRenderer } = require('electron')
 import exportFilesUtil from '../utils/exportFiles.util.js';
 import saveProjectUtil from '../utils/saveProject.util.js';
+import deleteProjectUtil from '../utils/deleteProject.util.js'
 
 
 export const setTree = treeData => ({
@@ -200,3 +201,11 @@ export const setProjectName = (projectName) => ({
   type: types.SET_PROJECT_NAME,
   payload: projectName
 })
+
+export const deleteProject = (projectName, uid) => (dispatch) => {
+  deleteProjectUtil(projectName, uid)
+    .then(something => dispatch({
+      type: types.DELETE_PROJECT,
+      payload: projectName
+    }))
+}
