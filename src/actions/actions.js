@@ -212,3 +212,8 @@ export const deleteProject = (projectName, uid) => (dispatch) => {
       payload: projectName
     }))
 }
+
+export const setId = (id) => ({
+  type: types.SET_ID,
+  payload: id
+})

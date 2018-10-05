@@ -274,6 +274,12 @@ const componentReducer = (state = initialState, action) => {
         currentProject: copy.currentProject.projectName === action.payload ? '' : copy.currentProject,
         treeData: copy.currentProject.projectName === action.payload ? [] : copy.treeData
       }
+    
+    case types.SET_ID: 
+      return {
+        ...state,
+        id: action.payload
+      }
   
     default: 
       return state;

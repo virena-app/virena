@@ -205,3 +205,9 @@ export const nodeExists = (treeData, id) => {
     else return bool;
   }, false)
 }
+
+export const findMaxId = (treeData) => {
+  return treeData.reduce((max, node) => {
+    return Math.max(node.children ? findMaxId(node.children) : -Infinity, node.id, max)
+  }, -Infinity)
+}
