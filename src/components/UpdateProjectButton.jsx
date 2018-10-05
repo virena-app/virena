@@ -13,12 +13,13 @@ const styles = theme => ({
 
 class UpdateProjectButton extends Component {
   render() {
-    const {treeData, saveProject, classes, currentProject, uid, displayName, updateUserProjects} = this.props;
+    const {treeData, saveProject, classes, currentProject, uid, displayName, updateUserProjects, setCurrentProject } = this.props;
     return (
       <Button variant="contained" color="primary"
       className={classes.saveButton} 
       onClick={() => {
         saveProject(treeData, currentProject.projectName, uid, displayName)
+        setCurrentProject({projectName: currentProject.projectName, treeData})
         updateUserProjects({projectName: currentProject.projectName, treeData})
       }}>
         Update Project
