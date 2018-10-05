@@ -27,15 +27,13 @@ export default class TopNav extends Component {
       <nav className='top-nav'>
         <ul>
           {userLoggedIn? <li onClick={() => toggleModal('reset')}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li> : <li onClick={() => toggleModal('reset')} style={{width: '250px'}}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li>}
-          {userLoggedIn && <li><img src='./assets/load_file.png' className='nav-icon'/>Load Project</li>}
-          <LoadFilesDropdown userProjects={userProjects} setTree={setTree} setProjectName={setProjectName} deleteProject={deleteProject} uid={uid}/>
-          {userLoggedIn && 
-          <div>
-            <li onClick={() => toggleModal('save')}>
-              <img src='./assets/save_file.png' className='nav-icon'/>
-                Save Project
-            </li>
-          </div>}
+          {userLoggedIn && <li className='load-wrapper'>
+            <div className='load-btn'>
+              <img src='./assets/load_file.png' className='nav-icon'/>Load Project
+            </div>
+            <LoadFilesDropdown userProjects={userProjects} setTree={setTree} setProjectName={setProjectName} deleteProject={deleteProject} uid={uid}/>
+          </li>}
+          {userLoggedIn && <li onClick={() => toggleModal('save')}><img src='./assets/save_file.png' className='nav-icon'/>Save Project</li>}
         </ul>
         <div className='logout-wrapper'>
           {userLoggedIn && (<div id='logout-btn' onClick={() => toggleModal('logout')}>

@@ -423,3 +423,16 @@ button:focus {
 .save-form {
   margin-top: 15px;
 }
+
+.load-wrapper {
+  display: inherit;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.load-btn {
+  display: inherit;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
