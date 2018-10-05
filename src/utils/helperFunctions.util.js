@@ -219,9 +219,9 @@ export const immediateBottomTabChild = treeData => {
 }
 
 export const getAllSwitchNavigators = treeData => {
-  return treeData.reduce((navigators, node) => {
-    if (node.subtitle === 'Switch') return navigators.concat(node.title);
-    else if (node.children) return navigators.concat(getAllSwitchNavigators(node.children));
-    else return navigators;
+  return treeData.reduce((switches, node) => {
+    if (node.subtitle === 'Switch') return switches.concat(node);
+    else if (node.children) return switches.concat(getAllSwitchNavigators(node.children));
+    else return switches;
   }, []);
 }

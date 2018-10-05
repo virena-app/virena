@@ -1,4 +1,4 @@
-import { getAllScreenTitles, getImmediateChildrenTitles, getAllParents, getParent, immediateBottomTabChild } from './helperFunctions.util'
+import { getAllScreenTitles, getImmediateChildrenTitles, getAllParents, getParent, immediateBottomTabChild, getAllSwitchNavigators } from './helperFunctions.util'
 
 /**
  * Master function which generates navigator.js file
