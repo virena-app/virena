@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 export default class LoadFilesDropdown extends Component {
 
   render() {
-    const { userProjects, setTree, setProjectName, deleteProject, uid } = this.props
+    const { userProjects, setTree, setCurrentProject, deleteProject, uid } = this.props
     return (
       <div className="menu">
         {userProjects.map((project, i) => (
         <div>
           <div onClick={()=> {
             setTree(project.treeData)
-            setProjectName(project.projectName);
+            setCurrentProject(project);
           }}>{project.projectName}
             <button onClick={() => {
               deleteProject(project.projectName, uid)
