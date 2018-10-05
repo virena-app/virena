@@ -1,4 +1,4 @@
-import { getAllScreenTitles, getImmediateChildrenTitles, getAllParents } from './helperFunctions.util'
+import { getAllScreenTitles, getImmediateChildrenTitles, getAllParents, getParent, immediateBottomTabChild } from './helperFunctions.util'
 
 /**
  * Master function which generates navigator.js file
@@ -6,8 +6,10 @@ import { getAllScreenTitles, getImmediateChildrenTitles, getAllParents } from '.
  */
   
 const generateNavigatorTemplate = treeData => {
+  console.log('is there a immediate bottom child ', immediateBottomTabChild(treeData));
   const screenTitles = getAllScreenTitles(treeData);
   const navigators = getAllParents(treeData);
+  let twoBottomNavs = 0;
   navigators.forEach(nav => {
     if(!nav.children) return new Error;
   })
@@ -16,10 +18,20 @@ const generateNavigatorTemplate = treeData => {
   navigators.map(navigator => {
     const childrenTitles = navigator.children.map(child => child.title)
     console.log('childrenTitles of'+ navigator.title +'inside gennavTemplate', navigator.children)
-    return `export const ${navigator.title} = create${navigator.subtitle}Navigator({` + (childrenTitles.length ?
+    let navigation = `export const ${navigator.title} = create${navigator.subtitle}Navigator({` + (childrenTitles.length ?
     childrenTitles.map(title => {
       return `${title}: { screen: ${title} }`
     }).join(', ') + '})' : '})')
+
+    if (navigator.subtitle === 'BottomTab') {
+      twoBottomNavs++;
+      if (twoBottomNavs >= 2) {
+        navigation = `${navigation} \n${navigator.title}.navigationOptions = ({navigation}) => { let tabBarVisible = true; if(navigation.state.index >= 0) tabBarVisible = false; return { tabBarVisible } }`
+      }
+    }
+
+    return navigation;
+
   }).reverse().join('\n\n');
 }
 

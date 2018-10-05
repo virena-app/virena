@@ -43,7 +43,8 @@ const mapDispatchToProps = dispatch => ({
   saveProject: (treeData, projectName, uid, displayName) => dispatch(actions.saveProject(treeData, projectName, uid, displayName)),
   openDirectory: () => dispatch(actions.openDirectory()),
   toggleLogo: () => dispatch(actions.toggleLogo()),
-  setUserData: (loginData) => dispatch(actions.setUserData(loginData))
+  updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject)),
+  setUserData: loginData => dispatch(actions.setUserData(loginData)),
 })
 
 const styles = theme => ({
@@ -84,14 +85,17 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
-    const { exportFiles, treeData, setUserData } = this.props;
+    const { setUserData, exportFiles } = this.props;
     console.log('PanelContainer componentDidMount');
-    ipcRenderer.on('selectedDir', (event, dirPath) => {
-      exportFiles(treeData, dirPath);
-    })
+    
     ipcRenderer.on('userLoggedIn', (event,loginData) => {
       console.log('Received login data in panelContainer', loginData);
       setUserData(loginData);
+    })
+    ipcRenderer.on('selectedDir', (event, dirPath) => {
+      const { treeData } = this.props;
+      console.log('dirPath in renderer', dirPath);
+      exportFiles(treeData, dirPath);
     })
     ipcRenderer.on('guestLoggedIn', (event, loginData) => {
       console.log('Received guest data', loginData);
@@ -102,11 +106,10 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen } = this.props;
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
-
     return (
       <div className='panel'>
         <div>
@@ -120,7 +123,7 @@ class PanelContainer extends Component {
           <div className='horizontal-line'></div>
           <br/>
           <img src='./assets/virena-icon-white.png' className={logoClass} onClick={toggleLogo}></img>
-          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject} projectName={projectName} uid={uid} displayName={displayName}/>}
+          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject} projectName={projectName} uid={uid} displayName={displayName} updateUserProjects={updateUserProjects}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}/>
         </div>
         <StatusPopup 

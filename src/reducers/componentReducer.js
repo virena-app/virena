@@ -31,8 +31,8 @@ const initialState = {
   projectName: '',
   modalStatus: false,
   modalAction: '',
-  iphoneHeight: 80,
-  androidHeight: 405
+  userProjects: [],
+  projectNameInput: '',
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -205,7 +205,8 @@ const componentReducer = (state = initialState, action) => {
     case types.LOGOUT:
       return {
         ...state,
-        userLoggedIn: copy.userLoggedIn? false: true
+        userLoggedIn: copy.userLoggedIn? false: true,
+        userProjects: []
       }
 
     case types.TOGGLE_MODAL:
@@ -222,6 +223,35 @@ const componentReducer = (state = initialState, action) => {
         modalStatus: copy.modalStatus
       }
 
+    case types.SET_USER_PROJECTS:
+      return {
+        ...state,
+        userProjects: [...action.payload]
+      }
+    
+    case types.UPDATE_USER_PROJECTS:
+      const updatedProjects = copy.userProjects
+        .filter(project => project.projectName !== action.payload.projectName)
+        .concat(action.payload);
+      return {
+        ...state,
+        userProjects: updatedProjects
+      }
+    
+    case types.ADD_USER_PROJECT:
+      alert(JSON.stringify(action.payload))
+      return {
+        ...state,
+        userProjects: [...copy.userProjects, action.payload],
+        projectNameInput: ''
+      }
+    
+    case types.CHANGE_PROJECT_NAME_INPUT:
+      return {
+        ...state,
+        projectNameInput: action.payload
+      }
+  
     default: 
       return state;
   }

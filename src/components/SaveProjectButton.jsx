@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
+import { setUserProjects } from '../actions/actions';
 
 const styles = theme => ({
   saveButton: {
@@ -12,12 +13,16 @@ const styles = theme => ({
 
 class SaveProjectButton extends Component {
   render() {
-    const {treeData, saveProject, classes, projectName, uid, displayName} = this.props;
+    const {treeData, saveProject, classes, projectName, uid, displayName, updateUserProjects} = this.props;
     return (
       <Button variant="contained" color="primary"
       className={classes.saveButton} 
-      onClick={() => saveProject(treeData, projectName || 'projectName', uid, displayName)}>
-        Update Project
+      onClick={() => {
+        //TODO get rid of defaulting to 'projectName'!!
+        saveProject(treeData, projectName || 'projectName', uid, displayName)
+        updateUserProjects({projectName: projectName || 'projectName', treeData})
+      }}>
+        Save Project
       </Button>
     );
   }

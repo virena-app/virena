@@ -162,3 +162,36 @@ export const toggleModal = (use) => ({
 export const reset = () => ({
   type: types.RESET
 })
+
+export const setUserProjects = (userProjects) => ({
+  type: types.SET_USER_PROJECTS,
+  payload: userProjects
+})
+
+export const updateUserProjects = (userProject) => ({
+  type: types.UPDATE_USER_PROJECTS,
+  payload: userProject
+})
+
+export const addUserProject = (treeData, projectNameInput, uid, displayName) => (dispatch) => {
+  saveProjectUtil(treeData, projectNameInput, uid, displayName)
+    .then(record => dispatch({
+      type: types.ADD_USER_PROJECT,
+      payload: {
+        projectName: projectNameInput,
+        treeData
+      }
+    }))
+    .catch(err => dispatch({
+      type: types.SAVE_PROJECT_FAIL,
+      payload: {
+        status: true,
+        err
+      }
+    }))
+}
+
+export const changeProjectNameInput = (projectNameInput) => ({
+  type: types.CHANGE_PROJECT_NAME_INPUT,
+  payload: projectNameInput
+})
