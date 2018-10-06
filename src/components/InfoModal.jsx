@@ -25,24 +25,27 @@ const styles = theme => ({
 
 class InfoModal extends Component {
   render() {
-    const { modalStatus, toggleModal, classes, modalAction, logout, reset, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput } = this.props;
+    const { modalStatus, toggleModal, classes, modalAction, logout, reset, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, deleteProject, deleteTarget, deleteTargetUid } = this.props;
     let modalText;
-    if (modalAction === 'logout') modalText = 'Are you sure you want to log out?'
+    if (modalAction === 'logout') modalText = 'Are you sure you want to log out? (Unsaved progress will be lost)'
     else if (modalAction === 'reset') modalText = 'Create new project?'
     else if (modalAction === 'save') modalText = 'Save Project As:'
+    else if (modalAction === 'delete') modalText = 'Are you sure you want to delete this project?'
     return (
       <Modal open={modalStatus} onClose={toggleModal} className={classes.modalwrapper}>
         <div className={classes.modal}>
           <Typography variant='title' id='title'>
             {modalText}
           </Typography>
-          {(modalAction === 'logout' || modalAction === 'reset') && <div>
+          {(modalAction === 'logout' || modalAction === 'reset' || modalAction === 'delete') && <div>
             <Button color="primary" className={classes.button} onClick={() => {
               if (modalAction === 'logout') {
                 logout()
                 ipcRenderer.send('logout', 'logout')
               } else if (modalAction === 'reset') {
                 reset()
+              } else if (modalAction === 'delete') {
+                deleteProject(deleteTarget, deleteTargetUid)
               }
               toggleModal('')
             }}>Yes</Button>

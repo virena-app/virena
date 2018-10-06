@@ -33,6 +33,9 @@ const initialState = {
   modalAction: '',
   userProjects: [],
   projectNameInput: '',
+  dropdownStatus: false,
+  deleteTarget: '',
+  deleteTargetUid: ''
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -214,7 +217,9 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         modalStatus: copy.modalStatus? false : true,
-        modalAction: action.payload
+        modalAction: action.payload.use,
+        deleteTarget: action.payload.project,
+        deleteTargetUid: action.payload.uid
       }
 
     case types.RESET:
@@ -273,6 +278,12 @@ const componentReducer = (state = initialState, action) => {
         userProjects: projectsAfterDeletion,
         currentProject: copy.currentProject.projectName === action.payload ? '' : copy.currentProject,
         treeData: copy.currentProject.projectName === action.payload ? [] : copy.treeData
+      }
+
+    case types.TOGGLE_DROPDOWN:
+      return {
+        ...state,
+        dropdownStatus: copy.dropdownStatus? false : true
       }
     
     case types.SET_ID: 
