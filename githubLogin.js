@@ -11,7 +11,8 @@ async function githubSignIn () {
   const code = await signInWithPopup()
   const tokens = await fetchAccessTokens(code)
   console.log(tokens)
-  const {id, email, name} = await fetchGithubProfile(tokens.access_token)
+  // const {id, email, name} = await fetchGithubProfile(tokens.access_token)
+  const responseData = await fetchGithubProfile(tokens.access_token);
   const providerUser = {
     uid: id,
     email,
@@ -19,7 +20,7 @@ async function githubSignIn () {
     idToken: tokens.id_token,
   }
 
-  return ipcRenderer.send('authorized', providerUser)
+  return ipcRenderer.send('authorized', responseData)
 }
 
 function signInWithPopup () {
@@ -34,8 +35,8 @@ function signInWithPopup () {
     const urlParams = {
       response_type: 'code',
       redirect_uri: 'http://127.0.0.1:8000',
-      client_id: process.env.GITINIT,
-      client_secret: process.env.GITSEE
+      client_id: '8fcf3e5c2d3d5dd78188',
+      client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e'
     }
     const authUrl = `${GITHUB_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
 
@@ -77,10 +78,10 @@ async function fetchAccessTokens (code) {
   console.log('code')
   const response = await axios.post(GITHUB_TOKEN_URL, qs.stringify({
     code,
-    client_id: process.env.GITINIT,
+    client_id: '8fcf3e5c2d3d5dd78188',
     redirect_uri: 'http://127.0.0.1:8000',
     grant_type: 'authorization_code',
-    client_secret: process.env.GITSEE
+    client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e'
   }), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
