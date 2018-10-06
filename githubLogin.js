@@ -1,25 +1,27 @@
-const {parse} = require('url')
-const {remote, ipcRenderer} = require('electron')
-const qs = require('qs')
-const axios = require('axios')
+// const {parse} = require('url')
+// const {remote, ipcRenderer} = require('electron')
+// const qs = require('qs')
+// const axios = require('axios')
 
-const GOOGLE_AUTHORIZATION_URL = 'https://accounts.google.com/o/oauth2/v2/auth'
-const GOOGLE_TOKEN_URL = 'https://www.googleapis.com/oauth2/v4/token'
-const GOOGLE_PROFILE_URL = 'https://www.googleapis.com/userinfo/v2/me'
+const GITHUB_AUTHORIZATION_URL = 'http://github.com/login/oauth/authorize'
+const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
+const GITHUB_PROFILE_URL = 'https://api.github.com/?'
 
-async function googleSignIn () {
+async function githubSignIn () {
   const code = await signInWithPopup()
   const tokens = await fetchAccessTokens(code)
-  const {id, email, name} = await fetchGoogleProfile(tokens.access_token)
-  console.log('after async fetch google profile')
-  const providerUser = {
-    uid: id,
-    email,
-    displayName: name,
-    idToken: tokens.id_token,
-  }
+  console.log(tokens)
+  // const {id, email, name} = await fetchGithubProfile(tokens.access_token)
+  const responseData = await fetchGithubProfile(tokens.access_token);
+  console.log(responseData)
+  // const providerUser = {
+  //   uid: id,
+  //   email,
+  //   displayName: name,
+  //   idToken: tokens.id_token,
+  // }
 
-  return ipcRenderer.send('authorized', providerUser)
+  return ipcRenderer.send('authorized', responseData)
 }
 
 function signInWithPopup () {
@@ -34,20 +36,23 @@ function signInWithPopup () {
     const urlParams = {
       response_type: 'code',
       redirect_uri: 'http://127.0.0.1:8000',
-      client_id: '484818166811-l38imlkp6f9s2t4p0c8mt9vui0vf7f0q.apps.googleusercontent.com',
-      scope: 'profile email',
+      client_id: '8fcf3e5c2d3d5dd78188',
+      client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e'
     }
-    const authUrl = `${GOOGLE_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
+    const authUrl = `${GITHUB_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
 
     function handleNavigation (url) {
       const query = parse(url, true).query
+      console.log(query)
       if (query) {
         if (query.error) {
           reject(new Error(`There was an error: ${query.error}`))
         } else if (query.code) {
+          // Login is complete
           authWindow.removeAllListeners('closed')
           setImmediate(() => authWindow.close())
 
+          // This is the authorization code we need to request tokens
           resolve(query.code)
         }
       }
@@ -72,11 +77,12 @@ function signInWithPopup () {
 
 async function fetchAccessTokens (code) {
   console.log('code')
-  const response = await axios.post(GOOGLE_TOKEN_URL, qs.stringify({
+  const response = await axios.post(GITHUB_TOKEN_URL, qs.stringify({
     code,
-    client_id: '484818166811-l38imlkp6f9s2t4p0c8mt9vui0vf7f0q.apps.googleusercontent.com',
+    client_id: '8fcf3e5c2d3d5dd78188',
     redirect_uri: 'http://127.0.0.1:8000',
     grant_type: 'authorization_code',
+    client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e'
   }), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -85,24 +91,19 @@ async function fetchAccessTokens (code) {
   return response.data
 }
 
-async function fetchGoogleProfile (accessToken) {
+async function fetchGithubProfile (accessToken) {
   console.log('fetch')
-  const response = await axios.get(GOOGLE_PROFILE_URL, {
+  const response = await axios.get(GITHUB_PROFILE_URL, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`,
+      'Authorization': accessToken,
     },
   })
   return response.data
 }
 
-const google = document.getElementById('google-login')
-google.addEventListener('click', () => {
-  console.log('cheese')
-  googleSignIn()
-})
-
-const guest = document.getElementById('guest-login')
-guest.addEventListener('click', () => {
-  ipcRenderer.send('guest', 'guest')
+const github = document.getElementById('github-login')
+github.addEventListener('click', () => {
+  console.log('clicked GitHub Login!')
+  githubSignIn()
 })

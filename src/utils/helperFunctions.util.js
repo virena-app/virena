@@ -204,6 +204,7 @@ export const nodeExists = (treeData, id) => {
   }, false)
 }
 
+<<<<<<< HEAD
 /**
  * @param {array} treeData - current state of the tree data
  */
@@ -224,4 +225,10 @@ export const getAllSwitchNavigators = treeData => {
     else if (node.children) return switches.concat(getAllSwitchNavigators(node.children));
     else return switches;
   }, []);
+=======
+export const findMaxId = (treeData) => {
+  return treeData.reduce((max, node) => {
+    return Math.max(node.children ? findMaxId(node.children) : -Infinity, node.id, max)
+  }, -Infinity)
+>>>>>>> master
 }

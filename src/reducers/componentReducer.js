@@ -34,6 +34,9 @@ const initialState = {
   userProjects: [],
   projectNameInput: '',
   headerStatus: false,
+  dropdownStatus: false,
+  deleteTarget: '',
+  deleteTargetUid: ''
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -196,10 +199,10 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.TOGGLE_LOGO:
-    return {
-      ...state,
-      logoSpin: copy.logoSpin? false: true
-    }
+      return {
+        ...state,
+        logoSpin: copy.logoSpin? false: true
+      }
     
     case types.SET_USER_DATA:
       return {
@@ -221,7 +224,9 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         modalStatus: copy.modalStatus? false : true,
-        modalAction: action.payload
+        modalAction: action.payload.use,
+        deleteTarget: action.payload.project,
+        deleteTargetUid: action.payload.uid
       }
 
     case types.RESET:
@@ -287,6 +292,18 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedComponent: copy.selectedComponent
+      }
+      
+    case types.TOGGLE_DROPDOWN:
+      return {
+        ...state,
+        dropdownStatus: copy.dropdownStatus? false : true
+      }
+    
+    case types.SET_ID: 
+      return {
+        ...state,
+        id: action.payload
       }
   
     default: 

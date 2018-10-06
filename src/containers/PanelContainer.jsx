@@ -47,6 +47,7 @@ const mapDispatchToProps = dispatch => ({
   updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject)),
   setUserData: loginData => dispatch(actions.setUserData(loginData)),
   toggleHeader: headerStatus => dispatch(actions.toggleHeader(headerStatus)),
+  setCurrentProject: (project) => dispatch(actions.setCurrentProject(project)), 
 })
 
 const styles = theme => ({
@@ -108,7 +109,7 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, } = this.props;
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
@@ -129,7 +130,7 @@ class PanelContainer extends Component {
           {userLoggedIn
           && currentProject.treeData
           && JSON.stringify(currentProject.treeData) !== JSON.stringify(treeData)
-          && <UpdateProjectButton treeData={treeData} saveProject={saveProject} currentProject={currentProject} uid={uid} displayName={displayName} updateUserProjects={updateUserProjects}/>}
+          && <UpdateProjectButton treeData={treeData} saveProject={saveProject} currentProject={currentProject} uid={uid} displayName={displayName} updateUserProjects={updateUserProjects} setCurrentProject={setCurrentProject}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}/>
         </div>
         <StatusPopup 
