@@ -33,7 +33,10 @@ const initialState = {
   modalAction: '',
   userProjects: [],
   projectNameInput: '',
-  dropdownStatus: false
+  dropdownStatus: false,
+  triggerDelete: false,
+  deleteTarget: '',
+  deleteTargetUid: ''
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -212,10 +215,13 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.TOGGLE_MODAL:
+      console.log(`asdf${action.payload.project}`)
       return {
         ...state,
         modalStatus: copy.modalStatus? false : true,
-        modalAction: action.payload
+        modalAction: action.payload.use,
+        deleteTarget: action.payload.project,
+        deleteTargetUid: action.payload.uid
       }
 
     case types.RESET:
@@ -281,6 +287,12 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         dropdownStatus: copy.dropdownStatus? false : true
       }
+
+    // case types.TOGGLE_DELETE:
+    //   return {
+    //     ...state,
+    //     triggerDelete: copy.triggerDelete? false : true
+    //   }
   
     default: 
       return state;

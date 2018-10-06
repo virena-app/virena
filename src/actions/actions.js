@@ -155,9 +155,13 @@ export const logout = () => ({
   type: types.LOGOUT
 })
 
-export const toggleModal = (use) => ({
+export const toggleModal = (use, project, uid) => ({
   type: types.TOGGLE_MODAL,
-  payload: use
+  payload: {
+    use,
+    project,
+    uid
+  }
 })
 
 export const reset = () => ({
@@ -215,4 +219,8 @@ export const deleteProject = (projectName, uid) => (dispatch) => {
 
 export const toggleDropdown = () => ({
   type: types.TOGGLE_DROPDOWN
+})
+
+export const toggleDelete = () => ({
+  type: types.TOGGLE_DELETE
 })

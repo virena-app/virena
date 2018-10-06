@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class LoadFilesDropdown extends Component {
 
   render() {
-    const { userProjects, setTree, setCurrentProject, deleteProject, uid, dropdownStatus } = this.props
+    const { userProjects, setTree, setCurrentProject, deleteProject, uid, dropdownStatus, toggleModal } = this.props
     const loadMenuClass = dropdownStatus? 'load-menu down': 'load-menu';
     return (
       <div className={loadMenuClass}>
@@ -15,7 +15,8 @@ export default class LoadFilesDropdown extends Component {
             }}>{project.projectName}
             </div>
             <button id='delete-item' onClick={() => {
-              deleteProject(project.projectName, uid)
+              toggleModal('delete', project.projectName, uid)
+              // deleteProject(project.projectName, uid)
             }}><img src='./assets/close.png' id='delete-cross' /></button>
           </div>
         ))}
