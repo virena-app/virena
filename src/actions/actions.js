@@ -2,6 +2,7 @@ import * as types from '../constants/actionTypes';
 const { ipcRenderer } = require('electron')
 import exportFilesUtil from '../utils/exportFiles.util.js';
 import saveProjectUtil from '../utils/saveProject.util.js';
+import deleteProjectUtil from '../utils/deleteProject.util.js'
 
 
 export const setTree = treeData => ({
@@ -19,14 +20,15 @@ export const addParent = name => ({
   payload: name
 })
 
-export const addChild = (name, type, key, path, id) => ({
+export const addChild = (name, type, key, path, id, header) => ({
   type: types.ADD_CHILD,
   payload: {
     title: name,
     subtitle: type,
     key,
     path,
-    id
+    id,
+    headerStatus: header
   }
 })
 
@@ -64,11 +66,12 @@ export const setNameToChange = name => ({
   payload: name
 })
 
-export const updateNameAndType = (name, type, selected) => ({
+export const updateNameAndType = (name, type, header, selected) => ({
   type: types.UPDATE_NAME_AND_TYPE,
   payload: {
     title: name,
     subtitle: type,
+    headerStatus: header,
     selectedComponent: selected
   }
 })
@@ -173,6 +176,11 @@ export const updateUserProjects = (userProject) => ({
   payload: userProject
 })
 
+export const changeProjectNameInput = (name) => ({
+  type: types.CHANGE_PROJECT_NAME_INPUT,
+  payload: name
+})
+
 export const addUserProject = (treeData, projectNameInput, uid, displayName) => (dispatch) => {
   saveProjectUtil(treeData, projectNameInput, uid, displayName)
     .then(record => dispatch({
@@ -191,7 +199,28 @@ export const addUserProject = (treeData, projectNameInput, uid, displayName) => 
     }))
 }
 
-export const changeProjectNameInput = (projectNameInput) => ({
-  type: types.CHANGE_PROJECT_NAME_INPUT,
-  payload: projectNameInput
+export const setCurrentProject = ({projectName, treeData}) => ({
+  type: types.SET_CURRENT_PROJECT,
+  payload: {
+    projectName,
+    treeData
+  }
+})
+
+export const deleteProject = (projectName, uid) => (dispatch) => {
+  deleteProjectUtil(projectName, uid)
+    .then(something => dispatch({
+      type: types.DELETE_PROJECT,
+      payload: projectName
+    }))
+}
+
+export const toggleHeader = (title, type, header, selected) => ({
+  type: types.TOGGLE_HEADER,
+  payload: {
+    title: title,
+    subtitle: type,
+    headerStatus: header,
+    selectedComponent: selected
+  }
 })

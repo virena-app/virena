@@ -4,7 +4,7 @@ import * as actions from '../actions/actions';
 import SubmitParentForm from '../components/SubmitParentForm.jsx';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
 import ExportFilesButton from '../components/ExportFilesButton.jsx';
-import SaveProjectButton from '../components/SaveProjectButton.jsx';
+import UpdateProjectButton from '../components/UpdateProjectButton.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import StatusPopup from '../components/StatusPopup.jsx';
 const { ipcRenderer } = require('electron');
@@ -24,9 +24,10 @@ const mapStateToProps = store => ({
   saveProjectErrorOpen: store.data.saveProjectErrorOpen,
   logoSpin: store.data.logoSpin,
   userLoggedIn: store.data.userLoggedIn,
-  projectName: store.data.projectName,
   displayName: store.data.displayName,
   uid: store.data.uid,
+  currentProject: store.data.currentProject,
+  headerStatus: store.data.headerStatus,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -35,7 +36,7 @@ const mapDispatchToProps = dispatch => ({
   selectType: selection => dispatch(actions.selectType(selection)),
   selectInitialType: selection => dispatch(actions.selectInitialType(selection)),
   selectParent: selection => dispatch(actions.selectParent(selection)),
-  updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
+  updateNameAndType: (name, type, header, key, path) => dispatch(actions.updateNameAndType(name, type, header, key, path)),
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
   exportFiles: (treeData, dirPath) => dispatch(actions.exportFiles(treeData, dirPath)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
@@ -45,6 +46,7 @@ const mapDispatchToProps = dispatch => ({
   toggleLogo: () => dispatch(actions.toggleLogo()),
   updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject)),
   setUserData: loginData => dispatch(actions.setUserData(loginData)),
+  toggleHeader: headerStatus => dispatch(actions.toggleHeader(headerStatus)),
 })
 
 const styles = theme => ({
@@ -105,11 +107,12 @@ class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles } = this.props;
+    statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, uid, displayName,
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
+    console.log("CP TREE DATA", currentProject.treeData,"STATE TREE DATA", treeData)
     return (
       <div className='panel'>
         <div>
@@ -117,13 +120,16 @@ class PanelContainer extends Component {
            setParentName={setParentName} addParent={addParent} selectInitialType={selectInitialType}/>
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
-          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
+          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent} toggleHeader={toggleHeader} headerStatus={headerStatus} />
         </div>
         <div className='logo-wrapper'>
           <div className='horizontal-line'></div>
           <br/>
           <img src='./assets/virena-icon-white.png' className={logoClass} onClick={toggleLogo}></img>
-          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject} projectName={projectName} uid={uid} displayName={displayName} updateUserProjects={updateUserProjects}/>}
+          {userLoggedIn
+          && currentProject.treeData
+          && JSON.stringify(currentProject.treeData) !== JSON.stringify(treeData)
+          && <UpdateProjectButton treeData={treeData} saveProject={saveProject} currentProject={currentProject} uid={uid} displayName={displayName} updateUserProjects={updateUserProjects}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}/>
         </div>
         <StatusPopup 

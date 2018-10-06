@@ -28,11 +28,12 @@ const initialState = {
   userLoggedIn: false,
   displayName: '',
   uid: '',
-  projectName: '',
+  currentProject: {},
   modalStatus: false,
   modalAction: '',
   userProjects: [],
   projectNameInput: '',
+  headerStatus: false,
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -53,6 +54,7 @@ const componentReducer = (state = initialState, action) => {
         title: pascalCase(copy.input) || "Untitled" + copy.id,
         subtitle: copy.initialTypeSelection || 'Switch',
         id: copy.id,
+        headerStatus: false
       }
       copy.treeData.push(parent)
       const copyid = copy.id + 1;
@@ -61,7 +63,8 @@ const componentReducer = (state = initialState, action) => {
       treeData: copy.treeData,
       input: '',
       id: copyid,
-      selectedComponent: parent
+      selectedComponent: parent,
+      headerStatus: false
     }
     case types.ADD_CHILD:
       const key1 = action.payload.key;
@@ -81,7 +84,7 @@ const componentReducer = (state = initialState, action) => {
         id: copy.id + 1,
         selectedComponent: newNode,
         changeNameInput: newNode.title,
-        typeSelected: newNode.subtitle
+        typeSelected: newNode.subtitle,
       }
     case types.DELETE_COMPONENT:
       const node = action.payload
@@ -97,7 +100,8 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         selectedComponent: {...action.payload},
         changeNameInput: action.payload.title,
-        typeSelected: action.payload.subtitle
+        typeSelected: action.payload.subtitle,
+        headerStatus: action.payload.headerStatus
       }
       
     case types.SELECT_TYPE:
@@ -121,10 +125,13 @@ const componentReducer = (state = initialState, action) => {
         changeNameInput: action.payload
       }
     case types.UPDATE_NAME_AND_TYPE:
-      const updated = updateNode(copy.treeData, action.payload.title, action.payload.subtitle, action.payload.selectedComponent)
+      // console.log(action.payload.headerStatus);
+      copy.selectedComponent.headerStatus = action.payload.headerStatus;
+      const updated = updateNode(copy.treeData, action.payload.title, action.payload.subtitle, action.payload.headerStatus, action.payload.selectedComponent)
       return {
         ...state,
-        treeData: updated
+        treeData: updated,
+        selectedComponent: copy.selectedComponent
       }
     case types.EXPORT_FILES:
       return state;
@@ -206,7 +213,8 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         userLoggedIn: copy.userLoggedIn? false: true,
-        userProjects: []
+        userProjects: [],
+        treeData: []
       }
 
     case types.TOGGLE_MODAL:
@@ -220,7 +228,10 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...initialState,
         userLoggedIn: copy.userLoggedIn? true: false,
-        modalStatus: copy.modalStatus
+        modalStatus: copy.modalStatus,
+        userProjects: copy.userProjects,
+        uid: copy.uid,
+        displayName: copy.displayName
       }
 
     case types.SET_USER_PROJECTS:
@@ -237,19 +248,45 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         userProjects: updatedProjects
       }
+
+    case types.CHANGE_PROJECT_NAME_INPUT:
+    console.log(action.payload)
+      return {
+        ...state,
+        projectNameInput: action.payload
+      }
     
     case types.ADD_USER_PROJECT:
       alert(JSON.stringify(action.payload))
       return {
         ...state,
         userProjects: [...copy.userProjects, action.payload],
-        projectNameInput: ''
+        projectNameInput: '',
+        currentProject: action.payload
       }
-    
-    case types.CHANGE_PROJECT_NAME_INPUT:
+
+    case types.SET_CURRENT_PROJECT:
+      //alert(JSON.stringify(action.payload))
       return {
         ...state,
-        projectNameInput: action.payload
+        currentProject: action.payload
+      }
+
+    case types.DELETE_PROJECT:
+      const projectsAfterDeletion = copy.userProjects
+      .filter(project => project.projectName !== action.payload)
+      return {
+        ...state,
+        userProjects: projectsAfterDeletion,
+        currentProject: copy.currentProject.projectName === action.payload ? '' : copy.currentProject,
+        treeData: copy.currentProject.projectName === action.payload ? [] : copy.treeData
+      }
+
+    case types.TOGGLE_HEADER:
+      copy.selectedComponent.headerStatus = !action.payload.headerStatus
+      return {
+        ...state,
+        selectedComponent: copy.selectedComponent
       }
   
     default: 

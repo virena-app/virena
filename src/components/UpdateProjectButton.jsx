@@ -11,21 +11,20 @@ const styles = theme => ({
   }
 })
 
-class SaveProjectButton extends Component {
+class UpdateProjectButton extends Component {
   render() {
-    const {treeData, saveProject, classes, projectName, uid, displayName, updateUserProjects} = this.props;
+    const {treeData, saveProject, classes, currentProject, uid, displayName, updateUserProjects} = this.props;
     return (
       <Button variant="contained" color="primary"
       className={classes.saveButton} 
       onClick={() => {
-        //TODO get rid of defaulting to 'projectName'!!
-        saveProject(treeData, projectName || 'projectName', uid, displayName)
-        updateUserProjects({projectName: projectName || 'projectName', treeData})
+        saveProject(treeData, currentProject.projectName, uid, displayName)
+        updateUserProjects({projectName: currentProject.projectName, treeData})
       }}>
-        Save Project
+        Update Project
       </Button>
     );
   }
 }
 
-export default (withStyles(styles)) (SaveProjectButton);
+export default (withStyles(styles)) (UpdateProjectButton);

@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { ipcRenderer } from 'electron';
+import SaveAsForm from './SaveAsForm.jsx';
 
 const styles = theme => ({
   modalwrapper: {
@@ -24,15 +25,18 @@ const styles = theme => ({
 
 class InfoModal extends Component {
   render() {
-    const { modalStatus, toggleModal, classes, modalAction, logout, reset } = this.props;
-    const modalText = modalAction === 'logout'? 'Are you sure you want to log out?' : 'Create new project?';
+    const { modalStatus, toggleModal, classes, modalAction, logout, reset, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput } = this.props;
+    let modalText;
+    if (modalAction === 'logout') modalText = 'Are you sure you want to log out?'
+    else if (modalAction === 'reset') modalText = 'Create new project?'
+    else if (modalAction === 'save') modalText = 'Save Project As:'
     return (
       <Modal open={modalStatus} onClose={toggleModal} className={classes.modalwrapper}>
         <div className={classes.modal}>
           <Typography variant='title' id='title'>
             {modalText}
           </Typography>
-          <div>
+          {(modalAction === 'logout' || modalAction === 'reset') && <div>
             <Button color="primary" className={classes.button} onClick={() => {
               if (modalAction === 'logout') {
                 logout()
@@ -43,7 +47,10 @@ class InfoModal extends Component {
               toggleModal('')
             }}>Yes</Button>
             <Button color="primary" className={classes.button} onClick={toggleModal}>No</Button>
-          </div>
+          </div>}
+          {modalAction === 'save' && <div>
+            <SaveAsForm addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName} toggleModal={toggleModal}/>
+          </div>}
         </div>
       </Modal>
     )

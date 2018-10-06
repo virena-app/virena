@@ -176,13 +176,13 @@ export const addNode = (treeData, parentTitle, newNode) => {
  * @param {string} selected - The node to be updated
  */
 
-export const updateNode = (treeData, title, subtitle, selected) => {
+export const updateNode = (treeData, title, subtitle, headerStatus, selected) => {
   return treeData.reduce( (newTree, node) => {
     if (selected.id === node.id) {
-      return newTree.concat({...node, title, subtitle});
+      return newTree.concat({...node, title, subtitle, headerStatus});
     }
     else if (node.children) {
-      return newTree.concat({...node, children: updateNode(node.children, title, subtitle, selected)})
+      return newTree.concat({...node, children: updateNode(node.children, title, subtitle, headerStatus, selected)})
     }
     else return newTree.concat(node)
   }, [])

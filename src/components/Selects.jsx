@@ -32,14 +32,14 @@ class Selects extends Component {
     return (
       <div className={classes.root}>
         <FormControl required className={classes.formControl}>
-          <InputLabel 
+          {/* <InputLabel 
             htmlFor="typeSelect"
             FormLabelClasses={{
               root: classes.input,
               focused: classes.inputFocused
             }}>
             Type
-            </InputLabel>
+            </InputLabel> */}
           <Select
             required
             value={typeSelected}
