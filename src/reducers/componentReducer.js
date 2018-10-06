@@ -192,10 +192,10 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.TOGGLE_LOGO:
-    return {
-      ...state,
-      logoSpin: copy.logoSpin? false: true
-    }
+      return {
+        ...state,
+        logoSpin: copy.logoSpin? false: true
+      }
     
     case types.SET_USER_DATA:
       return {
@@ -285,7 +285,13 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         dropdownStatus: copy.dropdownStatus? false : true
       }
-
+    
+    case types.SET_ID: 
+      return {
+        ...state,
+        id: action.payload
+      }
+  
     default: 
       return state;
   }
