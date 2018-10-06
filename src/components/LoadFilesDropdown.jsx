@@ -3,17 +3,20 @@ import React, { Component } from 'react';
 export default class LoadFilesDropdown extends Component {
 
   render() {
-    const { userProjects, setTree, setProjectName, deleteProject, uid } = this.props
+    const { userProjects, setTree, setCurrentProject, deleteProject, uid, dropdownStatus } = this.props
+    const loadMenuClass = dropdownStatus? 'load-menu down': 'load-menu';
     return (
-      <div className="load-menu">
+      <div className={loadMenuClass}>
         {userProjects.map((project, i) => (
-          <div onClick={()=> {
-            setTree(project.treeData)
-            setProjectName(project.projectName);
-          }}>{project.projectName}
-            <button onClick={() => {
+          <div className='load-items'>
+            <div className='load-item' onClick={()=> {
+              setTree(project.treeData)
+              setCurrentProject(project);
+            }}>{project.projectName}
+            </div>
+            <button id='delete-item' onClick={() => {
               deleteProject(project.projectName, uid)
-            }}>Delete{i}</button>
+            }}><img src='./assets/close.png' id='delete-cross' /></button>
           </div>
         ))}
       </div>

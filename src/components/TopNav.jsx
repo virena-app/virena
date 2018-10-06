@@ -20,7 +20,7 @@ const styles = theme => ({
 export default class TopNav extends Component {
 
   render() {
-    const { treeData, uid, displayName, userLoggedIn, userProjects, modalStatus, toggleModal, setTree, addUserProject, projectNameInput, changeProjectNameInput, setProjectName, deleteProject } = this.props
+    const { treeData, uid, displayName, userLoggedIn, userProjects, modalStatus, toggleModal, setTree, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject, toggleDropdown, dropdownStatus } = this.props
     console.log("USER PROJECTS FOR LOAD BUTTON DROPDOWN IN TOP NAV BAR", userProjects)
     return (
       
@@ -28,10 +28,10 @@ export default class TopNav extends Component {
         <ul>
           {userLoggedIn? <li onClick={() => toggleModal('reset')}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li> : <li onClick={() => toggleModal('reset')} style={{width: '250px'}}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li>}
           {userLoggedIn && <li className='load-wrapper'>
-            <div className='load-btn'>
+            <div className='load-btn' onClick={toggleDropdown}>
               <img src='./assets/load_file.png' className='nav-icon'/>Load Project
             </div>
-            <LoadFilesDropdown userProjects={userProjects} setTree={setTree} setProjectName={setProjectName} deleteProject={deleteProject} uid={uid}/>
+            <LoadFilesDropdown userProjects={userProjects} setTree={setTree} setCurrentProject={setCurrentProject} deleteProject={deleteProject} uid={uid} dropdownStatus={dropdownStatus}/>
           </li>}
           {userLoggedIn && <li onClick={() => toggleModal('save')}><img src='./assets/save_file.png' className='nav-icon'/>Save Project</li>}
         </ul>

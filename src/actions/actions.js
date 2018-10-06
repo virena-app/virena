@@ -197,9 +197,12 @@ export const addUserProject = (treeData, projectNameInput, uid, displayName) => 
     }))
 }
 
-export const setProjectName = (projectName) => ({
-  type: types.SET_PROJECT_NAME,
-  payload: projectName
+export const setCurrentProject = ({projectName, treeData}) => ({
+  type: types.SET_CURRENT_PROJECT,
+  payload: {
+    projectName,
+    treeData
+  }
 })
 
 export const deleteProject = (projectName, uid) => (dispatch) => {
@@ -209,3 +212,7 @@ export const deleteProject = (projectName, uid) => (dispatch) => {
       payload: projectName
     }))
 }
+
+export const toggleDropdown = () => ({
+  type: types.TOGGLE_DROPDOWN
+})
