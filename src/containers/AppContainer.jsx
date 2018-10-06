@@ -9,6 +9,7 @@ import PanelContainer from './PanelContainer.jsx';
 import InfoModal from '../components/InfoModal.jsx';
 import { db, Project } from '../models/db.js';
 const { ipcRenderer } = require('electron');
+import { findMaxId } from '../utils/helperFunctions.util.js'
 
 const mapStateToProps = store => ({
   userLoggedIn: store.data.userLoggedIn,
@@ -16,6 +17,9 @@ const mapStateToProps = store => ({
   modalAction: store.data.modalAction,
   uid: store.data.uid,
   userProjects: store.data.userProjects,
+  projectNameInput: store.data.projectNameInput,
+  treeData: store.data.treeData,
+  displayName: store.data.displayName
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -25,6 +29,11 @@ const mapDispatchToProps = dispatch => ({
   setUserData: (loginData) => dispatch(actions.setUserData(loginData)),
   setUserProjects: (userProjects) => dispatch(actions.setUserProjects(userProjects)),
   setTree: (treeData) => dispatch(actions.setTree(treeData)),
+  addUserProject: (treeData, projectNameInput, uid, displayName) => dispatch(actions.addUserProject(treeData, projectNameInput, uid, displayName)),
+  changeProjectNameInput: (projectNameInput) => dispatch(actions.changeProjectNameInput(projectNameInput)),
+  setCurrentProject: (project) => dispatch(actions.setCurrentProject(project)),
+  deleteProject: (projectName, uid) => dispatch(actions.deleteProject(projectName, uid)),
+  setId: (id) => dispatch(actions.setId(id)),
 })
 
 class AppContainer extends Component {
@@ -32,6 +41,7 @@ class AppContainer extends Component {
   componentDidMount() {
     const { setUserData, setUserProjects, userProjects } = this.props;
     ipcRenderer.on('userLoggedIn', (event,loginData) => {
+
       setUserData(loginData);
       const { uid } = this.props;
       db.sync()
@@ -53,11 +63,11 @@ class AppContainer extends Component {
     })
   }
   render() {
-    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree } = this.props
+    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject, setId } = this.props
     return (
       <div>
-        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree}/>
-        {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset}/>}
+        <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} setCurrentProject={setCurrentProject} treeData={treeData} displayName={displayName} uid={uid} deleteProject={deleteProject} setId={setId}/>
+        {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName}/>}
         <div className='main'>
         <ViewContainer />
         <div className='vertical-line'></div>

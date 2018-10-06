@@ -2,6 +2,7 @@ import * as types from '../constants/actionTypes';
 const { ipcRenderer } = require('electron')
 import exportFilesUtil from '../utils/exportFiles.util.js';
 import saveProjectUtil from '../utils/saveProject.util.js';
+import deleteProjectUtil from '../utils/deleteProject.util.js'
 
 
 export const setTree = treeData => ({
@@ -171,4 +172,48 @@ export const setUserProjects = (userProjects) => ({
 export const updateUserProjects = (userProject) => ({
   type: types.UPDATE_USER_PROJECTS,
   payload: userProject
+})
+
+export const changeProjectNameInput = (name) => ({
+  type: types.CHANGE_PROJECT_NAME_INPUT,
+  payload: name
+})
+
+export const addUserProject = (treeData, projectNameInput, uid, displayName) => (dispatch) => {
+  saveProjectUtil(treeData, projectNameInput, uid, displayName)
+    .then(record => dispatch({
+      type: types.ADD_USER_PROJECT,
+      payload: {
+        projectName: projectNameInput,
+        treeData
+      }
+    }))
+    .catch(err => dispatch({
+      type: types.SAVE_PROJECT_FAIL,
+      payload: {
+        status: true,
+        err
+      }
+    }))
+}
+
+export const setCurrentProject = ({projectName, treeData}) => ({
+  type: types.SET_CURRENT_PROJECT,
+  payload: {
+    projectName,
+    treeData
+  }
+})
+
+export const deleteProject = (projectName, uid) => (dispatch) => {
+  deleteProjectUtil(projectName, uid)
+    .then(response => dispatch({
+      type: types.DELETE_PROJECT,
+      payload: projectName
+    }))
+}
+
+export const setId = (id) => ({
+  type: types.SET_ID,
+  payload: id
 })

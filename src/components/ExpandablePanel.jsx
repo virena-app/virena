@@ -15,9 +15,6 @@ import TextField from '@material-ui/core/TextField';
 import { Input, InputLabel, FormControl } from '@material-ui/core/';
 import purple from '@material-ui/core/colors/purple';
 import { pascalCase, duplicateTitle } from '../utils/helperFunctions.util.js'
-// import white from '@material-ui/core/colors/white';
-import grey from '@material-ui/core/colors/grey';
-
 
 const styles = theme => ({
   root: {

@@ -28,10 +28,11 @@ const initialState = {
   userLoggedIn: false,
   displayName: '',
   uid: '',
-  projectName: '',
+  currentProject: {},
   modalStatus: false,
   modalAction: '',
   userProjects: [],
+  projectNameInput: '',
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -205,7 +206,8 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         userLoggedIn: copy.userLoggedIn? false: true,
-        userProjects: []
+        userProjects: [],
+        treeData: []
       }
 
     case types.TOGGLE_MODAL:
@@ -219,7 +221,10 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...initialState,
         userLoggedIn: copy.userLoggedIn? true: false,
-        modalStatus: copy.modalStatus
+        modalStatus: copy.modalStatus,
+        userProjects: copy.userProjects,
+        uid: copy.uid,
+        displayName: copy.displayName
       }
 
     case types.SET_USER_PROJECTS:
@@ -229,7 +234,6 @@ const componentReducer = (state = initialState, action) => {
       }
     
     case types.UPDATE_USER_PROJECTS:
-      alert(JSON.stringify(action.payload));
       const updatedProjects = copy.userProjects
         .filter(project => project.projectName !== action.payload.projectName)
         .concat(action.payload);
@@ -238,6 +242,45 @@ const componentReducer = (state = initialState, action) => {
         userProjects: updatedProjects
       }
 
+    case types.CHANGE_PROJECT_NAME_INPUT:
+    console.log(action.payload)
+      return {
+        ...state,
+        projectNameInput: action.payload
+      }
+    
+    case types.ADD_USER_PROJECT:
+      alert(JSON.stringify(action.payload))
+      return {
+        ...state,
+        userProjects: [...copy.userProjects, action.payload],
+        projectNameInput: '',
+        currentProject: action.payload
+      }
+
+    case types.SET_CURRENT_PROJECT:
+      //alert(JSON.stringify(action.payload))
+      return {
+        ...state,
+        currentProject: action.payload
+      }
+
+    case types.DELETE_PROJECT:
+      const projectsAfterDeletion = copy.userProjects
+      .filter(project => project.projectName !== action.payload)
+      return {
+        ...state,
+        userProjects: projectsAfterDeletion,
+        currentProject: copy.currentProject.projectName === action.payload ? '' : copy.currentProject,
+        treeData: copy.currentProject.projectName === action.payload ? [] : copy.treeData
+      }
+    
+    case types.SET_ID: 
+      return {
+        ...state,
+        id: action.payload
+      }
+  
     default: 
       return state;
   }

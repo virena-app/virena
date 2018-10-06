@@ -4,7 +4,7 @@ import * as actions from '../actions/actions';
 import SubmitParentForm from '../components/SubmitParentForm.jsx';
 import ExpandablePanel from '../components/ExpandablePanel.jsx';
 import ExportFilesButton from '../components/ExportFilesButton.jsx';
-import SaveProjectButton from '../components/SaveProjectButton.jsx';
+import UpdateProjectButton from '../components/UpdateProjectButton.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import StatusPopup from '../components/StatusPopup.jsx';
 const { ipcRenderer } = require('electron');
@@ -24,9 +24,9 @@ const mapStateToProps = store => ({
   saveProjectErrorOpen: store.data.saveProjectErrorOpen,
   logoSpin: store.data.logoSpin,
   userLoggedIn: store.data.userLoggedIn,
-  projectName: store.data.projectName,
   displayName: store.data.displayName,
   uid: store.data.uid,
+  currentProject: store.data.currentProject
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -45,6 +45,7 @@ const mapDispatchToProps = dispatch => ({
   toggleLogo: () => dispatch(actions.toggleLogo()),
   updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject)),
   setUserData: loginData => dispatch(actions.setUserData(loginData)),
+  setCurrentProject: (project) => dispatch(actions.setCurrentProject(project)), 
 })
 
 const styles = theme => ({
@@ -85,7 +86,7 @@ const styles = theme => ({
 
 class PanelContainer extends Component {
   componentDidMount() {
-    const { setUserData, exportFiles, treeData } = this.props;
+    const { setUserData, exportFiles } = this.props;
     console.log('PanelContainer componentDidMount');
     
     ipcRenderer.on('userLoggedIn', (event,loginData) => {
@@ -93,6 +94,7 @@ class PanelContainer extends Component {
       setUserData(loginData);
     })
     ipcRenderer.on('selectedDir', (event, dirPath) => {
+      const { treeData } = this.props;
       console.log('dirPath in renderer', dirPath);
       exportFiles(treeData, dirPath);
     })
@@ -104,11 +106,12 @@ class PanelContainer extends Component {
   render() {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
-    statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, projectName, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles } = this.props;
+    statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, uid, displayName,
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
+    console.log("CP TREE DATA", currentProject.treeData,"STATE TREE DATA", treeData)
     return (
       <div className='panel'>
         <div>
@@ -122,7 +125,10 @@ class PanelContainer extends Component {
           <div className='horizontal-line'></div>
           <br/>
           <img src='./assets/virena-icon-white.png' className={logoClass} onClick={toggleLogo}></img>
-          {userLoggedIn && <SaveProjectButton treeData={treeData} saveProject={saveProject} projectName={projectName} uid={uid} displayName={displayName} updateUserProjects={updateUserProjects}/>}
+          {userLoggedIn
+          && currentProject.treeData
+          && JSON.stringify(currentProject.treeData) !== JSON.stringify(treeData)
+          && <UpdateProjectButton treeData={treeData} saveProject={saveProject} currentProject={currentProject} uid={uid} displayName={displayName} updateUserProjects={updateUserProjects} setCurrentProject={setCurrentProject}/>}
           <ExportFilesButton treeData={treeData} openDirectory={openDirectory} statusPopupOpen={statusPopupOpen} statusPopupErrorOpen={statusPopupErrorOpen} closeStatusPopup={closeStatusPopup}/>
         </div>
         <StatusPopup 

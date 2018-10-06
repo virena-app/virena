@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as actions from '../actions/actions';
 import { ipcRenderer } from 'electron';
-import LoadFilesDropdown from './LoadFilesDropdown.jsx'
+import LoadFilesDropdown from './LoadFilesDropdown.jsx';
+import SaveAsForm from './SaveAsForm.jsx'
 
 
 
@@ -19,20 +20,22 @@ const styles = theme => ({
 export default class TopNav extends Component {
 
   render() {
-    const { userLoggedIn, logout, userProjects, toggleModal, setTree } = this.props
+    const { treeData, uid, displayName, userLoggedIn, userProjects, modalStatus, toggleModal, setTree, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject, setId } = this.props
     console.log("USER PROJECTS FOR LOAD BUTTON DROPDOWN IN TOP NAV BAR", userProjects)
     return (
       
       <nav className='top-nav'>
         <ul>
-          {userLoggedIn? <li onClick={() => {
-            toggleModal('reset')
-          }}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li> : <li onClick={() => {
-            toggleModal('reset')
-          }} style={{width: '250px'}}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li>}
+          {userLoggedIn? <li onClick={() => toggleModal('reset')}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li> : <li onClick={() => toggleModal('reset')} style={{width: '250px'}}><img src='./assets/add_new.png' className='nav-icon'/>New Project</li>}
           {userLoggedIn && <li><img src='./assets/load_file.png' className='nav-icon'/>Load Project</li>}
-          <LoadFilesDropdown userProjects={userProjects} setTree={setTree}/>
-          {userLoggedIn && <li><img src='./assets/save_file.png' className='nav-icon'/>Save Project</li>}
+          <LoadFilesDropdown userProjects={userProjects} setTree={setTree} setCurrentProject={setCurrentProject} deleteProject={deleteProject} uid={uid} setId={setId}/>
+          {userLoggedIn && 
+          <div>
+            <li onClick={() => toggleModal('save')}>
+              <img src='./assets/save_file.png' className='nav-icon'/>
+                Save Project
+            </li>
+          </div>}
         </ul>
         <div className='logout-wrapper'>
           {userLoggedIn && (<div id='logout-btn' onClick={() => toggleModal('logout')}>
