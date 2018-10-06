@@ -1,7 +1,7 @@
-const {parse} = require('url')
-const {remote, ipcRenderer} = require('electron')
-const qs = require('qs')
-const axios = require('axios')
+// const {parse} = require('url')
+// const {remote, ipcRenderer} = require('electron')
+// const qs = require('qs')
+// const axios = require('axios')
 
 const GITHUB_AUTHORIZATION_URL = 'http://github.com/login/oauth/authorize'
 const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
