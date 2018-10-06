@@ -20,7 +20,6 @@ const mapStateToProps = store => ({
   treeData: store.data.treeData,
   displayName: store.data.displayName,
   dropdownStatus: store.data.dropdownStatus,
-  triggerDelete: store.data.triggerDelete,
   deleteTarget: store.data.deleteTarget,
   deleteTargetUid: store.data.deleteTargetUid
 })
@@ -67,7 +66,7 @@ class AppContainer extends Component {
   render() {
     const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject, toggleDropdown, dropdownStatus, triggerDelete, deleteTarget, deleteTargetUid } = this.props
     return (
-      <div>
+      <div onClick={() => {if (dropdownStatus && !modalStatus) toggleDropdown()}}>
         <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} setCurrentProject={setCurrentProject} treeData={treeData} displayName={displayName} uid={uid} deleteProject={deleteProject} toggleDropdown={toggleDropdown} dropdownStatus={dropdownStatus} />
         {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName} deleteProject={deleteProject} deleteTarget={deleteTarget} deleteTargetUid={deleteTargetUid} />}
         <div className='main'>

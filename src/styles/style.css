@@ -436,6 +436,8 @@ button:focus {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .load-menu {
@@ -445,7 +447,7 @@ button:focus {
   height: 0;
   z-index: 999;
   overflow: scroll;
-  transition: height 0.5s ease-out;
+  transition: height 0.3s ease-out;
 }
 
 .down {
