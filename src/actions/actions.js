@@ -207,7 +207,7 @@ export const setCurrentProject = ({projectName, treeData}) => ({
 
 export const deleteProject = (projectName, uid) => (dispatch) => {
   deleteProjectUtil(projectName, uid)
-    .then(something => dispatch({
+    .then(response => dispatch({
       type: types.DELETE_PROJECT,
       payload: projectName
     }))

@@ -189,10 +189,10 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.TOGGLE_LOGO:
-    return {
-      ...state,
-      logoSpin: copy.logoSpin? false: true
-    }
+      return {
+        ...state,
+        logoSpin: copy.logoSpin? false: true
+      }
     
     case types.SET_USER_DATA:
       return {
