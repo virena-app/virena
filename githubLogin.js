@@ -13,12 +13,13 @@ async function githubSignIn () {
   console.log(tokens)
   // const {id, email, name} = await fetchGithubProfile(tokens.access_token)
   const responseData = await fetchGithubProfile(tokens.access_token);
-  const providerUser = {
-    uid: id,
-    email,
-    displayName: name,
-    idToken: tokens.id_token,
-  }
+  console.log(responseData)
+  // const providerUser = {
+  //   uid: id,
+  //   email,
+  //   displayName: name,
+  //   idToken: tokens.id_token,
+  // }
 
   return ipcRenderer.send('authorized', responseData)
 }
