@@ -3,12 +3,13 @@ import fs from 'fs';
 import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
-import { getAllScreenTitles } from './helperFunctions.util.js'
+import { getAllScreenTitles, getAllSwitches } from './helperFunctions.util.js'
 import * as types from '../constants/actionTypes.js'
 
 
 const exportFilesUtil = (treeData, path) => {
   const screenTitles = getAllScreenTitles(treeData);
+  const switches = getAllSwitches(treeData);
   const promises = [];
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {

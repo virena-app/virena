@@ -211,3 +211,12 @@ export const findMaxId = (treeData) => {
     return Math.max(node.children ? findMaxId(node.children) : -Infinity, node.id, max)
   }, -Infinity)
 }
+
+export const getAllSwitches = treeData => {
+  return treeData.reduce((switches, node) => {
+    if (node.subtitle === 'Switch' && node.children) return switches.concat(node, getAllSwitches(node.children));
+    else if (node.subtitle === 'Switch') return switches.concat(node);
+    else if (node.children) return switches.concat(getAllSwitches(node.children));
+    else return switches;
+  }, []);
+}
