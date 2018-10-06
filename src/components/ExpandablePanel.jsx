@@ -160,7 +160,7 @@ class DetailedExpansionPanel extends Component {
                     bar: classes.colorBar,
                     checked: classes.colorChecked
                   }}
-                  checked={selectedComponent.headerStatus ? selectdComponent.headerStatus : false}
+                  checked={selectedComponent.headerStatus ? selectedComponent.headerStatus : false}
                   onChange={() => {
                     // toggleHeader(selectedComponent.title, selectedComponent.subtitle, selectedComponent.headerStatus, selectedComponent)
                     const title = pascalCase(changeNameInput);

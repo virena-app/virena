@@ -109,7 +109,7 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject } = this.props;
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject, toggleHeader } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
@@ -121,7 +121,7 @@ class PanelContainer extends Component {
            setParentName={setParentName} addParent={addParent} selectInitialType={selectInitialType}/>
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
-          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent} toggleHeader={toggleHeader} headerStatus={headerStatus} />
+          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}  />
         </div>
         <div className='logo-wrapper'>
           <div className='horizontal-line'></div>
