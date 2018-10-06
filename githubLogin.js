@@ -34,8 +34,8 @@ function signInWithPopup () {
     const urlParams = {
       response_type: 'code',
       redirect_uri: 'http://127.0.0.1:8000',
-      client_id: '8fcf3e5c2d3d5dd78188',
-      client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e'
+      client_id: process.env.GITINIT,
+      client_secret: process.env.GITSEE
     }
     const authUrl = `${GITHUB_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
 
@@ -77,10 +77,10 @@ async function fetchAccessTokens (code) {
   console.log('code')
   const response = await axios.post(GITHUB_TOKEN_URL, qs.stringify({
     code,
-    client_id: '8fcf3e5c2d3d5dd78188',
+    client_id: process.env.GITINIT,
     redirect_uri: 'http://127.0.0.1:8000',
     grant_type: 'authorization_code',
-    client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e'
+    client_secret: process.env.GITSEE
   }), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
