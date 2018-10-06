@@ -20,14 +20,15 @@ export const addParent = name => ({
   payload: name
 })
 
-export const addChild = (name, type, key, path, id) => ({
+export const addChild = (name, type, key, path, id, header) => ({
   type: types.ADD_CHILD,
   payload: {
     title: name,
     subtitle: type,
     key,
     path,
-    id
+    id,
+    headerStatus: header
   }
 })
 
@@ -65,11 +66,12 @@ export const setNameToChange = name => ({
   payload: name
 })
 
-export const updateNameAndType = (name, type, selected) => ({
+export const updateNameAndType = (name, type, header, selected) => ({
   type: types.UPDATE_NAME_AND_TYPE,
   payload: {
     title: name,
     subtitle: type,
+    headerStatus: header,
     selectedComponent: selected
   }
 })
@@ -216,6 +218,16 @@ export const deleteProject = (projectName, uid) => (dispatch) => {
       payload: projectName
     }))
 }
+
+export const toggleHeader = (title, type, header, selected) => ({
+  type: types.TOGGLE_HEADER,
+  payload: {
+    title: title,
+    subtitle: type,
+    headerStatus: header,
+    selectedComponent: selected
+  }
+})
 
 export const toggleDropdown = () => ({
   type: types.TOGGLE_DROPDOWN

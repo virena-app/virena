@@ -3,7 +3,7 @@ import fs from 'fs';
 import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
-import { getAllScreenTitles } from './helperFunctions.util.js'
+import { getAllScreenTitles, immediateBottomTabChild } from './helperFunctions.util.js'
 import * as types from '../constants/actionTypes.js'
 
 
@@ -12,6 +12,9 @@ const exportFilesUtil = (treeData, path) => {
   const promises = [];
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
+      if (immediateBottomTabChild(treeData)) {
+        return reject(new Error('A BottomTabNav may NOT have a BottomTabNav as an immediate child'));
+      }
       fs.writeFile(`${path}/${title}.js`,
         generateScreenTemplate(title), {
           singleQuote: true,
