@@ -91,6 +91,7 @@ class PanelContainer extends Component {
     
     ipcRenderer.on('userLoggedIn', (event,loginData) => {
       console.log('Received login data in panelContainer', loginData);
+      console.log('current_user_url', loginData.current_user_url, loginData.emails_url)
       setUserData(loginData);
     })
     ipcRenderer.on('selectedDir', (event, dirPath) => {

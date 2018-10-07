@@ -37,7 +37,8 @@ function signInWithPopup () {
       response_type: 'code',
       redirect_uri: 'http://127.0.0.1:8000',
       client_id: '8fcf3e5c2d3d5dd78188',
-      client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e'
+      client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e',
+      scope: ['user']
     }
     const authUrl = `${GITHUB_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
 
@@ -82,11 +83,12 @@ async function fetchAccessTokens (code) {
     client_id: '8fcf3e5c2d3d5dd78188',
     redirect_uri: 'http://127.0.0.1:8000',
     grant_type: 'authorization_code',
-    client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e'
+    client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e',
+    scope: ['user']
   }), {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
+    // headers: {
+    //   'Content-Type': 'application/x-www-form-urlencoded',
+    // },
   })
   return response.data
 }
@@ -99,7 +101,8 @@ async function fetchGithubProfile (accessToken) {
       'Authorization': accessToken,
     },
   })
-  return response.data
+  console.log('inside fetchGithubProfile', response);
+  return response
 }
 
 const github = document.getElementById('github-login')
