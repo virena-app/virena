@@ -77,9 +77,28 @@ function signInWithPopup () {
     authWindow.loadURL(authUrl)
   })
 }
-
+//perhaps build another async await function just to grab the dotcom_user from cookie from header from request of access_token
+//append dotcom_user to the end of the GITHUB_PROFILE_URL, and then use that to run fetchGithubProfile to get specific user data
 async function fetchAccessTokens (code) {
   console.log('code')
+  const reqHeader = await axios.post(GITHUB_TOKEN_URL, qs.stringify({
+    code,
+    client_id: '8fcf3e5c2d3d5dd78188',
+    redirect_uri: 'http://127.0.0.1:8000',
+    grant_type: 'authorization_code',
+    client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e',
+    scope: ['user:email','read:user']
+  }), {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
+
+  console.log(reqHeader.headers);
+
+
+
+
   const response = await axios.post(GITHUB_TOKEN_URL, qs.stringify({
     code,
     client_id: '8fcf3e5c2d3d5dd78188',
@@ -92,7 +111,7 @@ async function fetchAccessTokens (code) {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   })
-  return response.data
+  return response
 }
 
 async function fetchGithubProfile (accessToken, tokens) {
