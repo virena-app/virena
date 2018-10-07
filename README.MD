@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h4 align="center">An incredibly fast and simple prototyping tool. Create your React Native App backbone in minutes!
+<h4 align="center">A simple and easy-to-use prototyping tool. Create your React Native App backbone in minutes.
  Built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
 
 <p align="center">
