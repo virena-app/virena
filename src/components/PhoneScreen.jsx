@@ -12,7 +12,6 @@ export default class PhoneScreen extends Component {
      * render the selectedComponent (child)
      */
     const routes = () => {
-      console.log(screen);
       if (selectedComponent.children) {
         return selectedComponent.children.map((screen, i) => <Route path={`/${screen.title}`} render={() => <div>{screen.title}</div>} />)
       }

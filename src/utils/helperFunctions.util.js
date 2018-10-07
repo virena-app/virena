@@ -176,20 +176,18 @@ export const addNode = (treeData, parentTitle, newNode) => {
  * @param {string} selected - The node to be updated
  */
 
-export const updateNode = (treeData, title, subtitle, selected) => {
+export const updateNode = (treeData, title, subtitle, headerStatus, selected) => {
   return treeData.reduce( (newTree, node) => {
     if (selected.id === node.id) {
-      return newTree.concat({...node, title, subtitle});
+      return newTree.concat({...node, title, subtitle, headerStatus});
     }
     else if (node.children) {
-      return newTree.concat({...node, children: updateNode(node.children, title, subtitle, selected)})
+      return newTree.concat({...node, children: updateNode(node.children, title, subtitle, headerStatus, selected)})
     }
     else return newTree.concat(node)
   }, [])
 }
 
-
- 
 export const getParent = (treeData, node) => {
   const {id} = node;
   for (let i = 0; i < treeData.length; i++) {
@@ -206,6 +204,28 @@ export const nodeExists = (treeData, id) => {
   }, false)
 }
 
+/**
+ * @param {array} treeData - current state of the tree data
+ */
+
+export const immediateBottomTabChild = treeData => {
+  return treeData.reduce((bool, currentNode) => {
+    if (currentNode.children) {
+      if (currentNode.subtitle === 'BottomTab' && currentNode.children[0].subtitle === 'BottomTab') return true;
+      else immediateBottomTabChild(currentNode.children)
+    }
+    return bool;
+  }, false)
+}
+
+export const getAllSwitchNavigators = treeData => {
+  return treeData.reduce((switches, node) => {
+    if (node.subtitle === 'Switch') return switches.concat(node);
+    else if (node.children) return switches.concat(getAllSwitchNavigators(node.children));
+    else return switches;
+  }, []);
+}
+
 export const findMaxId = (treeData) => {
   return treeData.reduce((max, node) => {
     return Math.max(node.children ? findMaxId(node.children) : -Infinity, node.id, max)
@@ -219,4 +239,12 @@ export const getAllSwitches = treeData => {
     else if (node.children) return switches.concat(getAllSwitches(node.children));
     else return switches;
   }, []);
+}
+
+export const screenTitlesWithNonSwitchParent = (treeData, parentType) => {
+  return treeData.reduce((screenTitles, node) => {
+    if (node.subtitle === 'Simple Screen' && parentType !== "Switch") return screenTitles.concat(node.title);
+    else if (node.children) return screenTitles.concat(screenTitlesWithNonSwitchParent(node.children, node.subtitle));
+    else return screenTitles;
+  }, [])
 }

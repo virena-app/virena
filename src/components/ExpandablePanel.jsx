@@ -11,9 +11,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Selects from './Selects.jsx'
-import TextField from '@material-ui/core/TextField';
-import { Input, InputLabel, FormControl } from '@material-ui/core/';
-import purple from '@material-ui/core/colors/purple';
+import { Input, InputLabel, FormControl, FormControlLabel, Switch } from '@material-ui/core/';
 import { pascalCase, duplicateTitle } from '../utils/helperFunctions.util.js'
 
 const styles = theme => ({
@@ -88,42 +86,25 @@ const styles = theme => ({
   },
   saveButton: {
     background: '#2068c9',
-  }
+  },
+  colorSwitchBase: {
+    color: '#eee',
+    '&$colorChecked': {
+      color: '#2068c9',
+      '& + $colorBar': {
+        backgroundColor: '#2068c9',
+      },
+    },
+  },
+  colorBar: {},
+  colorChecked: {}
 });
-
-// const theme = createMuiTheme({
-//   overrides: {
-//     MuiInput: {
-//       underline: {
-//         // color: 'red',
-//         // '&:hover:not($disabled):after':{
-//         //   backgroundColor: 'red',
-//         // },
-//         // '&:hover:not($disabled):before':{
-//         //   backgroundColor: 'red'
-//         // }
-//       }
-//     }
-//   },
-//   palette: {
-//     primary: {
-//       light: '#eee',
-//       main: '#eee',
-//       contrastText: '#eee'
-//     },
-//     secondary: {
-//       main: '#eee',
-//       contrastText: '#eee'
-//     }
-//   },
-// })
-
 
 //need to grab name of selected tree component and render to options panel
 class DetailedExpansionPanel extends Component {
   render () {
     const { treeData, classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
-      changeNameInput, setNameToChange, selectComponent } = this.props;
+      changeNameInput, setNameToChange, selectComponent,  } = this.props;
     return (
       !!treeData.length && <div className={classes.root}>
         <ExpansionPanel 
@@ -142,7 +123,7 @@ class DetailedExpansionPanel extends Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.details}>
             <div className={classes.column}>
-              <Selects typeSelected={typeSelected} selectedComponent={selectedComponent} parentSelected={parentSelected} availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}/>
+              <Selects typeSelected={typeSelected} selectedComponent={selectedComponent} parentSelected={parentSelected} availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType} treeData={treeData}/>
             </div>
             
             <div className={classNames(classes.column, classes.helper)}>
@@ -170,13 +151,33 @@ class DetailedExpansionPanel extends Component {
           </ExpansionPanelDetails>
           <Divider />
           <ExpansionPanelActions>
+            <FormControlLabel
+              control={
+                <Switch 
+                  color='primary'
+                  classes={{
+                    switchBase: classes.colorSwitchBase,
+                    bar: classes.colorBar,
+                    checked: classes.colorChecked
+                  }}
+                  checked={selectedComponent.headerStatus ? selectedComponent.headerStatus : false}
+                  onChange={() => {
+                    // toggleHeader(selectedComponent.title, selectedComponent.subtitle, selectedComponent.headerStatus, selectedComponent)
+                    const title = pascalCase(changeNameInput);
+                    updateNameAndType(title || "Untitled" + selectedComponent.id, typeSelected || "Simple Screen", !selectedComponent.headerStatus, selectedComponent)
+                  }}
+                />
+              }
+              classes={{label: classes.floatingLabel, marginRight: '50'}}
+              label='Header'>
+            </FormControlLabel>
             <Button 
               variant="contained" 
               color="primary" 
               className={classes.saveButton}
               onClick={() => {
                 const title = pascalCase(changeNameInput);
-                updateNameAndType(title || "Untitled" + selectedComponent.id, typeSelected || "Simple Screen", selectedComponent)
+                updateNameAndType(title || "Untitled" + selectedComponent.id, typeSelected || "Simple Screen", selectedComponent.headerStatus ? selectedComponent.headerStatus : false, selectedComponent)
 
               }}>
               Save

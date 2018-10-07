@@ -8,6 +8,7 @@ const mapStateToProps = store =>({
   selectedComponent: store.data.selectedComponent,
   input: store.data.input,
   id: store.data.id,
+  headerStatus: store.data.headerStatus,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -15,6 +16,7 @@ const mapDispatchToProps = dispatch => ({
   addChild: (name, type, key, path, id) => dispatch(actions.addChild(name, type, key, path, id)),
   deleteComponent: (key, path) => dispatch(actions.deleteComponent(key, path)),
   selectComponent: (name, subtitle, children, key, path) => dispatch(actions.selectComponent(name, subtitle, children, key, path)),
+  toggleHeader: headerStatus => dispatch(actions.toggleHeader(headerStatus)),
 })
 
 class TreeContainer extends Component {
@@ -23,7 +25,7 @@ class TreeContainer extends Component {
   }
 
   render() {
-    const { treeData, input, setTree, addChild, deleteComponent, selectComponent, selectedComponent, id } = this.props;
+    const { treeData, input, setTree, addChild, deleteComponent, selectComponent, selectedComponent, id, headerStatus, toggleHeader } = this.props;
     return (
       <div className='tree'>
         <Tree 
@@ -34,7 +36,9 @@ class TreeContainer extends Component {
           selectComponent={selectComponent} 
           selectedComponent={selectedComponent}
           input={input}
-          id={id}/>
+          id={id}
+          headerStatus={headerStatus}
+          toggleHeader={toggleHeader}/>
       </div>
     )
   }

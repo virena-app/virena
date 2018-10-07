@@ -20,14 +20,15 @@ export const addParent = name => ({
   payload: name
 })
 
-export const addChild = (name, type, key, path, id) => ({
+export const addChild = (name, type, key, path, id, header) => ({
   type: types.ADD_CHILD,
   payload: {
     title: name,
     subtitle: type,
     key,
     path,
-    id
+    id,
+    headerStatus: header
   }
 })
 
@@ -65,11 +66,12 @@ export const setNameToChange = name => ({
   payload: name
 })
 
-export const updateNameAndType = (name, type, selected) => ({
+export const updateNameAndType = (name, type, header, selected) => ({
   type: types.UPDATE_NAME_AND_TYPE,
   payload: {
     title: name,
     subtitle: type,
+    headerStatus: header,
     selectedComponent: selected
   }
 })
@@ -155,9 +157,13 @@ export const logout = () => ({
   type: types.LOGOUT
 })
 
-export const toggleModal = (use) => ({
+export const toggleModal = (use, project, uid) => ({
   type: types.TOGGLE_MODAL,
-  payload: use
+  payload: {
+    use,
+    project,
+    uid
+  }
 })
 
 export const reset = () => ({
@@ -207,11 +213,25 @@ export const setCurrentProject = ({projectName, treeData}) => ({
 
 export const deleteProject = (projectName, uid) => (dispatch) => {
   deleteProjectUtil(projectName, uid)
-    .then(something => dispatch({
+    .then(response => dispatch({
       type: types.DELETE_PROJECT,
       payload: projectName
     }))
 }
+
+export const toggleHeader = (title, type, header, selected) => ({
+  type: types.TOGGLE_HEADER,
+  payload: {
+    title: title,
+    subtitle: type,
+    headerStatus: header,
+    selectedComponent: selected
+  }
+})
+
+export const toggleDropdown = () => ({
+  type: types.TOGGLE_DROPDOWN
+})
 
 export const setId = (id) => ({
   type: types.SET_ID,
