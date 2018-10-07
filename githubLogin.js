@@ -91,6 +91,7 @@ async function fetchAccessTokens (code) {
   }), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
+      'Set-Cookie': 'dotcom_user',
     },
   })
 
@@ -109,6 +110,7 @@ async function fetchAccessTokens (code) {
   }), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
+      'Set-Cookie': 'dotcom_user',
     },
   })
   return response
@@ -120,6 +122,7 @@ async function fetchGithubProfile (accessToken, tokens) {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': accessToken,
+      'Set-Cookie': 'dotcom_user'
     },
   })
   console.log('inside fetchGithubProfile', response);
