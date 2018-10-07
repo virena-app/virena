@@ -3,13 +3,16 @@ import fs from 'fs';
 import generateScreenTemplate from './generateScreenTemplate.util.js';
 import generateNavigatorTemplate from './generateNavigatorTemplate.util.js';
 import generateAppTemplate from './generateAppTemplate.util.js';
-import { getAllScreenTitles, immediateBottomTabChild } from './helperFunctions.util.js'
+import generateSwitchTemplate from './generateSwitchTemplate.util.js'
+import { getAllScreenTitles, getAllSwitches, immediateBottomTabChild, screenTitlesWithNonSwitchParent } from './helperFunctions.util.js'
 import * as types from '../constants/actionTypes.js'
 
 
 const exportFilesUtil = (treeData, path) => {
   const screenTitles = getAllScreenTitles(treeData);
+  const rootSwitch = treeData[0].subtitle === 'Switch' ? treeData[0] : null;
   const promises = [];
+
   screenTitles.forEach((title) => {
     const newPromise = new Promise((resolve, reject) => {
       if (immediateBottomTabChild(treeData)) {
@@ -24,7 +27,7 @@ const exportFilesUtil = (treeData, path) => {
           parser: 'babylon',
         },
         (err) => {
-          if (err) return reject(err)
+          if (err) return reject(err);
           return resolve(title);
         });
     });
@@ -61,6 +64,43 @@ const exportFilesUtil = (treeData, path) => {
         return resolve('app');
       });
   });
+
+  if (rootSwitch) {
+    const switchPromise = new Promise((resolve, reject) => {
+      fs.writeFile(`${path}/${rootSwitch.title}.js`, 
+        generateSwitchTemplate(rootSwitch.title, rootSwitch.children), {
+          singleQuote: true,
+          trailingComma: 'es5',
+          bracketSpacing: true,
+          jsxBracketSameLine: true,
+          parser: 'babylon'
+        },
+        (err) => {
+          if (err) return reject(err);
+          return resolve(rootSwitch);
+        });
+    });
+    promises.push(switchPromise);
+  }
+
+  // switches.forEach(switchScreen => {
+  //   const newPromise = new Promise((resolve, reject) => {
+  //     //alert(JSON.stringify(switches))
+  //     fs.writeFile(`${path}/${switchScreen.title}.js`,
+  //       generateSwitchTemplate(switchScreen.title, switchScreen.children), {
+  //         singleQuote: true,
+  //         trailingComma: 'es5',
+  //         bracketSpacing: true,
+  //         jsxBracketSameLine: true,
+  //         parser: 'babylon',
+  //       },
+  //       (err) => {
+  //         if (err) return reject(err);
+  //         return resolve(switchScreen.title);
+  //       });
+  //   });
+  //   promises.push(newPromise);
+  // });
 
   promises.push(navPromise);
   promises.push(appPromise);

@@ -231,3 +231,20 @@ export const findMaxId = (treeData) => {
     return Math.max(node.children ? findMaxId(node.children) : -Infinity, node.id, max)
   }, -Infinity)
 }
+
+export const getAllSwitches = treeData => {
+  return treeData.reduce((switches, node) => {
+    if (node.subtitle === 'Switch' && node.children) return switches.concat(node, getAllSwitches(node.children));
+    else if (node.subtitle === 'Switch') return switches.concat(node);
+    else if (node.children) return switches.concat(getAllSwitches(node.children));
+    else return switches;
+  }, []);
+}
+
+export const screenTitlesWithNonSwitchParent = (treeData, parentType) => {
+  return treeData.reduce((screenTitles, node) => {
+    if (node.subtitle === 'Simple Screen' && parentType !== "Switch") return screenTitles.concat(node.title);
+    else if (node.children) return screenTitles.concat(screenTitlesWithNonSwitchParent(node.children, node.subtitle));
+    else return screenTitles;
+  }, [])
+}
