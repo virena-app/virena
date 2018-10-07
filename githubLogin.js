@@ -5,14 +5,15 @@
 
 const GITHUB_AUTHORIZATION_URL = 'http://github.com/login/oauth/authorize'
 const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
-const GITHUB_PROFILE_URL = 'https://api.github.com/?'
+//perhaps the below url is causing overly general user info to return
+const GITHUB_PROFILE_URL = `https://api.github.com/users/?`
 
 async function githubSignIn () {
   const code = await signInWithPopup()
   const tokens = await fetchAccessTokens(code)
-  console.log(tokens)
+  console.log('fetched token', tokens)
   // const {id, email, name} = await fetchGithubProfile(tokens.access_token)
-  const responseData = await fetchGithubProfile(tokens.access_token);
+  const responseData = await fetchGithubProfile(tokens.access_token, tokens);
   console.log(responseData)
   // const providerUser = {
   //   uid: id,
@@ -38,11 +39,12 @@ function signInWithPopup () {
       redirect_uri: 'http://127.0.0.1:8000',
       client_id: '8fcf3e5c2d3d5dd78188',
       client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e',
-      scope: ['user']
+      scope: ['user:email','read:user']
     }
     const authUrl = `${GITHUB_AUTHORIZATION_URL}?${qs.stringify(urlParams)}`
 
     function handleNavigation (url) {
+      console.log('url!', url)
       const query = parse(url, true).query
       console.log(query)
       if (query) {
@@ -84,18 +86,18 @@ async function fetchAccessTokens (code) {
     redirect_uri: 'http://127.0.0.1:8000',
     grant_type: 'authorization_code',
     client_secret: '0e102c56021e1aa28005b469b3c83ef7cb7e5b0e',
-    scope: ['user']
+    scope: ['user:email','read:user']
   }), {
-    // headers: {
-    //   'Content-Type': 'application/x-www-form-urlencoded',
-    // },
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
   })
   return response.data
 }
 
-async function fetchGithubProfile (accessToken) {
+async function fetchGithubProfile (accessToken, tokens) {
   console.log('fetch')
-  const response = await axios.get(GITHUB_PROFILE_URL, {
+  const response = await axios.get(GITHUB_PROFILE_URL + tokens, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': accessToken,
