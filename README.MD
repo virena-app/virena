@@ -19,6 +19,8 @@
 
 ![screenshot](https://raw.githubusercontent.com/virena-app/virena/master/assets/#.gif)
 
+A React Native prototyping tool that enables you to visualize and reason about the navigational structure of your app. When you finish, you can export auto-generated files directly into a folder that contains create-react-native app boiler plate, npm install the required dependencies, and begin testing/developing your app with Expo right away!
+
 ## Key Features
 
 * Tree Structure
