@@ -12,7 +12,7 @@ const styles = theme => ({
 });
 
 const StatusPopup = (props) => {
-  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProjectOpen, saveProjectErrorOpen, duplicateTitleErrorOpen, saveProjectSuccessOpen } = props;
+  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProjectOpen, saveProjectErrorOpen, duplicateTitleErrorOpen, saveProjectSuccessOpen, errMessage } = props;
 
   return (
     <div>
@@ -44,7 +44,7 @@ const StatusPopup = (props) => {
         <StatusPopupContent 
           variant='error'
           className={classes.margin}
-          message='Error generating files, may have exported files without a navigator file. Please check navigation tree logic.'
+          message={errMessage}
           onClose={closeStatusPopup}
         />
       </Snackbar>

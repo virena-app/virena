@@ -30,6 +30,7 @@ const mapStateToProps = store => ({
   headerStatus: store.data.headerStatus,
   duplicateTitleErrorOpen: store.data.duplicateTitleErrorOpen,
   saveProjectSuccessOpen: store.data.saveProjectSuccessOpen,
+  errMessage: store.data.errMessage,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -114,7 +115,7 @@ class PanelContainer extends Component {
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, uid, displayName,
     saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject, toggleHeader,
-    toggleDupsErrorSnackbar, duplicateTitleErrorOpen, saveProjectSuccessOpen } = this.props;
+    toggleDupsErrorSnackbar, duplicateTitleErrorOpen, saveProjectSuccessOpen, errMessage } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
@@ -145,6 +146,7 @@ class PanelContainer extends Component {
           closeStatusPopup={closeStatusPopup}
           duplicateTitleErrorOpen={duplicateTitleErrorOpen}
           saveProjectSuccessOpen={saveProjectSuccessOpen}
+          errMessage={errMessage}
         />
       </div>
     )

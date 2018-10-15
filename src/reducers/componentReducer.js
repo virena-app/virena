@@ -38,7 +38,8 @@ const initialState = {
   headerStatus: false,
   dropdownStatus: false,
   deleteTarget: '',
-  deleteTargetUid: ''
+  deleteTargetUid: '',
+  errMessage: ''
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -155,17 +156,19 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         statusPopupErrorOpen: action.payload.status,
+        errMessage: action.payload.err.message
       }
     case types.CLOSE_STATUS_POPUP:
       
       return {
         ...state,
-        statusPopupOpen: action.payload, 
-        statusPopupErrorOpen: action.payload,
-        saveProjectOpen: action.payload,
-        saveProjectErrorOpen: action.payload,
-        duplicateTitleErrorOpen: action.payload,
-        saveProjectSuccessOpen: action.payload,
+        statusPopupOpen: false, 
+        statusPopupErrorOpen: false,
+        saveProjectOpen: false,
+        saveProjectErrorOpen: false,
+        duplicateTitleErrorOpen: false,
+        saveProjectSuccessOpen: false,
+        errMessage: ''
       }
     case types.SAVE_PROJECT_SUCCESS:
       return {
