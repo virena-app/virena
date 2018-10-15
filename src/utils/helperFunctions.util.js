@@ -212,12 +212,12 @@ export const nodeExists = (treeData, id) => {
  */
 
 export const immediateBottomTabChild = treeData => {
-  return treeData.reduce((bool, currentNode) => {
-    if (currentNode.children) {
-      if (currentNode.subtitle === 'BottomTab' && currentNode.children[0].subtitle === 'BottomTab') return true;
-      else immediateBottomTabChild(currentNode.children)
+  return treeData.reduce((bool, node) => {
+    if (node.children) {
+      if (node.subtitle === 'BottomTab' && node.children.find(child => child.subtitle === 'BottomTab')) return true;
+      else return bool || immediateBottomTabChild(node.children)
     }
-    return bool;
+    else return bool;
   }, false)
 }
 

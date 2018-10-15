@@ -91,7 +91,6 @@ export const exportFiles = ( treeData, path ) => (dispatch) => {
         status: true,
         err
       }
-    
     })});
 }
 
@@ -119,8 +118,7 @@ export const toggleSaveProjectSnackbar = () => ({
 })
 
 export const closeStatusPopup = () => ({
-  type: types.CLOSE_STATUS_POPUP,
-  payload: false
+  type: types.CLOSE_STATUS_POPUP
 })
 
 export const openDrawer = () => ({
