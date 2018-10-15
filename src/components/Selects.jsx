@@ -29,17 +29,18 @@ const styles = theme => ({
 class Selects extends Component {
   render() {
     const { classes, treeData, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent } = this.props;
+    console.log(treeData)
     return (
       <div className={classes.root}>
         <FormControl required className={classes.formControl}>
-          <InputLabel 
+          {/* <InputLabel 
             htmlFor="typeSelect"
             FormLabelClasses={{
               root: classes.input,
               focused: classes.inputFocused
             }}>
             Type
-            </InputLabel>
+            </InputLabel> */}
           <Select
             required
             value={typeSelected}
@@ -56,8 +57,8 @@ class Selects extends Component {
             <MenuItem value={'Stack'}>Stack</MenuItem>
             <MenuItem value={'Drawer'}>Drawer</MenuItem>
             <MenuItem value={'BottomTab'}>BottomTab</MenuItem>
-            <MenuItem value={'Switch'}>Switch</MenuItem>
-            <MenuItem value={'Simple Screen'}>Simple Screen</MenuItem>
+            {selectedComponent.id === treeData[0].id && <MenuItem value={'Switch'}>Switch</MenuItem>}
+            {selectedComponent.id !==treeData[0].id && <MenuItem value={'Simple Screen'}>Simple Screen</MenuItem>}
           </Select>
           <FormHelperText>{'Current Type:' + typeSelected}</FormHelperText>
         </FormControl>

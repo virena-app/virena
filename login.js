@@ -98,6 +98,7 @@ async function fetchGoogleProfile (accessToken) {
 
 const google = document.getElementById('google-login')
 google.addEventListener('click', () => {
+  console.log('cheese')
   googleSignIn()
 })
 

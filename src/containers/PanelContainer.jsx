@@ -26,7 +26,8 @@ const mapStateToProps = store => ({
   userLoggedIn: store.data.userLoggedIn,
   displayName: store.data.displayName,
   uid: store.data.uid,
-  currentProject: store.data.currentProject
+  currentProject: store.data.currentProject,
+  headerStatus: store.data.headerStatus,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -35,7 +36,7 @@ const mapDispatchToProps = dispatch => ({
   selectType: selection => dispatch(actions.selectType(selection)),
   selectInitialType: selection => dispatch(actions.selectInitialType(selection)),
   selectParent: selection => dispatch(actions.selectParent(selection)),
-  updateNameAndType: (name, type, key, path) => dispatch(actions.updateNameAndType(name, type, key, path)),
+  updateNameAndType: (name, type, header, key, path) => dispatch(actions.updateNameAndType(name, type, header, key, path)),
   setNameToChange: name => dispatch(actions.setNameToChange(name)),
   exportFiles: (treeData, dirPath) => dispatch(actions.exportFiles(treeData, dirPath)),
   selectComponent: (name, key, path) => dispatch(actions.selectComponent(name, key, path)),
@@ -45,6 +46,7 @@ const mapDispatchToProps = dispatch => ({
   toggleLogo: () => dispatch(actions.toggleLogo()),
   updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject)),
   setUserData: loginData => dispatch(actions.setUserData(loginData)),
+  toggleHeader: headerStatus => dispatch(actions.toggleHeader(headerStatus)),
   setCurrentProject: (project) => dispatch(actions.setCurrentProject(project)), 
 })
 
@@ -108,7 +110,7 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject } = this.props;
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject, toggleHeader } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
@@ -120,7 +122,7 @@ class PanelContainer extends Component {
            setParentName={setParentName} addParent={addParent} selectInitialType={selectInitialType}/>
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
-          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}/>
+          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}  />
         </div>
         <div className='logo-wrapper'>
           <div className='horizontal-line'></div>

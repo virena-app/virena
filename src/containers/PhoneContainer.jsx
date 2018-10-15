@@ -14,7 +14,7 @@ const mapStateToProps = store => ({
   selectedComponent: store.data.selectedComponent,
   drawerState: store.data.drawerState,
   screen: store.data.screen,
-  phone: store.data.phone
+  phone: store.data.phone,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -27,7 +27,17 @@ class PhoneContainer extends Component {
   render() {
     let backdrop;
     
-    const { selectedComponent, selectComponent, treeData, drawerState, openDrawer, closeDrawer, screen, phone } = this.props;
+    const { 
+      selectedComponent, 
+      selectComponent, 
+      treeData, 
+      drawerState, 
+      openDrawer, 
+      closeDrawer, 
+      screen, 
+      phone,
+    } = this.props;
+    
     if (drawerState) {
       backdrop = <Backdrop closeDrawer={closeDrawer} />
     }
@@ -38,13 +48,14 @@ class PhoneContainer extends Component {
           <div className={screen}></div>
         )
       }
-      else if (selectedComponent.subtitle && selectedComponent.subtitle === 'BottomTab') {
+      else if (selectedComponent.subtitle && selectedComponent.subtitle === 'BottomTab' ) {
         return (
           <div className={screen}>
-            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen}/>
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen} />
             <BottomTab selectedComponent={selectedComponent} selectComponent={selectComponent} phone={phone} />
           </div>
         )
+        
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Drawer') {
         return (
           <div className={screen}>
@@ -53,7 +64,7 @@ class PhoneContainer extends Component {
               <Drawer selectedComponent={selectedComponent} drawerState={drawerState} selectComponent={selectComponent} />
               {backdrop}
             </div>
-            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen}/>
+            <PhoneScreen treeData={treeData} selectedComponent={selectedComponent} screen={screen} />
           </div>
         )
       } else if (selectedComponent.subtitle && selectedComponent.subtitle === 'Simple Screen') {
@@ -80,7 +91,7 @@ class PhoneContainer extends Component {
             let screens = [];
             let selectedChild = selectedComponent.children ? selectedComponent.children[0] : null
             if (selectedChild && selectedChild.subtitle === 'BottomTab') {              
-              screens.push(<PhoneScreen selectedComponent={selectedChild} screen={screen}/>);
+              screens.push(<PhoneScreen selectedComponent={selectedChild} screen={screen} />);
               screens.push(<BottomTab selectedComponent={selectedChild} phone={phone} />);
             } else if (selectedChild && selectedChild.subtitle === 'Drawer') {
                 screens.push(<div className='drawer-wrapper'>
@@ -88,7 +99,7 @@ class PhoneContainer extends Component {
                               <Drawer selectedComponent={selectedChild} drawerState={drawerState} selectComponent={selectComponent} />
                               {backdrop}
                             </div>)
-                screens.push(<PhoneScreen treeData={treeData} selectedComponent={selectedChild} screen={screen}/>)
+                screens.push(<PhoneScreen treeData={treeData} selectedComponent={selectedChild} screen={screen} />)
             }
 
             return screens;

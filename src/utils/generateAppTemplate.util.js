@@ -1,5 +1,5 @@
 const generateAppTemplate = treeData => {
-  const RootComponent = treeData[0].title;
+  const RootComponent = treeData[0].subtitle === 'Switch' ? 'RootSwitch' : treeData[0].title;
   return `
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
