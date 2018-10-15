@@ -7,7 +7,7 @@
 
 ## <strong>Virena</strong> [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<h4 align="center">A simple and easy-to-use prototyping tool. Create your React Native App backbone in minutes!
+<h4 align="center">A simple and easy-to-use prototyping tool. Create your React Native Navigation in minutes!
 <br>
  Built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
 
@@ -18,10 +18,6 @@
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
-
-Virena is a React Native Navigation prototyping tool. Drag and drop navigational components to build a custom tree, preview what the app will look like on an integrated phone simulator, and then export the auto-generated files directly into the root of a Create-React-Native-App scaffolding (or your own scaffolding).
-
-
 
 ## <strong>Key Features</strong> 
 ***
@@ -42,14 +38,16 @@ Virena is a React Native Navigation prototyping tool. Drag and drop navigational
 ***
 
 * STEP 1: INSTALL DEPENDENCIES
-  - Virena uses the React Navigation library to build out a navigation structure. https://reactnavigation.org/en/ Before getting started, you must npm/yarn install it as a dependency in your own project.
+  - Virena uses the React Navigation library to build out a navigation structure.
+  (https://reactnavigation.org/en/)  <br>
+  Before getting started, you must npm/yarn install it as a dependency in your own project.
 
-```bash
-npm install --save react-navigation
+  ```bash
+  npm install --save react-navigation
 
-# or with yarn
-# yarn add react-navigation
-```
+  # or with yarn
+  # yarn add react-navigation
+  ```
 
 * Step 2: ADD YOUR ENTRY POINT
   - Add a root navigational component by submitting the required information in the top right options panel by specifying the name and type. You can choose any name and can choose among the types Stack, Switch, Drawer, or Bottom Tab. The root component serves as the entry point into your React Native app.
