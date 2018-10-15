@@ -19,6 +19,8 @@
 
 Virena is is a React Native Navigation prototyping tool. Drag and drop navigational components to build a custom tree, preview what the app will look like on an integrated phone simulator, and then export the auto-generated files directly into the root of a Create-React-Native-App scaffolding (or your own scaffolding).
 
+
+
 ## <strong>Key Features</strong>
 ***
 * Drag-And-Drop Tree Structure
@@ -32,20 +34,30 @@ Virena is is a React Native Navigation prototyping tool. Drag and drop navigatio
 * Cross platform
   - Windows, MacOS and Linux ready.
 
+
+
 ## <strong>How To Use</strong>
 ***
---Insert directions here--
+
+1. INSTALL DEPENDENCIES
+Virena uses the React Navigation library to build out a navigation structure. https://reactnavigation.org/en/ Before we get started, you must npm/yarn install it as a dependency in your own project.
 
 ```bash
-# clone this repository
-$ git jk dont need to clone this
-
-# Install dependencies
-$ npm install
-
-# Run the app
-$ npm start
+yarn add react-navigation
+# or with npm
+# npm install --save react-navigation
 ```
+
+2. ADD YOUR ENTRY POINT
+  Add a root navigational component by submitting the required information in the top right options panel by specifying the name and type. You can choose any name and can choose among the types Stack, Switch, Drawer, or Bottom Tab. The root component serves as the entry point into your React Native app.
+
+3. ADD CHILDREN
+  Follow similar steps to add all children. You can nest navigational components within navigational components, or have components of the type "Simple Screen" (simple presentational components). It is important to note that presentational components cannot have children--only navigators can have children.
+  
+4. EXPORT / SAVE / LOAD FILES
+  When you are done with your session, you can either 1) Save your project for later or 2) Export the files for immediate use in your project. In order to save, simply click the "Save Project" button in the top nav bar. You can then log out and come back to it later by clicking the "Load Files" button adjacent to it. Simple enough! In order to export, simply click the blue "Export" button in the bottom region of the right panel and specify where you want it exported. Our application generates templates which assume you will be exporting everything on the same directory level. The contents of the export include a "navigation.js" file--essentially the code manifest detailing the layout of your navigation sturcture--and files which define your presentational components (components of type "Simple Screen" in our app).
+
+
 
 ## <strong>Download</strong>
 ***
@@ -63,12 +75,12 @@ You can [download](https://github.com/virenaappdownloadstuff) the latest install
 
 
 
-## <strong>Built with</strong>
+## <strong>Credits</strong>
 ***
 This software uses following open source packages.
 
 - [React](https://reactjs.org)
 - [Redux](https://reduxjs.org)
 - [React-Native](https://facebook.github.io/react-native/)
-- [React Sortable Tree - DAT TREE LIBRARY](https://github.com/mikcaweb/react-sortable-tree)
+- [React Sortable Tree](https://github.com/mikcaweb/react-sortable-tree)
 - [Electron](http://electron.atom.io/)
