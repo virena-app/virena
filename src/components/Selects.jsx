@@ -29,7 +29,6 @@ const styles = theme => ({
 class Selects extends Component {
   render() {
     const { classes, treeData, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent } = this.props;
-    console.log(treeData)
     return (
       <div className={classes.root}>
         <FormControl required className={classes.formControl}>

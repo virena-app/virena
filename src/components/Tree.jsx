@@ -20,7 +20,7 @@ export default class Tree extends Component {
             </button>,
             <button onClick={() => {
               selectComponent(node) 
-              console.log(selectedComponent.headerStatus)}} style={{ 'backgroundColor': '#37474f', 'outline': 'none', 'border': 'none' }}>
+            }} style={{ 'backgroundColor': '#37474f', 'outline': 'none', 'border': 'none' }}>
               <div className='details'></div>
             </button>
           ],

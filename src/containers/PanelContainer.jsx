@@ -29,6 +29,7 @@ const mapStateToProps = store => ({
   currentProject: store.data.currentProject,
   headerStatus: store.data.headerStatus,
   duplicateTitleErrorOpen: store.data.duplicateTitleErrorOpen,
+  saveProjectSuccessOpen: store.data.saveProjectSuccessOpen,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -113,11 +114,10 @@ class PanelContainer extends Component {
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, uid, displayName,
     saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject, toggleHeader,
-    toggleDupsErrorSnackbar, duplicateTitleErrorOpen } = this.props;
+    toggleDupsErrorSnackbar, duplicateTitleErrorOpen, saveProjectSuccessOpen } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
-    console.log("CP TREE DATA", currentProject.treeData,"STATE TREE DATA", treeData)
     return (
       <div className='panel'>
         <div>
@@ -144,6 +144,7 @@ class PanelContainer extends Component {
           saveProjectErrorOpen={saveProjectErrorOpen}
           closeStatusPopup={closeStatusPopup}
           duplicateTitleErrorOpen={duplicateTitleErrorOpen}
+          saveProjectSuccessOpen={saveProjectSuccessOpen}
         />
       </div>
     )
