@@ -82,7 +82,7 @@ class PhoneContainer extends Component {
               <Switch 
                 selectedComponent={selectedComponent} 
                 selectComponent={selectComponent} 
-                child={selectedComponent.children ? selectedComponent.children[0] : null}
+                child={selectedComponent.children ? selectedComponent.children : null}
                 screen={screen} />
             </div>
           )
