@@ -42,9 +42,9 @@ export const getAllScreenTitles = treeData => {
 
 export const getAllParents = treeData => {
   return treeData.reduce((parents, node) => {
-    return node.subtitle !== "Simple Screen" ? 
-      parents.concat(node, getAllParents(node.children)) : 
-      parents;
+    return node.subtitle !== "Simple Screen" 
+    ? parents.concat(node, node.children ? getAllParents(node.children) : []) 
+    : parents;
   }, []);
 }
 

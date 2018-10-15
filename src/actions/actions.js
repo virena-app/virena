@@ -84,13 +84,15 @@ export const exportFiles = ( treeData, path ) => (dispatch) => {
         status: true,
       }
     }))
-    .catch(err => dispatch({
+    .catch(err => {
+      dispatch({
       type: types.EXPORT_FILES_FAIL,
       payload: {
         status: true,
         err
       }
-    }));
+    
+    })});
 }
 
 export const saveProject = (treeData, projectName, uid, displayName) => (dispatch) => {
