@@ -5,7 +5,7 @@
   <br>
 </h1>
 
-## <strong>Virena</strong> [![Build Status](https://travis-ci.com/virena-app/virena.svg?branch=master)](https://travis-ci.com/virena-app/virena)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## <strong>Virena</strong> [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <h4 align="center">A simple and easy-to-use prototyping tool. Create your React Native App backbone in minutes.
  Built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
