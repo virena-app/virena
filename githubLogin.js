@@ -6,7 +6,7 @@
 const GITHUB_AUTHORIZATION_URL = 'http://github.com/login/oauth/authorize'
 const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
 //perhaps the below url is causing overly general user info to return
-const GITHUB_PROFILE_URL = `https://api.github.com/users/?`
+const GITHUB_PROFILE_URL = `https://api.github.com/?`
 
 async function githubSignIn () {
   const code = await signInWithPopup()
@@ -14,7 +14,7 @@ async function githubSignIn () {
   console.log('fetched token', tokens)
   // const {id, email, name} = await fetchGithubProfile(tokens.access_token)
   const responseData = await fetchGithubProfile(tokens.access_token, tokens);
-  console.log(responseData)
+  console.log('response from fetchting profile', responseData)
   // const providerUser = {
   //   uid: id,
   //   email,
@@ -95,7 +95,7 @@ async function fetchAccessTokens (code) {
     },
   })
 
-  console.log(reqHeader.headers);
+  console.log('reqheaders', reqHeader.headers);
 
 
 
@@ -113,19 +113,21 @@ async function fetchAccessTokens (code) {
       'Set-Cookie': 'dotcom_user',
     },
   })
+  console.log('inside fetchgithub token', JSON.stringify(response));
+  //return response.data?
   return response
 }
 
 async function fetchGithubProfile (accessToken, tokens) {
   console.log('fetch')
-  const response = await axios.get(GITHUB_PROFILE_URL + tokens, {
+  const response = await axios.get(GITHUB_PROFILE_URL, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': accessToken,
       'Set-Cookie': 'dotcom_user'
     },
   })
-  console.log('inside fetchGithubProfile', response);
+  
   return response
 }
 

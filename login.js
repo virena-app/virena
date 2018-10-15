@@ -6,9 +6,6 @@ const axios = require('axios')
 const GOOGLE_AUTHORIZATION_URL = 'https://accounts.google.com/o/oauth2/v2/auth'
 const GOOGLE_TOKEN_URL = 'https://www.googleapis.com/oauth2/v4/token'
 const GOOGLE_PROFILE_URL = 'https://www.googleapis.com/userinfo/v2/me'
-// const GITHUB_AUTHORIZATION_URL = 'http://github.com/login/oauth/authorize'
-// const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
-// const GITHUB_PROFILE_URL = 'https://api.github.com/?'
 
 async function googleSignIn () {
   const code = await signInWithPopup()
