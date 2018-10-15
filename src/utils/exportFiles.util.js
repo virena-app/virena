@@ -13,62 +13,36 @@ const exportFilesUtil = (treeData, path) => {
   const rootSwitch = treeData[0].subtitle === 'Switch' ? treeData[0] : null;
   const promises = [];
 
-  screenTitles.forEach((title) => {
-    const newPromise = new Promise((resolve, reject) => {
-      if (immediateBottomTabChild(treeData)) {
-        return reject(new Error('A BottomTabNav may NOT have a BottomTabNav as an immediate child'));
-      }
-      fs.writeFile(`${path}/${title}.js`,
-        generateScreenTemplate(title), {
-          singleQuote: true,
-          trailingComma: 'es5',
-          bracketSpacing: true,
-          jsxBracketSameLine: true,
-          parser: 'babylon',
-        },
-        (err) => {
-          if (err) return reject(err);
-          return resolve(title);
-        });
+  const screenPromises = () => {
+    screenTitles.forEach((title) => {
+      const newPromise = new Promise((resolve, reject) => {
+        if (immediateBottomTabChild(treeData)) {
+          return reject(new Error('A BottomTabNav may NOT have a BottomTabNav as an immediate child'));
+        }
+        fs.writeFile(`${path}/${title}.js`,
+          generateScreenTemplate(title), {
+            singleQuote: true,
+            trailingComma: 'es5',
+            bracketSpacing: true,
+            jsxBracketSameLine: true,
+            parser: 'babylon',
+          },
+          (err) => {
+            if (err) return reject(err);
+            return resolve(title);
+          });
+      });
+  
+      promises.push(newPromise);
     });
+  } 
 
-    promises.push(newPromise);
-  });
 
-  const navPromise = new Promise((resolve, reject) => {
-    fs.writeFile(`${path}/navigator.js`, 
-      generateNavigatorTemplate(treeData), {
-        singleQuote: true,
-        trailingComma: 'es5',
-        bracketSpacing: true,
-        jsxBracketSameLine: true,
-        parser: 'babylon'
-      },
-      (err) => {
-        if (err) return reject(err);
-        return resolve('nav');
-      });
-  });
 
-  const appPromise = new Promise((resolve, reject) => {
-    fs.writeFile(`${path}/App.js`, 
-      generateAppTemplate(treeData), {
-        singleQuote: true,
-        trailingComma: 'es5',
-        bracketSpacing: true,
-        jsxBracketSameLine: true,
-        parser: 'babylon'
-      },
-      (err) => {
-        if (err) return reject(err);
-        return resolve('app');
-      });
-  });
-
-  if (rootSwitch) {
-    const switchPromise = new Promise((resolve, reject) => {
-      fs.writeFile(`${path}/${rootSwitch.title}.js`, 
-        generateSwitchTemplate(rootSwitch.title, rootSwitch.children), {
+  const appPromise = () => {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(`${path}/App.js`, 
+        generateAppTemplate(treeData), {
           singleQuote: true,
           trailingComma: 'es5',
           bracketSpacing: true,
@@ -77,10 +51,30 @@ const exportFilesUtil = (treeData, path) => {
         },
         (err) => {
           if (err) return reject(err);
-          return resolve(rootSwitch);
+          return resolve('app');
         });
     });
-    promises.push(switchPromise);
+
+  }
+
+  
+  const switchPromise = () => {
+    if (rootSwitch) {
+      promises.push(new Promise((resolve, reject) => {
+        fs.writeFile(`${path}/${rootSwitch.title}.js`, 
+          generateSwitchTemplate(rootSwitch.title, rootSwitch.children), {
+            singleQuote: true,
+            trailingComma: 'es5',
+            bracketSpacing: true,
+            jsxBracketSameLine: true,
+            parser: 'babylon'
+          },
+          (err) => {
+            if (err) return reject(err);
+            return resolve(rootSwitch);
+          });
+      }))
+    }
   }
 
   // switches.forEach(switchScreen => {
@@ -102,10 +96,32 @@ const exportFilesUtil = (treeData, path) => {
   //   promises.push(newPromise);
   // });
 
-  promises.push(navPromise);
-  promises.push(appPromise);
+  const navPromise = () => {
+    return new Promise((resolve, reject) => {
+      const navigatorTemplate = generateNavigatorTemplate(treeData);
+      if  (navigatorTemplate === "ERROR") return reject(new Error("Navigator without children!"))
+      fs.writeFile(`${path}/navigator.js`, 
+        generateNavigatorTemplate(treeData), {
+          singleQuote: true,
+          trailingComma: 'es5',
+          bracketSpacing: true,
+          jsxBracketSameLine: true,
+          parser: 'babylon'
+        },
+        (err) => {
+          if (err) return reject(err);
+          return resolve('nav');
+        });
+    })
+  }
 
-  return Promise.all(promises)
+  return navPromise().then(() => {
+    return appPromise().then(() => {
+      switchPromise();
+      screenPromises();
+      return Promise.all(promises);
+    })
+  })
 };
 
 export default exportFilesUtil;
