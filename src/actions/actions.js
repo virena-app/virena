@@ -237,3 +237,8 @@ export const setId = (id) => ({
   type: types.SET_ID,
   payload: id
 })
+
+export const toggleDupsErrorSnackbar = () => ({
+  type: types.TOGGLE_DUPS_ERROR_SNACKBAR,
+  payload: true
+})

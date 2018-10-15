@@ -53,7 +53,6 @@ class Selects extends Component {
               id: 'typeSelect',
               className: classes.input,
             }}>
-            <MenuItem value=''/>
             <MenuItem value={'Stack'}>Stack</MenuItem>
             <MenuItem value={'Drawer'}>Drawer</MenuItem>
             <MenuItem value={'BottomTab'}>BottomTab</MenuItem>

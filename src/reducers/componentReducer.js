@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
-import { pascalCase, maxDepth, findNewNode, updateNode, nodeExists, deleteNode } from '../utils/helperFunctions.util.js'
+import { pascalCase, maxDepth, findNewNode, updateNode, nodeExists, deleteNode, childrenLimitExceeded, countNodes } from '../utils/helperFunctions.util.js'
 import saveProjectUtil from '../utils/saveProject.util.js';
 
 const initialState = {
@@ -20,6 +20,7 @@ const initialState = {
   saveProjectOpen: false,
   saveProjectErrorOpen: false,
   fileExportModalState: false,
+  duplicateTitleErrorOpen: false,
   drawerState: false,
   fileDownloadPath: '',
   phone: 'iphone-view',
@@ -81,10 +82,14 @@ const componentReducer = (state = initialState, action) => {
         addAsFirstChild: copy.addAsFirstChild,
       }).treeData;
       const newNode = findNewNode(copy.treeData, newTreeData);
+      const isInvalidAdd = maxDepth(newTreeData) > 5
+      || childrenLimitExceeded(newTreeData, "BottomTab", 5) 
+      || childrenLimitExceeded(newTreeData, "Drawer", 10)
+
       return {
         ...state,
-        treeData: maxDepth(newTreeData) > 5 ? copy.treeData : newTreeData,
-        id: copy.id + 1,
+        treeData: isInvalidAdd ? copy.treeData : newTreeData,
+        id: isInvalidAdd ? copy.id : copy.id + 1,
         selectedComponent: newNode,
         changeNameInput: newNode.title,
         typeSelected: newNode.subtitle,
@@ -96,7 +101,9 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         treeData: newTreeData2,
-        selectedComponent: copy.selectedComponent
+        selectedComponent: copy.selectedComponent,
+        changeNameInput: copy.selectedComponent.title ? copy.selectedComponent.title : '',
+        typeSelected: copy.selectedComponent.subtitle ? copy.selectedComponent.subtitle: ''
       }
     case types.SELECT_COMPONENT:
       return {
@@ -159,7 +166,8 @@ const componentReducer = (state = initialState, action) => {
         statusPopupOpen: action.payload, 
         statusPopupErrorOpen: action.payload,
         saveProjectOpen: action.payload,
-        saveProjectErrorOpen: action.payload
+        saveProjectErrorOpen: action.payload,
+        duplicateTitleErrorOpen: action.payload,
       }
     case types.SAVE_PROJECT_SUCCESS:
       console.log('saveRecord', action.payload.record)
@@ -172,6 +180,11 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         saveProjectErrorOpen: action.payload.status,
+      }
+    case types.TOGGLE_DUPS_ERROR_SNACKBAR:
+      return {
+        ...state,
+        duplicateTitleErrorOpen: action.payload
       }
     case types.OPEN_DRAWER:
       return {

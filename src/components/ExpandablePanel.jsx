@@ -104,7 +104,7 @@ const styles = theme => ({
 class DetailedExpansionPanel extends Component {
   render () {
     const { treeData, classes, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent, updateNameAndType,
-      changeNameInput, setNameToChange, selectComponent,  } = this.props;
+      changeNameInput, setNameToChange, selectComponent, toggleDupsErrorSnackbar } = this.props;
     return (
       !!treeData.length && <div className={classes.root}>
         <ExpansionPanel 
@@ -177,7 +177,13 @@ class DetailedExpansionPanel extends Component {
               className={classes.saveButton}
               onClick={() => {
                 const title = pascalCase(changeNameInput);
-                updateNameAndType(title || "Untitled" + selectedComponent.id, typeSelected || "Simple Screen", selectedComponent.headerStatus ? selectedComponent.headerStatus : false, selectedComponent)
+                const dupCheck = duplicateTitle(title, treeData);
+
+                if (typeof dupCheck === 'number' && dupCheck !== selectedComponent.id) {
+                  toggleDupsErrorSnackbar()
+                } else {
+                  updateNameAndType(title || "Untitled" + selectedComponent.id, typeSelected || "Simple Screen", selectedComponent.headerStatus ? selectedComponent.headerStatus : false, selectedComponent)
+                }
 
               }}>
               Save
