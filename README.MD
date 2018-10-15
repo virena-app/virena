@@ -2,9 +2,10 @@
   <br>
   <a href="#"><img src="https://raw.githubusercontent.com/virena-app/virena/master/assets/readme-logo.png" alt="Logo Here" width="200"></a>
   <br>
-  Virena
   <br>
 </h1>
+
+## <strong>Virena</strong> [![Build Status](https://travis-ci.com/virena-app/virena.svg?branch=master)](https://travis-ci.com/virena-app/virena)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <h4 align="center">A simple and easy-to-use prototyping tool. Create your React Native App backbone in minutes.
  Built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
@@ -17,11 +18,11 @@
   <a href="#license">License</a>
 </p>
 
-Virena is is a React Native Navigation prototyping tool. Drag and drop navigational components to build a custom tree, preview what the app will look like on an integrated phone simulator, and then export the auto-generated files directly into the root of a Create-React-Native-App scaffolding (or your own scaffolding).
+Virena is a React Native Navigation prototyping tool. Drag and drop navigational components to build a custom tree, preview what the app will look like on an integrated phone simulator, and then export the auto-generated files directly into the root of a Create-React-Native-App scaffolding (or your own scaffolding).
 
 
 
-## <strong>Key Features</strong>
+## <strong>Key Features</strong> 
 ***
 * Drag-And-Drop Tree Structure
   - Build out your navigation in a way that is extremely easy to think about.
