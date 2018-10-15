@@ -20,8 +20,7 @@ const styles = theme => ({
 export default class TopNav extends Component {
 
   render() {
-    const { treeData, uid, displayName, userLoggedIn, userProjects, modalStatus, toggleModal, setTree, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject, toggleDropdown, dropdownStatus, setId } = this.props
-    console.log("USER PROJECTS FOR LOAD BUTTON DROPDOWN IN TOP NAV BAR", userProjects)
+    const { treeData, uid, displayName, userLoggedIn, userProjects, modalStatus, toggleModal, setTree, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject, toggleDropdown, dropdownStatus, setId } = this.props;
     return (
       
       <nav className='top-nav'>

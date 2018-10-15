@@ -22,7 +22,7 @@ const mapStateToProps = store => ({
   displayName: store.data.displayName,
   dropdownStatus: store.data.dropdownStatus,
   deleteTarget: store.data.deleteTarget,
-  deleteTargetUid: store.data.deleteTargetUid
+  deleteTargetUid: store.data.deleteTargetUid,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -38,6 +38,7 @@ const mapDispatchToProps = dispatch => ({
   deleteProject: (projectName, uid) => dispatch(actions.deleteProject(projectName, uid)),
   toggleDropdown: () => dispatch(actions.toggleDropdown()),
   setId: (id) => dispatch(actions.setId(id)),
+  toggleSaveProjectSnackbar: () => dispatch(actions.toggleSaveProjectSnackbar()),
 })
 
 class AppContainer extends Component {
@@ -67,11 +68,11 @@ class AppContainer extends Component {
     })
   }
   render() {
-    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject, toggleDropdown, dropdownStatus, triggerDelete, deleteTarget, deleteTargetUid, setId } = this.props
+    const { userLoggedIn, logout, modalStatus, toggleModal, modalAction, reset, userProjects, setTree, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, setCurrentProject, deleteProject, toggleDropdown, dropdownStatus, triggerDelete, deleteTarget, deleteTargetUid, setId, toggleSaveProjectSnackbar, saveProjectSuccessOpen } = this.props
     return (
       <div onClick={() => {if (dropdownStatus && !modalStatus) toggleDropdown()}}>
         <TopNav userLoggedIn={userLoggedIn} logout={logout} modalStatus={modalStatus} toggleModal={toggleModal} reset={reset} userProjects={userProjects} setTree={setTree} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} setCurrentProject={setCurrentProject} treeData={treeData} displayName={displayName} uid={uid} deleteProject={deleteProject} toggleDropdown={toggleDropdown} dropdownStatus={dropdownStatus} setId={setId} />
-        {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName} deleteProject={deleteProject} deleteTarget={deleteTarget} deleteTargetUid={deleteTargetUid} />}
+        {modalStatus && <InfoModal modalStatus={modalStatus} toggleModal={toggleModal} modalAction={modalAction} logout={logout} reset={reset} addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName} deleteProject={deleteProject} deleteTarget={deleteTarget} deleteTargetUid={deleteTargetUid} toggleSaveProjectSnackbar={toggleSaveProjectSnackbar} />}
         <div className='main'>
         <ViewContainer />
         <div className='vertical-line'></div>

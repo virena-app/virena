@@ -77,8 +77,6 @@ export const updateNameAndType = (name, type, header, selected) => ({
 })
 
 export const exportFiles = ( treeData, path ) => (dispatch) => {
-  console.log('treeData in exportFiles actions', treeData);
-  
   exportFilesUtil(treeData, path)
     .then(data => dispatch({
       type: types.EXPORT_FILES_SUCCESS,
@@ -112,6 +110,11 @@ export const saveProject = (treeData, projectName, uid, displayName) => (dispatc
       }
     }))
 }
+
+export const toggleSaveProjectSnackbar = () => ({
+  type: types.TOGGLE_SAVE_PROJECT_SNACKBAR,
+  payload: true
+})
 
 export const closeStatusPopup = () => ({
   type: types.CLOSE_STATUS_POPUP,

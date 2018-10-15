@@ -21,6 +21,7 @@ const initialState = {
   saveProjectErrorOpen: false,
   fileExportModalState: false,
   duplicateTitleErrorOpen: false,
+  saveProjectSuccessOpen: false,
   drawerState: false,
   fileDownloadPath: '',
   phone: 'iphone-view',
@@ -135,7 +136,6 @@ const componentReducer = (state = initialState, action) => {
         changeNameInput: action.payload
       }
     case types.UPDATE_NAME_AND_TYPE:
-      // console.log(action.payload.headerStatus);
       copy.selectedComponent.headerStatus = action.payload.headerStatus;
       const updated = updateNode(copy.treeData, action.payload.title, action.payload.subtitle, action.payload.headerStatus, action.payload.selectedComponent)
       return {
@@ -147,14 +147,11 @@ const componentReducer = (state = initialState, action) => {
       return state;
       
     case types.EXPORT_FILES_SUCCESS:
-      console.log('successful export!');
       return {
         ...state,
         statusPopupOpen: action.payload.status
       }
     case types.EXPORT_FILES_FAIL:
-      console.log(action.payload.err)
-
       return {
         ...state,
         statusPopupErrorOpen: action.payload.status,
@@ -168,15 +165,14 @@ const componentReducer = (state = initialState, action) => {
         saveProjectOpen: action.payload,
         saveProjectErrorOpen: action.payload,
         duplicateTitleErrorOpen: action.payload,
+        saveProjectSuccessOpen: action.payload,
       }
     case types.SAVE_PROJECT_SUCCESS:
-      console.log('saveRecord', action.payload.record)
       return {
         ...state,
         saveProjectOpen: action.payload.status,
       }
     case types.SAVE_PROJECT_FAIL:
-      console.log('saveRecordFail', action.payload.err)
       return {
         ...state,
         saveProjectErrorOpen: action.payload.status,
@@ -185,6 +181,11 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         duplicateTitleErrorOpen: action.payload
+      }
+    case types.TOGGLE_SAVE_PROJECT_SNACKBAR:
+      return {
+        ...state,
+        saveProjectSuccessOpen: action.payload
       }
     case types.OPEN_DRAWER:
       return {
@@ -268,14 +269,12 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.CHANGE_PROJECT_NAME_INPUT:
-    console.log(action.payload)
       return {
         ...state,
         projectNameInput: action.payload
       }
     
     case types.ADD_USER_PROJECT:
-      alert(JSON.stringify(action.payload))
       return {
         ...state,
         userProjects: [...copy.userProjects, action.payload],
@@ -284,7 +283,6 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.SET_CURRENT_PROJECT:
-      //alert(JSON.stringify(action.payload))
       return {
         ...state,
         currentProject: action.payload

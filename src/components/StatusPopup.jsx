@@ -12,7 +12,7 @@ const styles = theme => ({
 });
 
 const StatusPopup = (props) => {
-  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProjectOpen, saveProjectErrorOpen, duplicateTitleErrorOpen } = props;
+  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProjectOpen, saveProjectErrorOpen, duplicateTitleErrorOpen, saveProjectSuccessOpen } = props;
 
   return (
     <div>
@@ -60,7 +60,7 @@ const StatusPopup = (props) => {
         <StatusPopupContent 
           variant='success'
           className={classes.margin}
-          message='Successfully saved to db!'
+          message='Successfully updated!'
           onClose={closeStatusPopup}
         />
       </Snackbar>
@@ -93,6 +93,22 @@ const StatusPopup = (props) => {
           variant='error'
           className={classes.margin}
           message='You cannot add duplicate titles'
+          onClose={closeStatusPopup}
+        />
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={saveProjectSuccessOpen}
+        autoHideDuration={6000}
+        onClose={closeStatusPopup}
+      >
+        <StatusPopupContent 
+          variant='success'
+          className={classes.margin}
+          message='Project successfully saved!'
           onClose={closeStatusPopup}
         />
       </Snackbar>
