@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-![alt text](readme-logo.png)
+![logo](https://raw.githubusercontent.com/virena-app/virena/master/assets/readme-logo.png)
 
 <h4 align="center">A simple and easy-to-use prototyping tool. Create your React Native App backbone in minutes.
  Built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
