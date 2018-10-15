@@ -28,6 +28,7 @@ const mapStateToProps = store => ({
   uid: store.data.uid,
   currentProject: store.data.currentProject,
   headerStatus: store.data.headerStatus,
+  duplicateTitleErrorOpen: store.data.duplicateTitleErrorOpen,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -47,7 +48,8 @@ const mapDispatchToProps = dispatch => ({
   updateUserProjects: (userProject) => dispatch(actions.updateUserProjects(userProject)),
   setUserData: loginData => dispatch(actions.setUserData(loginData)),
   toggleHeader: headerStatus => dispatch(actions.toggleHeader(headerStatus)),
-  setCurrentProject: (project) => dispatch(actions.setCurrentProject(project)), 
+  setCurrentProject: (project) => dispatch(actions.setCurrentProject(project)),
+  toggleDupsErrorSnackbar: () => dispatch(actions.toggleDupsErrorSnackbar()),
 })
 
 const styles = theme => ({
@@ -109,7 +111,8 @@ class PanelContainer extends Component {
     const { treeData, input, classes, selectedComponent, initialTypeSelection, typeSelected, parentSelected, setParentName, addParent, logoSpin, toggleLogo, 
     availableParents, selectType, selectParent, updateNameAndType, changeNameInput, setNameToChange, selectComponent, selectInitialType, 
     statusPopupOpen, userLoggedIn, statusPopupErrorOpen, closeStatusPopup, saveProject, openDirectory, uid, displayName,
-    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject, toggleHeader } = this.props;
+    saveProjectOpen, saveProjectErrorOpen, updateUserProjects, exportFiles, currentProject, setCurrentProject, toggleHeader,
+    toggleDupsErrorSnackbar, duplicateTitleErrorOpen } = this.props;
     let logoClass;
     if (logoSpin) logoClass = 'logo'
     else logoClass = 'logo paused'
@@ -121,7 +124,7 @@ class PanelContainer extends Component {
            setParentName={setParentName} addParent={addParent} selectInitialType={selectInitialType}/>
           <ExpandablePanel treeData={treeData} selectedComponent={selectedComponent} typeSelected={typeSelected} parentSelected={parentSelected}
           availableParents={availableParents} selectType={selectType} selectParent={selectParent} updateNameAndType={updateNameAndType}
-          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent}  />
+          changeNameInput={changeNameInput} setNameToChange={setNameToChange} selectComponent={selectComponent} toggleDupsErrorSnackbar={toggleDupsErrorSnackbar} />
         </div>
         <div className='logo-wrapper'>
           <div className='horizontal-line'></div>
@@ -139,6 +142,7 @@ class PanelContainer extends Component {
           saveProjectOpen={saveProjectOpen} 
           saveProjectErrorOpen={saveProjectErrorOpen}
           closeStatusPopup={closeStatusPopup}
+          duplicateTitleErrorOpen={duplicateTitleErrorOpen}
         />
       </div>
     )

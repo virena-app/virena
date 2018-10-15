@@ -99,7 +99,10 @@ export const getNthChildInfo = (node, parent) => {
 
 export const duplicateTitle = (title, treeData) => {
   return treeData.reduce((bool, node) => {
-    if (node.title === title) bool = node.id;
+    if (node.title === title) {
+      bool = node.id;
+      return bool;
+    }
     return node.children ? bool || duplicateTitle(title, node.children) : bool
   }, false)
 }
@@ -247,4 +250,18 @@ export const screenTitlesWithNonSwitchParent = (treeData, parentType) => {
     else if (node.children) return screenTitles.concat(screenTitlesWithNonSwitchParent(node.children, node.subtitle));
     else return screenTitles;
   }, [])
+}
+
+export const childrenLimitExceeded = (treeData, subtitle, length) => {
+  return treeData.reduce((bool, node) => {
+    if (node.subtitle === subtitle && node.children && node.children.length > length) return true;
+    else if (node.children) return bool || childrenLimitExceeded(node.children, subtitle, length);
+    else return bool;
+  }, false)
+}
+
+export const countNodes = treeData => {
+  return treeData.reduce((count, node) => {
+    return count + 1 + (node.children ? countNodes(node.children) : 0)
+  }, 0)
 }
