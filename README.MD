@@ -52,9 +52,13 @@
 * Step 2: ADD YOUR ENTRY POINT
   - Add a root navigational component by submitting the required information (name and type) in the top right options panel. The root component serves as the entry point into your React Native app.
 
+<img src="https://github.com/virena-app/virena/blob/master/assets/AddingScreens.gif"/>
+
 * Step 3: ADD CHILDREN
   - Follow similar steps as above to add children. You can nest navigational components within navigational components, or add components of the type "Simple Screen" which are the presentational components for your app. It is important to note that presentational components / "Simple Screens" cannot have children--only navigators can have children. In addition, all navigators must have at least ONE child.
   
+<img src="https://github.com/virena-app/virena/blob/master/assets/exportfiles.gif"/>
+
 * Step 4: EXPORT / SAVE / LOAD FILES
   - When you are done with your session, you can either 1) Save your project for later or 2) Export the files for immediate use in your project. In order to save, simply click the "Save Project" button in the top nav menu. You can then log out and come back to it later by clicking the "Load Project" button adjacent to it. Simple enough! In order to export, simply click the blue "Export" button in the bottom region of the right panel and specify where you want it exported. Our application generates templates with the assumption that you will be exporting everything at the same directory level. The contents of the export include a "navigation.js" file--essentially the code manifest detailing the layout of your navigation structure--as well as files which define your presentational components (components of type "Simple Screen" in our app).
 
