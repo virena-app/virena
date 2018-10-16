@@ -62,7 +62,7 @@
 
 ## <strong>Download</strong>
 ***
-You can [download](https://github.com/virenaappdownloadstuff) the latest installable version of Virena for Windows, MacOS and Linux.
+Download the latest installable version of Virena for [MacOS](https://github.com/virena-app/virena/releases/download/v0.5.0/virena-0.5.0.dmg), [Windows](https://github.com/virena-app/virena/releases/download/v0.5.0/virena.Setup.0.5.0.exe), and [Linux](https://github.com/virena-app/virena/releases/download/v0.5.0/virena_0.5.0_amd64.deb).
 
 ## <strong>Authors</strong>
 ***
