@@ -20,7 +20,7 @@ class SubmitParentForm extends Component {
     return (
 
         !treeData[0] && <form className='form' autoComplete='off'>
-        <InputLabel htmlFor='typeSelect'>Type</InputLabel>
+        {/* <InputLabel htmlFor='typeSelect'>Type</InputLabel> */}
         <FormControl className={classes.formControl}>
           <TextField
             InputProps={{
