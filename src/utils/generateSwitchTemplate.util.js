@@ -1,8 +1,4 @@
-const generateSwitchTemplate = (title, children) => {
-
-// alert(JSON.stringify(title));
-alert(JSON.stringify(children));
-  
+const generateSwitchTemplate = (title, children) => {  
   return `
 import React, {Component} from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native';`

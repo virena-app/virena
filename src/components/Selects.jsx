@@ -29,7 +29,6 @@ const styles = theme => ({
 class Selects extends Component {
   render() {
     const { classes, treeData, selectedComponent, typeSelected, parentSelected, availableParents, selectType, selectParent } = this.props;
-    console.log(treeData)
     return (
       <div className={classes.root}>
         <FormControl required className={classes.formControl}>
@@ -53,7 +52,6 @@ class Selects extends Component {
               id: 'typeSelect',
               className: classes.input,
             }}>
-            <MenuItem value=''/>
             <MenuItem value={'Stack'}>Stack</MenuItem>
             <MenuItem value={'Drawer'}>Drawer</MenuItem>
             <MenuItem value={'BottomTab'}>BottomTab</MenuItem>

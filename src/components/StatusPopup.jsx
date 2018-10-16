@@ -12,7 +12,7 @@ const styles = theme => ({
 });
 
 const StatusPopup = (props) => {
-  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProjectOpen, saveProjectErrorOpen } = props;
+  const { classes, statusPopupOpen, statusPopupErrorOpen, closeStatusPopup, saveProjectOpen, saveProjectErrorOpen, duplicateTitleErrorOpen, saveProjectSuccessOpen, errMessage } = props;
 
   return (
     <div>
@@ -44,7 +44,7 @@ const StatusPopup = (props) => {
         <StatusPopupContent 
           variant='error'
           className={classes.margin}
-          message='Error generating files, may have exported files without a navigator file. Please check navigation tree logic.'
+          message={errMessage}
           onClose={closeStatusPopup}
         />
       </Snackbar>
@@ -60,7 +60,7 @@ const StatusPopup = (props) => {
         <StatusPopupContent 
           variant='success'
           className={classes.margin}
-          message='Successfully saved to db!'
+          message='Successfully updated!'
           onClose={closeStatusPopup}
         />
       </Snackbar>
@@ -77,6 +77,38 @@ const StatusPopup = (props) => {
           variant='error'
           className={classes.margin}
           message='Error writing data to db!'
+          onClose={closeStatusPopup}
+        />
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={duplicateTitleErrorOpen}
+        autoHideDuration={6000}
+        onClose={closeStatusPopup}
+      >
+        <StatusPopupContent 
+          variant='error'
+          className={classes.margin}
+          message='You cannot add duplicate titles'
+          onClose={closeStatusPopup}
+        />
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={saveProjectSuccessOpen}
+        autoHideDuration={6000}
+        onClose={closeStatusPopup}
+      >
+        <StatusPopupContent 
+          variant='success'
+          className={classes.margin}
+          message='Project successfully saved!'
           onClose={closeStatusPopup}
         />
       </Snackbar>

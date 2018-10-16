@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { addNodeUnderParent, removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import exportFiles from '../utils/exportFiles.util.js';
-import { pascalCase, maxDepth, findNewNode, updateNode, nodeExists, deleteNode } from '../utils/helperFunctions.util.js'
+import { pascalCase, maxDepth, findNewNode, updateNode, nodeExists, deleteNode, childrenLimitExceeded, countNodes } from '../utils/helperFunctions.util.js'
 import saveProjectUtil from '../utils/saveProject.util.js';
 
 const initialState = {
@@ -20,6 +20,8 @@ const initialState = {
   saveProjectOpen: false,
   saveProjectErrorOpen: false,
   fileExportModalState: false,
+  duplicateTitleErrorOpen: false,
+  saveProjectSuccessOpen: false,
   drawerState: false,
   fileDownloadPath: '',
   phone: 'iphone-view',
@@ -36,7 +38,8 @@ const initialState = {
   headerStatus: false,
   dropdownStatus: false,
   deleteTarget: '',
-  deleteTargetUid: ''
+  deleteTargetUid: '',
+  errMessage: ''
 }
 const componentReducer = (state = initialState, action) => {
   const copy = Object.assign({}, state);
@@ -81,10 +84,14 @@ const componentReducer = (state = initialState, action) => {
         addAsFirstChild: copy.addAsFirstChild,
       }).treeData;
       const newNode = findNewNode(copy.treeData, newTreeData);
+      const isInvalidAdd = maxDepth(newTreeData) > 5
+      || childrenLimitExceeded(newTreeData, "BottomTab", 5) 
+      || childrenLimitExceeded(newTreeData, "Drawer", 10)
+
       return {
         ...state,
-        treeData: maxDepth(newTreeData) > 5 ? copy.treeData : newTreeData,
-        id: copy.id + 1,
+        treeData: isInvalidAdd ? copy.treeData : newTreeData,
+        id: isInvalidAdd ? copy.id : copy.id + 1,
         selectedComponent: newNode,
         changeNameInput: newNode.title,
         typeSelected: newNode.subtitle,
@@ -96,7 +103,9 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         treeData: newTreeData2,
-        selectedComponent: copy.selectedComponent
+        selectedComponent: copy.selectedComponent,
+        changeNameInput: copy.selectedComponent.title ? copy.selectedComponent.title : '',
+        typeSelected: copy.selectedComponent.subtitle ? copy.selectedComponent.subtitle: ''
       }
     case types.SELECT_COMPONENT:
       return {
@@ -128,7 +137,6 @@ const componentReducer = (state = initialState, action) => {
         changeNameInput: action.payload
       }
     case types.UPDATE_NAME_AND_TYPE:
-      // console.log(action.payload.headerStatus);
       copy.selectedComponent.headerStatus = action.payload.headerStatus;
       const updated = updateNode(copy.treeData, action.payload.title, action.payload.subtitle, action.payload.headerStatus, action.payload.selectedComponent)
       return {
@@ -140,38 +148,47 @@ const componentReducer = (state = initialState, action) => {
       return state;
       
     case types.EXPORT_FILES_SUCCESS:
-      console.log('successful export!');
       return {
         ...state,
         statusPopupOpen: action.payload.status
       }
     case types.EXPORT_FILES_FAIL:
-      console.log(action.payload.err)
-
       return {
         ...state,
         statusPopupErrorOpen: action.payload.status,
+        errMessage: action.payload.err.message
       }
     case types.CLOSE_STATUS_POPUP:
       
       return {
         ...state,
-        statusPopupOpen: action.payload, 
-        statusPopupErrorOpen: action.payload,
-        saveProjectOpen: action.payload,
-        saveProjectErrorOpen: action.payload
+        statusPopupOpen: false, 
+        statusPopupErrorOpen: false,
+        saveProjectOpen: false,
+        saveProjectErrorOpen: false,
+        duplicateTitleErrorOpen: false,
+        saveProjectSuccessOpen: false,
+        errMessage: ''
       }
     case types.SAVE_PROJECT_SUCCESS:
-      console.log('saveRecord', action.payload.record)
       return {
         ...state,
         saveProjectOpen: action.payload.status,
       }
     case types.SAVE_PROJECT_FAIL:
-      console.log('saveRecordFail', action.payload.err)
       return {
         ...state,
         saveProjectErrorOpen: action.payload.status,
+      }
+    case types.TOGGLE_DUPS_ERROR_SNACKBAR:
+      return {
+        ...state,
+        duplicateTitleErrorOpen: action.payload
+      }
+    case types.TOGGLE_SAVE_PROJECT_SNACKBAR:
+      return {
+        ...state,
+        saveProjectSuccessOpen: action.payload
       }
     case types.OPEN_DRAWER:
       return {
@@ -255,14 +272,12 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.CHANGE_PROJECT_NAME_INPUT:
-    console.log(action.payload)
       return {
         ...state,
         projectNameInput: action.payload
       }
     
     case types.ADD_USER_PROJECT:
-      alert(JSON.stringify(action.payload))
       return {
         ...state,
         userProjects: [...copy.userProjects, action.payload],
@@ -271,7 +286,6 @@ const componentReducer = (state = initialState, action) => {
       }
 
     case types.SET_CURRENT_PROJECT:
-      //alert(JSON.stringify(action.payload))
       return {
         ...state,
         currentProject: action.payload

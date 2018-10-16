@@ -25,7 +25,7 @@ const styles = theme => ({
 
 class InfoModal extends Component {
   render() {
-    const { modalStatus, toggleModal, classes, modalAction, logout, reset, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, deleteProject, deleteTarget, deleteTargetUid } = this.props;
+    const { modalStatus, toggleModal, classes, modalAction, logout, reset, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, deleteProject, deleteTarget, deleteTargetUid, toggleSaveProjectSnackbar } = this.props;
     let modalText;
     if (modalAction === 'logout') modalText = 'Are you sure you want to log out? (Unsaved progress will be lost)'
     else if (modalAction === 'reset') modalText = 'Create new project?'
@@ -52,7 +52,7 @@ class InfoModal extends Component {
             <Button color="primary" className={classes.button} onClick={toggleModal}>No</Button>
           </div>}
           {modalAction === 'save' && <div>
-            <SaveAsForm addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName} toggleModal={toggleModal}/>
+            <SaveAsForm addUserProject={addUserProject} changeProjectNameInput={changeProjectNameInput} projectNameInput={projectNameInput} treeData={treeData} uid={uid} displayName={displayName} toggleModal={toggleModal} toggleSaveProjectSnackbar={toggleSaveProjectSnackbar} />
           </div>}
         </div>
       </Modal>

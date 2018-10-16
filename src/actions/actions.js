@@ -77,8 +77,6 @@ export const updateNameAndType = (name, type, header, selected) => ({
 })
 
 export const exportFiles = ( treeData, path ) => (dispatch) => {
-  console.log('treeData in exportFiles actions', treeData);
-  
   exportFilesUtil(treeData, path)
     .then(data => dispatch({
       type: types.EXPORT_FILES_SUCCESS,
@@ -86,13 +84,14 @@ export const exportFiles = ( treeData, path ) => (dispatch) => {
         status: true,
       }
     }))
-    .catch(err => dispatch({
+    .catch(err => {
+      dispatch({
       type: types.EXPORT_FILES_FAIL,
       payload: {
         status: true,
         err
       }
-    }));
+    })});
 }
 
 export const saveProject = (treeData, projectName, uid, displayName) => (dispatch) => {
@@ -113,9 +112,13 @@ export const saveProject = (treeData, projectName, uid, displayName) => (dispatc
     }))
 }
 
+export const toggleSaveProjectSnackbar = () => ({
+  type: types.TOGGLE_SAVE_PROJECT_SNACKBAR,
+  payload: true
+})
+
 export const closeStatusPopup = () => ({
-  type: types.CLOSE_STATUS_POPUP,
-  payload: false
+  type: types.CLOSE_STATUS_POPUP
 })
 
 export const openDrawer = () => ({
@@ -236,4 +239,9 @@ export const toggleDropdown = () => ({
 export const setId = (id) => ({
   type: types.SET_ID,
   payload: id
+})
+
+export const toggleDupsErrorSnackbar = () => ({
+  type: types.TOGGLE_DUPS_ERROR_SNACKBAR,
+  payload: true
 })

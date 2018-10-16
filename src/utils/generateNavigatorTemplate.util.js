@@ -10,14 +10,14 @@ import { getAllScreenTitles, getImmediateChildrenTitles, getAllParents, getParen
   const navigators = getAllParents(treeData);
   let twoBottomNavs = 0;
   for (let i = 0; i < navigators.length; i++) {
-    if (!navigators[i].children) return "ERROR";
+    if (!navigators[i].children || (navigators[i].children && !navigators[i].children.length)) return null;
   }
   return `import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';\n`
   + screenTitles.map(title => `import ${title} from './${title}.js'`).join('\n')
   + '\n'
   + (treeData[0].subtitle === "Switch"
   ? `import ${treeData[0].title} from './${treeData[0].title}.js'` + '\n\n' 
-  : '')
+  : '\n')
   + navigators.map(navigator => {
     const childrenTitles = navigator.children.map(child => child.title);
 

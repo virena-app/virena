@@ -14,12 +14,13 @@ const styles = theme => ({
 
 class SaveAsForm extends Component {
   render() {
-    const { classes, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, toggleModal } = this.props;
+    const { classes, treeData, uid, displayName, addUserProject, projectNameInput, changeProjectNameInput, toggleModal, toggleSaveProjectSnackbar } = this.props;
     return (
         <form className='save-form' onSubmit={(e) => {
           e.preventDefault();
-          addUserProject(treeData, projectNameInput, uid, displayName)
-          toggleModal('')
+          addUserProject(treeData, projectNameInput, uid, displayName);
+          toggleSaveProjectSnackbar();
+          toggleModal('');
         }}
         >
         <TextField 
