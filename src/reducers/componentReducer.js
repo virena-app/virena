@@ -137,8 +137,11 @@ const componentReducer = (state = initialState, action) => {
         changeNameInput: action.payload
       }
     case types.UPDATE_NAME_AND_TYPE:
-      copy.selectedComponent.headerStatus = action.payload.headerStatus;
-      const updated = updateNode(copy.treeData, action.payload.title, action.payload.subtitle, action.payload.headerStatus, action.payload.selectedComponent)
+      const { title, subtitle, headerStatus, selectedComponent } = action.payload;
+      copy.selectedComponent.headerStatus = headerStatus;
+      copy.selectedComponent.subtitle = subtitle;
+      copy.selectedComponent.title = title;
+      const updated = updateNode(copy.treeData, title, subtitle, headerStatus, selectedComponent)
       return {
         ...state,
         treeData: updated,
